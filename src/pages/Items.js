@@ -4,10 +4,16 @@ import Card from "react-bootstrap/Card";
 import img from "../assets/images/items/shirt.jpeg";
 
 import itemData from "../assets/json/items.json";
+import { useNavigate } from "react-router-dom";
 
 
 function Items() {
+    const navigate = useNavigate();
     const onClickCard = (id) => alert(id);
+
+    const goToAddItem = () => {
+        navigate("/addItem");
+    }
 
     return (
         <>
@@ -21,7 +27,7 @@ function Items() {
                         </InputGroup>
                     </Col>
                     <Col md={{span: 2, offset: 1}}>
-                        <Button className="btn-primary">내 물건 나눔하기</Button>
+                        <Button className="btn-primary" onClick={goToAddItem}>내 물건 나눔하기</Button>
                     </Col>
                 </Row>
 
