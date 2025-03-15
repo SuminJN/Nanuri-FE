@@ -9,7 +9,7 @@ function Footer() {
         <>
             <div className="">
                 <Container fluid>
-                    <Row className="align-items-center g-0 border-top py-2">
+                    <Row className="align-items-center g-0 border-top py-2 bg-white">
                         {/* Desc */}
                         <Col md={6} sm={12} className="text-center text-md-start text-black">
                             <span>© 2025 NANURI · HGU </span>
