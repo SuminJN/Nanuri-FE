@@ -31,7 +31,7 @@ function Header() {
     if (window.location.pathname === "/signup") return null;
     return (
         <>
-            <Navbar collapseOnSelect expand="lg" className="bg-white border-bottom" fixed="top">
+            <Navbar collapseOnSelect expand="lg" className="bg-white border-bottom">
                 <Container>
 
                     <Navbar.Brand href="/" className="text-primary">
