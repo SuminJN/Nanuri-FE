@@ -8,8 +8,8 @@ function Footer() {
     return (
         <>
             <div className="">
-                <Container fluid>
-                    <Row className="align-items-center g-0 border-top py-2 bg-white">
+                <Container>
+                    <Row className="align-items-center g-0 border-top py-2">
                         {/* Desc */}
                         <Col md={6} sm={12} className="text-center text-md-start text-black">
                             <span>© 2025 NANURI · HGU </span>

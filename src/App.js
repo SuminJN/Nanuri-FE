@@ -15,6 +15,7 @@ import Profile from "./pages/Profile";
 import Footer from "./components/Footer";
 import Signup from "./pages/Signup";
 import AddItem from "./pages/AddItem";
+import ItemDetail from "./pages/ItemDetail";
 
 function App() {
 
@@ -32,6 +33,7 @@ function App() {
                         {/* 인증을 해야만 접속 가능한 페이지 */}
                         <Route element={<PrivateRoute/>}>
                             <Route path={process.env.REACT_APP_DEPLOY_URL + "items"} element={<Items/>}/>
+                            <Route path={process.env.REACT_APP_DEPLOY_URL + "item/:itemId"} element={<ItemDetail/>}/>
                             <Route path={process.env.REACT_APP_DEPLOY_URL + "addItem"} element={<AddItem/>}/>
                             <Route path={process.env.REACT_APP_DEPLOY_URL + "mysharing"} element={<MySharing/>}/>
                             <Route path={process.env.REACT_APP_DEPLOY_URL + "chat"} element={<Chat/>}/>

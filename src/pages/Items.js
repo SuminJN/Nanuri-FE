@@ -9,7 +9,9 @@ import { useNavigate } from "react-router-dom";
 
 function Items() {
     const navigate = useNavigate();
-    const onClickCard = (id) => alert(id);
+    const onClickCard = (id) => {
+        navigate(`/item/${id}`)
+    };
 
     const goToAddItem = () => {
         navigate("/addItem");
