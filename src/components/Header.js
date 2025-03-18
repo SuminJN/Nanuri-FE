@@ -1,6 +1,6 @@
 import React from "react";
 
-import {Navbar, Container, Nav} from "react-bootstrap";
+import {Navbar, Container, Nav, NavDropdown} from "react-bootstrap";
 import {useNavigate, useLocation} from "react-router-dom";
 import {useRecoilState, useRecoilValue} from "recoil";
 import Button from "react-bootstrap/Button";
@@ -43,7 +43,11 @@ function Header() {
 
                         <Nav variant="underline" defaultActiveKey={pathname}>
                             <Nav.Link href="/items">나눔 목록</Nav.Link>
-                            <Nav.Link href="/mysharing">나의 나눔</Nav.Link>
+                            <NavDropdown title="나의 나눔">
+                                <NavDropdown.Item href="/sharingList">나눔 중인 물건</NavDropdown.Item>
+                                <NavDropdown.Item href="/givenSharing">나눔 완료</NavDropdown.Item>
+                                <NavDropdown.Item href="/receivedSharing">받은 나눔</NavDropdown.Item>
+                            </NavDropdown>
                             <Nav.Link href="/chat">채팅</Nav.Link>
                             <Nav.Link href="/ranking">나눔 랭킹</Nav.Link>
                         </Nav>

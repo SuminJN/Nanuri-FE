@@ -8,7 +8,6 @@ import Main from "./pages/Main";
 import LoginIng from "./services/LoginIng";
 import PrivateRoute from "./services/PrivateRoute";
 import Items from "./pages/Items";
-import MySharing from "./pages/MySharing";
 import Chat from "./pages/Chat";
 import Ranking from "./pages/Ranking";
 import Profile from "./pages/Profile";
@@ -18,6 +17,9 @@ import AddItem from "./pages/AddItem";
 import ItemDetail from "./pages/ItemDetail";
 import UpdateItem from "./pages/UpdateItem";
 import GlobalStyles from "./assets/styles/GlobalStyles";
+import SharingList from "./components/sharing/SharingList";
+import GivenSharing from "./components/sharing/GivenSharing";
+import ReceivedSharing from "./components/sharing/ReceivedSharing";
 
 function App() {
 
@@ -39,7 +41,9 @@ function App() {
                             <Route path={process.env.REACT_APP_DEPLOY_URL + "item/:itemId"} element={<ItemDetail/>}/>
                             <Route path={process.env.REACT_APP_DEPLOY_URL + "addItem"} element={<AddItem/>}/>
                             <Route path={process.env.REACT_APP_DEPLOY_URL + "updateItem/:itemId"} element={<UpdateItem/>}/>
-                            <Route path={process.env.REACT_APP_DEPLOY_URL + "mysharing"} element={<MySharing/>}/>
+                            <Route path={process.env.REACT_APP_DEPLOY_URL + "sharingList"} element={<SharingList/>}/>
+                            <Route path={process.env.REACT_APP_DEPLOY_URL + "givenSharing"} element={<GivenSharing/>}/>
+                            <Route path={process.env.REACT_APP_DEPLOY_URL + "receivedSharing"} element={<ReceivedSharing/>}/>
                             <Route path={process.env.REACT_APP_DEPLOY_URL + "chat"} element={<Chat/>}/>
                             <Route path={process.env.REACT_APP_DEPLOY_URL + "ranking"} element={<Ranking/>}/>
                             <Route path={process.env.REACT_APP_DEPLOY_URL + "profile"} element={<Profile/>}/>
