@@ -17,11 +17,13 @@ import Signup from "./pages/Signup";
 import AddItem from "./pages/AddItem";
 import ItemDetail from "./pages/ItemDetail";
 import UpdateItem from "./pages/UpdateItem";
+import GlobalStyles from "./assets/styles/GlobalStyles";
 
 function App() {
 
     return (
-        <div style={{backgroundColor: '#F5F7FA'}}>
+        <>
+            <GlobalStyles />
             <RecoilRoot>
                 <BrowserRouter>
                     <Header/>
@@ -47,7 +49,7 @@ function App() {
                     <Footer/>
                 </BrowserRouter>
             </RecoilRoot>
-        </div>
+        </>
     );
 }
 
