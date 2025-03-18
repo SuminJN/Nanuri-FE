@@ -1,25 +1,56 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {useRecoilValue} from "recoil";
 import {UserState} from "../recoil/UserState";
 import {Col, Container, Form, Row} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
+import axios from "axios";
 
 function Profile() {
-    const userState = useRecoilValue(UserState); // 현재 로그인한 유저 정보 가져오기
-    const [nickname, setNickname] = useState(userState.nickname);
+    const [user, setUser] = useState({
+        uniqueId: '',
+        name: '',
+        department: '',
+        nickname: '',
+    });
     const [disable, setDisable] = useState(true);
+    const userState = useRecoilValue(UserState); // 현재 로그인한 유저 정보 가져오기
 
     const onChange = (e) => {
-        setNickname(e.target.value);
-    }
+        const {value, name} = e.target;
+        setUser({...user, [name]: value,});
+    };
 
-    const handleChangeNickname = () => {
-        alert("닉네임이 변경되었습니다.");
-
-        // TODO: axios로 서버에 변경할 닉네임 보내는 로직 추가 예정
+    const handleChangeNickname = async () => {
+        const response = await axios.patch(`${process.env.REACT_APP_RESTAPI_HOST}/api/user`,
+            {nickname: user.nickname},
+            {
+                headers: {
+                    Authorization: "Bearer " + userState.token,
+                },
+            }
+        )
 
         window.location.reload();
     }
+
+    const getUser = async () => {
+        try {
+            const response = await axios.get(`${process.env.REACT_APP_RESTAPI_HOST}/api/user`, {
+                headers: {
+                    Authorization: "Bearer " + userState.token,
+                },
+            });
+            console.log("유저 상세 조회 성공: ", response.data);
+            setUser(response.data);
+        } catch (error) {
+            console.log("유저 상세 조회 실패: ", error);
+            throw error;
+        }
+    }
+
+    useEffect( () => {
+        getUser();
+    }, []);
 
     return (
         <div className="my-5 pt-5">
@@ -29,21 +60,21 @@ function Profile() {
                 <Form>
                     <Form.Group className="mb-3">
                         <Form.Label>이름</Form.Label>
-                        <Form.Control type="text" value={userState.name} disabled/>
+                        <Form.Control type="text" value={user.name} disabled/>
                     </Form.Group>
                     <Form.Group className="mb-3">
                         <Form.Label>학번</Form.Label>
-                        <Form.Control type="text" value={userState.uniqueId} disabled/>
+                        <Form.Control type="text" value={user.uniqueId} disabled/>
                     </Form.Group>
                     <Form.Group className="mb-3">
                         <Form.Label>학부</Form.Label>
-                        <Form.Control type="text" value={userState.department} disabled/>
+                        <Form.Control type="text" value={user.department} disabled/>
                     </Form.Group>
                     <Form.Group className="mb-3">
                         <Form.Label>닉네임</Form.Label>
                         <Row>
                             <Col>
-                                <Form.Control type="text" value={nickname} onChange={onChange}
+                                <Form.Control type="text" name="nickname" value={user.nickname} onChange={onChange}
                                               disabled={disable}/>
                             </Col>
                             <Col>
