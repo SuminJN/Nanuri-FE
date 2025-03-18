@@ -6,11 +6,11 @@ import shirt from "../assets/images/items/shirt.jpeg";
 import Button from "react-bootstrap/Button";
 
 function ItemDetail() {
-    const params = useParams();
+    const {itemId} = useParams();
     const navigate = useNavigate();
 
     let item = {
-        id: params.itemId,
+        id: itemId,
         title: "제목입니다",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, " +
             "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. " +
@@ -66,8 +66,9 @@ function ItemDetail() {
                         <p className="mb-5">{item.category}</p>
                         <p>{item.description}</p>
                         <div className="d-grid gap-2">
-                        <Button variant="outline-success">수정하기</Button>
-                        <Button variant="outline-primary">삭제하기</Button>
+                            <Button variant="outline-success"
+                                    onClick={() => navigate(`/updateItem/${item.id}`)}>수정하기</Button>
+                            <Button variant="outline-primary">삭제하기</Button>
                         </div>
                     </Col>
                 </Row>
