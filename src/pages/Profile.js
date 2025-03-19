@@ -23,11 +23,7 @@ function Profile() {
     const handleChangeNickname = async () => {
         const response = await axios.patch(`${process.env.REACT_APP_RESTAPI_HOST}/api/user`,
             {nickname: user.nickname},
-            {
-                headers: {
-                    Authorization: "Bearer " + userState.token,
-                },
-            }
+            { withCredentials: true }
         )
 
         window.location.reload();
@@ -35,11 +31,7 @@ function Profile() {
 
     const getUser = async () => {
         try {
-            const response = await axios.get(`${process.env.REACT_APP_RESTAPI_HOST}/api/user`, {
-                headers: {
-                    Authorization: "Bearer " + userState.token,
-                },
-            });
+            const response = await axios.get(`${process.env.REACT_APP_RESTAPI_HOST}/api/user`, { withCredentials: true });
             console.log("유저 상세 조회 성공: ", response.data);
             setUser(response.data);
         } catch (error) {

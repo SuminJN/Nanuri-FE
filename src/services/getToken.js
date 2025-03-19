@@ -4,7 +4,8 @@ export const getToken = async (hisnetToken) => {
     try {
         const response = await axios.post(
             `${process.env.REACT_APP_RESTAPI_HOST}/api/nanuri/auth/login`,
-            { hisnetToken: hisnetToken } // 토큰을 요청의 본문에 담아 보냅니다.
+            { hisnetToken: hisnetToken }, // 토큰을 요청의 본문에 담아 보냅니다.
+            {withCredentials: true} // jwt를 쿠키로 받아오기 위한 설정
         );
         const token = response.data.token;
         const nickname = response.data.nickname;
