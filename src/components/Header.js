@@ -7,6 +7,7 @@ import Button from "react-bootstrap/Button";
 import {HeartOutlined, BellOutlined} from '@ant-design/icons';
 import {LoginState} from "../recoil/LoginState";
 import {UserState} from "../recoil/UserState";
+import axios from "axios";
 
 function Header() {
     const {pathname} = useLocation();
@@ -21,9 +22,12 @@ function Header() {
     };
 
     // 로그아웃 시도 시 로컬스토리지 값 지우고 메인화면으로 되돌림
-    const handleLogout = () => {
+    const handleLogout = async () => {
         localStorage.clear();
         setIsLoggedIn(false);
+
+        const response = await axios.get(`${process.env.REACT_APP_RESTAPI_HOST}/api/nanuri/auth/logout`, {withCredentials: true});
+
         navigate("/");
         window.location.reload();
     };
