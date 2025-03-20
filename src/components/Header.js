@@ -1,20 +1,20 @@
 import React from "react";
 
-import {Navbar, Container, Nav, NavDropdown} from "react-bootstrap";
+import {Navbar, Container, Nav, NavDropdown, Row, Col} from "react-bootstrap";
 import {useNavigate, useLocation} from "react-router-dom";
 import {useRecoilState, useRecoilValue} from "recoil";
 import Button from "react-bootstrap/Button";
-import {HeartOutlined, BellOutlined} from '@ant-design/icons';
 import {LoginState} from "../recoil/LoginState";
 import {UserState} from "../recoil/UserState";
 import axiosInstance from "../apis/axios";
+import bag from "../assets/images/bag-heart.svg";
+import person from "../assets/images/person.svg";
 
 function Header() {
     const {pathname} = useLocation();
     const navigate = useNavigate();
     const [isLoggedIn, setIsLoggedIn] = useRecoilState(LoginState);
 
-    // const token = localStorage.getItem("token");
     const user = useRecoilValue(UserState);
 
     const handleSignInClick = () => {
@@ -26,7 +26,7 @@ function Header() {
         localStorage.clear();
         setIsLoggedIn(false);
 
-        const response = await axiosInstance("/api/nanuri/auth/logout");
+        await axiosInstance.get("/api/nanuri/auth/logout");
 
         navigate("/");
         window.location.reload();
@@ -43,6 +43,7 @@ function Header() {
                     </Navbar.Brand>
 
                     <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
+
                     <Navbar.Collapse id="responsive-navbar-nav">
 
                         <Nav variant="underline" defaultActiveKey={pathname}>
@@ -54,33 +55,41 @@ function Header() {
                             </NavDropdown>
                             <Nav.Link href="/chat">채팅</Nav.Link>
                             <Nav.Link href="/ranking">나눔 랭킹</Nav.Link>
+                            <Nav.Link href="/wish"
+                                      className="d-xs-block d-sm-block d-md-block d-lg-none">관심목록</Nav.Link>
+                            <Nav.Link href="/profile"
+                                      className="d-xs-block d-sm-block d-md-block d-lg-none">마이페이지</Nav.Link>
+                            {isLoggedIn
+                                ?
+                                <Button variant="outline-primary" className="d-xs-block d-sm-block d-md-block d-lg-none"
+                                        onClick={handleLogout}>로그아웃</Button>
+                                : <Button variant="outline-primary" className="d-xs-block d-sm-block d-md-block d-lg-none"
+                                          onClick={handleSignInClick}>로그인</Button>
+                            }
                         </Nav>
                     </Navbar.Collapse>
 
-                    {/* 세션스토리지의 토큰 값이 유효하면 로그아웃 버튼, 유요하지 않으면 로그인 버튼 출력 */}
-                    {isLoggedIn
-                        ? <Nav className="gap-3">
-                            <div>
-                                <Button
-                                    className="rounded-circle border-white bg-body-tertiary text-black"><HeartOutlined/></Button>
-                                <Button
-                                    className="rounded-circle border-white bg-body-tertiary text-black mx-1"><BellOutlined/></Button>
-                            </div>
-                            <Navbar.Text> <a href="/profile">{user ? user.name : null}</a> 님</Navbar.Text>
-                            <Button className="py-2 px-3 bg-white text-primary" onClick={handleLogout}>로그아웃</Button>
-                        </Nav>
-                        : <Nav>
-                            <Button className="py-2 px-3 bg-white text-primary" onClick={handleSignInClick}>
-                                로그인
-                            </Button>
-                        </Nav>
-                    }
-
+                    <Nav className="d-none d-lg-block">
+                        {/* 세션스토리지의 토큰 값이 유효하면 로그아웃 버튼, 유요하지 않으면 로그인 버튼 출력 */}
+                        {isLoggedIn
+                            ? <Container className="d-flex gap-4">
+                                <Navbar.Text>
+                                    <a href="/wish"><img src={bag} width="24"/></a>
+                                </Navbar.Text>
+                                <Navbar.Text> <a href="/profile"><img src={person} width="24"/></a></Navbar.Text>
+                                <Button variant="outline-primary" onClick={handleLogout}>로그아웃</Button>
+                            </Container>
+                            : <Container>
+                                <Button variant="outline-primary" onClick={handleSignInClick}>로그인</Button>
+                            </Container>
+                        }
+                    </Nav>
 
                 </Container>
             </Navbar>
         </>
-    );
+    )
+        ;
 }
 
 export default Header;
