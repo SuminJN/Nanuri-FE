@@ -53,7 +53,7 @@ function Items() {
                             </Modal.Header>
                             <Modal.Body>
                                 <Form>
-                                    {['디지털기기', '생활가전', '가구/인테리어', '생활/주방', '도서', '뷰티/미용', '취미/게임', '티켓/교환권']
+                                    {['디지털기기', '생활가전', '문구', '가구/인테리어', '생활/주방', '도서', '의류', '뷰티/미용', '취미/게임', '티켓/교환권']
                                         .map((category, index) => (
                                             <div key={index} className="mb-3">
                                                 <Form.Check
@@ -80,7 +80,7 @@ function Items() {
                     <Col lg={3} xl={2} className="d-none d-lg-block p-5 mx-4">
                         <p className="fw-bold pb-2" style={{whiteSpace: "nowrap"}}>카테고리</p>
                         <Form>
-                            {['디지털기기', '생활가전', '가구/인테리어', '생활/주방', '도서', '뷰티/미용', '취미/게임', '티켓/교환권']
+                            {['디지털기기', '생활가전', '문구', '가구/인테리어', '생활/주방', '도서', '의류', '뷰티/미용', '취미/게임', '티켓/교환권']
                                 .map((category, index) => (
                                     <div key={index} className="mb-3">
                                         <Form.Check
@@ -104,9 +104,10 @@ function Items() {
                                               height: 340,
                                           }}
                                           cover={<img alt="example"
-                                                      src={img}/>}
+                                                      src={item.photo} height={200} />}
                                     >
-                                        <p className="fs-6">{item.title}</p>
+                                        <p className="fs-5">{item.title}</p>
+                                        <p>{item.ago}</p>
                                     </Card>
                                 </Col>
                             ))}
