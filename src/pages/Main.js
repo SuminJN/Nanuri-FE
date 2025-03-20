@@ -20,7 +20,7 @@ function Main() {
 
     return (
         <div className="">
-            <Carousel arrows autoplay effect="scrollx">
+            <Carousel arrows autoplay>
                 <div>
                     <h1 className="fw-bold" style={topText}>함께 나누는 기쁨, 따뜻한 우리.</h1>
                     <h3 className="fw-bold" style={bottomText}>당신의 나눔이 누군가의 따뜻한 하루가 됩니다</h3>

@@ -1,10 +1,9 @@
-import {Accordion, Breadcrumb, Col, Container, Row, Button} from "react-bootstrap";
-import itemData from "../../assets/json/items.json";
+import {Col, Container, Row, Button} from "react-bootstrap";
+import {mockItems} from "../../mocks/mockItems";
 import Card from "react-bootstrap/Card";
 import img from "../../assets/images/items/shirt.jpeg";
 import React, {useState} from "react";
 import {Drawer} from "antd";
-import {useNavigate} from "react-router-dom";
 
 function SharingList() {
     const [open, setOpen] = useState(false);
@@ -20,7 +19,7 @@ function SharingList() {
             <Container className="my-5 col col-md-8 col-lg-8 col-xl-6">
                 <Card>
                     <Card.Header as="h3" className="text-center">나눔 중인 물건</Card.Header>
-                    {itemData.map((item, idx) => (
+                    {mockItems.map((item, idx) => (
                         <Card.Body key={idx} className="border">
 
                             <Row>

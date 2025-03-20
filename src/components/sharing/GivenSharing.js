@@ -1,10 +1,8 @@
 import { Col, Container, Row, Button } from "react-bootstrap";
-import itemData from "../../assets/json/items.json";
+import {mockItems} from "../../mocks/mockItems";
 import Card from "react-bootstrap/Card";
 import img from "../../assets/images/items/shirt.jpeg";
-import React, {useState} from "react";
-import {Drawer} from "antd";
-import {useNavigate} from "react-router-dom";
+import React from "react";
 
 function GivenSharing() {
 
@@ -13,7 +11,7 @@ function GivenSharing() {
             <Container className="my-5 col col-md-8 col-lg-8 col-xl-6">
                 <Card>
                     <Card.Header as="h3" className="text-center">나눔 완료</Card.Header>
-                    {itemData.map((item, idx) => (
+                    {mockItems.map((item, idx) => (
                         <Card.Body key={idx} className="border">
 
                             <Row>
