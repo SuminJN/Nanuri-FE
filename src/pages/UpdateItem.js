@@ -4,6 +4,7 @@ import Button from "react-bootstrap/Button";
 import React, {useEffect, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
 import axios from "axios";
+import axiosInstance from "../apis/axios";
 
 function UpdateItem() {
     const {itemId} = useParams();
@@ -26,12 +27,12 @@ function UpdateItem() {
     };
 
     const getItem = async () => {
-        const response = await (await axios.get(`${process.env.REACT_APP_RESTAPI_HOST}/api/item/${itemId}`)).data;
+        const response = await (await axiosInstance().get(`/api/item/${itemId}`)).data;
         setItem(response.data);
     };
 
     const updateItem = async () => {
-        await axios.patch(`${process.env.REACT_APP_RESTAPI_HOST}/api/item/${itemId}`, item).then((res) => {
+        await axiosInstance().patch(`/api/item/${itemId}`, item).then(() => {
             alert('수정되었습니다.');
             navigate(`/item/${itemId}`, {replace: true})
         });

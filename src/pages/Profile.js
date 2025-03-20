@@ -3,7 +3,7 @@ import {useRecoilValue} from "recoil";
 import {UserState} from "../recoil/UserState";
 import {Col, Container, Form, Row} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
-import axios from "axios";
+import axiosInstance from "../apis/axios";
 
 function Profile() {
     const [user, setUser] = useState({
@@ -21,26 +21,16 @@ function Profile() {
     };
 
     const handleChangeNickname = async () => {
-        const response = await axios.patch(`${process.env.REACT_APP_RESTAPI_HOST}/api/user`,
-            {nickname: user.nickname},
-            { withCredentials: true }
-        )
-
+        await axiosInstance.patch("/api/user", {nickname: user.nickname})
         window.location.reload();
     }
 
     const getUser = async () => {
-        try {
-            const response = await axios.get(`${process.env.REACT_APP_RESTAPI_HOST}/api/user`, { withCredentials: true });
-            console.log("유저 상세 조회 성공: ", response.data);
-            setUser(response.data);
-        } catch (error) {
-            console.log("유저 상세 조회 실패: ", error);
-            throw error;
-        }
+        const response = await axiosInstance.get("/api/user");
+        setUser(response.data);
     }
 
-    useEffect( () => {
+    useEffect(() => {
         getUser();
     }, []);
 
