@@ -7,7 +7,7 @@ import Button from "react-bootstrap/Button";
 import {HeartOutlined, BellOutlined} from '@ant-design/icons';
 import {LoginState} from "../recoil/LoginState";
 import {UserState} from "../recoil/UserState";
-import axios from "axios";
+import axiosInstance from "../apis/axios";
 
 function Header() {
     const {pathname} = useLocation();
@@ -26,7 +26,7 @@ function Header() {
         localStorage.clear();
         setIsLoggedIn(false);
 
-        const response = await axios.get(`${process.env.REACT_APP_RESTAPI_HOST}/api/nanuri/auth/logout`, {withCredentials: true});
+        const response = await axiosInstance("/api/nanuri/auth/logout");
 
         navigate("/");
         window.location.reload();

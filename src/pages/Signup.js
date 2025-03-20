@@ -3,9 +3,9 @@ import Button from "react-bootstrap/Button";
 import Modal from 'react-bootstrap/Modal';
 import {useRecoilState, useRecoilValue} from "recoil";
 import {UserState} from "../recoil/UserState";
-import axios from "axios";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import {LoginState} from "../recoil/LoginState";
+import axiosInstance from "../apis/axios";
 
 function Signup() {
     const [isLoggedIn, setIsLoggedIn] = useRecoilState(LoginState);
@@ -28,24 +28,19 @@ function Signup() {
     const onSubmit = (event) => {
         event.preventDefault();
 
-        if(nickname.length < 3) {
+        if (nickname.length < 3) {
             alert("3글자 이상의 닉네임을 입력해주세요");
             return;
-        } else if(!isChecked) {
+        } else if (!isChecked) {
             alert("개인정보 수집 및 이용에 동의해주세요")
             return;
         }
 
-        try {
-            axios.post(`${process.env.REACT_APP_RESTAPI_HOST}/api/nanuri/auth/signup`,
-                {uniqueId: userInfo.uniqueId, nickname: nickname}); // TODO: 토큰 검증 필요
+        axiosInstance.post("/api/nanuri/auth/signup", {uniqueId: userInfo.uniqueId, nickname: nickname});
 
-            setUserState({...userState, nickname: nickname})
-            setIsLoggedIn(true);
-            window.location.href = "/";
-        } catch (error) {
-            console.error("error: ", error);
-        }
+        setUserState({...userState, nickname: nickname})
+        setIsLoggedIn(true);
+        window.location.href = "/";
     };
 
     return (
@@ -91,9 +86,9 @@ function Signup() {
                             <Container>
                                 <ul>
                                     <li>수집 및 이용 목적</li>
-                                    <br />
+                                    <br/>
                                     <li>수집 항목</li>
-                                    <br />
+                                    <br/>
                                     <li>보유 및 이용 기간</li>
                                 </ul>
                             </Container>

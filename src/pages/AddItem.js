@@ -6,6 +6,7 @@ import { AiOutlinePicture } from "react-icons/ai";
 import axios from "axios";
 import {useRecoilValue} from "recoil";
 import {UserState} from "../recoil/UserState";
+import axiosInstance from "../apis/axios";
 
 function AddItem() {
     const userState = useRecoilValue(UserState);
@@ -58,21 +59,23 @@ function AddItem() {
         console.log(imageFiles);
         console.log(formData);
 
-        await axios({
-            method: 'post',
-            url: '/api/item',
-            headers: {
-                'Content-Type': 'multipart/form-data',
-                Authorization: "Bearer " + userState.token,
-            },
-            data: formData,
-        }).then((Response) => {
-            if (Response.status === 200) {
-                console.log("물건이 등록 되었습니다.");
-            } else {
-                alert("등록 오류가 생겼습니다. 다시 시도해주세요.");
-            }
-        });
+        await axiosInstance("/api/item", {data: formData});
+        //
+        // await axios({
+        //     method: 'post',
+        //     url: '/api/item',
+        //     headers: {
+        //         'Content-Type': 'multipart/form-data',
+        //         Authorization: "Bearer " + userState.token,
+        //     },
+        //     data: formData,
+        // }).then((Response) => {
+        //     if (Response.status === 200) {
+        //         console.log("물건이 등록 되었습니다.");
+        //     } else {
+        //         alert("등록 오류가 생겼습니다. 다시 시도해주세요.");
+        //     }
+        // });
     }
 
     return (
