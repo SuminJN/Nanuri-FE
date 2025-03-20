@@ -20,6 +20,7 @@ import GlobalStyles from "./assets/styles/GlobalStyles";
 import SharingList from "./components/sharing/SharingList";
 import GivenSharing from "./components/sharing/GivenSharing";
 import ReceivedSharing from "./components/sharing/ReceivedSharing";
+import Wish from "./pages/Wish";
 
 function App() {
 
@@ -46,6 +47,7 @@ function App() {
                             <Route path={process.env.REACT_APP_DEPLOY_URL + "receivedSharing"} element={<ReceivedSharing/>}/>
                             <Route path={process.env.REACT_APP_DEPLOY_URL + "chat"} element={<Chat/>}/>
                             <Route path={process.env.REACT_APP_DEPLOY_URL + "ranking"} element={<Ranking/>}/>
+                            <Route path={process.env.REACT_APP_DEPLOY_URL + "wish"} element={<Wish/>}/>
                             <Route path={process.env.REACT_APP_DEPLOY_URL + "profile"} element={<Profile/>}/>
                         </Route>
                     </Routes>

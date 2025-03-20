@@ -1,5 +1,4 @@
 import {useNavigate, useParams} from "react-router-dom";
-import axios from "axios";
 import React, {useEffect} from "react";
 import {Container, Row, Col, Breadcrumb} from "react-bootstrap";
 import shirt from "../assets/images/items/shirt.jpeg";
@@ -66,9 +65,9 @@ function ItemDetail() {
                         <p className="mb-5">{item.category}</p>
                         <p>{item.description}</p>
                         <div className="d-grid gap-2">
-                            <Button variant="outline-success"
+                            <Button variant="outline-primary"
                                     onClick={() => navigate(`/updateItem/${item.id}`)}>수정하기</Button>
-                            <Button variant="outline-primary">삭제하기</Button>
+                            <Button variant="outline-secondary">삭제하기</Button>
                         </div>
                     </Col>
                 </Row>

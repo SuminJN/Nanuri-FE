@@ -1,7 +1,7 @@
 import Button from "react-bootstrap/Button";
 import {Col, Container, Form, InputGroup, Row} from "react-bootstrap";
 import img from "../assets/images/items/shirt.jpeg";
-import itemData from "../assets/json/items.json";
+import {mockItems} from "../mocks/mockItems";
 import {useNavigate} from "react-router-dom";
 import {Card} from 'antd';
 import search from "../assets/images/search.svg";
@@ -35,7 +35,7 @@ function Items() {
                         </InputGroup>
                     </Col>
                     <Col xs={4} sm={3} md={2} lg={2} xl={3}>
-                        <Button className="btn-primary" onClick={goToAddItem} style={{whiteSpace: "nowrap"}}>+
+                        <Button variant="outline-primary" onClick={goToAddItem} style={{whiteSpace: "nowrap"}}>+
                             나눔하기</Button>
                     </Col>
                 </Row>
@@ -67,10 +67,10 @@ function Items() {
                                 </Form>
                             </Modal.Body>
                             <Modal.Footer>
-                                <Button variant="primary" onClick={handleClose}>
+                                <Button variant="secondary" className="text-white" onClick={handleClose}>
                                     닫기
                                 </Button>
-                                <Button variant="success" onClick={handleClose}>
+                                <Button variant="primary" onClick={handleClose}>
                                     적용하기
                                 </Button>
                             </Modal.Footer>
@@ -96,15 +96,17 @@ function Items() {
 
                     <Col>
                         <Row xs={2} sm={2} md={3} lg={3} xl={4} className="g-4">
-                            {itemData.map((item, index) => (
+                            {mockItems.map((item, index) => (
                                 <Col key={index}>
                                     <Card onClick={() => onClickCard(item.id)}
                                           hoverable
+                                          style={{
+                                              height: 340,
+                                          }}
                                           cover={<img alt="example"
                                                       src={img}/>}
                                     >
-                                        <p className="fs-5">{item.title}</p>
-                                        <p>{item.description}</p>
+                                        <p className="fs-6">{item.title}</p>
                                     </Card>
                                 </Col>
                             ))}

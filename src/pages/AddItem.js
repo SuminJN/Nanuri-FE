@@ -1,9 +1,7 @@
-import {Container, Row, Col, Form, Image} from "react-bootstrap";
-import { Carousel } from 'antd';
+import {Container, Row, Col, Form, Image, Button} from "react-bootstrap";
+import {Carousel} from 'antd';
 import {Fragment, useRef, useState} from "react";
-import {Button} from 'antd';
-import { AiOutlinePicture } from "react-icons/ai";
-import axios from "axios";
+import {AiOutlinePicture} from "react-icons/ai";
 import {useRecoilValue} from "recoil";
 import {UserState} from "../recoil/UserState";
 import axiosInstance from "../apis/axios";
@@ -51,7 +49,7 @@ function AddItem() {
         const formData = new FormData();
         const json = JSON.stringify(inputs);
         const blob = new Blob([json], {
-            type: "application/json",
+            type: "application/mocks",
         });
         formData.append("createMenuDto", blob);
         formData.append('files', imageFiles);
@@ -80,49 +78,53 @@ function AddItem() {
 
     return (
         <>
-            <Container className="mt-5 py-5">
+            <Container className="mt-5">
                 <h1 className="text-center mb-5">나의 물건 나눔</h1>
 
-                <Row className="mx-5">
-                    <Col className="mb-3" sm={6} md={6}>
+                <Row className="">
+                    <Col className="mb-3 px-5" md={0} lg={6}>
                         {
                             imageFiles && imageFiles.length
                                 ? <Container>
-                                    <Carousel arrows infinite={false}>
-                                        {imageFiles.map((e, i) => (
-                                            <div key={i} className="w-100 h-75" style={{background: '#364d79', lineHeight: '160px',}}>
-                                                <div className="d-flex justify-content-center">
+                                    <Carousel arrows autoplay className="text-black">
+                                        {imageFiles.map((img, i) => (
+                                            <div key={i}>
+                                                <div className="d-flex justify-content-end">
                                                     <Button
-                                                        className="m-3"
-                                                        color="danger" variant="outlined"
+                                                        style={{position: 'absolute', zIndex: "10"}}
+                                                        className="m-2"
+                                                        variant="outline-danger"
                                                         onClick={() => removeImageFile(i)}
-                                                    >삭제</Button>
+                                                    >X</Button>
                                                 </div>
                                                 <Image className="w-100"
-                                                       src={e}
-                                                       alt={e}
+                                                       src={img}
+                                                       alt={img}
                                                        style={{
                                                            height: '45vh',
-                                                           objectFit: "cover",
-                                                           backgroundColor: "grey"
+                                                           objectFit: "fill",
+                                                           // backgroundColor: "grey"
                                                        }}
                                                 />
                                             </div>
                                         ))}
                                     </Carousel>
                                 </Container>
-                                : <Container className="w-100 d-flex justify-content-center align-items-center mt-4" style={{
+                                : <Container className="d-flex justify-content-center align-items-center mt-4" style={{
                                     height: '45vh',
                                     backgroundColor: "lightgrey"
                                 }}><AiOutlinePicture size="100" color="#555"/></Container>
                         }
                     </Col>
                     <Col>
-                        <Button color="danger" variant="dashed" onClick={() => {
-                            imageRef.current?.click();
-                        }}>
-                            이미지 업로드
-                        </Button>
+                        <Container className="d-flex justify-content-end">
+                            <Button variant="outline-primary"
+                                    onClick={() => {
+                                        imageRef.current?.click();
+                                    }}>
+                                이미지 업로드
+                            </Button>
+                        </Container>
                         <Container className="d-flex justify-content-center mb-3">
 
                             <input
@@ -139,11 +141,13 @@ function AddItem() {
                         <Form>
                             <Form.Group className="mb-3">
                                 <Form.Label column="md">제목</Form.Label>
-                                <Form.Control type="text" name="title" placeholder="글 제목" value={title} onChange={onChange} />
+                                <Form.Control type="text" name="title" placeholder="글 제목" value={title}
+                                              onChange={onChange}/>
                             </Form.Group>
                             <Form.Group className="mb-3">
                                 <Form.Label column="md">나눔 희망 장소</Form.Label>
-                                <Form.Control type="text" name="location" placeholder="희망 장소를 적어주세요." value={location} onChange={onChange}></Form.Control>
+                                <Form.Control type="text" name="location" placeholder="희망 장소를 적어주세요." value={location}
+                                              onChange={onChange}></Form.Control>
                             </Form.Group>
                             <Form.Group className="mb-3">
                                 <Form.Label column="md">날짜</Form.Label>
@@ -151,7 +155,8 @@ function AddItem() {
                             </Form.Group>
                             <Form.Group className="mb-3">
                                 <Form.Label column="md">자세한 설명</Form.Label>
-                                <Form.Control as="textarea" rows={3} placeholder="게시글 내용을 작성해 주세요." name="description" value={description} onChange={onChange}></Form.Control>
+                                <Form.Control as="textarea" rows={3} placeholder="게시글 내용을 작성해 주세요." name="description"
+                                              value={description} onChange={onChange}></Form.Control>
                             </Form.Group>
                         </Form>
                     </Col>

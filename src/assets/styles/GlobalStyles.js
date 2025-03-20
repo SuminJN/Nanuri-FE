@@ -9,7 +9,7 @@ const GlobalStyles = createGlobalStyle`
 
     html, body {
         font-size: 100%;
-        background: #fafafa;
+        background: #f0f2f8;
         color: #4d4d4d;
     }
 `
