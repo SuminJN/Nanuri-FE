@@ -35,7 +35,7 @@ function Items() {
                         </InputGroup>
                     </Col>
                     <Col xs={4} sm={3} md={2} lg={2} xl={3}>
-                        <Button className="btn-primary" onClick={goToAddItem} style={{whiteSpace: "nowrap"}}>+
+                        <Button variant="outline-primary" onClick={goToAddItem} style={{whiteSpace: "nowrap"}}>+
                             나눔하기</Button>
                     </Col>
                 </Row>
@@ -67,10 +67,10 @@ function Items() {
                                 </Form>
                             </Modal.Body>
                             <Modal.Footer>
-                                <Button variant="primary" onClick={handleClose}>
+                                <Button variant="secondary" className="text-white" onClick={handleClose}>
                                     닫기
                                 </Button>
-                                <Button variant="success" onClick={handleClose}>
+                                <Button variant="primary" onClick={handleClose}>
                                     적용하기
                                 </Button>
                             </Modal.Footer>

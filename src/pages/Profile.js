@@ -61,11 +61,11 @@ function Profile() {
                             </Col>
                             <Col>
                                 {disable
-                                    ? <Button variant="outline-primary" onClick={() => setDisable(!disable)}>수정</Button>
+                                    ? <Button variant="outline-secondary" onClick={() => setDisable(!disable)}>수정</Button>
                                     : <>
-                                        <Button variant="outline-primary"
+                                        <Button variant="outline-secondary"
                                                 onClick={() => setDisable(!disable)}>취소</Button>
-                                        <Button variant="outline-success" className="mx-2"
+                                        <Button variant="outline-primary" className="mx-2"
                                                 onClick={handleChangeNickname}>변경</Button>
                                     </>
                                 }

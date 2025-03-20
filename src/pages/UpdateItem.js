@@ -69,8 +69,8 @@ function UpdateItem() {
                             </Form.Group>
 
                             <div className="d-grid gap-2">
-                                <Button variant="outline-success" onClick={updateItem}>수정 완료</Button>
-                                <Button variant="outline-primary"
+                                <Button variant="outline-primary" onClick={updateItem}>수정 완료</Button>
+                                <Button variant="outline-secondary"
                                         onClick={() => navigate(`/item/${itemId}`, {replace: true})}>취소</Button>
                             </div>
                         </Col>

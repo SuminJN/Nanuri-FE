@@ -7,7 +7,7 @@ function Main() {
         color: '#fff',
         lineHeight: '400px',
         textAlign: 'center',
-        background: 'rgb(231,102,100)',
+        background: '#527dad',
     };
 
     const bottomText = {
@@ -15,7 +15,7 @@ function Main() {
         height: '250px',
         color: '#fff',
         textAlign: 'center',
-        background: 'rgb(231,102,100)',
+        background: '#527dad',
     };
 
     return (

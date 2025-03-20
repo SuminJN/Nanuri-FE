@@ -66,9 +66,9 @@ function ItemDetail() {
                         <p className="mb-5">{item.category}</p>
                         <p>{item.description}</p>
                         <div className="d-grid gap-2">
-                            <Button variant="outline-success"
+                            <Button variant="outline-primary"
                                     onClick={() => navigate(`/updateItem/${item.id}`)}>수정하기</Button>
-                            <Button variant="outline-primary">삭제하기</Button>
+                            <Button variant="outline-secondary">삭제하기</Button>
                         </div>
                     </Col>
                 </Row>

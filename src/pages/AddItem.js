@@ -84,7 +84,7 @@ function AddItem() {
                 <h1 className="text-center mb-5">나의 물건 나눔</h1>
 
                 <Row className="mx-5">
-                    <Col className="mb-3" sm={6} md={6}>
+                    <Col className="mb-3" lg={12} xl={6}>
                         {
                             imageFiles && imageFiles.length
                                 ? <Container>
@@ -103,7 +103,7 @@ function AddItem() {
                                                        alt={e}
                                                        style={{
                                                            height: '45vh',
-                                                           objectFit: "cover",
+                                                           objectFit: "contain",
                                                            backgroundColor: "grey"
                                                        }}
                                                 />
