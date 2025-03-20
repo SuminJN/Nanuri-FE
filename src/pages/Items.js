@@ -100,11 +100,13 @@ function Items() {
                                 <Col key={index}>
                                     <Card onClick={() => onClickCard(item.id)}
                                           hoverable
+                                          style={{
+                                              height: 340,
+                                          }}
                                           cover={<img alt="example"
                                                       src={img}/>}
                                     >
-                                        <p className="fs-5">{item.title}</p>
-                                        <p>{item.description}</p>
+                                        <p className="fs-6">{item.title}</p>
                                     </Card>
                                 </Col>
                             ))}

@@ -1,5 +1,4 @@
 import {useNavigate, useParams} from "react-router-dom";
-import axios from "axios";
 import React, {useEffect} from "react";
 import {Container, Row, Col, Breadcrumb} from "react-bootstrap";
 import shirt from "../assets/images/items/shirt.jpeg";
