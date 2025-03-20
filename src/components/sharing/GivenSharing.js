@@ -7,19 +7,10 @@ import {Drawer} from "antd";
 import {useNavigate} from "react-router-dom";
 
 function GivenSharing() {
-    const navigate = useNavigate();
-
-    const [open, setOpen] = useState(false);
-    const showDrawer = () => {
-        setOpen(true);
-    };
-    const onClose = () => {
-        setOpen(false);
-    };
 
     return (
         <>
-            <Container className="my-5 col col-md-8 col-lg-6">
+            <Container className="my-5 col col-md-8 col-lg-8 col-xl-6">
                 <Card>
                     <Card.Header as="h3" className="text-center">나눔 완료</Card.Header>
                     {itemData.map((item, idx) => (

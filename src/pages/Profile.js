@@ -36,7 +36,7 @@ function Profile() {
 
     return (
         <div className="my-5 pt-5">
-            <Container className="col col-md-8 col-lg-4 bg-white p-5 border rounded shadow">
+            <Container className="col col-md-8 col-lg-6 col-xl-4 bg-white p-5 border rounded shadow">
                 <h2 className="mb-5 text-center">프로필 정보</h2>
 
                 <Form>
