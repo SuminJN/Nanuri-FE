@@ -3,9 +3,9 @@ import {Carousel} from 'antd';
 function Main() {
     const topText = {
         margin: 0,
-        height: '250px',
+        height: '350px',
         color: '#fff',
-        lineHeight: '400px',
+        lineHeight: '550px',
         textAlign: 'center',
         background: '#527dad',
     };

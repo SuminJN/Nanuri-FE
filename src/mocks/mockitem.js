@@ -2,20 +2,13 @@ import shirt from "../assets/images/items/shirt.jpeg";
 
 export const mockItem = {
     id: 0,
-    title: "제목입니다",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, " +
-        "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. " +
-        "Nisl tincidunt eget nullam non. Quis hendrerit dolor magna eget est " +
-        "lorem ipsum dolor sit. Volutpat odio facilisis mauris sit amet massa. " +
-        "Commodo odio aenean sed adipiscing diam donec adipiscing tristique. " +
-        "Mi eget mauris pharetra et. Non tellus orci ac auctor augue. " +
-        "Elit at imperdiet dui accumsan sit. " +
-        "Ornare arcu dui vivamus arcu felis. Egestas integer eget aliquet nibh praesent. " +
-        "In hac habitasse platea dictumst quisque sagittis purus. " +
-        "Pulvinar elementum integer enim neque volutpat ac.",
-    place: "장소입니다",
+    title: "셔츠 나눔 합니다!",
+    description: "깨끗하게 세탁한 셔츠 몇 장을 나눔하려고 합니다! " +
+        "사이즈는 M~L 정도이며, 기본 화이트 셔츠와 캐주얼 체크 셔츠가 포함되어 있어요. " +
+        "몇 번 입었지만 상태는 양호하며, 필요하신 분께 무료로 드립니다. 직접 오셔서 가져가시면 좋고, " +
+        "가능하면 환경을 생각해 에코백이나 장바구니를 지참해 주세요. 관심 있으신 분은 신청해주세요 😊",
     view_count: "조회수입니다",
-    category: "카테고리입니다",
-    userId: "userId 입니다",
+    category: "남성의류",
+    nickname: "학생 001",
     photo: shirt,
 }
