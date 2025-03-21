@@ -1,5 +1,4 @@
 import {Col, Container, Form, Row} from "react-bootstrap";
-import shirt from "../assets/images/items/shirt.jpeg";
 import Button from "react-bootstrap/Button";
 import React, {useEffect, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
@@ -10,13 +9,11 @@ function UpdateItem() {
     const {itemId} = useParams();
     const navigate = useNavigate();
     const [item, setItem] = useState({
-        itemId: itemId,
+        id: '',
         title: '',
         category: '',
         description: '',
-        userId: '',
-        photo: shirt,
-        viewCount: '',
+        photo: '',
     });
 
     const {title, category, description, photo} = item; // 비구조화 할당
@@ -27,19 +24,19 @@ function UpdateItem() {
     };
 
     const getItem = async () => {
-        const response = await (await axiosInstance().get(`/api/item/${itemId}`)).data;
+        const response =  await axios.get(`/api/item/${itemId}`);
         setItem(response.data);
     };
 
     const updateItem = async () => {
-        await axiosInstance().patch(`/api/item/${itemId}`, item).then(() => {
+        await axios.patch(`/api/item/${itemId}`, item).then(() => {
             alert('수정되었습니다.');
             navigate(`/item/${itemId}`, {replace: true})
         });
     };
 
     useEffect(() => {
-        // getItem();
+        getItem();
     }, []);
 
     return (
@@ -48,7 +45,7 @@ function UpdateItem() {
                 <Form>
                     <Row>
                         <Col xs={12} sm={12} md={12} lg={6}>
-                            <img className="border border-2 rounded w-100 h-75 mb-3" src={shirt} alt="photo"/>
+                            <img className="border border-2 rounded w-100 h-75 mb-3" src={photo} alt="photo"/>
                             <h4>{item.userId}</h4>
                         </Col>
                         <Col>

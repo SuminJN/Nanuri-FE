@@ -1,12 +1,19 @@
 import {Col, Container, Row, Button} from "react-bootstrap";
-import {mockItems} from "../../mocks/mockItems";
 import Card from "react-bootstrap/Card";
-import img from "../../assets/images/items/shirt.jpeg";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Drawer} from "antd";
+import {useNavigate} from "react-router-dom";
+import axios from "axios";
 
 function SharingList() {
+    const navigate = useNavigate();
+    const [itemList, setItemList] = useState(null);
     const [open, setOpen] = useState(false);
+
+    const onClickCard = (id) => {
+        navigate(`/item/${id}`)
+    };
+
     const showDrawer = () => {
         setOpen(true);
     };
@@ -14,32 +21,42 @@ function SharingList() {
         setOpen(false);
     };
 
+    useEffect( () => {
+        axios.get("/api/items").then((res) => {
+                setItemList(res.data);
+            }
+        )
+    }, [])
+
     return (
         <>
-            <Container className="mt-md-0 mt-lg-5 col-md-12 col-lg-10 col-xl-6">
+            <Container className="mt-md-0 mt-lg-5 col-md-10 col-lg-10 col-xl-8">
                 <Card>
                     <Card.Header as="h2" className="text-center py-3">나눔 중인 물건</Card.Header>
-                    {mockItems.map((item, idx) => (
+                    { itemList === null
+                        ? null
+                        : itemList.map((item, idx) => (
                         <Card.Body key={idx} className="border">
 
-                            <Row>
-                                <Col lg={3} className="mb-3">
+                            <Row className="m-3">
+                                <Col xs={0} sm={0} md={3} lg={3} xl={3} onClick={() => onClickCard(item.id)}>
                                     <Card.Img
                                         className=""
                                         variant="top"
                                         src={item.photo} width={100}
                                         height={200}/>
                                 </Col>
-                                <Col xs={8} lg={6}>
-                                    <Row>
-                                        <Card.Title className="mb-3 fs-4">{item.title}</Card.Title>
+
+                                <Col xs={0} sm={0} md={6} lg={6} xl={6} className="my-3 my-md-0" onClick={() => onClickCard(item.id)}>
+                                    <Card.Title className="mb-3 fs-4">{item.title} </Card.Title>
                                     <Card.Text>
                                         {item.description}
                                     </Card.Text>
-                                    </Row>
                                 </Col>
-                                <Col xs={4} lg={3}>
-                                    <Button variant="outline-primary" onClick={showDrawer}>
+
+                                <Col className="d-grid d-md-flex align-items-md-center justify-content-md-center">
+                                    <Button variant="outline-primary" onClick={showDrawer}
+                                            style={{whiteSpace: "nowrap"}}>
                                         신청자 보기
                                     </Button>
                                 </Col>

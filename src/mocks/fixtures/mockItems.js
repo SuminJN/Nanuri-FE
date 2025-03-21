@@ -1,20 +1,20 @@
-import book from "../assets/images/items/book.jpeg";
-import mouse from "../assets/images/items/mouse.jpeg";
-import shirt from "../assets/images/items/shirt.jpeg";
-import shoes from "../assets/images/items/shoes.jpeg";
-import tumblr from "../assets/images/items/tumblr.jpeg";
-import keyboard from "../assets/images/items/keyboard.jpeg";
-import charger from "../assets/images/items/charger.jpeg";
-import pencilCase from "../assets/images/items/pencilCase.jpeg";
-import cap from "../assets/images/items/cap.jpeg";
-import pencil from "../assets/images/items/pencil.jpeg";
-import chair from "../assets/images/items/chair.jpeg";
+import book from "../../assets/images/items/book.jpeg";
+import mouse from "../../assets/images/items/mouse.jpeg";
+import shirt from "../../assets/images/items/shirt.jpeg";
+import shoes from "../../assets/images/items/shoes.jpeg";
+import tumblr from "../../assets/images/items/tumblr.jpeg";
+import keyboard from "../../assets/images/items/keyboard.jpeg";
+import charger from "../../assets/images/items/charger.jpeg";
+import pencilCase from "../../assets/images/items/pencilCase.jpeg";
+import cap from "../../assets/images/items/cap.jpeg";
+import pencil from "../../assets/images/items/pencil.jpeg";
+import chair from "../../assets/images/items/chair.jpeg";
 
 export const mockItems = [
     {
         "id" : 0,
         "title" : "책 나눔 합니다",
-        "description" : "수학 공부하시는 분들께 도움될 만한 책을 나눔하려고 합니다! " +
+        "description" : "자바 공부하시는 분들께 도움될 만한 책을 나눔하려고 합니다! " +
             "대학교 과정 문제집과 개념서 몇 권이며, 필기나 밑줄이 조금 있지만 공부하는 데 지장은 없습니다. " +
             "필요하신 분께 무료로 드리며, 직접 오셔서 가져가시면 좋습니다. 다음 필요한 분들께도 이어서 잘 사용해 주시면 감사하겠습니다.",
         "photo": book,
@@ -68,7 +68,7 @@ export const mockItems = [
         "id" : 4,
         "title" : "텀블러 나눔 합니다",
         "description" : "사용하지 않는 텀블러를 나눔합니다! 용량은 500ml이며, 깨끗하게 세척해 두었습니다. " +
-            "보온·보냉 기능이 좋아서 일상에서 유용하게 사용할 수 있습니다. 필요하신 분이 잘 활용해 주시면 좋겠습니다. " +
+            "보온⸰보냉 기능이 좋아서 일상에서 유용하게 사용할 수 있습니다. 필요하신 분이 잘 활용해 주시면 좋겠습니다. " +
             "나눔이니 부담 없이 연락 주세요! 직접 전달 가능하며, 장소는 학관 앞에서 조율 가능합니다. 😊",
         "photo": tumblr,
         "ago": "50분 전",

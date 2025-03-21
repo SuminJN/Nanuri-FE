@@ -1,36 +1,38 @@
-import { Col, Container, Row, Button } from "react-bootstrap";
-import {mockItems} from "../../mocks/mockItems";
+import {Col, Container, Row} from "react-bootstrap";
+import {mockItems} from "../../mocks/fixtures/mockItems";
 import Card from "react-bootstrap/Card";
-import img from "../../assets/images/items/shirt.jpeg";
 import React from "react";
+import {useNavigate} from "react-router-dom";
 
-function GivenSharing() {
+function SharingList() {
+    const navigate = useNavigate();
+
+    const onClickCard = (id) => {
+        navigate(`/item/${id}`)
+    };
 
     return (
         <>
-            <Container className="mt-md-0 mt-lg-5 col-md-12 col-lg-10 col-xl-6">
+            <Container className="mt-md-0 mt-lg-5 col-md-10 col-lg-10 col-xl-8">
                 <Card>
                     <Card.Header as="h2" className="text-center py-3">나눔 완료</Card.Header>
                     {mockItems.map((item, idx) => (
-                        <Card.Body key={idx} className="border">
+                        <Card.Body key={idx} className="border" onClick={() => onClickCard(item.id)}>
 
-                            <Row>
-                                <Col lg={3} className="mb-3">
+                            <Row className="m-3">
+                                <Col xs={0} sm={0} md={3} lg={3} xl={3}>
                                     <Card.Img
                                         className=""
                                         variant="top"
-                                        src={img} width={100}
+                                        src={item.photo} width={100}
                                         height={200}/>
                                 </Col>
-                                <Col xs={8} lg={6}>
-                                    <Row>
-                                        <Card.Title className="mb-3 fs-4">{item.title}</Card.Title>
-                                        <Card.Text>
-                                            {item.description}
-                                        </Card.Text>
-                                    </Row>
-                                </Col>
-                                <Col xs={4} lg={3}>
+
+                                <Col xs={0} sm={0} md={6} lg={6} xl={6} className="my-3 my-md-0">
+                                    <Card.Title className="mb-3 fs-4">{item.title}</Card.Title>
+                                    <Card.Text>
+                                        {item.description}
+                                    </Card.Text>
                                 </Col>
                             </Row>
                         </Card.Body>
@@ -41,4 +43,4 @@ function GivenSharing() {
     );
 }
 
-export default GivenSharing;
+export default SharingList;

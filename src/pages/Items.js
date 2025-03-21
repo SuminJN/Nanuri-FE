@@ -1,16 +1,17 @@
 import Button from "react-bootstrap/Button";
 import {Col, Container, Form, InputGroup, Row} from "react-bootstrap";
 import img from "../assets/images/items/shirt.jpeg";
-import {mockItems} from "../mocks/mockItems";
 import {useNavigate} from "react-router-dom";
 import {Card} from 'antd';
 import search from "../assets/images/search.svg";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import Modal from "react-bootstrap/Modal";
+import axios from "axios";
 
 function Items() {
     const navigate = useNavigate();
     const [show, setShow] = useState(false);
+    const [itemList, setItemList] = useState(null);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -22,6 +23,13 @@ function Items() {
     const goToAddItem = () => {
         navigate("/addItem");
     }
+
+    useEffect( () => {
+         axios.get("/api/items").then((res) => {
+                setItemList(res.data);
+            }
+        )
+    }, [])
 
     return (
         <>
@@ -43,9 +51,9 @@ function Items() {
                 <Row className="mt-5">
 
                     <Container className="d-xs-block d-sm-block d-md-block d-lg-none">
-                            <Button variant="outline-primary" className="px-4 mb-3" onClick={handleShow}>
-                                필터
-                            </Button>
+                        <Button variant="outline-primary" className="px-4 mb-3" onClick={handleShow}>
+                            필터
+                        </Button>
 
                         <Modal show={show} onHide={handleClose}>
                             <Modal.Header closeButton>
@@ -96,21 +104,21 @@ function Items() {
 
                     <Col>
                         <Row xs={2} sm={2} md={3} lg={3} xl={4} className="g-4">
-                            {mockItems.map((item, index) => (
-                                <Col key={index}>
-                                    <Card className="shadow-sm" onClick={() => onClickCard(item.id)}
-                                          hoverable
-                                          style={{
-                                              height: 340,
-                                          }}
-                                          cover={<img alt="example"
-                                                      src={item.photo} height={200} />}
-                                    >
-                                        <p className="fs-5">{item.title}</p>
-                                        <p>{item.ago}</p>
-                                    </Card>
-                                </Col>
-                            ))}
+                            {itemList !== null ? itemList.map((item, index) => (
+                                    <Col key={index}>
+                                        <Card className="shadow-sm" onClick={() => onClickCard(item.id)}
+                                              hoverable
+                                              style={{
+                                                  height: 340,
+                                              }}
+                                              cover={<img alt="example"
+                                                          src={item.photo} height={200}/>}
+                                        >
+                                            <p className="fs-5 mb-1">{item.title}</p>
+                                            <p className="opacity-50">{item.ago}</p>
+                                        </Card>
+                                    </Col>
+                                )) : null}
                         </Row>
                     </Col>
                 </Row>

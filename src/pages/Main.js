@@ -1,4 +1,6 @@
 import {Carousel} from 'antd';
+import {useEffect} from "react";
+import axios from "axios";
 
 function Main() {
     const topText = {
@@ -7,7 +9,7 @@ function Main() {
         color: '#fff',
         lineHeight: '550px',
         textAlign: 'center',
-        background: '#527dad',
+        background: '#7693b7',
     };
 
     const bottomText = {
@@ -15,7 +17,7 @@ function Main() {
         height: '250px',
         color: '#fff',
         textAlign: 'center',
-        background: '#527dad',
+        background: '#7693b7',
     };
 
     return (
