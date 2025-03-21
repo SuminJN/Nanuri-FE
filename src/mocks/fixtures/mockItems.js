@@ -1,14 +1,14 @@
-import book from "../assets/images/items/book.jpeg";
-import mouse from "../assets/images/items/mouse.jpeg";
-import shirt from "../assets/images/items/shirt.jpeg";
-import shoes from "../assets/images/items/shoes.jpeg";
-import tumblr from "../assets/images/items/tumblr.jpeg";
-import keyboard from "../assets/images/items/keyboard.jpeg";
-import charger from "../assets/images/items/charger.jpeg";
-import pencilCase from "../assets/images/items/pencilCase.jpeg";
-import cap from "../assets/images/items/cap.jpeg";
-import pencil from "../assets/images/items/pencil.jpeg";
-import chair from "../assets/images/items/chair.jpeg";
+import book from "../../assets/images/items/book.jpeg";
+import mouse from "../../assets/images/items/mouse.jpeg";
+import shirt from "../../assets/images/items/shirt.jpeg";
+import shoes from "../../assets/images/items/shoes.jpeg";
+import tumblr from "../../assets/images/items/tumblr.jpeg";
+import keyboard from "../../assets/images/items/keyboard.jpeg";
+import charger from "../../assets/images/items/charger.jpeg";
+import pencilCase from "../../assets/images/items/pencilCase.jpeg";
+import cap from "../../assets/images/items/cap.jpeg";
+import pencil from "../../assets/images/items/pencil.jpeg";
+import chair from "../../assets/images/items/chair.jpeg";
 
 export const mockItems = [
     {

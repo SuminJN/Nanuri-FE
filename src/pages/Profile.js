@@ -4,6 +4,7 @@ import {UserState} from "../recoil/UserState";
 import {Col, Container, Form, Row} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import axiosInstance from "../apis/axios";
+import axios from "axios";
 
 function Profile() {
     const [user, setUser] = useState({
@@ -21,12 +22,15 @@ function Profile() {
     };
 
     const handleChangeNickname = async () => {
-        await axiosInstance.patch("/api/user", {nickname: user.nickname})
-        window.location.reload();
+        if (window.confirm("정말로 닉네임을 변경하시겠습니까?")) {
+            await axios.patch("/api/user", {nickname: user.nickname})
+            alert("변경되었습니다.");
+            window.location.reload();
+        }
     }
 
     const getUser = async () => {
-        const response = await axiosInstance.get("/api/user");
+        const response = await axios.get("/api/user");
         setUser(response.data);
     }
 

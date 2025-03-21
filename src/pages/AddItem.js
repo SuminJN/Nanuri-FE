@@ -144,11 +144,11 @@ function AddItem() {
                                 <Form.Control type="text" name="title" placeholder="글 제목" value={title}
                                               onChange={onChange}/>
                             </Form.Group>
-                            <Form.Group className="mb-3">
-                                <Form.Label column="md">나눔 희망 장소</Form.Label>
-                                <Form.Control type="text" name="location" placeholder="희망 장소를 적어주세요." value={location}
-                                              onChange={onChange}></Form.Control>
-                            </Form.Group>
+                            {/*<Form.Group className="mb-3">*/}
+                            {/*    <Form.Label column="md">나눔 희망 장소</Form.Label>*/}
+                            {/*    <Form.Control type="text" name="location" placeholder="희망 장소를 적어주세요." value={location}*/}
+                            {/*                  onChange={onChange}></Form.Control>*/}
+                            {/*</Form.Group>*/}
                             <Form.Group className="mb-3">
                                 <Form.Label column="md">날짜</Form.Label>
                                 <Form.Control type="date" name="date" value={date} onChange={onChange}></Form.Control>
