@@ -21,7 +21,8 @@ export const mockItems = [
         "ago": "10분 전",
         "viewCount": 11,
         "category": "도서",
-        "nickname": "닉네임 0"
+        "nickname": "닉네임 0",
+        "wishCount": 4
     },
     {
         "id" : 1,
@@ -33,7 +34,8 @@ export const mockItems = [
         "ago": "22분 전",
         "viewCount": 15,
         "category": "디지털기기",
-        "nickname": "닉네임 1"
+        "nickname": "닉네임 1",
+        "wishCount":13
     },
     {
         "id" : 2,
@@ -46,7 +48,8 @@ export const mockItems = [
         "ago": "34분 전",
         "viewCount": 33,
         "category": "의류",
-        "nickname": "닉네임 2"
+        "nickname": "닉네임 2",
+        "wishCount": 8
     },
     {
         "id" : 3,
@@ -58,7 +61,8 @@ export const mockItems = [
         "ago": "41분 전",
         "viewCount": 44,
         "category": "의류",
-        "nickname": "닉네임 3"
+        "nickname": "닉네임 3",
+        "wishCount": 15
     },
     {
         "id" : 4,
@@ -70,7 +74,8 @@ export const mockItems = [
         "ago": "50분 전",
         "viewCount": 25,
         "category": "생활/주방",
-        "nickname": "닉네임 4"
+        "nickname": "닉네임 4",
+        "wishCount": 2
     },
     {
         "id" : 5,
@@ -82,7 +87,8 @@ export const mockItems = [
         "ago": "1시간 전",
         "viewCount": 51,
         "category": "디지털기기",
-        "nickname": "닉네임 5"
+        "nickname": "닉네임 5",
+        "wishCount": 15
     },
     {
         "id" : 6,
@@ -94,7 +100,8 @@ export const mockItems = [
         "ago": "1시간 전",
         "viewCount": 25,
         "category": "생활가전",
-        "nickname": "닉네임 6"
+        "nickname": "닉네임 6",
+        "wishCount":27
     },
     {
         "id" : 7,
@@ -106,7 +113,8 @@ export const mockItems = [
         "ago": "1시간 전",
         "viewCount": 75,
         "category": "문구",
-        "nickname": "닉네임 7"
+        "nickname": "닉네임 7",
+        "wishCount": 11
     },
     {
         "id" : 8,
@@ -118,7 +126,8 @@ export const mockItems = [
         "ago": "2시간 전",
         "viewCount": 44,
         "category": "의류",
-        "nickname": "닉네임 8"
+        "nickname": "닉네임 8",
+        "wishCount": 13
     },
     {
         "id" : 9,
@@ -130,7 +139,8 @@ export const mockItems = [
         "ago": "2시간 전",
         "viewCount": 22,
         "category": "문구",
-        "nickname": "닉네임 9"
+        "nickname": "닉네임 9",
+        "wishCount": 14
     },
     {
         "id" : 10,
@@ -142,6 +152,7 @@ export const mockItems = [
         "ago": "3시간 전",
         "viewCount": 31,
         "category": "가구/인테리어",
-        "nickname": "닉네임 10"
+        "nickname": "닉네임 10",
+        "wishCount": 6
     }
 ]

@@ -27,7 +27,7 @@ function SharingList() {
                                     <Card.Img
                                         className=""
                                         variant="top"
-                                        src={img} width={100}
+                                        src={item.photo} width={100}
                                         height={200}/>
                                 </Col>
                                 <Col xs={8} lg={6}>
