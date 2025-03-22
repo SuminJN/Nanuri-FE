@@ -2,19 +2,30 @@ import Button from "react-bootstrap/Button";
 import {Col, Container, Form, InputGroup, Row} from "react-bootstrap";
 import img from "../assets/images/items/shirt.jpeg";
 import {useNavigate} from "react-router-dom";
-import {Card} from 'antd';
+import {Card, ConfigProvider} from 'antd';
 import search from "../assets/images/search.svg";
 import React, {useEffect, useState} from "react";
 import Modal from "react-bootstrap/Modal";
 import axios from "axios";
+import {Input, Radio} from 'antd';
+import {mockCategory} from '../mocks/fixtures/mockCategory';
 
 function Items() {
     const navigate = useNavigate();
     const [show, setShow] = useState(false);
     const [itemList, setItemList] = useState(null);
+    const [radioValue, setRadioValue] = useState(0);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+    const onChangeCategory = (e) => {
+        setRadioValue(e.target.value);
+        axios.get("/api/items", {params: {categoryId: e.target.value}}).then(res => {
+            setItemList(res.data);
+        });
+        setShow(false)
+    };
 
     const onClickCard = (id) => {
         navigate(`/item/${id}`)
@@ -24,8 +35,8 @@ function Items() {
         navigate("/addItem");
     }
 
-    useEffect( () => {
-         axios.get("/api/items").then((res) => {
+    useEffect(() => {
+        axios.get("/api/items").then((res) => {
                 setItemList(res.data);
             }
         )
@@ -60,65 +71,59 @@ function Items() {
                                 <Modal.Title>카테고리</Modal.Title>
                             </Modal.Header>
                             <Modal.Body>
-                                <Form>
-                                    {['디지털기기', '생활가전', '문구', '가구/인테리어', '생활/주방', '도서', '의류', '뷰티/미용', '취미/게임', '티켓/교환권']
-                                        .map((category, index) => (
-                                            <div key={index} className="mb-3">
-                                                <Form.Check
-                                                    style={{whiteSpace: "nowrap"}} // 텍스트 줄바꿈 방지
-                                                    type="radio"
-                                                    name="category"
-                                                    label={category}
-                                                />
-                                            </div>
-                                        ))}
-                                </Form>
+                                <Radio.Group
+                                    style={{
+                                        display: 'flex',
+                                        flexDirection: 'column',
+                                        gap: 10,
+                                        whiteSpace: "nowrap",
+                                    }}
+                                    onChange={onChangeCategory}
+                                    value={radioValue}
+                                    options={mockCategory}/>
                             </Modal.Body>
                             <Modal.Footer>
                                 <Button variant="secondary" className="text-white" onClick={handleClose}>
                                     닫기
                                 </Button>
-                                <Button variant="primary" onClick={handleClose}>
-                                    적용하기
-                                </Button>
+                                {/*<Button variant="primary" onClick={handleClose}>*/}
+                                {/*    적용하기*/}
+                                {/*</Button>*/}
                             </Modal.Footer>
                         </Modal>
                     </Container>
 
-                    <Col lg={3} xl={2} className="d-none d-lg-block p-5 mx-4">
-                        <p className="fw-bold pb-2" style={{whiteSpace: "nowrap"}}>카테고리</p>
-                        <Form>
-                            {['디지털기기', '생활가전', '문구', '가구/인테리어', '생활/주방', '도서', '의류', '뷰티/미용', '취미/게임', '티켓/교환권']
-                                .map((category, index) => (
-                                    <div key={index} className="mb-3">
-                                        <Form.Check
-                                            style={{whiteSpace: "nowrap"}} // 텍스트 줄바꿈 방지
-                                            type="radio"
-                                            name="category"
-                                            label={category}
-                                        />
-                                    </div>
-                                ))}
-                        </Form>
+                    <Col lg={3} xl={2} className="d-none d-lg-block p-5 mx-4 ">
+                        <p className="fw-bold fs-5 pb-2" style={{whiteSpace: "nowrap"}}>카테고리</p>
+                        <Radio.Group
+                            style={{
+                                display: 'flex',
+                                flexDirection: 'column',
+                                gap: 10,
+                                whiteSpace: "nowrap",
+                            }}
+                            onChange={onChangeCategory}
+                            value={radioValue}
+                            options={mockCategory}/>
                     </Col>
 
                     <Col>
                         <Row xs={2} sm={2} md={3} lg={3} xl={4} className="g-4">
                             {itemList !== null ? itemList.map((item, index) => (
-                                    <Col key={index}>
-                                        <Card className="shadow-sm" onClick={() => onClickCard(item.id)}
-                                              hoverable
-                                              style={{
-                                                  height: 340,
-                                              }}
-                                              cover={<img alt="example"
-                                                          src={item.photo} height={200}/>}
-                                        >
-                                            <p className="fs-5 mb-1">{item.title}</p>
-                                            <p className="opacity-50">{item.ago}</p>
-                                        </Card>
-                                    </Col>
-                                )) : null}
+                                <Col key={index}>
+                                    <Card className="shadow-sm" onClick={() => onClickCard(item.id)}
+                                          hoverable
+                                          style={{
+                                              height: 340,
+                                          }}
+                                          cover={<img alt="example"
+                                                      src={item.photo} height={200}/>}
+                                    >
+                                        <p className="fs-5 mb-1">{item.title}</p>
+                                        <p className="opacity-50">{item.ago}</p>
+                                    </Card>
+                                </Col>
+                            )) : null}
                         </Row>
                     </Col>
                 </Row>
