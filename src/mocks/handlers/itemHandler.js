@@ -2,7 +2,8 @@ import {http, HttpResponse} from 'msw'
 import {mockItems} from '../fixtures/mockItems.js';
 
 export const itemHandler = [
-    http.get('/api/items', () => {
+    http.get('/api/items', (request) => {
+        console.log("get /api/items: ", request);
         return HttpResponse.json(mockItems);
     }),
 
