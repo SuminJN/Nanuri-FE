@@ -24,6 +24,7 @@ function Items() {
         axios.get("/api/items", {params: {categoryId: e.target.value}}).then(res => {
             setItemList(res.data);
         });
+        setShow(false)
     };
 
     const onClickCard = (id) => {
@@ -85,9 +86,9 @@ function Items() {
                                 <Button variant="secondary" className="text-white" onClick={handleClose}>
                                     닫기
                                 </Button>
-                                <Button variant="primary" onClick={handleClose}>
-                                    적용하기
-                                </Button>
+                                {/*<Button variant="primary" onClick={handleClose}>*/}
+                                {/*    적용하기*/}
+                                {/*</Button>*/}
                             </Modal.Footer>
                         </Modal>
                     </Container>
