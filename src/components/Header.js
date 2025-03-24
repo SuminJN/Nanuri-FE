@@ -5,7 +5,6 @@ import {useNavigate, useLocation} from "react-router-dom";
 import {useRecoilState, useRecoilValue} from "recoil";
 import Button from "react-bootstrap/Button";
 import {LoginState} from "../recoil/LoginState";
-import {UserState} from "../recoil/UserState";
 import axiosInstance from "../apis/axios";
 import bag from "../assets/images/bag-heart.svg";
 import person from "../assets/images/person.svg";
@@ -14,8 +13,6 @@ function Header() {
     const {pathname} = useLocation();
     const navigate = useNavigate();
     const [isLoggedIn, setIsLoggedIn] = useRecoilState(LoginState);
-
-    const user = useRecoilValue(UserState);
 
     const handleSignInClick = () => {
         window.location.href = process.env.REACT_APP_HISNET_LOGIN_URL;
@@ -49,12 +46,12 @@ function Header() {
                         <Nav variant="underline" defaultActiveKey={pathname}>
                             <Nav.Link href="/items">나눔 목록</Nav.Link>
                             <NavDropdown title="나의 나눔">
-                                <NavDropdown.Item href="/sharingList">나눔 중</NavDropdown.Item>
-                                <NavDropdown.Item href="/givenSharing">나눔 완료</NavDropdown.Item>
+                                <NavDropdown.Item href="/sharing">나눔 중</NavDropdown.Item>
+                                <NavDropdown.Item href="/shareDone">나눔 완료</NavDropdown.Item>
                             </NavDropdown>
                             <NavDropdown title="받은 나눔">
-                                <NavDropdown.Item href="/">대기 중</NavDropdown.Item>
-                                <NavDropdown.Item href="/receivedSharing">받은 나눔</NavDropdown.Item>
+                                <NavDropdown.Item href="/receiving">대기 중</NavDropdown.Item>
+                                <NavDropdown.Item href="/receiveDone">받은 나눔</NavDropdown.Item>
                             </NavDropdown>
                             <Nav.Link href="/chat">채팅</Nav.Link>
                             <Nav.Link href="/ranking">나눔 랭킹</Nav.Link>

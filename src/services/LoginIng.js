@@ -2,12 +2,9 @@ import {useEffect} from "react";
 import {useRecoilState} from "recoil";
 import {getToken} from "./getToken";
 import {LoginState} from "../recoil/LoginState";
-import {UserState} from "../recoil/UserState";
-import {jwtDecode} from "jwt-decode";
 
 function LoginIng() {
     const [isLoggedIn, setIsLoggedIn] = useRecoilState(LoginState);
-    const [userInfo, setUserInfo] = useRecoilState(UserState);
 
     const fetchData = async () => {
         try {
@@ -16,13 +13,7 @@ function LoginIng() {
 
             if (credential) {
                 const user = await getToken(credential);
-                const userData = jwtDecode(user.token);
-                console.log("userData: ", userData);
 
-                setUserInfo({...userData, token: user.token});
-                console.log("userInfo: ", userInfo);
-
-                console.log("user.nickname", user.nickname);
                 // 닉네임이 있다면 기존 유저
                 if (!user.nickname) {
                     window.location.href = "/signup";
@@ -33,7 +24,7 @@ function LoginIng() {
                     window.location.href = "/";
                 }
             } else {
-                throw new Error("토큰이 존재하지 않습니다.");
+                throw new Error("히즈넷 토큰이 존재하지 않습니다.");
             }
         } catch (error) {
             alert("로그인 실패!");

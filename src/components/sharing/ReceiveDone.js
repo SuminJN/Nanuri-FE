@@ -1,10 +1,10 @@
-import {Button, Col, Container, Row} from "react-bootstrap";
+import {Col, Container, Row} from "react-bootstrap";
 import {mockItems} from "../../mocks/fixtures/mockItems";
 import Card from "react-bootstrap/Card";
 import React from "react";
 import {useNavigate} from "react-router-dom";
 
-function SharingList() {
+function ReceiveDone() {
     const navigate = useNavigate();
 
     const onClickCard = (id) => {
@@ -15,7 +15,7 @@ function SharingList() {
         <>
             <Container className="mt-md-0 mt-lg-5 col-md-10 col-lg-8 col-xl-6">
                 <Card>
-                    <Card.Header as="h2" className="text-center py-3">나눔 완료</Card.Header>
+                    <Card.Header as="h2" className="text-center py-3">받은 나눔</Card.Header>
                     {mockItems.map((item, idx) => (
                         <Card.Body key={idx}
                                    className="border"
@@ -23,7 +23,7 @@ function SharingList() {
                                    onClick={() => onClickCard(item.id)}>
 
                             <Row className="m-3">
-                                <Col xs={0} sm={0} md={3} lg={3} xl={3}>
+                                <Col xs={0} sm={0} md={3} lg={3} xl={4}>
                                     <Card.Img
                                         className=""
                                         variant="top"
@@ -31,14 +31,14 @@ function SharingList() {
                                         height={200}/>
                                 </Col>
 
-                                <Col xs={0} sm={0} md={6} lg={6} xl={6} className="my-3 my-md-0">
+                                <Col xs={0} sm={0} md={6} lg={6} xl={5} className="my-3 my-md-0">
                                     <Card.Title className="mb-3 fs-4">{item.title}</Card.Title>
-                                    <Card.Text>
-                                        {item.description}
+                                    <Card.Text className="opacity-75">
+                                        {item.ago}
                                     </Card.Text>
                                 </Col>
 
-                                <Col className="d-grid d-md-flex align-items-md-center justify-content-md-center"
+                                <Col className="d-grid d-md-flex align-items-end justify-content-end"
                                      style={{whiteSpace: "nowrap"}}>
                                     {item.completionTime}
                                 </Col>
@@ -51,4 +51,4 @@ function SharingList() {
     );
 }
 
-export default SharingList;
+export default ReceiveDone;

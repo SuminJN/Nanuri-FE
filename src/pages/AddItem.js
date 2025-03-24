@@ -2,14 +2,10 @@ import {Container, Row, Col, Form, Image, Button} from "react-bootstrap";
 import {Carousel} from 'antd';
 import {Fragment, useRef, useState} from "react";
 import {AiOutlinePicture} from "react-icons/ai";
-import {useRecoilValue} from "recoil";
-import {UserState} from "../recoil/UserState";
 import axiosInstance from "../apis/axios";
 import axios from "axios";
 
 function AddItem() {
-    const userState = useRecoilValue(UserState);
-
     const [inputs, setInputs] = useState({
         title: "",
         date: "",

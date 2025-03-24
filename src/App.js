@@ -17,11 +17,12 @@ import AddItem from "./pages/AddItem";
 import ItemDetail from "./pages/ItemDetail";
 import UpdateItem from "./pages/UpdateItem";
 import GlobalStyles from "./assets/styles/GlobalStyles";
-import SharingList from "./components/sharing/SharingList";
-import GivenSharing from "./components/sharing/GivenSharing";
-import ReceivedSharing from "./components/sharing/ReceivedSharing";
+import Sharing from "./components/sharing/Sharing";
 import Wish from "./pages/Wish";
 import {ConfigProvider} from "antd";
+import ShareDone from "./components/sharing/ShareDone";
+import Receiving from "./components/sharing/Receiving";
+import ReceiveDone from "./components/sharing/ReceiveDone";
 
 function App() {
 
@@ -50,17 +51,13 @@ function App() {
                             {/* 인증을 해야만 접속 가능한 페이지 */}
                             <Route element={<PrivateRoute/>}>
                                 <Route path={process.env.REACT_APP_DEPLOY_URL + "items"} element={<Items/>}/>
-                                <Route path={process.env.REACT_APP_DEPLOY_URL + "item/:itemId"}
-                                       element={<ItemDetail/>}/>
+                                <Route path={process.env.REACT_APP_DEPLOY_URL + "item/:itemId"} element={<ItemDetail/>}/>
                                 <Route path={process.env.REACT_APP_DEPLOY_URL + "addItem"} element={<AddItem/>}/>
-                                <Route path={process.env.REACT_APP_DEPLOY_URL + "updateItem/:itemId"}
-                                       element={<UpdateItem/>}/>
-                                <Route path={process.env.REACT_APP_DEPLOY_URL + "sharingList"}
-                                       element={<SharingList/>}/>
-                                <Route path={process.env.REACT_APP_DEPLOY_URL + "givenSharing"}
-                                       element={<GivenSharing/>}/>
-                                <Route path={process.env.REACT_APP_DEPLOY_URL + "receivedSharing"}
-                                       element={<ReceivedSharing/>}/>
+                                <Route path={process.env.REACT_APP_DEPLOY_URL + "updateItem/:itemId"} element={<UpdateItem/>}/>
+                                <Route path={process.env.REACT_APP_DEPLOY_URL + "sharing"} element={<Sharing/>}/>
+                                <Route path={process.env.REACT_APP_DEPLOY_URL + "shareDone"} element={<ShareDone/>}/>
+                                <Route path={process.env.REACT_APP_DEPLOY_URL + "receiving"} element={<Receiving/>}/>
+                                <Route path={process.env.REACT_APP_DEPLOY_URL + "receiveDone"} element={<ReceiveDone/>}/>
                                 <Route path={process.env.REACT_APP_DEPLOY_URL + "chat"} element={<Chat/>}/>
                                 <Route path={process.env.REACT_APP_DEPLOY_URL + "ranking"} element={<Ranking/>}/>
                                 <Route path={process.env.REACT_APP_DEPLOY_URL + "wish"} element={<Wish/>}/>

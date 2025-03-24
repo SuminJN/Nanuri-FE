@@ -1,6 +1,4 @@
 import React, {useEffect, useState} from "react";
-import {useRecoilValue} from "recoil";
-import {UserState} from "../recoil/UserState";
 import {Col, Container, Form, Row} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import axiosInstance from "../apis/axios";
@@ -14,7 +12,6 @@ function Profile() {
         nickname: '',
     });
     const [disable, setDisable] = useState(true);
-    const userState = useRecoilValue(UserState); // 현재 로그인한 유저 정보 가져오기
 
     const onChange = (e) => {
         const {value, name} = e.target;
