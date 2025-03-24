@@ -5,17 +5,18 @@ import {AiOutlinePicture} from "react-icons/ai";
 import {useRecoilValue} from "recoil";
 import {UserState} from "../recoil/UserState";
 import axiosInstance from "../apis/axios";
+import axios from "axios";
 
 function AddItem() {
     const userState = useRecoilValue(UserState);
 
     const [inputs, setInputs] = useState({
         title: "",
-        location: "",
         date: "",
+        place: "",
         description: "",
     });
-    const {title, location, date, description} = inputs;
+    const {title, place, date, description} = inputs;
 
     const onChange = (e) => {
         const {value, name} = e.target;
@@ -56,8 +57,10 @@ function AddItem() {
 
         console.log(imageFiles);
         console.log(formData);
+        console.log(inputs);
 
-        await axiosInstance("/api/item", {data: formData});
+        const response = await axios.post("/api/item", inputs);
+        console.log(response);
         //
         // await axios({
         //     method: 'post',
@@ -142,6 +145,11 @@ function AddItem() {
                             <Form.Group className="mb-3">
                                 <Form.Label column="md">제목</Form.Label>
                                 <Form.Control type="text" name="title" placeholder="글 제목" value={title}
+                                              onChange={onChange}/>
+                            </Form.Group>
+                            <Form.Group className="mb-3">
+                                <Form.Label column="md">장소</Form.Label>
+                                <Form.Control type="text" name="place" placeholder="장소" value={place}
                                               onChange={onChange}/>
                             </Form.Group>
                             {/*<Form.Group className="mb-3">*/}

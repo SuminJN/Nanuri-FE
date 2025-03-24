@@ -22,7 +22,8 @@ export const mockItems = [
         "viewCount": 11,
         "category": "도서",
         "nickname": "닉네임 0",
-        "wishCount": 4
+        "wishCount": 4,
+        "completionTime": "2025/03/13"
     },
     {
         "id" : 1,
@@ -35,7 +36,8 @@ export const mockItems = [
         "viewCount": 15,
         "category": "디지털기기",
         "nickname": "닉네임 1",
-        "wishCount":13
+        "wishCount":13,
+        "completionTime": "2025/03/13"
     },
     {
         "id" : 2,
@@ -49,7 +51,8 @@ export const mockItems = [
         "viewCount": 33,
         "category": "의류",
         "nickname": "닉네임 2",
-        "wishCount": 8
+        "wishCount": 8,
+        "completionTime": "2025/03/13"
     },
     {
         "id" : 3,
@@ -62,7 +65,8 @@ export const mockItems = [
         "viewCount": 44,
         "category": "의류",
         "nickname": "닉네임 3",
-        "wishCount": 15
+        "wishCount": 15,
+        "completionTime": "2025/03/13"
     },
     {
         "id" : 4,
@@ -75,7 +79,8 @@ export const mockItems = [
         "viewCount": 25,
         "category": "생활/주방",
         "nickname": "닉네임 4",
-        "wishCount": 2
+        "wishCount": 2,
+        "completionTime": "2025/03/13"
     },
     {
         "id" : 5,
@@ -88,7 +93,8 @@ export const mockItems = [
         "viewCount": 51,
         "category": "디지털기기",
         "nickname": "닉네임 5",
-        "wishCount": 15
+        "wishCount": 15,
+        "completionTime": "2025/03/13"
     },
     {
         "id" : 6,
@@ -101,7 +107,8 @@ export const mockItems = [
         "viewCount": 25,
         "category": "생활가전",
         "nickname": "닉네임 6",
-        "wishCount":27
+        "wishCount":27,
+        "completionTime": "2025/03/13"
     },
     {
         "id" : 7,
@@ -114,7 +121,8 @@ export const mockItems = [
         "viewCount": 75,
         "category": "문구",
         "nickname": "닉네임 7",
-        "wishCount": 11
+        "wishCount": 11,
+        "completionTime": "2025/03/13"
     },
     {
         "id" : 8,
@@ -127,7 +135,8 @@ export const mockItems = [
         "viewCount": 44,
         "category": "의류",
         "nickname": "닉네임 8",
-        "wishCount": 13
+        "wishCount": 13,
+        "completionTime": "2025/03/13"
     },
     {
         "id" : 9,
@@ -140,7 +149,8 @@ export const mockItems = [
         "viewCount": 22,
         "category": "문구",
         "nickname": "닉네임 9",
-        "wishCount": 14
+        "wishCount": 14,
+        "completionTime": "2025/03/13"
     },
     {
         "id" : 10,
@@ -153,6 +163,7 @@ export const mockItems = [
         "viewCount": 31,
         "category": "가구/인테리어",
         "nickname": "닉네임 10",
-        "wishCount": 6
+        "wishCount": 6,
+        "completionTime": "2025/03/13"
     }
 ]

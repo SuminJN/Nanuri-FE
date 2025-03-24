@@ -49,8 +49,11 @@ function Header() {
                         <Nav variant="underline" defaultActiveKey={pathname}>
                             <Nav.Link href="/items">나눔 목록</Nav.Link>
                             <NavDropdown title="나의 나눔">
-                                <NavDropdown.Item href="/sharingList">나눔 중인 물건</NavDropdown.Item>
+                                <NavDropdown.Item href="/sharingList">나눔 중</NavDropdown.Item>
                                 <NavDropdown.Item href="/givenSharing">나눔 완료</NavDropdown.Item>
+                            </NavDropdown>
+                            <NavDropdown title="받은 나눔">
+                                <NavDropdown.Item href="/">대기 중</NavDropdown.Item>
                                 <NavDropdown.Item href="/receivedSharing">받은 나눔</NavDropdown.Item>
                             </NavDropdown>
                             <Nav.Link href="/chat">채팅</Nav.Link>

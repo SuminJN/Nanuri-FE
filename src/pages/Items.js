@@ -71,16 +71,27 @@ function Items() {
                                 <Modal.Title>카테고리</Modal.Title>
                             </Modal.Header>
                             <Modal.Body>
-                                <Radio.Group
-                                    style={{
-                                        display: 'flex',
-                                        flexDirection: 'column',
-                                        gap: 10,
-                                        whiteSpace: "nowrap",
+                                <ConfigProvider
+                                    theme={{
+                                        components: {
+                                            Radio: {
+                                                /* here is your component tokens */
+                                            },
+                                        },
                                     }}
-                                    onChange={onChangeCategory}
-                                    value={radioValue}
-                                    options={mockCategory}/>
+                                >
+                                    <Radio.Group
+                                        style={{
+                                            display: 'flex',
+                                            flexDirection: 'column',
+                                            gap: 10,
+                                            whiteSpace: "nowrap",
+                                        }}
+                                        onChange={onChangeCategory}
+                                        value={radioValue}
+                                        options={mockCategory}/>
+                                </ConfigProvider>
+
                             </Modal.Body>
                             <Modal.Footer>
                                 <Button variant="secondary" className="text-white" onClick={handleClose}>
@@ -95,16 +106,16 @@ function Items() {
 
                     <Col lg={3} xl={2} className="d-none d-lg-block p-5 mx-4 ">
                         <p className="fw-bold fs-5 pb-2" style={{whiteSpace: "nowrap"}}>카테고리</p>
-                        <Radio.Group
-                            style={{
-                                display: 'flex',
-                                flexDirection: 'column',
-                                gap: 10,
-                                whiteSpace: "nowrap",
-                            }}
-                            onChange={onChangeCategory}
-                            value={radioValue}
-                            options={mockCategory}/>
+                            <Radio.Group
+                                style={{
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    gap: 10,
+                                    whiteSpace: "nowrap",
+                                }}
+                                onChange={onChangeCategory}
+                                value={radioValue}
+                                options={mockCategory}/>
                     </Col>
 
                     <Col>

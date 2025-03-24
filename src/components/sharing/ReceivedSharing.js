@@ -13,11 +13,14 @@ function SharingList() {
 
     return (
         <>
-            <Container className="mt-md-0 mt-lg-5 col-md-10 col-lg-10 col-xl-8">
+            <Container className="mt-md-0 mt-lg-5 col-md-10 col-lg-8 col-xl-6">
                 <Card>
                     <Card.Header as="h2" className="text-center py-3">받은 나눔</Card.Header>
                     {mockItems.map((item, idx) => (
-                        <Card.Body key={idx} className="border" onClick={() => onClickCard(item.id)}>
+                        <Card.Body key={idx}
+                                   className="border"
+                                   style={{cursor: "pointer"}}
+                                   onClick={() => onClickCard(item.id)}>
 
                             <Row className="m-3">
                                 <Col xs={0} sm={0} md={3} lg={3} xl={3}>
@@ -33,6 +36,11 @@ function SharingList() {
                                     <Card.Text>
                                         {item.description}
                                     </Card.Text>
+                                </Col>
+
+                                <Col className="d-grid d-md-flex align-items-md-center justify-content-md-center"
+                                     style={{whiteSpace: "nowrap"}}>
+                                    {item.completionTime}
                                 </Col>
                             </Row>
                         </Card.Body>
