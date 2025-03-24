@@ -1,11 +1,11 @@
 import {Col, Container, Row} from "react-bootstrap";
+import {mockItems} from "../../mocks/fixtures/mockItems";
 import Card from "react-bootstrap/Card";
 import React, {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
-import {mockItems} from "../mocks/fixtures/mockItems";
 import axios from "axios";
 
-function Wish() {
+function ReceiveDone() {
     const navigate = useNavigate();
     const [itemList, setItemList] = useState(null);
 
@@ -24,7 +24,7 @@ function Wish() {
         <>
             <Container className="mt-md-0 mt-lg-5 col-md-10 col-lg-8 col-xl-6">
                 <Card>
-                    <Card.Header as="h2" className="text-center py-3">위시 리스트</Card.Header>
+                    <Card.Header as="h2" className="text-center py-3">받은 나눔</Card.Header>
                     {itemList === null
                         ? null
                         : itemList.map((item, idx) => (
@@ -49,6 +49,10 @@ function Wish() {
                                     </Card.Text>
                                 </Col>
 
+                                <Col className="d-grid d-md-flex align-items-end justify-content-end"
+                                     style={{whiteSpace: "nowrap"}}>
+                                    {item.completionTime}
+                                </Col>
                             </Row>
                         </Card.Body>
                     ))}
@@ -58,4 +62,4 @@ function Wish() {
     );
 }
 
-export default Wish;
+export default ReceiveDone;

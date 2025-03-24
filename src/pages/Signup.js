@@ -2,21 +2,19 @@ import {Col, Container, Form, Row} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Modal from 'react-bootstrap/Modal';
 import {useRecoilState, useRecoilValue} from "recoil";
-import {UserState} from "../recoil/UserState";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {LoginState} from "../recoil/LoginState";
 import axiosInstance from "../apis/axios";
+import axios from "axios";
 
 function Signup() {
     const [isLoggedIn, setIsLoggedIn] = useRecoilState(LoginState);
-    const [userState, setUserState] = useRecoilState(UserState);
+    const [userInfo, setUserInfo] = useState(null);
 
-    const userInfo = useRecoilValue(UserState);
     const [nickname, setNickname] = useState("");
     const [isChecked, setIsChecked] = useState(false);
 
     const handleNickname = (e) => setNickname(e.target.value);
-
     const handleIsChecked = () => setIsChecked(!isChecked);
 
     // 모달
@@ -36,12 +34,17 @@ function Signup() {
             return;
         }
 
-        axiosInstance.post("/api/nanuri/auth/signup", {uniqueId: userInfo.uniqueId, nickname: nickname});
+        axiosInstance.post("/api/nanuri/auth/signup", {nickname: nickname});
 
-        setUserState({...userState, nickname: nickname})
         setIsLoggedIn(true);
         window.location.href = "/";
     };
+
+    useEffect(() => {
+        axios.get("/api/user").then((res) => {
+            setUserInfo(res.data);
+        });
+    }, []);
 
     return (
         <div>

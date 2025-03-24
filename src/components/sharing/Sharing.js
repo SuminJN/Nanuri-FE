@@ -5,7 +5,7 @@ import {Drawer} from "antd";
 import {useNavigate} from "react-router-dom";
 import axios from "axios";
 
-function SharingList() {
+function Sharing() {
     const navigate = useNavigate();
     const [itemList, setItemList] = useState(null);
     const [open, setOpen] = useState(false);
@@ -36,16 +36,18 @@ function SharingList() {
 
     return (
         <>
-            <Container className="mt-md-0 mt-lg-5 col-md-10 col-lg-10 col-xl-8">
+            <Container className="mt-md-0 mt-lg-5 col-md-10 col-lg-8 col-xl-6">
                 <Card>
-                    <Card.Header as="h2" className="text-center py-3">나눔 중인 물건</Card.Header>
+                    <Card.Header as="h2" className="text-center py-3">나눔 중</Card.Header>
                     {itemList === null
                         ? null
                         : itemList.map((item, idx) => (
                             <Card.Body key={idx} className="border">
 
                                 <Row className="m-3">
-                                    <Col xs={0} sm={0} md={3} lg={3} xl={3} onClick={() => onClickCard(item.id)}>
+                                    <Col xs={0} sm={0} md={3} lg={3} xl={4}
+                                         style={{cursor: "pointer"}}
+                                         onClick={() => onClickCard(item.id)}>
                                         <Card.Img
                                             className=""
                                             variant="top"
@@ -53,15 +55,17 @@ function SharingList() {
                                             height={200}/>
                                     </Col>
 
-                                    <Col xs={0} sm={0} md={6} lg={6} xl={6} className="my-3 my-md-0"
+                                    <Col xs={0} sm={0} md={6} lg={6} xl={5}
+                                         className="my-3 my-md-0"
+                                         style={{cursor: "pointer"}}
                                          onClick={() => onClickCard(item.id)}>
-                                        <Card.Title className="mb-3 fs-4">{item.title} </Card.Title>
-                                        <Card.Text>
-                                            {item.description}
+                                        <Card.Title className="mb-1 fs-4">{item.title}</Card.Title>
+                                        <Card.Text className="opacity-75">
+                                            {item.ago}
                                         </Card.Text>
                                     </Col>
 
-                                    <Col className="d-grid d-md-flex align-items-md-center justify-content-md-center">
+                                    <Col className="d-grid d-md-flex align-items-md-end justify-content-md-end">
                                         <Button variant="outline-primary" onClick={() => getApplicant(item.id)}
                                                 style={{whiteSpace: "nowrap"}}>
                                             신청자 보기
@@ -97,4 +101,4 @@ function SharingList() {
     );
 }
 
-export default SharingList;
+export default Sharing;
