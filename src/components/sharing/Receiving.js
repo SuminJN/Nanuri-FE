@@ -1,12 +1,13 @@
 import {Button, Col, Container, Row} from "react-bootstrap";
 import {mockItems} from "../../mocks/fixtures/mockItems";
 import Card from "react-bootstrap/Card";
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import axios from "axios";
 
 function Receiving() {
     const navigate = useNavigate();
+    const [itemList, setItemList] = useState(null);
 
     const onClickCard = (id) => {
         navigate(`/item/${id}`)
@@ -19,12 +20,21 @@ function Receiving() {
         window.location.reload();
     }
 
+    useEffect(() => {
+        axios.get("/api/items").then((res) => {
+                setItemList(res.data);
+            }
+        )
+    }, [])
+
     return (
         <>
             <Container className="mt-md-0 mt-lg-5 col-md-10 col-lg-8 col-xl-6">
                 <Card>
                     <Card.Header as="h2" className="text-center py-3">나눔 받기 대기 중</Card.Header>
-                    {mockItems.map((item, idx) => (
+                    {itemList === null
+                        ? null
+                        : itemList.map((item, idx) => (
                         <Card.Body key={idx}
                                    className="border"
                                    style={{cursor: "pointer"}}>
