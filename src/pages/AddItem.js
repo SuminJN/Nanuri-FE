@@ -8,11 +8,11 @@ import axios from "axios";
 function AddItem() {
     const [inputs, setInputs] = useState({
         title: "",
-        date: "",
+        category: "",
         place: "",
         description: "",
     });
-    const {title, place, date, description} = inputs;
+    const {title, place, category, description} = inputs;
 
     const onChange = (e) => {
         const {value, name} = e.target;
@@ -43,19 +43,19 @@ function AddItem() {
         e.preventDefault();
 
         // https://selfdevelopcampus.tistory.com/entry/React-Axios-Post-FormData-%EC%9D%B4%EB%AF%B8%EC%A7%80%EB%9E%91-JSON-%EA%B0%99%EC%9D%B4-%EB%B3%B4%EB%82%B4%EA%B8%B0-%EC%97%90%EB%9F%AC-%EC%97%84%EC%B2%AD-%EB%82%9C-%ED%9B%84%EA%B8%B0
-        const formData = new FormData();
-        const json = JSON.stringify(inputs);
-        const blob = new Blob([json], {
-            type: "application/mocks",
-        });
-        formData.append("createMenuDto", blob);
-        formData.append('files', imageFiles);
+        // const formData = new FormData();
+        // const json = JSON.stringify(inputs);
+        // const blob = new Blob([json], {
+        //     type: "application/mocks",
+        // });
+        // formData.append("createMenuDto", blob);
+        // formData.append('files', imageFiles);
+        //
+        // console.log(imageFiles);
+        // console.log(formData);
+        // console.log(inputs);
 
-        console.log(imageFiles);
-        console.log(formData);
-        console.log(inputs);
-
-        const response = await axios.post("/api/item", inputs);
+       const response = await axios.post("/api/item", inputs);
         console.log(response);
         //
         // await axios({
@@ -154,8 +154,8 @@ function AddItem() {
                             {/*                  onChange={onChange}></Form.Control>*/}
                             {/*</Form.Group>*/}
                             <Form.Group className="mb-3">
-                                <Form.Label column="md">날짜</Form.Label>
-                                <Form.Control type="date" name="date" value={date} onChange={onChange}></Form.Control>
+                                <Form.Label column="md">카테고리</Form.Label>
+                                <Form.Control type="text" name="category" placeholder="카테고리" value={category} onChange={onChange}></Form.Control>
                             </Form.Group>
                             <Form.Group className="mb-3">
                                 <Form.Label column="md">자세한 설명</Form.Label>
