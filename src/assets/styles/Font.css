@@ -4,11 +4,16 @@
 }
 
 @font-face {
-    font-family: 'BM Dohyeon'; /* 사용할 폰트의 이름을 정의 */
-    src: url('../fonts/BMDOHYEON.ttf'); /* 폰트 파일의 위치 */
+    font-family: 'BM Hanna Pro'; /* 사용할 폰트의 이름을 정의 */
+    src: url('../fonts/BMHANNAPro.ttf'); /* 폰트 파일의 위치 */
 }
 
 @font-face {
-    font-family: 'BM Hanna Pro'; /* 사용할 폰트의 이름을 정의 */
-    src: url('../fonts/BMHANNAPro.ttf'); /* 폰트 파일의 위치 */
+    font-family: 'Pretendard Medium'; /* 사용할 폰트의 이름을 정의 */
+    src: url('../fonts/Pretendard-Medium.ttf'); /* 폰트 파일의 위치 */
+}
+
+@font-face {
+    font-family: 'Pretendard SemiBold'; /* 사용할 폰트의 이름을 정의 */
+    src: url('../fonts/Pretendard-SemiBold.ttf'); /* 폰트 파일의 위치 */
 }
