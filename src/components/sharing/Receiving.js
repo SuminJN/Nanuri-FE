@@ -14,10 +14,17 @@ function Receiving() {
     };
 
     const handleCancel = async (itemId) => {
-        await axios.delete(`/api/history/${itemId}`).then(res => {
-            alert("나눔 대기가 취소되었습니다.");
-        })
-        window.location.reload();
+        if (window.confirm("정말로 삭제하시겠습니까?")) {
+            try {
+                await axios.delete(`/api/history/${itemId}`).then(res => {
+                    alert("나눔 대기가 취소되었습니다.");
+                })
+                window.location.reload();
+            } catch (e) {
+                console.log("대기 취소 실패: ", e);
+            }
+        }
+
     }
 
     useEffect(() => {
