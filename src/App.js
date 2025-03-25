@@ -46,18 +46,24 @@ function App() {
                         <Routes>
                             {/* 인증여부가 상관없는 페이지 */}
                             <Route path={process.env.REACT_APP_DEPLOY_URL} element={<Main/>}/>
-                            <Route path={process.env.REACT_APP_DEPLOY_URL + "nanuri/callback"} element={<LoginIng/>}/>
+                            <Route path={process.env.REACT_APP_DEPLOY_URL + "nanuri/callback"}
+                                   element={<LoginIng/>}/>
                             <Route path={process.env.REACT_APP_DEPLOY_URL + "signup"} element={<Signup/>}/>
                             {/* 인증을 해야만 접속 가능한 페이지 */}
                             <Route element={<PrivateRoute/>}>
                                 <Route path={process.env.REACT_APP_DEPLOY_URL + "items"} element={<Items/>}/>
-                                <Route path={process.env.REACT_APP_DEPLOY_URL + "item/:itemId"} element={<ItemDetail/>}/>
+                                <Route path={process.env.REACT_APP_DEPLOY_URL + "item/:itemId"}
+                                       element={<ItemDetail/>}/>
                                 <Route path={process.env.REACT_APP_DEPLOY_URL + "addItem"} element={<AddItem/>}/>
-                                <Route path={process.env.REACT_APP_DEPLOY_URL + "updateItem/:itemId"} element={<UpdateItem/>}/>
+                                <Route path={process.env.REACT_APP_DEPLOY_URL + "updateItem/:itemId"}
+                                       element={<UpdateItem/>}/>
                                 <Route path={process.env.REACT_APP_DEPLOY_URL + "sharing"} element={<Sharing/>}/>
-                                <Route path={process.env.REACT_APP_DEPLOY_URL + "shareDone"} element={<ShareDone/>}/>
-                                <Route path={process.env.REACT_APP_DEPLOY_URL + "receiving"} element={<Receiving/>}/>
-                                <Route path={process.env.REACT_APP_DEPLOY_URL + "receiveDone"} element={<ReceiveDone/>}/>
+                                <Route path={process.env.REACT_APP_DEPLOY_URL + "shareDone"}
+                                       element={<ShareDone/>}/>
+                                <Route path={process.env.REACT_APP_DEPLOY_URL + "receiving"}
+                                       element={<Receiving/>}/>
+                                <Route path={process.env.REACT_APP_DEPLOY_URL + "receiveDone"}
+                                       element={<ReceiveDone/>}/>
                                 <Route path={process.env.REACT_APP_DEPLOY_URL + "chat"} element={<Chat/>}/>
                                 <Route path={process.env.REACT_APP_DEPLOY_URL + "ranking"} element={<Ranking/>}/>
                                 <Route path={process.env.REACT_APP_DEPLOY_URL + "wish"} element={<Wish/>}/>

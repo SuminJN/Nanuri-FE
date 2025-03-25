@@ -10,14 +10,16 @@ function Main() {
         lineHeight: '550px',
         textAlign: 'center',
         background: '#7693b7',
+        fontSize: 50,
     };
 
     const bottomText = {
         margin: 0,
-        height: '250px',
+        height: '200px',
         color: '#fff',
         textAlign: 'center',
         background: '#7693b7',
+        fontSize: 40,
     };
 
     return (

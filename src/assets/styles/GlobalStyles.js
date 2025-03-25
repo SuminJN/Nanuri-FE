@@ -6,7 +6,9 @@ const GlobalStyles = createGlobalStyle`
         margin: 0;
         padding: 0;
         box-sizing: border-box;
-        font-family : 'BM Jua', serif;
+        //font-family: "BM Hanna Pro", serif;
+        //font-family : 'Pretendard Medium', serif;
+        font-family : 'Pretendard SemiBold', serif;
     }
 
     html, body {
