@@ -78,14 +78,18 @@ function Sharing() {
                     <Drawer title="나눔 받기 신청자" onClose={onClose} open={open}>
                         {
                             applicantList.map((applicant, idx) => (
-                                <Row className="mb-3" key={idx}>
-                                    <Col>
-                                        <span>{applicant.userId}</span>
+                                <Row className="mb-3 p-2" key={idx}>
+                                    <Col xs={5} sm={5} className="fs-5 p-0 d-flex align-items-center">
+                                        <span>{applicant.nickname}</span>
                                     </Col>
 
-                                    <Col>
+                                    <Col xs={4} sm={4} className="d-flex justify-content-end align-items-center">
+                                        <span className="opacity-75">{applicant.ago}</span>
+                                    </Col>
+
+                                    <Col className="p-0 d-flex justify-content-end align-items-center">
                                         <Button
-                                            className="mx-5"
+                                            className=""
                                             variant="primary"
                                             style={{whiteSpace: "nowrap"}}>
                                             채팅하기
