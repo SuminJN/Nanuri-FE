@@ -12,7 +12,7 @@ function Footer() {
                     <Row className="align-items-center g-0 border-top py-2">
                         {/* Desc */}
                         <Col md={6} sm={12} className="text-center text-md-start text-black">
-                            <span>© 2025 NANURI ⸰ HGU </span>
+                            <span>© 2025 NANURI · HGU </span>
                         </Col>
                         {/* Links */}
                         <Col md={6} sm={12}>

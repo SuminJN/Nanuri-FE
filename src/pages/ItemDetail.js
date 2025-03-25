@@ -52,10 +52,10 @@ function ItemDetail() {
 
                             <Col>
                                 <h3>{item.title}</h3>
-                                <p className="mb-5">{item.category} ⸰ {item.ago}</p>
+                                <p className="mb-5">{item.category} · {item.ago}</p>
                                 <p className="mb-5">{item.description}</p>
 
-                                <p className="h6 opacity-75"><small>관심 {item.wishCount} ⸰ 조회 {item.viewCount}</small></p>
+                                <p className="h6 opacity-75"><small>관심 {item.wishCount} · 조회 {item.viewCount}</small></p>
                                 <div className="d-grid gap-2">
                                     <Button variant="outline-primary"
                                             onClick={() => navigate(`/updateItem/${item.id}`)}>수정하기</Button>
