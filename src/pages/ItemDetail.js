@@ -2,7 +2,7 @@ import {useNavigate, useParams} from "react-router-dom";
 import React, {useEffect, useState} from "react";
 import {Container, Row, Col, Breadcrumb} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
-import axios from "axios";
+import axiosInstance from "../apis/axios";
 
 function ItemDetail() {
     const {itemId} = useParams();
@@ -13,7 +13,7 @@ function ItemDetail() {
     const handleItemDelete = async () => {
         if (window.confirm("정말로 삭제하시겠습니까?")) {
             try {
-                const response = await axios.delete(`/api/item/${itemId}`)
+                const response = await axiosInstance.delete(`/api/item/${itemId}`)
                 console.log("아이템 삭제 성공: ", response);
                 alert("물건이 삭제되었습니다.");
                 navigate("/items");
@@ -24,7 +24,7 @@ function ItemDetail() {
     }
 
     useEffect(() => {
-        axios.get(`/api/item/${itemId}`).then(res => {
+        axiosInstance.get(`/api/item/${itemId}`).then(res => {
             setItem(res.data);
         })
     }, []);

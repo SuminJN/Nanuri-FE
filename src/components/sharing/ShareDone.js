@@ -3,7 +3,7 @@ import {mockItems} from "../../mocks/fixtures/mockItems";
 import Card from "react-bootstrap/Card";
 import React, {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
-import axios from "axios";
+import axiosInstance from "../../apis/axios";
 
 function ShareDone() {
     const navigate = useNavigate();
@@ -14,7 +14,7 @@ function ShareDone() {
     };
 
     useEffect(() => {
-        axios.get("/api/items").then((res) => {
+        axiosInstance.get("/api/items").then((res) => {
                 setItemList(res.data);
             }
         )

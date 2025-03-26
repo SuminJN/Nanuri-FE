@@ -6,9 +6,9 @@ import {Card, ConfigProvider} from 'antd';
 import search from "../assets/images/search.svg";
 import React, {useEffect, useState} from "react";
 import Modal from "react-bootstrap/Modal";
-import axios from "axios";
 import {Input, Radio} from 'antd';
 import {mockCategory} from '../mocks/fixtures/mockCategory';
+import axiosInstance from "../apis/axios";
 
 function Items() {
     const navigate = useNavigate();
@@ -21,14 +21,14 @@ function Items() {
 
     const onChangeCategory = (e) => {
         setRadioValue(e.target.value);
-        axios.get("/api/items", {params: {categoryId: e.target.value}}).then(res => {
+        axiosInstance.get("/api/items", {params: {category: e.target.value}}).then(res => {
             setItemList(res.data);
         });
         setShow(false)
     };
 
-    const onClickCard = (id) => {
-        navigate(`/item/${id}`)
+    const onClickCard = (itemId) => {
+        navigate(`/item/${itemId}`)
     };
 
     const goToAddItem = () => {
@@ -36,7 +36,7 @@ function Items() {
     }
 
     useEffect(() => {
-        axios.get("/api/items").then((res) => {
+        axiosInstance.get("/api/items").then((res) => {
                 setItemList(res.data);
             }
         )
@@ -122,7 +122,7 @@ function Items() {
                         <Row xs={2} sm={2} md={3} lg={3} xl={4} className="g-4">
                             {itemList !== null ? itemList.map((item, index) => (
                                 <Col key={index}>
-                                    <Card className="shadow-sm" onClick={() => onClickCard(item.id)}
+                                    <Card className="shadow-sm" onClick={() => onClickCard(item.itemId)}
                                           hoverable
                                           style={{
                                               height: 340,
