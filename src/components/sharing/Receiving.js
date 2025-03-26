@@ -1,9 +1,8 @@
 import {Button, Col, Container, Row} from "react-bootstrap";
-import {mockItems} from "../../mocks/fixtures/mockItems";
 import Card from "react-bootstrap/Card";
 import React, {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
-import axios from "axios";
+import axiosInstance from "../../apis/axios";
 
 function Receiving() {
     const navigate = useNavigate();
@@ -16,7 +15,7 @@ function Receiving() {
     const handleCancel = async (itemId) => {
         if (window.confirm("정말로 삭제하시겠습니까?")) {
             try {
-                await axios.delete(`/api/history/${itemId}`).then(res => {
+                await axiosInstance.delete(`/api/history/${itemId}`).then(res => {
                     alert("나눔 대기가 취소되었습니다.");
                 })
                 window.location.reload();
@@ -28,7 +27,7 @@ function Receiving() {
     }
 
     useEffect(() => {
-        axios.get("/api/items").then((res) => {
+        axiosInstance.get("/api/items").then((res) => {
                 setItemList(res.data);
             }
         )

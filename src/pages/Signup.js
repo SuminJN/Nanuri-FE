@@ -1,11 +1,10 @@
 import {Col, Container, Form, Row} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Modal from 'react-bootstrap/Modal';
-import {useRecoilState, useRecoilValue} from "recoil";
+import {useRecoilState} from "recoil";
 import {useEffect, useState} from "react";
 import {LoginState} from "../recoil/LoginState";
 import axiosInstance from "../apis/axios";
-import axios from "axios";
 
 function Signup() {
     const [isLoggedIn, setIsLoggedIn] = useRecoilState(LoginState);
@@ -41,7 +40,7 @@ function Signup() {
     };
 
     useEffect(() => {
-        axios.get("/api/user").then((res) => {
+        axiosInstance.get("/api/user").then((res) => {
             setUserInfo(res.data);
         });
     }, []);

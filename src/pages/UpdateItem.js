@@ -2,7 +2,6 @@ import {Col, Container, Form, Row} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import React, {useEffect, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
-import axios from "axios";
 import axiosInstance from "../apis/axios";
 
 function UpdateItem() {
@@ -24,12 +23,12 @@ function UpdateItem() {
     };
 
     const getItem = async () => {
-        const response =  await axios.get(`/api/item/${itemId}`);
+        const response =  await axiosInstance.get(`/api/item/${itemId}`);
         setItem(response.data);
     };
 
     const updateItem = async () => {
-        await axios.patch(`/api/item/${itemId}`, item).then(() => {
+        await axiosInstance.patch(`/api/item/${itemId}`, item).then(() => {
             alert('수정되었습니다.');
             navigate(`/item/${itemId}`, {replace: true})
         });

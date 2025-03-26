@@ -3,7 +3,6 @@ import {Carousel} from 'antd';
 import {Fragment, useRef, useState} from "react";
 import {AiOutlinePicture} from "react-icons/ai";
 import axiosInstance from "../apis/axios";
-import axios from "axios";
 
 function AddItem() {
     const [inputs, setInputs] = useState({
@@ -55,7 +54,7 @@ function AddItem() {
         // console.log(formData);
         // console.log(inputs);
 
-       const response = await axios.post("/api/item", inputs);
+       const response = await axiosInstance.post("/api/item", inputs);
         console.log(response);
         //
         // await axios({

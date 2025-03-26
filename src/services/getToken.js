@@ -1,4 +1,3 @@
-import axios from "axios";
 import axiosInstance from "../apis/axios";
 
 export const getToken = async (hisnetToken) => {

@@ -1,6 +1,4 @@
 import {Carousel} from 'antd';
-import {useEffect} from "react";
-import axios from "axios";
 
 function Main() {
     const topText = {
