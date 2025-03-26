@@ -3,6 +3,8 @@ import {Carousel} from 'antd';
 import {Fragment, useRef, useState} from "react";
 import {AiOutlinePicture} from "react-icons/ai";
 import axiosInstance from "../apis/axios";
+import styled from "styled-components";
+import {mockCategory} from "../mocks/fixtures/mockCategory";
 
 function AddItem() {
     const [inputs, setInputs] = useState({
@@ -20,6 +22,14 @@ function AddItem() {
 
     const imageRef = useRef(null);
     const [imageFiles, setImageFiles] = useState([]);
+
+    const [selectedCategory, setSelectedCategory] = useState(null);
+    const onChangeRadio = (label, e) => {
+        setSelectedCategory(Number(e.target.value));
+
+        const {name} = e.target;
+        setInputs({...inputs, [name]: label});
+    }
 
     const addImageFile = (e) => {
         let tmp = e.target.files;
@@ -54,7 +64,7 @@ function AddItem() {
         // console.log(formData);
         // console.log(inputs);
 
-       const response = await axiosInstance.post("/api/item", inputs);
+        const response = await axiosInstance.post("/api/item", inputs);
         console.log(response);
         //
         // await axios({
@@ -154,8 +164,35 @@ function AddItem() {
                             {/*</Form.Group>*/}
                             <Form.Group className="mb-3">
                                 <Form.Label column="md">카테고리</Form.Label>
-                                <Form.Control type="text" name="category" placeholder="카테고리" value={category} onChange={onChange}></Form.Control>
+                                <Form.Control type="text" name="category" placeholder="카테고리" value={category}
+                                              onChange={onChange}></Form.Control>
                             </Form.Group>
+                            <RadioWrap>
+                                <Row>
+                                    {
+                                        mockCategory.map((category, idx) => (
+                                            <Col xs={4} key={idx}>
+                                                <label>
+                                                    <input
+                                                        type='radio'
+                                                        name='category'
+                                                        value={category.value}
+                                                        onChange={(e) => onChangeRadio(category.label, e)}
+                                                        style={{whiteSpace: "nowrap"}}
+                                                        checked={idx === selectedCategory}
+                                                    />
+                                                    <span className='category'
+                                                          style={{
+                                                              border: idx === selectedCategory ? '1px solid #95a5bd' : '1px solid lightgray',
+                                                              backgroundColor: idx === selectedCategory ? '#95a5bd' : 'lightgray'
+                                                          }}
+                                                    >{category.label}</span>
+                                                </label>
+                                            </Col>
+                                        ))
+                                    }
+                                </Row>
+                            </RadioWrap>
                             <Form.Group className="mb-3">
                                 <Form.Label column="md">자세한 설명</Form.Label>
                                 <Form.Control as="textarea" rows={3} placeholder="게시글 내용을 작성해 주세요." name="description"
@@ -176,3 +213,30 @@ function AddItem() {
 }
 
 export default AddItem;
+
+const RadioWrap = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 20px;
+
+    input {
+        border: 0;
+        clip: rect(0 0 0 0);
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 1px;
+    }
+
+    .category {
+        height: 30px;
+        line-height: 30px;
+        border-radius: 5px;
+        font-size: 14px;
+        text-align: center;
+        padding: 4px 16px;
+    }
+`
