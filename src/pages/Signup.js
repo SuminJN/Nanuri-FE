@@ -42,11 +42,13 @@ function Signup() {
     useEffect(() => {
         axiosInstance.get("/api/user").then((res) => {
             setUserInfo(res.data);
+            console.log(res.data)
         });
     }, []);
 
     return (
         <div>
+            {userInfo ?
             <Container fluid className="w-25 mt-5 bg-body-tertiary shadow p-3 mb-5 bg-body rounded">
                 <h1 className="text-primary my-4 d-flex justify-content-center">NANURI</h1>
                 <h3 className="d-flex justify-content-center">회원가입</h3>
@@ -105,6 +107,8 @@ function Signup() {
                 </Form>
 
             </Container>
+                : null
+            }
         </div>
     );
 
