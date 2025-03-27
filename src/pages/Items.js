@@ -21,7 +21,9 @@ function Items() {
 
     const onChangeCategory = (e) => {
         setRadioValue(e.target.value);
-        axiosInstance.get("/api/items", {params: {category: e.target.value}}).then(res => {
+        let category = mockCategory.find((category) => category.value === e.target.value).label;
+        if(e.target.value === 0) category = "";
+        axiosInstance.get("/api/items", {params: {category: category}}).then(res => {
             setItemList(res.data);
         });
         setShow(false)
@@ -38,6 +40,7 @@ function Items() {
     useEffect(() => {
         axiosInstance.get("/api/items").then((res) => {
                 setItemList(res.data);
+                console.log(res.data);
             }
         )
     }, [])
@@ -131,7 +134,7 @@ function Items() {
                                                       src={item.photo} height={200}/>}
                                     >
                                         <p className="fs-5 mb-1">{item.title}</p>
-                                        <p className="opacity-50">{item.ago}</p>
+                                        <p className="opacity-50">{item.createdTime}</p>
                                     </Card>
                                 </Col>
                             )) : null}

@@ -8,12 +8,12 @@ function Wish() {
     const navigate = useNavigate();
     const [itemList, setItemList] = useState(null);
 
-    const onClickCard = (id) => {
-        navigate(`/item/${id}`)
+    const onClickCard = (itemId) => {
+        navigate(`/item/${itemId}`)
     };
 
     useEffect(() => {
-        axiosInstance().get("/api/items").then((res) => {
+        axiosInstance.get("/api/items").then((res) => {
                 setItemList(res.data);
             }
         )
@@ -30,7 +30,7 @@ function Wish() {
                         <Card.Body key={idx}
                                    className="border"
                                    style={{cursor: "pointer"}}
-                                   onClick={() => onClickCard(item.id)}>
+                                   onClick={() => onClickCard(item.itemId)}>
 
                             <Row className="m-3">
                                 <Col xs={0} sm={0} md={3} lg={3} xl={4}>

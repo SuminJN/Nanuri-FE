@@ -26,6 +26,7 @@ function ItemDetail() {
     useEffect(() => {
         axiosInstance.get(`/api/item/${itemId}`).then(res => {
             setItem(res.data);
+            console.log(res.data);
         })
     }, []);
 
@@ -52,7 +53,7 @@ function ItemDetail() {
 
                             <Col>
                                 <h3>{item.title}</h3>
-                                <p className="mb-5">{item.category} · {item.ago}</p>
+                                <p className="mb-5">{item.category} · {item.createdTime}</p>
                                 <p className="mb-5">{item.description}</p>
 
                                 <p className="h6 opacity-75"><small>관심 {item.wishCount} · 조회 {item.viewCount}</small></p>
