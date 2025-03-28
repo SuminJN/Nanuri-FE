@@ -33,7 +33,7 @@ function Signup() {
             return;
         }
 
-        axiosInstance.post("/api/nanuri/auth/signup", {nickname: nickname});
+        axiosInstance.post("/api/nanuri/auth/signup", {uniqueId: userInfo.uniqueId, nickname: nickname});
 
         setIsLoggedIn(true);
         window.location.href = "/";

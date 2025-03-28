@@ -65,6 +65,10 @@ function AddItem() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        if(imageFiles.length === 0) {
+            alert("이미지를 등록해주세요.");
+            return;
+        }
         if (!category) {
             alert("카테고리를 선택해주세요.");
             return;
@@ -111,8 +115,8 @@ function AddItem() {
         <>
             <Container className="mt-5">
                 <h1 className="text-center mb-5">나의 물건 나눔</h1>
-                <h2>이미지: {imageFiles.length}개</h2>
-                <h2>미리보기: {previews.length}개</h2>
+                {/*<h2>이미지: {imageFiles.length}개</h2>*/}
+                {/*<h2>미리보기: {previews.length}개</h2>*/}
                 <Row>
                     <Col className="mb-3 px-5" md={0} lg={6}>
                         {

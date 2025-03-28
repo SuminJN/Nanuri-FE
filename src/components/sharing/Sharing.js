@@ -17,7 +17,7 @@ function Sharing() {
 
     const getApplicant = (itemId) => {
         setOpen(true);
-        axiosInstance.get(`/api/item/${itemId}/applicant`).then((res) => {
+        axiosInstance.get(`/api/history/${itemId}`).then((res) => {
             setApplicantList(res.data);
         })
         console.log(applicantList);
@@ -61,7 +61,7 @@ function Sharing() {
                                          onClick={() => onClickCard(item.itemId)}>
                                         <Card.Title className="mb-1 fs-4">{item.title}</Card.Title>
                                         <Card.Text className="opacity-75">
-                                            {item.ago}
+                                            {item.createdTime}
                                         </Card.Text>
                                     </Col>
 
@@ -84,7 +84,7 @@ function Sharing() {
                                     </Col>
 
                                     <Col xs={4} sm={4} className="d-flex justify-content-end align-items-center">
-                                        <span className="opacity-75">{applicant.ago}</span>
+                                        <span className="opacity-75">{applicant.createdTime}</span>
                                     </Col>
 
                                     <Col className="p-0 d-flex justify-content-end align-items-center">

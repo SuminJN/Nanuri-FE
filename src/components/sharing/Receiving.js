@@ -56,7 +56,7 @@ function Receiving() {
                                 <Col xs={0} sm={0} md={6} lg={6} xl={5} className="my-3 my-md-0" onClick={() => onClickCard(item.itemId)}>
                                     <Card.Title className="mb-3 fs-4">{item.title}</Card.Title>
                                     <Card.Text className="opacity-75">
-                                        {item.ago}
+                                        {item.createdTime}
                                     </Card.Text>
                                 </Col>
 

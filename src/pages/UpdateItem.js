@@ -12,7 +12,7 @@ function UpdateItem() {
         title: '',
         category: '',
         description: '',
-        image: '',
+        images: '',
     });
 
     const {title, category, description, image} = item; // 비구조화 할당
@@ -20,11 +20,6 @@ function UpdateItem() {
     const onChange = (e) => {
         const {value, name} = e.target;
         setItem({...item, [name]: value,});
-    };
-
-    const getItem = async () => {
-        const response =  await axiosInstance.get(`/api/item/${itemId}`);
-        setItem(response.data);
     };
 
     const updateItem = async () => {
@@ -35,7 +30,10 @@ function UpdateItem() {
     };
 
     useEffect(() => {
-        getItem();
+        axiosInstance.get(`/api/item/${itemId}`).then(res => {
+            setItem(res.data);
+            console.log(res.data);
+        })
     }, []);
 
     return (
@@ -44,7 +42,7 @@ function UpdateItem() {
                 <Form>
                     <Row>
                         <Col xs={12} sm={12} md={12} lg={6}>
-                            <img className="border border-2 rounded w-100 h-75 mb-3" src={image} alt="image"/>
+                            <img className="border border-2 rounded w-100 h-75 mb-3" src={item.images[0]} alt="image"/>
                             <h4>{item.userId}</h4>
                         </Col>
                         <Col>
