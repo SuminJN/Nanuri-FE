@@ -13,8 +13,9 @@ function Wish() {
     };
 
     useEffect(() => {
-        axiosInstance.get("/api/items").then((res) => {
+        axiosInstance.get("/api/wish").then((res) => {
                 setItemList(res.data);
+                console.log("res.data: ", res.data)
             }
         )
     }, [])
@@ -30,21 +31,21 @@ function Wish() {
                         <Card.Body key={idx}
                                    className="border"
                                    style={{cursor: "pointer"}}
-                                   onClick={() => onClickCard(item.itemId)}>
+                                   onClick={() => onClickCard(item.itemListResponseDto.itemId)}>
 
                             <Row className="m-3">
                                 <Col xs={0} sm={0} md={3} lg={3} xl={4}>
                                     <Card.Img
                                         className=""
                                         variant="top"
-                                        src={item.image} width={100}
+                                        src={item.itemListResponseDto.image} width={100}
                                         height={200}/>
                                 </Col>
 
                                 <Col xs={0} sm={0} md={6} lg={6} xl={5} className="my-3 my-md-0">
-                                    <Card.Title className="mb-3 fs-4">{item.title}</Card.Title>
+                                    <Card.Title className="mb-3 fs-4">{item.itemListResponseDto.title}</Card.Title>
                                     <Card.Text className="opacity-75">
-                                        {item.createdTime}
+                                        {item.itemListResponseDto.createdTime}
                                     </Card.Text>
                                 </Col>
 
