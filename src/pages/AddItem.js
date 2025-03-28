@@ -25,6 +25,7 @@ function AddItem() {
 
     const imageRef = useRef(null);
     const [imageFiles, setImageFiles] = useState([]);
+    const [previews, setPreviews] = useState([]);
 
     const [selectedCategory, setSelectedCategory] = useState(null);
     const onChangeRadio = (label, e) => {
@@ -35,31 +36,41 @@ function AddItem() {
     }
 
     const addImageFile = (e) => {
-        let tmp = e.target.files;
-        if (tmp !== null) {
-            setImageFiles(tmp);
+        const images = e.target.files;
+
+        if (images) {
+            setImageFiles(images);
+            setPreviews([]);
+
+            for (let i = 0; i < images.length; i++) {
+                const reader = new FileReader();
+                reader.readAsDataURL(images[i]);
+                reader.onloadend = () => {
+                    if (reader.result) {
+                        setPreviews(prev => [...prev, reader.result]);
+                    }
+                };
+            }
         }
-        // if (tmp) {
-        //     const reader = new FileReader();
-        //     reader.readAsDataURL(tmp[0]);
-        //     reader.onloadend = () => {
-        //         if (reader.result) {
-        //             setImageFiles(prev => [...prev, reader.result]);
-        //         }
-        //     };
-        // }
+
+        // console.log("imageFiles: ", imageFiles.concat(images));
+        // console.log("images: ", images[0]);
     };
 
     const removeImageFile = (idx) => {
-        setImageFiles(imageFiles.filter((e, i) => i !== idx));
+        setImageFiles(previews.filter((e, i) => i !== idx));
+        setPreviews(previews.filter((e, i) => i !== idx));
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const formData = new FormData();
-        // formData.append('files', imageFiles);
+        if (!category) {
+            alert("카테고리를 선택해주세요.");
+            return;
+        }
 
+        const formData = new FormData();
         Array.from(imageFiles).forEach((file) => {
             formData.append("files", file);
         });
@@ -78,7 +89,7 @@ function AddItem() {
         // console.log(inputs);
 
         axiosInstance.post("/api/item", inputs).then((response) => {
-            if(response.status === 200) {
+            if (response.status === 200) {
                 const itemId = response.data.itemId;
 
                 axiosInstance.post(`/api/image/${itemId}`, formData, {
@@ -100,41 +111,35 @@ function AddItem() {
         <>
             <Container className="mt-5">
                 <h1 className="text-center mb-5">나의 물건 나눔</h1>
-                <form
-                    onSubmit={handleSubmit}
-                    encType="multipart/form-data"
-                >
-                    <input type="file" name="userfile" multiple onChange={addImageFile} />
-                    <input type="submit" />
-                </form>
-
-                <Row className="">
+                <h2>이미지: {imageFiles.length}개</h2>
+                <h2>미리보기: {previews.length}개</h2>
+                <Row>
                     <Col className="mb-3 px-5" md={0} lg={6}>
                         {
-                            imageFiles && imageFiles.length
+                            previews && previews.length
                                 ? <Container>
                                     <Carousel arrows autoplay className="text-black">
-                                        {/*{imageFiles.map((img, i) => (*/}
-                                        {/*    <div key={i}>*/}
-                                        {/*        <div className="d-flex justify-content-end">*/}
-                                        {/*            <Button*/}
-                                        {/*                style={{position: 'absolute', zIndex: "10"}}*/}
-                                        {/*                className="m-2"*/}
-                                        {/*                variant="outline-danger"*/}
-                                        {/*                onClick={() => removeImageFile(i)}*/}
-                                        {/*            >X</Button>*/}
-                                        {/*        </div>*/}
-                                        {/*        <Image className="w-100"*/}
-                                        {/*               src={img}*/}
-                                        {/*               alt={img}*/}
-                                        {/*               style={{*/}
-                                        {/*                   height: '45vh',*/}
-                                        {/*                   objectFit: "fill",*/}
-                                        {/*                   // backgroundColor: "grey"*/}
-                                        {/*               }}*/}
-                                        {/*        />*/}
-                                        {/*    </div>*/}
-                                        {/*))}*/}
+                                        {previews.map((img, i) => (
+                                            <div key={i}>
+                                                <div className="d-flex justify-content-end">
+                                                    <Button
+                                                        style={{position: 'absolute', zIndex: "10"}}
+                                                        className="m-2"
+                                                        variant="outline-danger"
+                                                        onClick={() => removeImageFile(i)}
+                                                    >X</Button>
+                                                </div>
+                                                <Image className="w-100"
+                                                       src={img}
+                                                       alt={img}
+                                                       style={{
+                                                           height: '45vh',
+                                                           objectFit: "fill",
+                                                           // backgroundColor: "grey"
+                                                       }}
+                                                />
+                                            </div>
+                                        ))}
                                     </Carousel>
                                 </Container>
                                 : <Container className="d-flex justify-content-center align-items-center mt-4" style={{

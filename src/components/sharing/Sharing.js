@@ -47,18 +47,18 @@ function Sharing() {
                                 <Row className="m-3">
                                     <Col xs={0} sm={0} md={3} lg={3} xl={4}
                                          style={{cursor: "pointer"}}
-                                         onClick={() => onClickCard(item.id)}>
+                                         onClick={() => onClickCard(item.itemId)}>
                                         <Card.Img
                                             className=""
                                             variant="top"
-                                            src={item.photo} width={100}
+                                            src={item.image} width={100}
                                             height={200}/>
                                     </Col>
 
                                     <Col xs={0} sm={0} md={6} lg={6} xl={5}
                                          className="my-3 my-md-0"
                                          style={{cursor: "pointer"}}
-                                         onClick={() => onClickCard(item.id)}>
+                                         onClick={() => onClickCard(item.itemId)}>
                                         <Card.Title className="mb-1 fs-4">{item.title}</Card.Title>
                                         <Card.Text className="opacity-75">
                                             {item.ago}
@@ -66,7 +66,7 @@ function Sharing() {
                                     </Col>
 
                                     <Col className="d-grid d-md-flex align-items-md-end justify-content-md-end">
-                                        <Button variant="outline-primary" onClick={() => getApplicant(item.id)}
+                                        <Button variant="outline-primary" onClick={() => getApplicant(item.itemId)}
                                                 style={{whiteSpace: "nowrap"}}>
                                             신청자 보기
                                         </Button>
