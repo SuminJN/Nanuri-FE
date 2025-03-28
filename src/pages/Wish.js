@@ -37,7 +37,7 @@ function Wish() {
                                     <Card.Img
                                         className=""
                                         variant="top"
-                                        src={item.photo} width={100}
+                                        src={item.image} width={100}
                                         height={200}/>
                                 </Col>
 

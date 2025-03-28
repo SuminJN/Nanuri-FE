@@ -131,7 +131,7 @@ function Items() {
                                               height: 340,
                                           }}
                                           cover={<img alt="example"
-                                                      src={item.photo} height={200}/>}
+                                                      src={item.image} height={200}/>}
                                     >
                                         <p className="fs-5 mb-1">{item.title}</p>
                                         <p className="opacity-50">{item.createdTime}</p>

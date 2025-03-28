@@ -30,14 +30,14 @@ function ReceiveDone() {
                         <Card.Body key={idx}
                                    className="border"
                                    style={{cursor: "pointer"}}
-                                   onClick={() => onClickCard(item.id)}>
+                                   onClick={() => onClickCard(item.itemId)}>
 
                             <Row className="m-3">
                                 <Col xs={0} sm={0} md={3} lg={3} xl={4}>
                                     <Card.Img
                                         className=""
                                         variant="top"
-                                        src={item.photo} width={100}
+                                        src={item.image} width={100}
                                         height={200}/>
                                 </Col>
 

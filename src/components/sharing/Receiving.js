@@ -46,14 +46,14 @@ function Receiving() {
                                    style={{cursor: "pointer"}}>
 
                             <Row className="m-3">
-                                <Col xs={0} sm={0} md={3} lg={3} xl={4} onClick={() => onClickCard(item.id)}>
+                                <Col xs={0} sm={0} md={3} lg={3} xl={4} onClick={() => onClickCard(item.itemId)}>
                                     <Card.Img
                                         variant="top"
-                                        src={item.photo} width={100}
+                                        src={item.image} width={100}
                                         height={200}/>
                                 </Col>
 
-                                <Col xs={0} sm={0} md={6} lg={6} xl={5} className="my-3 my-md-0" onClick={() => onClickCard(item.id)}>
+                                <Col xs={0} sm={0} md={6} lg={6} xl={5} className="my-3 my-md-0" onClick={() => onClickCard(item.itemId)}>
                                     <Card.Title className="mb-3 fs-4">{item.title}</Card.Title>
                                     <Card.Text className="opacity-75">
                                         {item.ago}
@@ -63,7 +63,7 @@ function Receiving() {
                                 <Col className="d-grid d-md-flex align-items-md-end justify-content-md-end">
                                     <Button variant="outline-danger"
                                             style={{whiteSpace: "nowrap"}}
-                                            onClick={() => handleCancel(item.id)}
+                                            onClick={() => handleCancel(item.itemId)}
                                     >
                                         대기 취소
                                     </Button>

@@ -9,6 +9,7 @@ function ItemDetail() {
     const navigate = useNavigate();
 
     const [item, setItem] = useState(null);
+    const [imageFiles, setImageFiles] = useState(null);
 
     const handleItemDelete = async () => {
         if (window.confirm("정말로 삭제하시겠습니까?")) {
@@ -27,6 +28,12 @@ function ItemDetail() {
         axiosInstance.get(`/api/item/${itemId}`).then(res => {
             setItem(res.data);
             console.log(res.data);
+            axiosInstance.get(`/api/image/view/${itemId}`, {
+                responseType: "blob" // 바이너리 데이터로 받기
+            }).then(response => {
+                const imageUrl = URL.createObjectURL(response.data); // Blob을 URL로 변환
+                setImageFiles(imageUrl);
+            })
         })
     }, []);
 
@@ -47,7 +54,8 @@ function ItemDetail() {
                             </Breadcrumb>
 
                             <Col xs={12} sm={12} md={12} lg={6}>
-                                <img className="border border-2 rounded w-100 h-75 mb-3" src={item.photo} alt="photo"/>
+                                {/*{imageFiles ? <img className="border border-2 rounded w-100 h-75 mb-3" src={imageFiles} alt="image"/> : null}*/}
+                                <img className="border border-2 rounded w-100 h-75 mb-3" src={item.images[0]} alt="image"/>
                                 <h4>{item.nickname}</h4>
                             </Col>
 
@@ -59,7 +67,7 @@ function ItemDetail() {
                                 <p className="h6 opacity-75"><small>관심 {item.wishCount} · 조회 {item.viewCount}</small></p>
                                 <div className="d-grid gap-2">
                                     <Button variant="outline-primary"
-                                            onClick={() => navigate(`/updateItem/${item.id}`)}>수정하기</Button>
+                                            onClick={() => navigate(`/updateItem/${item.itemId}`)}>수정하기</Button>
                                     <Button variant="outline-danger" onClick={handleItemDelete}>삭제하기</Button>
                                 </div>
                             </Col>

@@ -12,10 +12,10 @@ function UpdateItem() {
         title: '',
         category: '',
         description: '',
-        photo: '',
+        image: '',
     });
 
-    const {title, category, description, photo} = item; // 비구조화 할당
+    const {title, category, description, image} = item; // 비구조화 할당
 
     const onChange = (e) => {
         const {value, name} = e.target;
@@ -44,7 +44,7 @@ function UpdateItem() {
                 <Form>
                     <Row>
                         <Col xs={12} sm={12} md={12} lg={6}>
-                            <img className="border border-2 rounded w-100 h-75 mb-3" src={photo} alt="photo"/>
+                            <img className="border border-2 rounded w-100 h-75 mb-3" src={image} alt="image"/>
                             <h4>{item.userId}</h4>
                         </Col>
                         <Col>
