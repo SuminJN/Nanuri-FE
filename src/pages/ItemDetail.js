@@ -43,12 +43,6 @@ function ItemDetail() {
         axiosInstance.get(`/api/item/${itemId}`).then(res => {
             setItem(res.data);
             console.log(res.data);
-            axiosInstance.get(`/api/image/view/${itemId}`, {
-                responseType: "blob" // 바이너리 데이터로 받기
-            }).then(response => {
-                const imageUrl = URL.createObjectURL(response.data); // Blob을 URL로 변환
-                setImageFiles(imageUrl);
-            })
         })
     }, []);
 
