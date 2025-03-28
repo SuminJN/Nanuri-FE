@@ -18,7 +18,7 @@ export const mockItems = [
             "대학교 과정 문제집과 개념서 몇 권이며, 필기나 밑줄이 조금 있지만 공부하는 데 지장은 없습니다. " +
             "필요하신 분께 무료로 드리며, 직접 오셔서 가져가시면 좋습니다. 다음 필요한 분들께도 이어서 잘 사용해 주시면 감사하겠습니다.",
         "photo": book,
-        "ago": "10분 전",
+        "createdTime": "10분 전",
         "viewCount": 11,
         "category": "도서",
         "nickname": "닉네임 0",
@@ -32,7 +32,7 @@ export const mockItems = [
             "기본적인 사무용 마우스로 작동은 정상적으로 되며, 큰 흠집 없이 깨끗한 상태입니다. " +
             "필요하신 분께 무료로 드리며, 직접 오셔서 가져가시면 좋습니다. 환경을 생각해 꼭 필요한 분이 가져가셨으면 좋겠습니다. ",
         "photo": mouse,
-        "ago": "22분 전",
+        "createdTime": "22분 전",
         "viewCount": 15,
         "category": "디지털기기",
         "nickname": "닉네임 1",
@@ -47,7 +47,7 @@ export const mockItems = [
             "몇 번 입었지만 상태는 양호하며, 필요하신 분께 무료로 드립니다. 직접 오셔서 가져가시면 좋고, " +
             "가능하면 환경을 생각해 에코백이나 장바구니를 지참해 주세요. 관심 있으신 분은 신청해주세요 😊",
         "photo": shirt,
-        "ago": "34분 전",
+        "createdTime": "34분 전",
         "viewCount": 33,
         "category": "의류",
         "nickname": "닉네임 2",
@@ -61,7 +61,7 @@ export const mockItems = [
             "필요하신 분이 자유롭게 가져가셔서 잘 활용해 주시면 좋겠습니다. 나눔이 필요한 분께 먼저 드리고 싶으니, 정말 필요하신 분이 연락 주세요. " +
             "직접 전달 가능하며, 장소는 뉴턴홀에서 조율 가능합니다! 😊",
         "photo": shoes,
-        "ago": "41분 전",
+        "createdTime": "41분 전",
         "viewCount": 44,
         "category": "의류",
         "nickname": "닉네임 3",
@@ -75,7 +75,7 @@ export const mockItems = [
             "보온·보냉 기능이 좋아서 일상에서 유용하게 사용할 수 있습니다. 필요하신 분이 잘 활용해 주시면 좋겠습니다. " +
             "나눔이니 부담 없이 연락 주세요! 직접 전달 가능하며, 장소는 학관 앞에서 조율 가능합니다. 😊",
         "photo": tumblr,
-        "ago": "50분 전",
+        "createdTime": "50분 전",
         "viewCount": 25,
         "category": "생활/주방",
         "nickname": "닉네임 4",
@@ -89,7 +89,7 @@ export const mockItems = [
             " 타건감도 좋고 사용감은 있지만 깨끗하게 관리했습니다. 필요하신 분이 유용하게 사용해 주시면 좋겠습니다. " +
             "나눔이니 부담 없이 연락 주세요! 직접 전달 가능하며, 장소는 뉴턴홀에서 조율 가능합니다. 😊",
         "photo": keyboard,
-        "ago": "1시간 전",
+        "createdTime": "1시간 전",
         "viewCount": 51,
         "category": "디지털기기",
         "nickname": "닉네임 5",
@@ -103,7 +103,7 @@ export const mockItems = [
             "필요하신 분이 유용하게 사용해 주시면 좋겠습니다. " +
             "나눔이니 부담 없이 연락 주세요! 직접 전달 가능하며, 장소는 학관 앞에서 조율 가능합니다. 😊",
         "photo": charger,
-        "ago": "1시간 전",
+        "createdTime": "1시간 전",
         "viewCount": 25,
         "category": "생활가전",
         "nickname": "닉네임 6",
@@ -117,7 +117,7 @@ export const mockItems = [
             "내부는 여러 개의 칸으로 나뉘어 있어, 다양한 문구류를 정리하기에 좋습니다. 사용감은 있지만 상태는 아주 좋습니다. " +
             "필요하신 분이 잘 활용해 주시면 좋겠습니다. 나눔이니 부담 없이 연락 주세요! 직접 전달 가능합니다.",
         "photo": pencilCase,
-        "ago": "1시간 전",
+        "createdTime": "1시간 전",
         "viewCount": 75,
         "category": "문구",
         "nickname": "닉네임 7",
@@ -131,7 +131,7 @@ export const mockItems = [
             "디자인은 간단하면서도 스타일리시하여 다양한 outfits와 잘 어울립니다. 사용감은 있지만 깨끗하게 관리했습니다. " +
             "필요하신 분이 잘 활용해 주시면 좋겠습니다. 나눔이니 부담 없이 연락 주세요! 직접 전달 가능합니다.",
         "photo": cap,
-        "ago": "2시간 전",
+        "createdTime": "2시간 전",
         "viewCount": 44,
         "category": "의류",
         "nickname": "닉네임 8",
@@ -145,7 +145,7 @@ export const mockItems = [
             "글씨가 부드럽게 써집니다. 학업이나 취미용으로 유용하게 사용할 수 있습니다." +
             " 나눔이니 필요하신 분이 부담 없이 가져가세요! 직접 전달 가능합니다.",
         "photo": pencil,
-        "ago": "2시간 전",
+        "createdTime": "2시간 전",
         "viewCount": 22,
         "category": "문구",
         "nickname": "닉네임 9",
@@ -159,7 +159,7 @@ export const mockItems = [
             "사용감은 있지만 상태는 양호하고, 앉았을 때 편안합니다. 사무실이나 공부방, 혹은 집에서 사용하기 좋습니다. " +
             "나눔이니 정말 필요하신 분이 가져가시면 좋겠습니다. 직접 전달 가능합니다.",
         "photo": chair,
-        "ago": "3시간 전",
+        "createdTime": "3시간 전",
         "viewCount": 31,
         "category": "가구/인테리어",
         "nickname": "닉네임 10",
