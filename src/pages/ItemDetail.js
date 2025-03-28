@@ -78,16 +78,17 @@ function ItemDetail() {
                                 </p>
                                 {item.isOwner
                                     ?
-                                    <div className="d-grid gap-2">
-                                        <Button variant="outline-primary"
+                                    <Container className="d-flex justify-content-between p-0">
+                                        <Button className="w-50 me-1" variant="outline-primary"
                                                 onClick={() => navigate(`/updateItem/${item.id}`)}>수정하기</Button>
-                                        <Button variant="outline-danger" onClick={handleItemDelete}>삭제하기</Button>
-                                    </div>
-                                    : <div className="d-grid gap-2">
-                                        <Button variant="outline-primary" onClick={handleItemApply}>나눔 받기 신청</Button>
-                                        <Button variant="outline-secondary" onClick={handleAddWish}>위시 등록하기</Button>
-                                    </div>
+                                        <Button className="w-50 ms-1" variant="outline-danger" onClick={handleItemDelete}>삭제하기</Button>
+                                    </Container>
+                                    : <Container className="d-flex justify-content-between p-0">
+                                        <Button className="w-50 me-1" variant="outline-primary" onClick={handleItemApply}>나눔 받기 신청</Button>
+                                        <Button className="w-50 ms-1" variant="outline-secondary" onClick={handleAddWish}>위시 등록하기</Button>
+                                    </Container>
                                 }
+
 
                                 {/*<div className="d-grid gap-2">*/}
                                 {/*    <Button variant="outline-danger" onClick={handleItemDelete}>나눔 받기 신청</Button>*/}
