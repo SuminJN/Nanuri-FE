@@ -31,7 +31,7 @@ function Wish() {
                         <Card.Body key={idx}
                                    className="border"
                                    style={{cursor: "pointer"}}
-                                   onClick={() => onClickCard(item.itemId)}>
+                                   onClick={() => onClickCard(item.itemListResponseDto.itemId)}>
 
                             <Row className="m-3">
                                 <Col xs={0} sm={0} md={6} lg={5} xl={5}>
@@ -46,6 +46,7 @@ function Wish() {
                                     <Card.Title className="mb-3 fs-4">{item.title}</Card.Title>
                                     <Card.Text className="opacity-75">
                                         {item.description}
+
                                     </Card.Text>
                                 </Col>
 
