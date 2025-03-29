@@ -14,7 +14,7 @@ function ShareDone() {
     };
 
     useEffect(() => {
-        axiosInstance.get("/api/items").then((res) => {
+        axiosInstance.get("/api/items/shared", {params: {done : true}}).then((res) => {
                 setItemList(res.data);
             }
         )
