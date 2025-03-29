@@ -81,11 +81,11 @@ function Sharing() {
                             applicantList.map((applicant, idx) => (
                                 <Row className="mb-3 p-2" key={idx}>
                                     <Col xs={5} sm={5} className="fs-5 p-0 d-flex align-items-center">
-                                        <span>{applicant.name}</span>
+                                        <span>{applicant.nickName}</span>
                                     </Col>
 
                                     <Col xs={4} sm={4} className="d-flex justify-content-end align-items-center">
-                                        <span className="opacity-75">{applicant.createdTime}</span>
+                                        <span className="opacity-75">{applicant.applicationTime}</span>
                                     </Col>
 
                                     <Col className="p-0 d-flex justify-content-end align-items-center">

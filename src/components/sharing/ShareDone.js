@@ -52,7 +52,7 @@ function ShareDone() {
 
                                 <Col className="d-grid d-md-flex align-items-end justify-content-end"
                                      style={{whiteSpace: "nowrap"}}>
-                                    {item.completionTime}
+                                    {item.updatedTime}
                                 </Col>
                             </Row>
                         </Card.Body>
