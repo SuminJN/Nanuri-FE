@@ -61,7 +61,8 @@ function Sharing() {
                                          onClick={() => onClickCard(item.itemId)}>
                                         <Card.Title className="mb-1 fs-4">{item.title}</Card.Title>
                                         <Card.Text className="opacity-75">
-                                            {item.createdTime}
+                                            <p>{item.category} · {item.createdTime}</p>
+                                            <p>{item.description}</p>
                                         </Card.Text>
                                     </Col>
 
