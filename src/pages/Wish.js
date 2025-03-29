@@ -1,4 +1,4 @@
-import {Col, Container, Row} from "react-bootstrap";
+import {Button, Col, Container, Row} from "react-bootstrap";
 import Card from "react-bootstrap/Card";
 import React, {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
@@ -11,6 +11,20 @@ function Wish() {
     const onClickCard = (itemId) => {
         navigate(`/item/${itemId}`)
     };
+
+    const handleCancel = async (wishId) => {
+        if (window.confirm("정말로 삭제하시겠습니까?")) {
+            try {
+                await axiosInstance.delete(`/api/wish`, {data: {wishId: wishId}})
+                    .then(res => {
+                        alert("나눔 대기가 취소되었습니다.");
+                    })
+                window.location.reload();
+            } catch (e) {
+                console.log("취소 실패: ", e);
+            }
+        }
+    }
 
     useEffect(() => {
         axiosInstance.get("/api/wish").then((res) => {
@@ -31,18 +45,17 @@ function Wish() {
                         <Card.Body key={idx}
                                    className="border"
                                    style={{cursor: "pointer"}}
-                                   onClick={() => onClickCard(item.itemListResponseDto.itemId)}>
+                        >
 
                             <Row className="m-3">
-                                <Col xs={0} sm={0} md={6} lg={5} xl={5}>
+                                <Col xs={0} sm={0} md={6} lg={5} xl={5} onClick={() => onClickCard(item.itemId)}>
                                     <Card.Img
-                                        className=""
                                         variant="top"
                                         src={item.imageUrl} width={100}
                                         height={200}/>
                                 </Col>
 
-                                <Col xs={0} sm={0} md={6} lg={7} xl={7} className="my-3 my-md-0">
+                                <Col xs={0} sm={0} md={6} lg={7} xl={7} className="my-3 my-md-0" onClick={() => onClickCard(item.itemId)}>
                                     <Card.Title className="mb-3 fs-4">{item.title}</Card.Title>
                                     <Card.Text className="opacity-75">
                                         {item.description}
@@ -50,6 +63,14 @@ function Wish() {
                                     </Card.Text>
                                 </Col>
 
+                                <Col className="d-grid d-md-flex align-items-md-end justify-content-md-end">
+                                    <Button variant="outline-danger"
+                                            style={{whiteSpace: "nowrap"}}
+                                            onClick={() => handleCancel(item.wishId)}
+                                    >
+                                        대기 취소
+                                    </Button>
+                                </Col>
                             </Row>
                         </Card.Body>
                     ))}
