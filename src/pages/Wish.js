@@ -13,8 +13,9 @@ function Wish() {
     };
 
     useEffect(() => {
-        axiosInstance.get("/api/items").then((res) => {
+        axiosInstance.get("/api/wish").then((res) => {
                 setItemList(res.data);
+                console.log(res.data)
             }
         )
     }, [])
@@ -37,7 +38,7 @@ function Wish() {
                                     <Card.Img
                                         className=""
                                         variant="top"
-                                        src={item.image} width={100}
+                                        src={item.imageUrl} width={100}
                                         height={200}/>
                                 </Col>
 
