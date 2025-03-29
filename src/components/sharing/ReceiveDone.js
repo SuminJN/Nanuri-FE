@@ -21,7 +21,7 @@ function ReceiveDone() {
 
     return (
         <>
-            <Container className="mt-md-0 mt-lg-5 col-md-10 col-lg-8 col-xl-6">
+            <Container className="p-0 mt-md-0 mt-lg-4 col-md-10 col-lg-8 col-xl-6">
                 <Card>
                     <Card.Header as="h2" className="text-center py-3">받은 나눔</Card.Header>
                     {itemList === null

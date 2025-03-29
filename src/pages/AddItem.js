@@ -94,7 +94,7 @@ function AddItem() {
 
         axiosInstance.post("/api/item", inputs).then((response) => {
             if (response.status === 200) {
-                const itemId = response.data.itemId;
+                const itemId = response.data;
 
                 axiosInstance.post(`/api/image/${itemId}`, formData, {
                     headers: {

@@ -36,7 +36,7 @@ function Sharing() {
 
     return (
         <>
-            <Container className="mt-md-0 mt-lg-5 col-md-10 col-lg-8 col-xl-6">
+            <Container className="p-0 mt-md-0 mt-lg-4 col-md-10 col-lg-8 col-xl-6">
                 <Card>
                     <Card.Header as="h2" className="text-center py-3">나눔 중</Card.Header>
                     {itemList === null
@@ -61,7 +61,8 @@ function Sharing() {
                                          onClick={() => onClickCard(item.itemId)}>
                                         <Card.Title className="mb-1 fs-4">{item.title}</Card.Title>
                                         <Card.Text className="opacity-75">
-                                            {item.createdTime}
+                                            <p>{item.category} · {item.createdTime}</p>
+                                            <p>{item.description}</p>
                                         </Card.Text>
                                     </Col>
 

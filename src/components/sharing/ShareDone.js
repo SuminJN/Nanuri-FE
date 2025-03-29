@@ -22,7 +22,7 @@ function ShareDone() {
 
     return (
         <>
-            <Container className="mt-md-0 mt-lg-5 col-md-10 col-lg-8 col-xl-6">
+            <Container className="p-0 mt-md-0 mt-lg-4 col-md-10 col-lg-8 col-xl-6">
                 <Card>
                     <Card.Header as="h2" className="text-center py-3">나눔 완료</Card.Header>
                     {itemList === null
@@ -44,6 +44,10 @@ function ShareDone() {
 
                                 <Col xs={0} sm={0} md={6} lg={6} xl={5} className="my-3 my-md-0">
                                     <Card.Title className="mb-3 fs-4">{item.title}</Card.Title>
+                                    <Card.Text className="opacity-75">
+                                        <p>{item.category} · {item.createdTime}</p>
+                                        <p>{item.description}</p>
+                                    </Card.Text>
                                 </Col>
 
                                 <Col className="d-grid d-md-flex align-items-end justify-content-end"

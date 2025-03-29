@@ -15,14 +15,14 @@ function Wish() {
     useEffect(() => {
         axiosInstance.get("/api/wish").then((res) => {
                 setItemList(res.data);
-                console.log("res.data: ", res.data)
+                console.log(res.data)
             }
         )
     }, [])
 
     return (
         <>
-            <Container className="mt-md-0 mt-lg-5 col-md-10 col-lg-8 col-xl-6">
+            <Container className="p-0 mt-md-0 mt-lg-4 col-md-10 col-lg-8 col-xl-6">
                 <Card>
                     <Card.Header as="h2" className="text-center py-3">위시 리스트</Card.Header>
                     {itemList === null
@@ -34,18 +34,19 @@ function Wish() {
                                    onClick={() => onClickCard(item.itemListResponseDto.itemId)}>
 
                             <Row className="m-3">
-                                <Col xs={0} sm={0} md={3} lg={3} xl={4}>
+                                <Col xs={0} sm={0} md={6} lg={5} xl={5}>
                                     <Card.Img
                                         className=""
                                         variant="top"
-                                        src={item.itemListResponseDto.image} width={100}
+                                        src={item.imageUrl} width={100}
                                         height={200}/>
                                 </Col>
 
-                                <Col xs={0} sm={0} md={6} lg={6} xl={5} className="my-3 my-md-0">
-                                    <Card.Title className="mb-3 fs-4">{item.itemListResponseDto.title}</Card.Title>
+                                <Col xs={0} sm={0} md={6} lg={7} xl={7} className="my-3 my-md-0">
+                                    <Card.Title className="mb-3 fs-4">{item.title}</Card.Title>
                                     <Card.Text className="opacity-75">
-                                        {item.itemListResponseDto.createdTime}
+                                        {item.description}
+
                                     </Card.Text>
                                 </Col>
 
