@@ -56,7 +56,7 @@ function Header() {
                             <Nav.Link href="/chat">채팅</Nav.Link>
                             <Nav.Link href="/ranking">나눔 랭킹</Nav.Link>
                             <Nav.Link href="/wish"
-                                      className="d-xs-block d-sm-block d-md-block d-lg-none">관심목록</Nav.Link>
+                                      className="d-xs-block d-sm-block d-md-block d-lg-none">위시리스트</Nav.Link>
                             <Nav.Link href="/profile"
                                       className="d-xs-block d-sm-block d-md-block d-lg-none">마이페이지</Nav.Link>
                             {isLoggedIn

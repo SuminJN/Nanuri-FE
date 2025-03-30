@@ -17,7 +17,7 @@ function Wish() {
             try {
                 await axiosInstance.delete(`/api/wish`, {data: {wishId: wishId}})
                     .then(res => {
-                        alert("나눔 대기가 취소되었습니다.");
+                        alert("위시 리스트에서 삭제되었습니다.");
                     })
                 window.location.reload();
             } catch (e) {
@@ -68,7 +68,7 @@ function Wish() {
                                             style={{whiteSpace: "nowrap"}}
                                             onClick={() => handleCancel(item.wishId)}
                                     >
-                                        대기 취소
+                                        위시 삭제
                                     </Button>
                                 </Col>
                             </Row>
