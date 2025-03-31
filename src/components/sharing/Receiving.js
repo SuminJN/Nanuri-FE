@@ -15,7 +15,7 @@ function Receiving() {
     const handleCancel = async (historyId) => {
         if (window.confirm("정말로 삭제하시겠습니까?")) {
             try {
-                await axiosInstance.delete(`/api/history`, {data: {historyId: historyId}})
+                await axiosInstance.delete(`/api/history/${historyId}`)
                     .then(res => {
                     alert("나눔 대기가 취소되었습니다.");
                 })
