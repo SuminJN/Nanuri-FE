@@ -15,7 +15,7 @@ function Wish() {
     const handleCancel = async (wishId) => {
         if (window.confirm("정말로 삭제하시겠습니까?")) {
             try {
-                await axiosInstance.delete(`/api/wish`, {data: {wishId: wishId}})
+                await axiosInstance.delete(`/api/wish/${wishId}`)
                     .then(res => {
                         alert("위시 리스트에서 삭제되었습니다.");
                     })
