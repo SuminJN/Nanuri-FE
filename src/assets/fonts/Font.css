@@ -1,0 +1,4 @@
+@font-face {
+    font-family: 'Pretendard Medium'; /* 사용할 폰트의 이름을 정의 */
+    src: url('./Pretendard-Medium.ttf'); /* 폰트 파일의 위치 */
+}
