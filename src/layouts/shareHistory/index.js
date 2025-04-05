@@ -10,9 +10,10 @@ import { useState } from "react";
 import SharingInformation from "./component/SharingInformation";
 import Footer from "../../examples/Footer";
 import ShareDoneInformation from "./component/ShareDoneInformation";
+import ReceivingInformation from "./component/ReceivingInformation";
+import ReceiveDoneInformation from "./component/ReceiveDoneInformation";
 
 function ShareHistory() {
-  const [tabsOrientation, setTabsOrientation] = useState("horizontal");
   const [tabValue, setTabValue] = useState(0);
 
   const handleSetTabValue = (event, newValue) => setTabValue(newValue);
@@ -23,9 +24,9 @@ function ShareHistory() {
       <MDBox mb={2} />
       <MDBox position="relative">
         <Grid container>
-          <Grid item xs={12} md={6} lg={4}>
+          <Grid item xs={12}>
             <AppBar position="static">
-              <Tabs orientation={tabsOrientation} value={tabValue} onChange={handleSetTabValue}>
+              <Tabs orientation="horizontal" value={tabValue} onChange={handleSetTabValue}>
                 <Tab
                   label="나눔 중"
                   icon={
@@ -42,13 +43,32 @@ function ShareHistory() {
                     </Icon>
                   }
                 />
+                <Tab
+                  label="대기 중"
+                  icon={
+                    <Icon fontSize="small" sx={{ mt: -0.25 }}>
+                      hourglass_full_two_tone_icon
+                    </Icon>
+                  }
+                />
+                <Tab
+                  label="받은 물건"
+                  icon={
+                    <Icon fontSize="small" sx={{ mt: -0.25 }}>
+                      download_done_icon
+                    </Icon>
+                  }
+                />
               </Tabs>
             </AppBar>
           </Grid>
         </Grid>
       </MDBox>
       <MDBox mt={2} mb={3}>
-        {tabValue === 0 ? <SharingInformation /> : <ShareDoneInformation />}
+        {tabValue === 0 && <SharingInformation />}
+        {tabValue === 1 && <ShareDoneInformation />}
+        {tabValue === 2 && <ReceivingInformation />}
+        {tabValue === 3 && <ReceiveDoneInformation />}
       </MDBox>
       <Footer />
     </DashboardLayout>
