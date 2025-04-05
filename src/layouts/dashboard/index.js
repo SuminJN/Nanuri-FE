@@ -26,7 +26,7 @@ function Dashboard() {
       <DashboardNavbar />
       <MDBox position="relative">
         <Grid container>
-          <Grid item xs={12} md={6} lg={6}>
+          <Grid item xs={12} md={6} lg={4}>
             <AppBar position="static">
               <Tabs orientation={tabsOrientation} value={tabValue} onChange={handleSetTabValue}>
                 <Tab
@@ -45,21 +45,14 @@ function Dashboard() {
                     </Icon>
                   }
                 />
-                <Tab
-                  label="나눔 완료"
-                  icon={
-                    <Icon fontSize="small" sx={{ mt: -0.25 }}>
-                      download_done_icon
-                    </Icon>
-                  }
-                />
               </Tabs>
             </AppBar>
           </Grid>
         </Grid>
       </MDBox>
       <MDBox mt={2} mb={3}>
-        {tabValue === 0 ? <TotalItems /> : tabValue === 1 ? <SharingItems /> : <CompletedItems />}
+        {tabValue === 0 && <TotalItems />}
+        {tabValue === 1 && <SharingItems />}
       </MDBox>
       <Footer />
     </DashboardLayout>
