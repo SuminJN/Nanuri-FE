@@ -21,7 +21,7 @@ function WishItems() {
         <Card>
           <MDBox pt={3} px={2}>
             <MDTypography variant="h6" fontWeight="medium">
-              진행중인 나의 나눔
+              위시 리스트
             </MDTypography>
           </MDBox>
           <MDBox pt={1} pb={2} px={2}>
