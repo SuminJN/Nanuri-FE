@@ -32,7 +32,7 @@ function TotalItems() {
                         category={item.category}
                         image={item.image}
                         createdTime={item.createdTime}
-                        route={`/share-history/${item.itemId}`}
+                        route={`/home/${item.itemId}`}
                       />
                     </Grid>
                   ))}

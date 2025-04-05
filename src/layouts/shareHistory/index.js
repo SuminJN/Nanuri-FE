@@ -47,7 +47,7 @@ function ShareHistory() {
                   label="받은 물건"
                   icon={
                     <Icon fontSize="small" sx={{ mt: -0.25 }}>
-                      download_done_icon
+                      celebration_icon
                     </Icon>
                   }
                 />

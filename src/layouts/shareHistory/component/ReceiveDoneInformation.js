@@ -37,7 +37,7 @@ function ReceiveDoneInformation() {
                         category={item.category}
                         image={item.image}
                         createdTime={item.createdTime}
-                        route={`/share-history/${item.itemId}`}
+                        route={`/my-share/${item.itemId}`}
                       />
                     </Grid>
                   ))}
