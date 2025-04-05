@@ -88,7 +88,9 @@ function ItemDetail() {
                   <Grid container spacing={1}>
                     <Grid item xs={12} sm={7}>
                       <MDBox mb={2}>
-                        <MDTypography variant="h4">{item.title}</MDTypography>
+                        <MDTypography variant="h4" color="info">
+                          {item.title}
+                        </MDTypography>
                       </MDBox>
                       <MDBox mb={8}>
                         <MDTypography variant="h6" opacity="60%">

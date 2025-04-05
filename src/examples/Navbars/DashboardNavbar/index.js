@@ -1,17 +1,17 @@
 /**
-=========================================================
-* Material Dashboard 2 React - v2.2.0
-=========================================================
+ =========================================================
+ * Material Dashboard 2 React - v2.2.0
+ =========================================================
 
-* Product Page: https://www.creative-tim.com/product/material-dashboard-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
+ * Product Page: https://www.creative-tim.com/product/material-dashboard-react
+ * Copyright 2023 Creative Tim (https://www.creative-tim.com)
 
-Coded by www.creative-tim.com
+ Coded by www.creative-tim.com
 
  =========================================================
 
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ */
 
 import { useState, useEffect } from "react";
 
@@ -65,12 +65,12 @@ function DashboardNavbar({ absolute, light, isMini }) {
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useRecoilState(LoginState);
 
-  const handleLogout = async () => {
-    setIsLoggedIn(false);
-
-    await axiosInstance.get("/api/nanuri/auth/logout");
-
-    navigate("/");
+  const handleLogout = () => {
+    if (window.confirm("정말로 로그아웃 하시겠습니까?")) {
+      axiosInstance.get("/api/nanuri/auth/logout").then((r) => {
+        setIsLoggedIn(false);
+      });
+    }
   };
 
   useEffect(() => {
@@ -89,7 +89,7 @@ function DashboardNavbar({ absolute, light, isMini }) {
     /**
      The event listener that's calling the handleTransparentNavbar function when
      scrolling the window.
-    */
+     */
     window.addEventListener("scroll", handleTransparentNavbar);
 
     // Call the handleTransparentNavbar function to set the state with the initial value.

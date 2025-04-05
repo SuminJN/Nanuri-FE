@@ -21,7 +21,7 @@ function SharingInformation() {
         <Card>
           <MDBox pt={3} px={2}>
             <MDTypography variant="h6" fontWeight="medium">
-              나눔 중인 물건
+              진행중인 나의 나눔
             </MDTypography>
           </MDBox>
           <MDBox pt={1} pb={2} px={2}>
@@ -37,7 +37,7 @@ function SharingInformation() {
                         category={item.category}
                         image={item.image}
                         createdTime={item.createdTime}
-                        route={`/share-history/${item.itemId}`}
+                        route={`/my-share/${item.itemId}`}
                       />
                     </Grid>
                   ))}

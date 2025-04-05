@@ -24,7 +24,7 @@ function ShareHistory() {
       <MDBox mb={2} />
       <MDBox position="relative">
         <Grid container>
-          <Grid item xs={12}>
+          <Grid item xs={12} sm={6}>
             <AppBar position="static">
               <Tabs orientation="horizontal" value={tabValue} onChange={handleSetTabValue}>
                 <Tab
@@ -44,18 +44,10 @@ function ShareHistory() {
                   }
                 />
                 <Tab
-                  label="대기 중"
+                  label="받은 나눔"
                   icon={
                     <Icon fontSize="small" sx={{ mt: -0.25 }}>
-                      hourglass_full_two_tone_icon
-                    </Icon>
-                  }
-                />
-                <Tab
-                  label="받은 물건"
-                  icon={
-                    <Icon fontSize="small" sx={{ mt: -0.25 }}>
-                      download_done_icon
+                      celebration_icon
                     </Icon>
                   }
                 />
@@ -67,8 +59,7 @@ function ShareHistory() {
       <MDBox mt={2} mb={3}>
         {tabValue === 0 && <SharingInformation />}
         {tabValue === 1 && <ShareDoneInformation />}
-        {tabValue === 2 && <ReceivingInformation />}
-        {tabValue === 3 && <ReceiveDoneInformation />}
+        {tabValue === 2 && <ReceiveDoneInformation />}
       </MDBox>
       <Footer />
     </DashboardLayout>

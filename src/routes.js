@@ -22,10 +22,10 @@ const routes = [
   },
   {
     type: "collapse",
-    name: "Share History",
-    key: "share-history",
+    name: "My Share",
+    key: "my-share",
     icon: <Icon fontSize="small">volunteer_activism_icon</Icon>,
-    route: "/share-history",
+    route: "/my-share",
     component: <ShareHistory />,
   },
   {

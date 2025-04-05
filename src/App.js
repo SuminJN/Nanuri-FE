@@ -204,8 +204,8 @@ export default function App() {
             <Route path="*" element={<Navigate to="/home" />} />
             <Route path="/home/:itemId" element={<ItemDetail />} />
             <Route path="/addItem" element={<AddItem />} />
-            <Route path="/share-history" element={<ShareHistory />} />
-            <Route path="/share-history/:itemId" element={<ItemDetail />} />
+            <Route path="/my-share" element={<ShareHistory />} />
+            <Route path="/my-share/:itemId" element={<ItemDetail />} />
           </>
         ) : (
           <>

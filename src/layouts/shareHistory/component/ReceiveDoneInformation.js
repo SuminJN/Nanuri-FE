@@ -21,7 +21,7 @@ function ReceiveDoneInformation() {
         <Card>
           <MDBox pt={3} px={2}>
             <MDTypography variant="h6" fontWeight="medium">
-              받은 물건
+              내가 받은 나눔
             </MDTypography>
           </MDBox>
           <MDBox pt={1} pb={2} px={2}>
@@ -37,7 +37,7 @@ function ReceiveDoneInformation() {
                         category={item.category}
                         image={item.image}
                         createdTime={item.createdTime}
-                        route={`/share-history/${item.itemId}`}
+                        route={`/my-share/${item.itemId}`}
                       />
                     </Grid>
                   ))}
