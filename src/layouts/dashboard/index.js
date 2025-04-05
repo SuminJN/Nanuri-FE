@@ -26,7 +26,7 @@ function Dashboard() {
       <DashboardNavbar />
       <MDBox position="relative">
         <Grid container>
-          <Grid item xs={12} md={6} lg={4}>
+          <Grid item xs={12} md={6} lg={6}>
             <AppBar position="static">
               <Tabs orientation={tabsOrientation} value={tabValue} onChange={handleSetTabValue}>
                 <Tab
