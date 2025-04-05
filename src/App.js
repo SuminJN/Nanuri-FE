@@ -47,6 +47,7 @@ import SignUp from "./layouts/authentication/sign-up";
 import ShareHistory from "./layouts/shareHistory";
 import { CommentOutlined, CustomerServiceOutlined } from "@ant-design/icons";
 import { FloatButton } from "antd";
+import Wish from "./layouts/wish/Wish";
 
 export default function App() {
   const [controller, dispatch] = useMaterialUIController();
@@ -206,6 +207,7 @@ export default function App() {
             <Route path="/addItem" element={<AddItem />} />
             <Route path="/my-share" element={<ShareHistory />} />
             <Route path="/my-share/:itemId" element={<ItemDetail />} />
+            <Route path="/wish" element={<Wish />} />
           </>
         ) : (
           <>
