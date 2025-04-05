@@ -44,7 +44,7 @@ function ShareHistory() {
                   }
                 />
                 <Tab
-                  label="받은 물건"
+                  label="받은 나눔"
                   icon={
                     <Icon fontSize="small" sx={{ mt: -0.25 }}>
                       celebration_icon

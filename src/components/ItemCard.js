@@ -37,8 +37,8 @@ function SharingItemCard({ itemId, image, title, createdTime, category, descript
         </Grid>
         <Grid item xs={12} style={{ height: "200px" }}>
           <MDBox width="100%" display="flex" flexDirection="column">
-            <MDBox mb={2}>
-              <MDTypography variant="h5" fontWeight="bold" textTransform="capitalize">
+            <MDBox mt={1} mb={2}>
+              <MDTypography variant="h5" fontWeight="bold" textTransform="capitalize" color="info">
                 {title}
               </MDTypography>
             </MDBox>

@@ -21,7 +21,7 @@ function ShareDoneInformation() {
         <Card>
           <MDBox pt={3} px={2}>
             <MDTypography variant="h6" fontWeight="medium">
-              나눔 완료된 물건
+              완료된 나의 나눔
             </MDTypography>
           </MDBox>
           <MDBox pt={1} pb={2} px={2}>
