@@ -36,9 +36,10 @@ import breakpoints from "assets/theme/base/breakpoints";
 
 // Images
 import burceMars from "assets/images/bruce-mars.jpg";
-import backgroundImage from "assets/images/bg-profile.jpeg";
+// import backgroundImage from "assets/images/bg-profile.jpeg";
+import backgroundImage from "assets/images/curved.jpg";
 
-function Header({ nickname, children }) {
+function Header({ nickname }) {
   const [tabsOrientation, setTabsOrientation] = useState("horizontal");
   const [tabValue, setTabValue] = useState(0);
 
@@ -65,7 +66,7 @@ function Header({ nickname, children }) {
   const handleSetTabValue = (event, newValue) => setTabValue(newValue);
 
   return (
-    <MDBox position="relative" mb={5}>
+    <MDBox position="relative">
       <MDBox
         display="flex"
         alignItems="center"
@@ -85,6 +86,9 @@ function Header({ nickname, children }) {
       />
       <Card
         sx={{
+          backdropFilter: `saturate(200%) blur(30px)`,
+          backgroundColor: ({ functions: { rgba }, palette: { white } }) => rgba(white.main, 0.8),
+          boxShadow: ({ boxShadows: { navbarBoxShadow } }) => navbarBoxShadow,
           position: "relative",
           mt: -8,
           mx: 3,
@@ -94,7 +98,7 @@ function Header({ nickname, children }) {
       >
         <Grid container spacing={3} alignItems="center">
           <Grid item>
-            <MDAvatar src={burceMars} alt="profile-image" size="xl" shadow="sm" />
+            <MDAvatar src={burceMars} alt="profile-image" variant="rounded" size="xl" shadow="sm" />
           </Grid>
           <Grid item>
             <MDBox height="100%" mt={0.5} lineHeight={1}>
@@ -104,7 +108,6 @@ function Header({ nickname, children }) {
             </MDBox>
           </Grid>
         </Grid>
-        {children}
       </Card>
     </MDBox>
   );
@@ -118,7 +121,6 @@ Header.defaultProps = {
 // Typechecking props for the Header
 Header.propTypes = {
   nickname: PropTypes.string.isRequired,
-  children: PropTypes.node,
 };
 
 export default Header;

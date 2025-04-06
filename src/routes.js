@@ -10,6 +10,7 @@ import SignUp from "layouts/authentication/sign-up";
 // @mui icons
 import Icon from "@mui/material/Icon";
 import ShareHistory from "./layouts/shareHistory";
+import Chat from "./layouts/chat/Chat";
 
 const routes = [
   {
@@ -27,6 +28,14 @@ const routes = [
     icon: <Icon fontSize="small">volunteer_activism_icon</Icon>,
     route: "/my-share",
     component: <ShareHistory />,
+  },
+  {
+    type: "collapse",
+    name: "Chat",
+    key: "chat",
+    icon: <Icon fontSize="small">chat_icon</Icon>,
+    route: "/chat",
+    component: <Chat />,
   },
   {
     type: "collapse",
