@@ -1,20 +1,20 @@
 /**
-=========================================================
-* Material Dashboard 2 React - v2.2.0
-=========================================================
+ =========================================================
+ * Material Dashboard 2 React - v2.2.0
+ =========================================================
 
-* Product Page: https://www.creative-tim.com/product/material-dashboard-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
+ * Product Page: https://www.creative-tim.com/product/material-dashboard-react
+ * Copyright 2023 Creative Tim (https://www.creative-tim.com)
 
-Coded by www.creative-tim.com
+ Coded by www.creative-tim.com
 
  =========================================================
 
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ */
 
 // react-routers components
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 // prop-types is library for typechecking of props
 import PropTypes from "prop-types";
@@ -29,6 +29,8 @@ import MDAvatar from "components/MDAvatar";
 import MDButton from "components/MDButton";
 
 function ProfilesList({ title, profiles, shadow }) {
+  const navigate = useNavigate();
+
   const renderProfiles = profiles.map(({ image, name, description, action }) => (
     <MDBox key={name} component="li" display="flex" alignItems="center" py={1} mb={1}>
       <MDBox mr={2}>
@@ -43,28 +45,21 @@ function ProfilesList({ title, profiles, shadow }) {
         </MDTypography>
       </MDBox>
       <MDBox ml="auto">
-        {action.type === "internal" ? (
-          <MDButton component={Link} to={action.route} variant="text" color="info">
-            {action.label}
-          </MDButton>
-        ) : (
-          <MDButton
-            component="a"
-            href={action.route}
-            target="_blank"
-            rel="noreferrer"
-            variant="text"
-            color={action.color}
-          >
-            {action.label}
-          </MDButton>
-        )}
+        <MDButton
+          variant="text"
+          color="info"
+          onClick={() => {
+            navigate(`/chat/1`);
+          }}
+        >
+          대화하기
+        </MDButton>
       </MDBox>
     </MDBox>
   ));
 
   return (
-    <Card sx={{ height: "100%", boxShadow: !shadow && "none" }}>
+    <Card sx={{ height: "100%" }}>
       <MDBox pt={2} px={2}>
         <MDTypography variant="h6" fontWeight="medium" textTransform="capitalize">
           {title}

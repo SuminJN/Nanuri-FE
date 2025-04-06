@@ -48,6 +48,8 @@ import ShareHistory from "./layouts/shareHistory";
 import { CommentOutlined, CustomerServiceOutlined } from "@ant-design/icons";
 import { FloatButton } from "antd";
 import Wish from "./layouts/wish/Wish";
+import Chat from "./layouts/chat/Chat";
+import ChatField from "./layouts/chat/ChatField";
 
 export default function App() {
   const [controller, dispatch] = useMaterialUIController();
@@ -208,6 +210,8 @@ export default function App() {
             <Route path="/my-share" element={<ShareHistory />} />
             <Route path="/my-share/:itemId" element={<ItemDetail />} />
             <Route path="/wish" element={<Wish />} />
+            <Route path="/chat" element={<Chat />} />
+            <Route path="/chat/:roomId" element={<ChatField />} />
           </>
         ) : (
           <>
