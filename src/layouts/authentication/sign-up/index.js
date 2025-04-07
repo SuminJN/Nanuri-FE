@@ -6,12 +6,13 @@ import MDButton from "components/MDButton";
 import CoverLayout from "layouts/authentication/components/CoverLayout";
 import bgImage from "assets/images/bg-sign-up-cover.jpeg";
 import axiosInstance from "../../../apis/axios";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRecoilState } from "recoil";
 import { LoginState } from "../../../recoil/LoginState";
 import TextField from "@mui/material/TextField";
 
 function Cover() {
+  const inputRef = useRef(null);
   const [isLoggedIn, setIsLoggedIn] = useRecoilState(LoginState);
   const [userInfo, setUserInfo] = useState({
     userInfo: null,
@@ -39,6 +40,7 @@ function Cover() {
     axiosInstance.get("/api/user").then((res) => {
       setUserInfo(res.data);
     });
+    inputRef.current.focus();
   }, []);
 
   return (
@@ -95,6 +97,7 @@ function Cover() {
                 variant="outlined"
                 fullWidth
                 required
+                inputRef={inputRef}
                 value={nickname}
                 onChange={(event) => {
                   setNickname(event.target.value);
