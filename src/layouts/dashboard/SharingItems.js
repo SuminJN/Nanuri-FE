@@ -10,7 +10,7 @@ function SharingItems() {
 
   useEffect(() => {
     axiosInstance.get("/api/items").then((res) => {
-      setItemList(res.data.filter((item) => item.isFinished === false));
+      setItemList(res.data.filter((item) => item.shareStatus === "NONE"));
       console.log(res.data);
     });
   }, []);

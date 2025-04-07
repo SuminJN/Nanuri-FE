@@ -10,7 +10,7 @@ function ShareDoneInformation() {
   const [itemList, setItemList] = useState(null);
 
   useEffect(() => {
-    axiosInstance.get("/api/items/shared", { params: { done: true } }).then((res) => {
+    axiosInstance.get("/api/items/shared", { params: { done: "Completed" } }).then((res) => {
       setItemList(res.data);
     });
   }, []);

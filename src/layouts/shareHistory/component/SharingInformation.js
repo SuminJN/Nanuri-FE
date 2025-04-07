@@ -10,8 +10,9 @@ function SharingInformation() {
   const [itemList, setItemList] = useState(null);
 
   useEffect(() => {
-    axiosInstance.get("/api/items/shared", { params: { done: false } }).then((res) => {
+    axiosInstance.get("/api/items/shared", { params: { done: "None" } }).then((res) => {
       setItemList(res.data);
+      console.log(res.data);
     });
   }, []);
 
