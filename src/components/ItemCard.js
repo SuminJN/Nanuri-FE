@@ -9,7 +9,7 @@ import { Image } from "antd";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-function SharingItemCard({ itemId, image, title, createdTime, category, description, route }) {
+function ItemCard({ itemId, image, title, createdTime, category, description, route }) {
   const [controller] = useMaterialUIController();
   const { darkMode } = controller;
 
@@ -37,32 +37,23 @@ function SharingItemCard({ itemId, image, title, createdTime, category, descript
         </Grid>
         <Grid item xs={12} style={{ height: "200px" }}>
           <MDBox width="100%" display="flex" flexDirection="column">
-            <MDBox mt={1} mb={2}>
+            <MDBox mt={1} mb={0.5} lineHeight={0}>
               <MDTypography variant="h5" fontWeight="bold" textTransform="capitalize" color="info">
                 {title}
               </MDTypography>
             </MDBox>
             <MDBox mb={1} lineHeight={0}>
               <MDTypography variant="caption" fontWeight="regular" color="text">
-                게시일:&nbsp;&nbsp;&nbsp;
-                <MDTypography variant="caption" fontWeight="medium" textTransform="capitalize">
-                  {createdTime}
-                </MDTypography>
+                {createdTime}
               </MDTypography>
             </MDBox>
             <MDBox mb={1} lineHeight={0}>
               <MDTypography variant="caption" fontWeight="regular" color="text">
-                테그:&nbsp;&nbsp;&nbsp;
-                <MDTypography variant="caption" fontWeight="medium">
-                  {category}
-                </MDTypography>
+                {category}
               </MDTypography>
             </MDBox>
-            <MDTypography variant="caption" fontWeight="regular" color="text">
-              내용:&nbsp;&nbsp;&nbsp;
-              <MDTypography variant="caption" fontWeight="medium">
-                {description}
-              </MDTypography>
+            <MDTypography variant="caption" fontWeight="medium">
+              {description}
             </MDTypography>
           </MDBox>
         </Grid>
@@ -71,15 +62,27 @@ function SharingItemCard({ itemId, image, title, createdTime, category, descript
           xs={12}
           display="flex"
           justifyContent="flex-end"
-          alignItems="flex-end"
+          alignItems="center"
           style={{ marginTop: "auto" }}
         >
+          <MDBox mr={2} display="flex" justifyContent="flex-end" alignItems="center">
+            <Icon fontSize="small">favorite_icon</Icon>
+            <MDTypography variant="caption" fontWeight="medium" lineHeight={0}>
+              &nbsp;0
+            </MDTypography>
+          </MDBox>
+          <MDBox mr={2} display="flex" justifyContent="flex-end" alignItems="center">
+            <Icon fontSize="small">remove_red_eye_icon</Icon>
+            <MDTypography variant="caption" fontWeight="medium" lineHeight={0}>
+              &nbsp;0
+            </MDTypography>
+          </MDBox>
           <MDButton
             component={Link}
             to={route}
             variant="text"
             color="info"
-            style={{ whiteSpace: "nowrap" }}
+            style={{ whiteSpace: "nowrap", padding: 10 }}
           >
             <Icon>edit</Icon>&nbsp;자세히 보기
           </MDButton>
@@ -89,11 +92,11 @@ function SharingItemCard({ itemId, image, title, createdTime, category, descript
   );
 }
 
-SharingItemCard.defaultProps = {
+ItemCard.defaultProps = {
   noGutter: false,
 };
 
-SharingItemCard.propTypes = {
+ItemCard.propTypes = {
   itemId: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
@@ -103,4 +106,4 @@ SharingItemCard.propTypes = {
   route: PropTypes.string.isRequired,
 };
 
-export default SharingItemCard;
+export default ItemCard;
