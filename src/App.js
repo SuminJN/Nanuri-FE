@@ -210,6 +210,7 @@ export default function App() {
             <Route path="/my-share" element={<ShareHistory />} />
             <Route path="/my-share/:itemId" element={<ItemDetail />} />
             <Route path="/wish" element={<Wish />} />
+            <Route path="/wish/:itemId" element={<ItemDetail />} />
             <Route path="/chat" element={<Chat />} />
             <Route path="/chat/:roomId" element={<ChatField />} />
           </>

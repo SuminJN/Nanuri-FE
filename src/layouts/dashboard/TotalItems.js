@@ -4,6 +4,7 @@ import ItemCard from "../../components/ItemCard";
 import Card from "@mui/material/Card";
 import { useEffect, useState } from "react";
 import axiosInstance from "../../apis/axios";
+import { Badge } from "antd";
 
 function TotalItems() {
   const [itemList, setItemList] = useState(null);
@@ -25,15 +26,17 @@ function TotalItems() {
                 ? null
                 : itemList.map((item, idx) => (
                     <Grid item xs={12} sm={6} md={6} lg={4} xl={3} key={idx}>
-                      <ItemCard
-                        itemId={item.itemId}
-                        title={item.title}
-                        description={item.description}
-                        category={item.category}
-                        image={item.image}
-                        createdTime={item.createdTime}
-                        route={`/home/${item.itemId}`}
-                      />
+                      <Badge.Ribbon text="New">
+                        <ItemCard
+                          itemId={item.itemId}
+                          title={item.title}
+                          description={item.description}
+                          category={item.category}
+                          image={item.image}
+                          createdTime={item.createdTime}
+                          route={`/home/${item.itemId}`}
+                        />
+                      </Badge.Ribbon>
                     </Grid>
                   ))}
             </Grid>
