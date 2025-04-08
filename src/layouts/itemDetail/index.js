@@ -62,118 +62,111 @@ function ItemDetail() {
   return (
     <DashboardLayout>
       <DashboardNavbar />
-      <MDBox>
-        <Grid container spacing={2} justifyContent="center">
-          {item &&
-            item.images.map((image, index) => (
-              <Grid item key={index} xs={12} sm={4}>
-                <Image
-                  src={image}
-                  alt="image"
-                  loading="lazy"
-                  width="100%"
-                  height="300px"
-                  style={{ borderRadius: "8px", boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)" }}
-                />
-              </Grid>
-            ))}
-        </Grid>
-      </MDBox>
       <MDBox mt={2} mb={3}>
-        <Grid container spacing={3} mb={2} justifyContent="center">
-          <Grid item xs={12}>
+        <Grid container spacing={3} mb={2}>
+          <Grid item xs={12} sm={12} md={4}>
+            {item &&
+              item.images.map((image, index) => (
+                <MDBox key={index} mb={2}>
+                  <Image
+                    src={image}
+                    alt="image"
+                    loading="lazy"
+                    width="100%"
+                    height="300px"
+                    style={{ borderRadius: "8px", boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)" }}
+                  />
+                </MDBox>
+              ))}
+          </Grid>
+          <Grid item xs={12} sm={12} md={8}>
             <Card>
               <MDBox p={4}>
-                <MDBox p={3}>
-                  <Grid container spacing={1}>
-                    <Grid item xs={12} sm={7}>
-                      <MDBox mb={2}>
-                        <MDTypography variant="h4" color="info">
-                          {item.title}
-                        </MDTypography>
-                      </MDBox>
-                      <MDBox mb={8}>
-                        <MDTypography variant="h6" opacity="60%">
-                          {item.category} · {item.createdTime}
-                        </MDTypography>
-                      </MDBox>
-                      <MDBox mb={2}>
-                        <MDTypography variant="h6">{item.description}</MDTypography>
-                      </MDBox>
-                    </Grid>
-                    <Grid sm={2}></Grid>
-                    <Grid
-                      item
-                      xs={12}
-                      sm={3}
-                      display="flex"
-                      flexDirection="column"
-                      justifyContent="flex-end"
-                    >
-                      <MDBox>
-                        <MDTypography variant="overline">
-                          신청 0 · 관심 {item.wishCount ? item.wishCount : 0} · 조회{" "}
-                          {item.viewCount}
-                        </MDTypography>
-                      </MDBox>
-                      {item.isOwner ? (
-                        <>
-                          <MDBox mb={1}>
-                            <MDButton
-                              variant="outlined"
-                              color="info"
-                              fullWidth
-                              onClick={() => navigate(`/updateItem/${item.id}`)}
-                            >
-                              <MDTypography variant="h6" color="info">
-                                나눔정보 수정
-                              </MDTypography>
-                            </MDButton>
-                          </MDBox>
-                          <MDBox>
-                            <MDButton
-                              variant="outlined"
-                              color="error"
-                              fullWidth
-                              onClick={handleItemDelete}
-                            >
-                              <MDTypography variant="h6" color="error">
-                                나눔 삭제
-                              </MDTypography>
-                            </MDButton>
-                          </MDBox>
-                        </>
-                      ) : (
-                        <>
-                          <MDBox mb={1}>
-                            <MDButton
-                              variant="outlined"
-                              color="info"
-                              fullWidth
-                              onClick={handleItemApply}
-                            >
-                              <MDTypography variant="h6" color="info">
-                                나눔받기 신청
-                              </MDTypography>
-                            </MDButton>
-                          </MDBox>
-                          <MDBox>
-                            <MDButton
-                              variant="outlined"
-                              color="secondary"
-                              fullWidth
-                              onClick={handleAddWish}
-                            >
-                              <MDTypography variant="h6" color="secondary">
-                                위시리스트 추가
-                              </MDTypography>
-                            </MDButton>
-                          </MDBox>
-                        </>
-                      )}
-                    </Grid>
+                <Grid container spacing={1}>
+                  <Grid item xs={12}>
+                    <MDBox mb={2}>
+                      <MDTypography variant="h4" color="info">
+                        {item.title}
+                      </MDTypography>
+                    </MDBox>
+                    <MDBox mb={8}>
+                      <MDTypography variant="h6" opacity="60%">
+                        {item.category} · {item.createdTime}
+                      </MDTypography>
+                    </MDBox>
+                    <MDBox mb={2} height="200px">
+                      <MDTypography variant="h6">{item.description}</MDTypography>
+                    </MDBox>
                   </Grid>
-                </MDBox>
+                  <Grid
+                    item
+                    xs={12}
+                    display="flex"
+                    flexDirection="column"
+                    justifyContent="flex-end"
+                  >
+                    <MDBox>
+                      <MDTypography variant="overline">
+                        신청 0 · 관심 {item.wishCount ? item.wishCount : 0} · 조회 {item.viewCount}
+                      </MDTypography>
+                    </MDBox>
+                    {item.isOwner ? (
+                      <>
+                        <MDBox mb={1}>
+                          <MDButton
+                            variant="outlined"
+                            color="info"
+                            fullWidth
+                            onClick={() => navigate(`/updateItem/${item.id}`)}
+                          >
+                            <MDTypography variant="h6" color="info">
+                              나눔정보 수정
+                            </MDTypography>
+                          </MDButton>
+                        </MDBox>
+                        <MDBox>
+                          <MDButton
+                            variant="outlined"
+                            color="error"
+                            fullWidth
+                            onClick={handleItemDelete}
+                          >
+                            <MDTypography variant="h6" color="error">
+                              나눔 삭제
+                            </MDTypography>
+                          </MDButton>
+                        </MDBox>
+                      </>
+                    ) : (
+                      <>
+                        <MDBox mb={1}>
+                          <MDButton
+                            variant="outlined"
+                            color="info"
+                            fullWidth
+                            onClick={handleItemApply}
+                          >
+                            <MDTypography variant="h6" color="info">
+                              나눔받기 신청
+                            </MDTypography>
+                          </MDButton>
+                        </MDBox>
+                        <MDBox>
+                          <MDButton
+                            variant="outlined"
+                            color="secondary"
+                            fullWidth
+                            onClick={handleAddWish}
+                          >
+                            <MDTypography variant="h6" color="secondary">
+                              위시리스트 추가
+                            </MDTypography>
+                          </MDButton>
+                        </MDBox>
+                      </>
+                    )}
+                  </Grid>
+                </Grid>
               </MDBox>
             </Card>
           </Grid>
