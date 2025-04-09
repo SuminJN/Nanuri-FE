@@ -1,16 +1,16 @@
 import Grid from "@mui/material/Grid";
 import MDBox from "../../components/MDBox";
-import ItemCard from "../../components/ItemCard";
 import Card from "@mui/material/Card";
 import { useEffect, useState } from "react";
 import axiosInstance from "../../apis/axios";
+import PostCard from "../../components/PostCard";
 
 function ReceivingItems() {
-  const [itemList, setItemList] = useState(null);
+  const [postList, setPostList] = useState(null);
 
   useEffect(() => {
     axiosInstance.get("/api/want/posts").then((res) => {
-      setItemList(res.data);
+      setPostList(res.data);
       console.log(res.data);
     });
   }, []);
@@ -20,18 +20,16 @@ function ReceivingItems() {
         <Card>
           <MDBox pt={2} pb={2} px={2}>
             <Grid container spacing={2}>
-              {itemList === null
+              {postList === null
                 ? null
-                : itemList.map((item, idx) => (
+                : postList.map((post, idx) => (
                     <Grid item xs={12} sm={6} md={6} lg={4} xl={3} key={idx}>
-                      <ItemCard
-                        itemId={item.itemId}
-                        title={item.title}
-                        description={item.description}
-                        category={item.category}
-                        image={item.image}
-                        createdTime={item.createdTime}
-                        route={`/home/${item.itemId}`}
+                      <PostCard
+                        itemId={post.id}
+                        title={post.title}
+                        description={post.description}
+                        createdTime={post.createdTime}
+                        route={`/home/post/${post.id}`}
                       />
                     </Grid>
                   ))}
