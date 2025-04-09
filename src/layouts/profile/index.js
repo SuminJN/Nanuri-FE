@@ -31,7 +31,7 @@ import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import Footer from "examples/Footer";
 import ProfileInfoCard from "examples/Cards/InfoCards/ProfileInfoCard";
-import ProfilesList from "examples/Lists/ProfilesList";
+import ChatRoomList from "../chat/ChatRoomList";
 import DefaultProjectCard from "examples/Cards/ProjectCards/DefaultProjectCard";
 
 // Overview page components
@@ -98,7 +98,7 @@ function Overview() {
             <PlatformSettings />
           </Grid>
           <Grid item xs={12} xl={4}>
-            <ProfilesList title="conversations" profiles={profilesListData} shadow={false} />
+            <ChatRoomList title="conversations" profiles={profilesListData} shadow={false} />
           </Grid>
         </Grid>
       </MDBox>
