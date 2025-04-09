@@ -12,9 +12,8 @@ import Tab from "@mui/material/Tab";
 import AppBar from "@mui/material/AppBar";
 import SharingInformation from "../shareHistory/component/SharingInformation";
 import ShareDoneInformation from "../shareHistory/component/ShareDoneInformation";
-import TotalItems from "./TotalItems";
 import SharingItems from "./SharingItems";
-import CompletedItems from "./CompletedItems";
+import ReceivingItems from "./ReceivingItems";
 
 function Dashboard() {
   const [tabsOrientation, setTabsOrientation] = useState("horizontal");
@@ -30,18 +29,18 @@ function Dashboard() {
             <AppBar position="static">
               <Tabs orientation={tabsOrientation} value={tabValue} onChange={handleSetTabValue}>
                 <Tab
-                  label="전체"
+                  label="나눠요"
                   icon={
                     <Icon fontSize="small" sx={{ mt: -0.25 }}>
-                      dashboard
+                      volunteer_activism
                     </Icon>
                   }
                 />
                 <Tab
-                  label="나눔 중"
+                  label="받아요"
                   icon={
                     <Icon fontSize="small" sx={{ mt: -0.25 }}>
-                      volunteer_activism
+                      handshake_icon
                     </Icon>
                   }
                 />
@@ -51,8 +50,8 @@ function Dashboard() {
         </Grid>
       </MDBox>
       <MDBox mt={2} mb={3}>
-        {tabValue === 0 && <TotalItems />}
-        {tabValue === 1 && <SharingItems />}
+        {tabValue === 0 && <SharingItems />}
+        {tabValue === 1 && <ReceivingItems />}
       </MDBox>
       <Footer />
     </DashboardLayout>

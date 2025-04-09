@@ -5,12 +5,12 @@ import Card from "@mui/material/Card";
 import { useEffect, useState } from "react";
 import axiosInstance from "../../apis/axios";
 
-function CompletedItems() {
+function ReceivingItems() {
   const [itemList, setItemList] = useState(null);
 
   useEffect(() => {
-    axiosInstance.get("/api/items").then((res) => {
-      setItemList(res.data.filter((item) => item.isFinished === true));
+    axiosInstance.get("/api/want/posts").then((res) => {
+      setItemList(res.data);
       console.log(res.data);
     });
   }, []);
@@ -43,4 +43,4 @@ function CompletedItems() {
   );
 }
 
-export default CompletedItems;
+export default ReceivingItems;
