@@ -189,7 +189,7 @@ function AddItem() {
                         fullWidth
                         required
                         multiline
-                        rows={4}
+                        rows={8}
                       />
                     </MDBox>
                     <MDBox display="flex" justifyContent="center" mb={3}>

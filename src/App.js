@@ -41,8 +41,8 @@ import { useRecoilValue } from "recoil";
 import { LoginState } from "./recoil/LoginState";
 import SignIn from "./layouts/authentication/sign-in";
 import LoginIng from "./services/LoginIng";
-import ItemDetail from "./layouts/itemDetail";
-import AddItem from "./layouts/addItem";
+import ItemDetail from "./layouts/itemDetail/ItemDetail";
+import AddItem from "./layouts/addItem/AddItem";
 import SignUp from "./layouts/authentication/sign-up";
 import ShareHistory from "./layouts/shareHistory";
 import { CommentOutlined, CustomerServiceOutlined } from "@ant-design/icons";
@@ -50,6 +50,8 @@ import { FloatButton } from "antd";
 import Wish from "./layouts/wish/Wish";
 import Chat from "./layouts/chat/Chat";
 import ChatField from "./layouts/chat/ChatField";
+import AddPost from "./layouts/addItem/AddPost";
+import PostDetail from "./layouts/itemDetail/PostDetail";
 
 export default function App() {
   const [controller, dispatch] = useMaterialUIController();
@@ -192,10 +194,15 @@ export default function App() {
             <FloatButton
               description={<strong>나눔 하기</strong>}
               onClick={() => {
-                navigate("/addItem");
+                navigate("/home/addItem");
               }}
             />
-            <FloatButton description={<strong>나눔 받기</strong>} />
+            <FloatButton
+              description={<strong>나눔 받기</strong>}
+              onClick={() => {
+                navigate("/home/addPost");
+              }}
+            />
           </FloatButton.Group>
         </>
       )}
@@ -206,7 +213,9 @@ export default function App() {
             {getRoutes(routes)}
             <Route path="*" element={<Navigate to="/home" />} />
             <Route path="/home/:itemId" element={<ItemDetail />} />
-            <Route path="/addItem" element={<AddItem />} />
+            <Route path="/home/post/:postId" element={<PostDetail />} />
+            <Route path="/home/addItem" element={<AddItem />} />
+            <Route path="/home/addPost" element={<AddPost />} />
             <Route path="/my-share" element={<ShareHistory />} />
             <Route path="/my-share/:itemId" element={<ItemDetail />} />
             <Route path="/wish" element={<Wish />} />
