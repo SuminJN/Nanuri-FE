@@ -5,9 +5,11 @@ import Card from "@mui/material/Card";
 import { useEffect, useState } from "react";
 import axiosInstance from "../../apis/axios";
 import { Badge } from "antd";
+import useGetTime from "../../hooks/useGetTime";
 
 function SharingItems() {
   const [itemList, setItemList] = useState(null);
+  const { getCurrentTime, isNew } = useGetTime();
 
   useEffect(() => {
     axiosInstance.get("/api/items").then((res) => {
@@ -26,17 +28,29 @@ function SharingItems() {
                 ? null
                 : itemList.map((item, idx) => (
                     <Grid item xs={12} sm={6} md={6} lg={4} xl={3} key={idx}>
-                      <Badge.Ribbon text="New">
+                      {isNew(item.createdTime) ? (
+                        <Badge.Ribbon text="New" color="red">
+                          <ItemCard
+                            itemId={item.itemId}
+                            title={item.title}
+                            description={item.description}
+                            category={item.category}
+                            image={item.image}
+                            createdTime={getCurrentTime(item.createdTime)}
+                            route={`/home/${item.itemId}`}
+                          />
+                        </Badge.Ribbon>
+                      ) : (
                         <ItemCard
                           itemId={item.itemId}
                           title={item.title}
                           description={item.description}
                           category={item.category}
                           image={item.image}
-                          createdTime={item.createdTime}
+                          createdTime={getCurrentTime(item.createdTime)}
                           route={`/home/${item.itemId}`}
                         />
-                      </Badge.Ribbon>
+                      )}
                     </Grid>
                   ))}
             </Grid>

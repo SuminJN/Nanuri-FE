@@ -13,7 +13,6 @@ import useGetTime from "../hooks/useGetTime";
 function ItemCard({ itemId, image, title, createdTime, category, description, route }) {
   const [controller] = useMaterialUIController();
   const { darkMode } = controller;
-  const { getCurrentTime } = useGetTime();
 
   return (
     <MDBox
@@ -46,7 +45,7 @@ function ItemCard({ itemId, image, title, createdTime, category, description, ro
             </MDBox>
             <MDBox mb={3} lineHeight={0}>
               <MDTypography variant="caption" fontWeight="regular" color="text">
-                {category} · {getCurrentTime(createdTime)}
+                {category} · {createdTime}
               </MDTypography>
             </MDBox>
             <MDTypography variant="caption" fontWeight="medium">
