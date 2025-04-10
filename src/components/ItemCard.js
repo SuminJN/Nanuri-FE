@@ -8,6 +8,7 @@ import Grid from "@mui/material/Grid";
 import { Image } from "antd";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import getTime from "../util/getTime";
 
 function ItemCard({ itemId, image, title, createdTime, category, description, route }) {
   const [controller] = useMaterialUIController();
@@ -42,14 +43,9 @@ function ItemCard({ itemId, image, title, createdTime, category, description, ro
                 {title}
               </MDTypography>
             </MDBox>
-            <MDBox mb={1} lineHeight={0}>
+            <MDBox mb={3} lineHeight={0}>
               <MDTypography variant="caption" fontWeight="regular" color="text">
-                {createdTime}
-              </MDTypography>
-            </MDBox>
-            <MDBox mb={1} lineHeight={0}>
-              <MDTypography variant="caption" fontWeight="regular" color="text">
-                {category}
+                {category} · {getTime(createdTime)}
               </MDTypography>
             </MDBox>
             <MDTypography variant="caption" fontWeight="medium">
