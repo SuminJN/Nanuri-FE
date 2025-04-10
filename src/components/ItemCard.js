@@ -62,7 +62,7 @@ function ItemCard({ itemId, image, title, createdTime, category, description, ro
           style={{ marginTop: "auto" }}
         >
           <MDBox mr={2} display="flex" justifyContent="flex-end" alignItems="center">
-            <Icon fontSize="small" color="primary">
+            <Icon fontSize="small" color="secondary">
               favorite_icon
             </Icon>
             <MDTypography variant="caption" fontWeight="medium" lineHeight={0}>
