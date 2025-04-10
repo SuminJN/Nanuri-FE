@@ -7,10 +7,11 @@ import { useMaterialUIController } from "context";
 import Grid from "@mui/material/Grid";
 import { Image } from "antd";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useGetTime from "../hooks/useGetTime";
 
 function PostCard({ itemId, title, createdTime, description, route }) {
+  const navigate = useNavigate();
   const [controller] = useMaterialUIController();
   const { darkMode } = controller;
   const { getCurrentTime } = useGetTime();
@@ -28,7 +29,12 @@ function PostCard({ itemId, title, createdTime, description, route }) {
       mb={1}
     >
       <Grid container spacing={1}>
-        <Grid item xs={12} style={{ height: "200px" }}>
+        <Grid
+          item
+          xs={12}
+          style={{ height: "200px", cursor: "pointer" }}
+          onClick={() => navigate(route)}
+        >
           <MDBox width="100%" display="flex" flexDirection="column">
             <MDBox mt={1} mb={0.5} lineHeight={0}>
               <MDTypography variant="h5" fontWeight="bold" textTransform="capitalize" color="info">
@@ -40,9 +46,11 @@ function PostCard({ itemId, title, createdTime, description, route }) {
                 {getCurrentTime(createdTime)}
               </MDTypography>
             </MDBox>
-            <MDTypography variant="caption" fontWeight="medium">
-              {description}
-            </MDTypography>
+            <MDBox>
+              <MDTypography variant="caption" fontWeight="medium">
+                {description}
+              </MDTypography>
+            </MDBox>
           </MDBox>
         </Grid>
         <Grid
@@ -59,15 +67,15 @@ function PostCard({ itemId, title, createdTime, description, route }) {
               &nbsp;0
             </MDTypography>
           </MDBox>
-          <MDButton
-            component={Link}
-            to={route}
-            variant="text"
-            color="info"
-            style={{ whiteSpace: "nowrap", padding: 10 }}
-          >
-            <Icon>edit</Icon>&nbsp;자세히 보기
-          </MDButton>
+          {/*<MDButton*/}
+          {/*  component={Link}*/}
+          {/*  to={route}*/}
+          {/*  variant="text"*/}
+          {/*  color="info"*/}
+          {/*  style={{ whiteSpace: "nowrap", padding: 10 }}*/}
+          {/*>*/}
+          {/*  <Icon>edit</Icon>&nbsp;자세히 보기*/}
+          {/*</MDButton>*/}
         </Grid>
       </Grid>
     </MDBox>
