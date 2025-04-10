@@ -64,21 +64,6 @@ function ItemDetail() {
       <DashboardNavbar />
       <MDBox mt={2} mb={3}>
         <Grid container spacing={3} mb={2}>
-          <Grid item xs={12} sm={12} md={4}>
-            {item &&
-              item.images.map((image, index) => (
-                <MDBox key={index} mb={2}>
-                  <Image
-                    src={image}
-                    alt="image"
-                    loading="lazy"
-                    width="100%"
-                    height="300px"
-                    style={{ borderRadius: "8px", boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)" }}
-                  />
-                </MDBox>
-              ))}
-          </Grid>
           <Grid item xs={12} sm={12} md={8}>
             <Card>
               <MDBox p={4}>
@@ -98,77 +83,89 @@ function ItemDetail() {
                       <MDTypography variant="h6">{item.description}</MDTypography>
                     </MDBox>
                   </Grid>
-                  <Grid
-                    item
-                    xs={12}
-                    display="flex"
-                    flexDirection="column"
-                    justifyContent="flex-end"
-                  >
-                    <MDBox>
-                      <MDTypography variant="overline">
-                        신청 0 · 관심 {item.wishCount ? item.wishCount : 0} · 조회 {item.viewCount}
-                      </MDTypography>
-                    </MDBox>
-                    {item.isOwner ? (
-                      <>
-                        <MDBox mb={1}>
-                          <MDButton
-                            variant="outlined"
-                            color="info"
-                            fullWidth
-                            onClick={() => navigate(`/updateItem/${item.id}`)}
-                          >
-                            <MDTypography variant="h6" color="info">
-                              나눔정보 수정
-                            </MDTypography>
-                          </MDButton>
-                        </MDBox>
-                        <MDBox>
-                          <MDButton
-                            variant="outlined"
-                            color="error"
-                            fullWidth
-                            onClick={handleItemDelete}
-                          >
-                            <MDTypography variant="h6" color="error">
-                              나눔 삭제
-                            </MDTypography>
-                          </MDButton>
-                        </MDBox>
-                      </>
-                    ) : (
-                      <>
-                        <MDBox mb={1}>
-                          <MDButton
-                            variant="outlined"
-                            color="info"
-                            fullWidth
-                            onClick={handleItemApply}
-                          >
-                            <MDTypography variant="h6" color="info">
-                              나눔받기 신청
-                            </MDTypography>
-                          </MDButton>
-                        </MDBox>
-                        <MDBox>
-                          <MDButton
-                            variant="outlined"
-                            color="secondary"
-                            fullWidth
-                            onClick={handleAddWish}
-                          >
-                            <MDTypography variant="h6" color="secondary">
-                              위시리스트 추가
-                            </MDTypography>
-                          </MDButton>
-                        </MDBox>
-                      </>
-                    )}
+                  <Grid container display="flex" justifyContent="end">
+                    <Grid item xs={12} sm={4}>
+                      <MDBox>
+                        <MDTypography variant="overline">
+                          신청 0 · 관심 {item.wishCount ? item.wishCount : 0} · 조회{" "}
+                          {item.viewCount}
+                        </MDTypography>
+                      </MDBox>
+                      {item.isOwner ? (
+                        <>
+                          <MDBox mb={1}>
+                            <MDButton
+                              variant="outlined"
+                              color="info"
+                              fullWidth
+                              onClick={() => navigate(`/updateItem/${item.id}`)}
+                            >
+                              <MDTypography variant="h6" color="info">
+                                나눔정보 수정
+                              </MDTypography>
+                            </MDButton>
+                          </MDBox>
+                          <MDBox>
+                            <MDButton
+                              variant="outlined"
+                              color="error"
+                              fullWidth
+                              onClick={handleItemDelete}
+                            >
+                              <MDTypography variant="h6" color="error">
+                                나눔 삭제
+                              </MDTypography>
+                            </MDButton>
+                          </MDBox>
+                        </>
+                      ) : (
+                        <>
+                          <MDBox mb={1}>
+                            <MDButton
+                              variant="outlined"
+                              color="info"
+                              fullWidth
+                              onClick={handleItemApply}
+                            >
+                              <MDTypography variant="h6" color="info">
+                                나눔받기 신청
+                              </MDTypography>
+                            </MDButton>
+                          </MDBox>
+                          <MDBox>
+                            <MDButton
+                              variant="outlined"
+                              color="secondary"
+                              fullWidth
+                              onClick={handleAddWish}
+                            >
+                              <MDTypography variant="h6" color="secondary">
+                                위시리스트 추가
+                              </MDTypography>
+                            </MDButton>
+                          </MDBox>
+                        </>
+                      )}
+                    </Grid>
                   </Grid>
                 </Grid>
               </MDBox>
             </Card>
+          </Grid>
+          <Grid item xs={12} sm={12} md={4}>
+            {item &&
+              item.images.map((image, index) => (
+                <MDBox key={index} mb={2}>
+                  <Image
+                    src={image}
+                    alt="image"
+                    loading="lazy"
+                    width="100%"
+                    height="300px"
+                    style={{ borderRadius: "8px", boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)" }}
+                  />
+                </MDBox>
+              ))}
           </Grid>
         </Grid>
       </MDBox>

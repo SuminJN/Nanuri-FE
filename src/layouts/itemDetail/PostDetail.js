@@ -73,59 +73,55 @@ function PostDetail() {
                       <MDTypography variant="h6">{post.description}</MDTypography>
                     </MDBox>
                   </Grid>
-                  <Grid
-                    item
-                    xs={12}
-                    display="flex"
-                    flexDirection="column"
-                    justifyContent="flex-end"
-                  >
-                    <MDBox>
-                      <MDTypography variant="overline">신청 0 · 조회 0</MDTypography>
-                    </MDBox>
-                    {!post.isOwner ? (
-                      <>
-                        <MDBox mb={1}>
-                          <MDButton
-                            variant="outlined"
-                            color="info"
-                            fullWidth
-                            onClick={() => navigate(`/updatePost/${post.id}`)}
-                          >
-                            <MDTypography variant="h6" color="info">
-                              받아요 글 수정
-                            </MDTypography>
-                          </MDButton>
-                        </MDBox>
-                        <MDBox>
-                          <MDButton
-                            variant="outlined"
-                            color="error"
-                            fullWidth
-                            onClick={handlePostDelete}
-                          >
-                            <MDTypography variant="h6" color="error">
-                              받아요 글 삭제
-                            </MDTypography>
-                          </MDButton>
-                        </MDBox>
-                      </>
-                    ) : (
-                      <>
-                        <MDBox mb={1}>
-                          <MDButton
-                            variant="outlined"
-                            color="info"
-                            fullWidth
-                            onClick={handlePostApply}
-                          >
-                            <MDTypography variant="h6" color="info">
-                              나눔 신청
-                            </MDTypography>
-                          </MDButton>
-                        </MDBox>
-                      </>
-                    )}
+                  <Grid container display="flex" justifyContent="end">
+                    <Grid item xs={12} sm={4}>
+                      <MDBox>
+                        <MDTypography variant="overline">신청 0 · 조회 0</MDTypography>
+                      </MDBox>
+                      {!post.isOwner ? (
+                        <>
+                          <MDBox mb={1}>
+                            <MDButton
+                              variant="outlined"
+                              color="info"
+                              fullWidth
+                              onClick={() => navigate(`/updatePost/${post.id}`)}
+                            >
+                              <MDTypography variant="h6" color="info">
+                                받아요 글 수정
+                              </MDTypography>
+                            </MDButton>
+                          </MDBox>
+                          <MDBox>
+                            <MDButton
+                              variant="outlined"
+                              color="error"
+                              fullWidth
+                              onClick={handlePostDelete}
+                            >
+                              <MDTypography variant="h6" color="error">
+                                받아요 글 삭제
+                              </MDTypography>
+                            </MDButton>
+                          </MDBox>
+                        </>
+                      ) : (
+                        <>
+                          <MDBox mb={1}>
+                            <MDButton
+                              variant="outlined"
+                              color="info"
+                              fullWidth
+                              onClick={handlePostApply}
+                            >
+                              <MDTypography variant="h6" color="info">
+                                나눔 신청
+                              </MDTypography>
+                            </MDButton>
+                          </MDBox>
+                        </>
+                      )}
+                    </Grid>
                   </Grid>
                 </Grid>
               </MDBox>
