@@ -54,7 +54,7 @@ function PostDetail() {
       <DashboardNavbar />
       <MDBox mt={2} mb={3}>
         <Grid container spacing={3} mb={2} justifyContent="center">
-          <Grid item xs={12}>
+          <Grid item xs={12} sm={4}>
             <Card>
               <MDBox p={4}>
                 <Grid container spacing={1}>
@@ -74,7 +74,7 @@ function PostDetail() {
                     </MDBox>
                   </Grid>
                   <Grid container display="flex" justifyContent="end">
-                    <Grid item xs={12} sm={4}>
+                    <Grid item xs={12}>
                       <MDBox>
                         <MDTypography variant="overline">신청 0 · 조회 0</MDTypography>
                       </MDBox>
