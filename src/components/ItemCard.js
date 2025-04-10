@@ -7,10 +7,11 @@ import { useMaterialUIController } from "context";
 import Grid from "@mui/material/Grid";
 import { Image } from "antd";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useGetTime from "../hooks/useGetTime";
 
 function ItemCard({ itemId, image, title, createdTime, category, description, route }) {
+  const navigate = useNavigate();
   const [controller] = useMaterialUIController();
   const { darkMode } = controller;
 
@@ -36,21 +37,28 @@ function ItemCard({ itemId, image, title, createdTime, category, description, ro
             alt="image"
           />
         </Grid>
-        <Grid item xs={12} style={{ height: "200px" }}>
+        <Grid
+          item
+          xs={12}
+          style={{ height: "200px", cursor: "pointer" }}
+          onClick={() => navigate(route)}
+        >
           <MDBox width="100%" display="flex" flexDirection="column">
-            <MDBox mt={1} mb={0.5} lineHeight={0}>
+            <MDBox mt={1} mb={0.5} lineHeight={0} display="flex" justifyContent="center">
               <MDTypography variant="h5" fontWeight="bold" textTransform="capitalize" color="info">
                 {title}
               </MDTypography>
             </MDBox>
-            <MDBox mb={3} lineHeight={0}>
+            <MDBox mb={3} lineHeight={0} display="flex" justifyContent="center">
               <MDTypography variant="caption" fontWeight="regular" color="text">
                 {category} · {createdTime}
               </MDTypography>
             </MDBox>
-            <MDTypography variant="caption" fontWeight="medium">
-              {description}
-            </MDTypography>
+            <MDBox display="flex" justifyContent="center">
+              <MDTypography variant="caption" fontWeight="medium">
+                {description}
+              </MDTypography>
+            </MDBox>
           </MDBox>
         </Grid>
         <Grid
@@ -77,15 +85,15 @@ function ItemCard({ itemId, image, title, createdTime, category, description, ro
               &nbsp;0
             </MDTypography>
           </MDBox>
-          <MDButton
-            component={Link}
-            to={route}
-            variant="text"
-            color="info"
-            style={{ whiteSpace: "nowrap", padding: 10 }}
-          >
-            <Icon>edit</Icon>&nbsp;자세히 보기
-          </MDButton>
+          {/*<MDButton*/}
+          {/*  component={Link}*/}
+          {/*  to={route}*/}
+          {/*  variant="text"*/}
+          {/*  color="info"*/}
+          {/*  style={{ whiteSpace: "nowrap", padding: 10 }}*/}
+          {/*>*/}
+          {/*  <Icon>edit</Icon>&nbsp;자세히 보기*/}
+          {/*</MDButton>*/}
         </Grid>
       </Grid>
     </MDBox>
