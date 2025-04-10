@@ -8,10 +8,12 @@ import Grid from "@mui/material/Grid";
 import { Image } from "antd";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import useGetTime from "../hooks/useGetTime";
 
 function ItemCard({ itemId, image, title, createdTime, category, description, route }) {
   const [controller] = useMaterialUIController();
   const { darkMode } = controller;
+  const { getCurrentTime } = useGetTime();
 
   return (
     <MDBox
@@ -42,14 +44,9 @@ function ItemCard({ itemId, image, title, createdTime, category, description, ro
                 {title}
               </MDTypography>
             </MDBox>
-            <MDBox mb={1} lineHeight={0}>
+            <MDBox mb={3} lineHeight={0}>
               <MDTypography variant="caption" fontWeight="regular" color="text">
-                {createdTime}
-              </MDTypography>
-            </MDBox>
-            <MDBox mb={1} lineHeight={0}>
-              <MDTypography variant="caption" fontWeight="regular" color="text">
-                {category}
+                {category} · {getCurrentTime(createdTime)}
               </MDTypography>
             </MDBox>
             <MDTypography variant="caption" fontWeight="medium">
@@ -66,13 +63,17 @@ function ItemCard({ itemId, image, title, createdTime, category, description, ro
           style={{ marginTop: "auto" }}
         >
           <MDBox mr={2} display="flex" justifyContent="flex-end" alignItems="center">
-            <Icon fontSize="small">favorite_icon</Icon>
+            <Icon fontSize="small" color="primary">
+              favorite_icon
+            </Icon>
             <MDTypography variant="caption" fontWeight="medium" lineHeight={0}>
               &nbsp;0
             </MDTypography>
           </MDBox>
           <MDBox mr={2} display="flex" justifyContent="flex-end" alignItems="center">
-            <Icon fontSize="small">remove_red_eye_icon</Icon>
+            <Icon fontSize="small" color="secondary">
+              remove_red_eye_icon
+            </Icon>
             <MDTypography variant="caption" fontWeight="medium" lineHeight={0}>
               &nbsp;0
             </MDTypography>

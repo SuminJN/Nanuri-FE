@@ -31,7 +31,7 @@ import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import Footer from "examples/Footer";
 import ProfileInfoCard from "examples/Cards/InfoCards/ProfileInfoCard";
-import ProfilesList from "examples/Lists/ProfilesList";
+import ChatRoomList from "../chat/ChatRoomList";
 import DefaultProjectCard from "examples/Cards/ProjectCards/DefaultProjectCard";
 
 // Overview page components
@@ -53,6 +53,7 @@ import team4 from "assets/images/team-4.jpg";
 import DefaultItemCard from "../../examples/Cards/ItemCards/DefaultItemCard";
 import { useEffect, useState } from "react";
 import axiosInstance from "../../apis/axios";
+import ShareCardList from "./components/ShareCardList";
 
 function Overview() {
   const [user, setUser] = useState({
@@ -82,7 +83,7 @@ function Overview() {
         <Grid container spacing={1}>
           <Grid item xs={12} md={6} xl={4}>
             <ProfileInfoCard
-              title="profile information"
+              title="프로필 정보"
               description="Hi, I’m Alec Thompson, Decisions: If you can’t decide, the answer is no. If two equally difficult paths, choose the one more painful in the short term (pain avoidance is creating an illusion of equality)."
               info={{
                 id: user.uniqueId,
@@ -95,10 +96,10 @@ function Overview() {
             />
           </Grid>
           <Grid item xs={12} md={6} xl={4}>
-            <PlatformSettings />
+            <ShareCardList />
           </Grid>
           <Grid item xs={12} xl={4}>
-            <ProfilesList title="conversations" profiles={profilesListData} shadow={false} />
+            <ChatRoomList title="conversations" profiles={profilesListData} shadow={false} />
           </Grid>
         </Grid>
       </MDBox>

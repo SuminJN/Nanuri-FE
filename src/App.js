@@ -40,7 +40,7 @@ import brandDark from "assets/images/logo-ct-dark.png";
 import { useRecoilValue } from "recoil";
 import { LoginState } from "./recoil/LoginState";
 import SignIn from "./layouts/authentication/sign-in";
-import LoginIng from "./services/LoginIng";
+import LoginIng from "./util/LoginIng";
 import ItemDetail from "./layouts/itemDetail/ItemDetail";
 import AddItem from "./layouts/addItem/AddItem";
 import SignUp from "./layouts/authentication/sign-up";
@@ -220,6 +220,7 @@ export default function App() {
             <Route path="/my-share/:itemId" element={<ItemDetail />} />
             <Route path="/wish" element={<Wish />} />
             <Route path="/wish/:itemId" element={<ItemDetail />} />
+            <Route path="/profile/:itemId" element={<ItemDetail />} />
             <Route path="/chat" element={<Chat />} />
             <Route path="/chat/:roomId" element={<ChatField />} />
           </>

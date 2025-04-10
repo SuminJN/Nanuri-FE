@@ -28,7 +28,7 @@ import DefaultInfoCard from "examples/Cards/InfoCards/DefaultInfoCard";
 
 // Billing page components
 import PaymentMethod from "layouts/billing/components/PaymentMethod";
-import Invoices from "layouts/billing/components/Invoices";
+import ShareCardList from "../profile/components/ShareCardList";
 import BillingInformation from "layouts/billing/components/BillingInformation";
 import Transactions from "layouts/billing/components/Transactions";
 
@@ -66,7 +66,7 @@ function Billing() {
               </Grid>
             </Grid>
             <Grid item xs={12} lg={4}>
-              <Invoices />
+              <ShareCardList />
             </Grid>
           </Grid>
         </MDBox>
