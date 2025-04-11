@@ -78,7 +78,7 @@ function PostDetail() {
                       <MDBox>
                         <MDTypography variant="overline">신청 0 · 조회 0</MDTypography>
                       </MDBox>
-                      {!post.isOwner ? (
+                      {post.isOwner ? (
                         <>
                           <MDBox mb={1}>
                             <MDButton

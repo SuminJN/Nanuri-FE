@@ -23,6 +23,14 @@ const routes = [
   },
   {
     type: "collapse",
+    name: "My Share",
+    key: "my-share",
+    icon: <Icon fontSize="small">volunteer_activism</Icon>,
+    route: "/my-share",
+    component: <ShareHistory />,
+  },
+  {
+    type: "collapse",
     name: "Chat",
     key: "chat",
     icon: <Icon fontSize="small">chat_icon</Icon>,
@@ -45,14 +53,14 @@ const routes = [
   //   route: "/billing",
   //   component: <Billing />,
   // },
-  {
-    type: "collapse",
-    name: "Notifications",
-    key: "notifications",
-    icon: <Icon fontSize="small">notifications</Icon>,
-    route: "/notifications",
-    component: <Notifications />,
-  },
+  // {
+  //   type: "collapse",
+  //   name: "Notifications",
+  //   key: "notifications",
+  //   icon: <Icon fontSize="small">notifications</Icon>,
+  //   route: "/notifications",
+  //   component: <Notifications />,
+  // },
   {
     type: "collapse",
     name: "Profile",
