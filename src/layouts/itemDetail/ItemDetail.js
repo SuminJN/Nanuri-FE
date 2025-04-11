@@ -3,12 +3,15 @@ import DashboardLayout from "../../examples/LayoutContainers/DashboardLayout";
 import MDBox from "../../components/MDBox";
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import axiosInstance from "../../apis/axios";
 import { useNavigate, useParams } from "react-router-dom";
 import MDTypography from "../../components/MDTypography";
 import MDButton from "../../components/MDButton";
 import { Image } from "antd";
+import IconButton from "@mui/material/IconButton";
+import { navbarIconButton } from "../../examples/Navbars/DashboardNavbar/styles";
+import Icon from "@mui/material/Icon";
 
 function ItemDetail() {
   const { itemId } = useParams();
@@ -66,6 +69,19 @@ function ItemDetail() {
         <Grid container spacing={3} mb={2}>
           <Grid item xs={12} sm={12} md={8}>
             <Card>
+              <MDBox p={2}>
+                <IconButton
+                  size="small"
+                  disableRipple
+                  sx={navbarIconButton}
+                  variant="contained"
+                  onClick={() => {
+                    navigate(-1);
+                  }}
+                >
+                  <Icon>arrow_back_ios_icon</Icon>
+                </IconButton>
+              </MDBox>
               <MDBox p={4}>
                 <Grid container spacing={1}>
                   <Grid item xs={12}>

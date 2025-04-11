@@ -3,11 +3,14 @@ import DashboardLayout from "../../examples/LayoutContainers/DashboardLayout";
 import MDBox from "../../components/MDBox";
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import axiosInstance from "../../apis/axios";
 import { useNavigate, useParams } from "react-router-dom";
 import MDTypography from "../../components/MDTypography";
 import MDButton from "../../components/MDButton";
+import IconButton from "@mui/material/IconButton";
+import { navbarIconButton } from "../../examples/Navbars/DashboardNavbar/styles";
+import Icon from "@mui/material/Icon";
 
 function PostDetail() {
   const { postId } = useParams();
@@ -43,7 +46,7 @@ function PostDetail() {
 
   useEffect(() => {
     console.log(postId);
-    axiosInstance.get(`/api/want/post/${postId}`).then((res) => {
+    axiosInstance.get(`/api/want/${postId}`).then((res) => {
       setPost(res.data);
       console.log(res.data);
     });
@@ -56,6 +59,19 @@ function PostDetail() {
         <Grid container spacing={3} mb={2} justifyContent="center">
           <Grid item xs={12} sm={4}>
             <Card>
+              <MDBox p={2}>
+                <IconButton
+                  size="small"
+                  disableRipple
+                  sx={navbarIconButton}
+                  variant="contained"
+                  onClick={() => {
+                    navigate(-1);
+                  }}
+                >
+                  <Icon>arrow_back_ios_icon</Icon>
+                </IconButton>
+              </MDBox>
               <MDBox p={4}>
                 <Grid container spacing={1}>
                   <Grid item xs={12}>
