@@ -14,7 +14,6 @@ function PostCard({ itemId, title, createdTime, description, route }) {
   const navigate = useNavigate();
   const [controller] = useMaterialUIController();
   const { darkMode } = controller;
-  const { getCurrentTime } = useGetTime();
 
   return (
     <MDBox
@@ -43,7 +42,7 @@ function PostCard({ itemId, title, createdTime, description, route }) {
             </MDBox>
             <MDBox mb={3} lineHeight={0}>
               <MDTypography variant="caption" fontWeight="regular" color="text">
-                {getCurrentTime(createdTime)}
+                {createdTime}
               </MDTypography>
             </MDBox>
             <MDBox>

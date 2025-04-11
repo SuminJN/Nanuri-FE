@@ -5,9 +5,11 @@ import axiosInstance from "../../../apis/axios";
 import { useEffect, useState } from "react";
 import Grid from "@mui/material/Grid";
 import ItemCard from "../../../components/ItemCard";
+import useGetTime from "../../../hooks/useGetTime";
 
 function SharingInformation() {
   const [itemList, setItemList] = useState(null);
+  const { getCurrentTime } = useGetTime();
 
   useEffect(() => {
     axiosInstance.get("/api/items/shared", { params: { done: "None" } }).then((res) => {
@@ -37,7 +39,7 @@ function SharingInformation() {
                         description={item.description}
                         category={item.category}
                         image={item.image}
-                        createdTime={item.createdTime}
+                        createdTime={getCurrentTime(item.createdTime)}
                         route={`/my-share/${item.itemId}`}
                       />
                     </Grid>

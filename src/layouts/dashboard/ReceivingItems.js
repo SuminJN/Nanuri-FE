@@ -4,9 +4,11 @@ import Card from "@mui/material/Card";
 import { useEffect, useState } from "react";
 import axiosInstance from "../../apis/axios";
 import PostCard from "../../components/PostCard";
+import useGetTime from "../../hooks/useGetTime";
 
 function ReceivingItems() {
   const [postList, setPostList] = useState(null);
+  const { getCurrentTime } = useGetTime();
 
   useEffect(() => {
     axiosInstance.get("/api/want/posts").then((res) => {
@@ -27,7 +29,7 @@ function ReceivingItems() {
                       <PostCard
                         itemId={post.id}
                         title={post.title}
-                        description={post.description}
+                        description={getCurrentTime(createdTime)}
                         createdTime={post.createdTime}
                         route={`/home/post/${post.id}`}
                       />
