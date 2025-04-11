@@ -84,7 +84,7 @@ function Overview() {
           <Grid item xs={12} md={6} xl={4}>
             <ProfileInfoCard
               title="프로필 정보"
-              description="Hi, I’m Alec Thompson, Decisions: If you can’t decide, the answer is no. If two equally difficult paths, choose the one more painful in the short term (pain avoidance is creating an illusion of equality)."
+              description={user.introduction}
               info={{
                 id: user.uniqueId,
                 fullName: user.name,
