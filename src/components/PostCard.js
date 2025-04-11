@@ -41,15 +41,17 @@ function PostCard({ itemId, title, createdTime, description, route }) {
                 {title}
               </MDTypography>
             </MDBox>
-            <MDBox mb={1} lineHeight={0}>
+            <MDBox mb={3} lineHeight={0}>
               <MDTypography variant="caption" fontWeight="regular" color="text">
                 {getCurrentTime(createdTime)}
               </MDTypography>
             </MDBox>
             <MDBox>
-              <MDTypography variant="caption" fontWeight="medium">
-                {description}
-              </MDTypography>
+              <MDBox display="flex" justifyContent="start">
+                <MDTypography variant="caption" fontWeight="medium">
+                  {description}
+                </MDTypography>
+              </MDBox>
             </MDBox>
           </MDBox>
         </Grid>
