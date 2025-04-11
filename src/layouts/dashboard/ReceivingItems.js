@@ -29,8 +29,8 @@ function ReceivingItems() {
                       <PostCard
                         itemId={post.id}
                         title={post.title}
-                        description={getCurrentTime(createdTime)}
-                        createdTime={post.createdTime}
+                        description={post.description}
+                        createdTime={getCurrentTime(post.createdTime)}
                         route={`/home/post/${post.id}`}
                       />
                     </Grid>

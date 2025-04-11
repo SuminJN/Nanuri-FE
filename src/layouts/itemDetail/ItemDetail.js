@@ -12,10 +12,12 @@ import { Image } from "antd";
 import IconButton from "@mui/material/IconButton";
 import { navbarIconButton } from "../../examples/Navbars/DashboardNavbar/styles";
 import Icon from "@mui/material/Icon";
+import useGetTime from "../../hooks/useGetTime";
 
 function ItemDetail() {
   const { itemId } = useParams();
   const navigate = useNavigate();
+  const { getCurrentTime } = useGetTime();
   const [item, setItem] = useState({
     id: "",
     title: "",

@@ -26,7 +26,7 @@ const useGetTime = () => {
     const createdDate = new Date(createdTime);
     const diffTime = Math.abs(now - createdDate);
     const diffHours = diffTime / (1000 * 60 * 60);
-    return diffHours <= 48; // 48시간 이내면 true
+    return diffHours <= 24; // 24시간 이내면 true
   };
 
   return { getCurrentTime, isNew };
