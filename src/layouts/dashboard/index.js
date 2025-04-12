@@ -37,7 +37,7 @@ function Dashboard() {
                   }
                 />
                 <Tab
-                  label="받아요"
+                  label="필요해요"
                   icon={
                     <Icon fontSize="small" sx={{ mt: -0.25 }}>
                       handshake_icon
