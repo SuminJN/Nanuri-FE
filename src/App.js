@@ -53,6 +53,7 @@ import ChatField from "./layouts/chat/ChatField";
 import AddPost from "./layouts/addItem/AddPost";
 import PostDetail from "./layouts/itemDetail/PostDetail";
 import Notifications from "./layouts/notifications";
+import EditItem from "./layouts/editItem/EditItem";
 
 export default function App() {
   const [controller, dispatch] = useMaterialUIController();
@@ -217,6 +218,7 @@ export default function App() {
             <Route path="/home/post/:postId" element={<PostDetail />} />
             <Route path="/home/addItem" element={<AddItem />} />
             <Route path="/home/addPost" element={<AddPost />} />
+            <Route path="/home/:itemId/edit" element={<EditItem />} />
             <Route path="/my-share" element={<ShareHistory />} />
             <Route path="/my-share/:itemId" element={<ItemDetail />} />
             <Route path="/wish" element={<Wish />} />

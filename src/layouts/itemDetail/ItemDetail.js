@@ -127,7 +127,7 @@ function ItemDetail() {
                               variant="outlined"
                               color="info"
                               fullWidth
-                              onClick={() => navigate(`/updateItem/${item.id}`)}
+                              onClick={() => navigate(`/home/${item.id}/edit`)}
                             >
                               <MDTypography variant="h6" color="info">
                                 나눔정보 수정
