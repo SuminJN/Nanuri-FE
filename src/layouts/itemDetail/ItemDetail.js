@@ -13,6 +13,8 @@ import IconButton from "@mui/material/IconButton";
 import { navbarIconButton } from "../../examples/Navbars/DashboardNavbar/styles";
 import Icon from "@mui/material/Icon";
 import useGetTime from "../../hooks/useGetTime";
+import MDAvatar from "../../components/MDAvatar";
+import image from "../../assets/images/team-2.jpg";
 
 function ItemDetail() {
   const { itemId } = useParams();
@@ -21,6 +23,7 @@ function ItemDetail() {
   const [item, setItem] = useState({
     id: "",
     title: "",
+    nickname: "",
     description: "",
     viewCount: 0,
     category: "",
@@ -87,6 +90,14 @@ function ItemDetail() {
               <MDBox p={4}>
                 <Grid container spacing={1}>
                   <Grid item xs={12}>
+                    <MDBox mb={3} display="flex" alignItems="center">
+                      <MDBox p={1}>
+                        <MDAvatar src={image} alt="something here" shadow="md" size="md" />
+                      </MDBox>
+                      <MDTypography variant="h6" opacity="60%">
+                        {item.nickname}
+                      </MDTypography>
+                    </MDBox>
                     <MDBox mb={2}>
                       <MDTypography variant="h4" color="info">
                         {item.title}
@@ -146,7 +157,7 @@ function ItemDetail() {
                               onClick={handleItemApply}
                             >
                               <MDTypography variant="h6" color="info">
-                                나눔받기 신청
+                                채팅하기
                               </MDTypography>
                             </MDButton>
                           </MDBox>
