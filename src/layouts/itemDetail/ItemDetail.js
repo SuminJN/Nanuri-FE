@@ -79,7 +79,7 @@ function ItemDetail() {
               sx={navbarIconButton}
               variant="contained"
               onClick={() => {
-                navigate(-1);
+                navigate("/home");
               }}
             >
               <Icon>arrow_back_ios_icon</Icon>
