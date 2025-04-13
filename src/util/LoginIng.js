@@ -1,11 +1,13 @@
 import { useEffect } from "react";
 import { useRecoilState } from "recoil";
-import { getToken } from "./getToken";
 import { LoginState } from "../recoil/LoginState";
 import { useNavigate } from "react-router-dom";
+import { login } from "../apis/userApi";
+import { UserId } from "../recoil/UserId";
 
 function LoginIng() {
   const [isLoggedIn, setIsLoggedIn] = useRecoilState(LoginState);
+  const [userId, setUserId] = useRecoilState(UserId);
   const navigate = useNavigate();
 
   const fetchData = async () => {
@@ -15,7 +17,8 @@ function LoginIng() {
       console.log(credential);
 
       if (credential) {
-        const user = await getToken(credential);
+        const user = await login(credential);
+        setUserId(user.userId);
 
         // 닉네임이 없다면 신규 유저
         if (!user.nickname) {
