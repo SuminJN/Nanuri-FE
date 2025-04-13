@@ -54,6 +54,7 @@ import AddPost from "./layouts/addItem/AddPost";
 import PostDetail from "./layouts/itemDetail/PostDetail";
 import Notifications from "./layouts/notifications";
 import EditItem from "./layouts/editItem/EditItem";
+import ChatRoom from "./layouts/chat/ChatRoom";
 
 export default function App() {
   const [controller, dispatch] = useMaterialUIController();
@@ -225,7 +226,7 @@ export default function App() {
             <Route path="/wish/:itemId" element={<ItemDetail />} />
             <Route path="/profile/:itemId" element={<ItemDetail />} />
             <Route path="/chat" element={<Chat />} />
-            <Route path="/chat/:roomId" element={<ChatField />} />
+            <Route path="/chat/:roomId" element={<ChatRoom />} />
             <Route path="/notice" element={<Notifications />} />
           </>
         ) : (
