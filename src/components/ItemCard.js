@@ -56,7 +56,7 @@ function ItemCard({ itemId, image, title, createdTime, category, description, vi
             </MDBox>
             <MDBox display="flex" justifyContent="center">
               <MDTypography variant="caption" fontWeight="medium">
-                {description}
+                {description.length < 190 ? description : `${description.slice(0, 190)}...`}
               </MDTypography>
             </MDBox>
           </MDBox>
