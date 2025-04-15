@@ -3,11 +3,11 @@ import { useRecoilState } from "recoil";
 import { LoginState } from "../recoil/LoginState";
 import { useNavigate } from "react-router-dom";
 import { login } from "../apis/userApi";
-import { UserId } from "../recoil/UserId";
+import { NicknameState } from "../recoil/NicknameState";
 
 function LoginIng() {
   const [isLoggedIn, setIsLoggedIn] = useRecoilState(LoginState);
-  const [userId, setUserId] = useRecoilState(UserId);
+  const [nickname, setNickname] = useRecoilState(NicknameState);
   const navigate = useNavigate();
 
   const fetchData = async () => {
@@ -17,11 +17,11 @@ function LoginIng() {
       console.log(credential);
 
       if (credential) {
-        const user = await login(credential);
-        setUserId(user.userId);
+        const nickname = await login(credential);
+        setNickname(nickname);
 
         // 닉네임이 없다면 신규 유저
-        if (!user.nickname) {
+        if (!nickname) {
           window.location.href = "/signup";
         }
         // 닉네임이 있다면 기존 유저

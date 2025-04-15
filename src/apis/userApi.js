@@ -16,11 +16,10 @@ export const login = async (hisnetToken) => {
     const userName = response.data.userName;
     const department = response.data.department;
     const nickname = response.data.nickname;
-    const user = { userId, nickname };
 
     console.log("토큰 보내기 성공");
 
-    return user;
+    return nickname;
   } catch (error) {
     console.log("토큰 보내기 실패");
     throw error;
