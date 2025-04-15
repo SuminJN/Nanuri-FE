@@ -37,6 +37,7 @@ function ShareDoneInformation() {
                         category={item.category}
                         image={item.image}
                         createdTime={item.createdTime}
+                        viewCount={item.viewCount}
                         route={`/my-share/${item.itemId}`}
                       />
                     </Grid>

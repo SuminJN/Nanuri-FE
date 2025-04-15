@@ -47,6 +47,7 @@ function ShareCardList() {
                     title={item.title}
                     category={item.category}
                     createdTime={item.createdTime}
+                    viewCount={item.viewCount}
                     route={`/my-share/${item.itemId}`}
                   />
                 </MDBox>

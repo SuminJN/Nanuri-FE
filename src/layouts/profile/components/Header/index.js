@@ -71,7 +71,7 @@ function Header({ nickname }) {
         display="flex"
         alignItems="center"
         position="relative"
-        minHeight="18.75rem"
+        minHeight="8rem"
         borderRadius="xl"
         sx={{
           backgroundImage: ({ functions: { rgba, linearGradient }, palette: { gradients } }) =>

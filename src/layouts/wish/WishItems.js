@@ -37,6 +37,7 @@ function WishItems() {
                         category={item.category}
                         image={item.imageUrl}
                         createdTime={item.createdTime}
+                        viewCount={item.viewCount}
                         route={`/wish/${item.itemId}`}
                       />
                     </Grid>
