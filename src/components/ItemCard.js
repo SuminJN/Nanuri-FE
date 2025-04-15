@@ -79,6 +79,14 @@ function ItemCard({ itemId, image, title, createdTime, category, description, vi
           </MDBox>
           <MDBox mr={2} display="flex" justifyContent="flex-end" alignItems="center">
             <Icon fontSize="small" color="secondary">
+              chat_icon
+            </Icon>
+            <MDTypography variant="caption" fontWeight="medium" lineHeight={0}>
+              &nbsp;0
+            </MDTypography>
+          </MDBox>
+          <MDBox mr={2} display="flex" justifyContent="flex-end" alignItems="center">
+            <Icon fontSize="small" color="secondary">
               remove_red_eye_icon
             </Icon>
             <MDTypography variant="caption" fontWeight="medium" lineHeight={0}>
