@@ -150,29 +150,6 @@ export default function App() {
     </MDBox>
   );
 
-  const floatingButton = () => (
-    <>
-      <FloatButton.Group
-        trigger="click"
-        type="primary"
-        style={{ insetInlineEnd: 24 }}
-        icon={<CustomerServiceOutlined />}
-      >
-        <FloatButton />
-        <FloatButton icon={<CommentOutlined />} />
-      </FloatButton.Group>
-      <FloatButton.Group
-        trigger="hover"
-        type="primary"
-        style={{ insetInlineEnd: 94 }}
-        icon={<CustomerServiceOutlined />}
-      >
-        <FloatButton />
-        <FloatButton icon={<CommentOutlined />} />
-      </FloatButton.Group>
-    </>
-  );
-
   return (
     <ThemeProvider theme={darkMode ? themeDark : theme}>
       <CssBaseline />
@@ -189,18 +166,21 @@ export default function App() {
           <Configurator />
           {/*{configsButton}*/}
           <FloatButton.Group
+            shape="square"
             trigger="hover"
             type="primary"
             style={{ insetInlineEnd: 24 }}
             icon={<Icon sx={{ fontWeight: "bold" }}>add</Icon>}
           >
             <FloatButton
+              shape="square"
               description={<strong>나눔 하기</strong>}
               onClick={() => {
                 navigate("/home/addItem");
               }}
             />
             <FloatButton
+              shape="square"
               description={<strong>나눔 받기</strong>}
               onClick={() => {
                 navigate("/home/addPost");
