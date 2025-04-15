@@ -13,8 +13,10 @@ import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
 import Divider from "@mui/material/Divider";
 import SelectInput from "@mui/material/Select/SelectInput";
+import { NicknameState } from "../../../recoil/NicknameState";
 
 function Cover() {
+  const [nicknameState, setNicknameState] = useRecoilState(NicknameState);
   const [isLoggedIn, setIsLoggedIn] = useRecoilState(LoginState);
   const [userInfo, setUserInfo] = useState({
     userInfo: null,
@@ -42,6 +44,7 @@ function Cover() {
       })
       .then((res) => {
         setIsLoggedIn(true);
+        setNicknameState(nickname);
         window.location.href = "/";
       });
   };
