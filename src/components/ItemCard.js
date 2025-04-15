@@ -10,7 +10,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import useGetTime from "../hooks/useGetTime";
 
-function ItemCard({ itemId, image, title, createdTime, category, description, route }) {
+function ItemCard({ itemId, image, title, createdTime, category, description, viewCount, route }) {
   const navigate = useNavigate();
   const [controller] = useMaterialUIController();
   const { darkMode } = controller;
@@ -82,18 +82,9 @@ function ItemCard({ itemId, image, title, createdTime, category, description, ro
               remove_red_eye_icon
             </Icon>
             <MDTypography variant="caption" fontWeight="medium" lineHeight={0}>
-              &nbsp;0
+              &nbsp;{viewCount}
             </MDTypography>
           </MDBox>
-          {/*<MDButton*/}
-          {/*  component={Link}*/}
-          {/*  to={route}*/}
-          {/*  variant="text"*/}
-          {/*  color="info"*/}
-          {/*  style={{ whiteSpace: "nowrap", padding: 10 }}*/}
-          {/*>*/}
-          {/*  <Icon>edit</Icon>&nbsp;자세히 보기*/}
-          {/*</MDButton>*/}
         </Grid>
       </Grid>
     </MDBox>
@@ -111,6 +102,7 @@ ItemCard.propTypes = {
   category: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
   createdTime: PropTypes.string.isRequired,
+  viewCount: PropTypes.number.isRequired,
   route: PropTypes.string.isRequired,
 };
 

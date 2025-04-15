@@ -37,6 +37,7 @@ function SharingItems() {
                             category={item.category}
                             image={item.image}
                             createdTime={getCurrentTime(item.createdTime)}
+                            viewCount={item.viewCount}
                             route={`/home/${item.itemId}`}
                           />
                         </Badge.Ribbon>
@@ -48,6 +49,7 @@ function SharingItems() {
                           category={item.category}
                           image={item.image}
                           createdTime={getCurrentTime(item.createdTime)}
+                          viewCount={item.viewCount}
                           route={`/home/${item.itemId}`}
                         />
                       )}

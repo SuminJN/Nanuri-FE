@@ -8,7 +8,7 @@ import MDAvatar from "../../../components/MDAvatar";
 import { Image } from "antd";
 import { Link } from "react-router-dom";
 
-function ShareCard({ itemId, image, title, category, createdTime }) {
+function ShareCard({ itemId, image, title, category, createdTime, viewCount }) {
   const { getCurrentTime } = useGetTime();
 
   return (
@@ -48,7 +48,7 @@ function ShareCard({ itemId, image, title, category, createdTime }) {
             remove_red_eye_icon
           </Icon>
           <MDTypography variant="caption" fontWeight="medium" lineHeight={0}>
-            &nbsp;0
+            &nbsp;{viewCount}
           </MDTypography>
         </MDBox>
         <MDButton
@@ -75,6 +75,7 @@ ShareCard.propTypes = {
   title: PropTypes.string.isRequired,
   category: PropTypes.string.isRequired,
   createdTime: PropTypes.string.isRequired,
+  viewCount: PropTypes.number.isRequired,
 };
 
 export default ShareCard;
