@@ -119,6 +119,37 @@ function PostDetail() {
                               </MDTypography>
                             </MDButton>
                           </MDBox>
+
+                          <Grid container spacing={1}>
+                            <Grid item xs={12} sm={6}>
+                              <MDBox>
+                                <MDButton
+                                  variant="outlined"
+                                  color="info"
+                                  fullWidth
+                                  onClick={() => navigate(`/updatePost/${post.id}`)}
+                                >
+                                  <MDTypography variant="h6" color="info">
+                                    받아요 글 수정
+                                  </MDTypography>
+                                </MDButton>
+                              </MDBox>
+                            </Grid>
+                            <Grid item xs={12} sm={6}>
+                              <MDBox>
+                                <MDButton
+                                  variant="outlined"
+                                  color="secondary"
+                                  fullWidth
+                                  onClick={handlePostDelete}
+                                >
+                                  <MDTypography variant="h6" color="secondary">
+                                    받아요 글 삭제
+                                  </MDTypography>
+                                </MDButton>
+                              </MDBox>
+                            </Grid>
+                          </Grid>
                         </>
                       ) : (
                         <>
