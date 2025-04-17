@@ -151,12 +151,14 @@ export default function App() {
   );
 
   return (
-    <ThemeProvider theme={darkMode ? themeDark : theme}>
+    // <ThemeProvider theme={darkMode ? themeDark : theme}>
+    <ThemeProvider theme={theme}>
       <CssBaseline />
       {layout === "dashboard" && (
         <>
           <Sidenav
             color={sidenavColor}
+            // brand={(transparentSidenav && !darkMode) || whiteSidenav ? brandDark : brandWhite}
             brand={(transparentSidenav && !darkMode) || whiteSidenav ? brandDark : brandWhite}
             brandName="Nanuri"
             routes={routes}

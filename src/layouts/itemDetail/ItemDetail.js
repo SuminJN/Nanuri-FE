@@ -69,8 +69,7 @@ function ItemDetail() {
 
   return (
     <DashboardLayout>
-      <DashboardNavbar />
-      <MDBox mt={2} mb={3}>
+      <MDBox mb={3}>
         <Card>
           <MDBox px={2} pt={3}>
             <IconButton

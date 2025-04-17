@@ -10,10 +10,35 @@ import DashboardNavbar from "../../examples/Navbars/DashboardNavbar";
 import DashboardLayout from "../../examples/LayoutContainers/DashboardLayout";
 import MDBox from "../../components/MDBox";
 import axiosInstance from "../../apis/axios";
+import {
+  ChatContainer,
+  ConversationHeader,
+  MainContainer,
+  Message,
+  MessageInput,
+  MessageList,
+} from "@chatscope/chat-ui-kit-react";
+import MDAvatar from "../../components/MDAvatar";
+import image from "../../assets/images/team-2.jpg";
+import Card from "@mui/material/Card";
+import MDTypography from "../../components/MDTypography";
+import MDButton from "../../components/MDButton";
+import IconButton from "@mui/material/IconButton";
+import { navbarIconButton } from "../../examples/Navbars/DashboardNavbar/styles";
+import Icon from "@mui/material/Icon";
+
+const initState = {
+  itemId: "",
+  postId: "",
+  title: "",
+  itemImage: "",
+  opponentNickname: "",
+};
 
 function ChatRoom() {
   const navigate = useNavigate();
   const { roomId } = useParams();
+  const [roomInfo, setRoomInfo] = useState(initState);
 
   const SERVER_URL = "http://localhost:8080/ws-stomp"; // STOMP 연결 엔드포인트
   const PUB_ENDPOINT = "/pub/chat/message"; // 메시지를 전송하기 위한 엔드포인트
@@ -115,11 +140,25 @@ function ChatRoom() {
     };
   })();
 
+  const handleChangeMessage = (message) => {
+    setMessageObj({ ...messageObj, message: message });
+  };
+
   const getPreviousChat = async () => {
     const response = await axiosInstance.get(`/api/chat/room/${roomId}/messages`);
     if (response.status === 200) {
       console.log(response.data);
-      setMessages(response.data);
+      setMessages(response.data.reverse());
+    } else {
+      console.log("error");
+    }
+  };
+
+  const getRoomInfo = async () => {
+    const response = await axiosInstance.get(`/api/chat/room/${roomId}`);
+    if (response.status === 200) {
+      console.log(response.data);
+      setRoomInfo(response.data);
     } else {
       console.log("error");
     }
@@ -129,6 +168,7 @@ function ChatRoom() {
     getPreviousChat().then((r) => {
       stompHandler.connect();
     });
+    getRoomInfo();
 
     return () => {
       stompHandler.disconnect();
@@ -137,57 +177,112 @@ function ChatRoom() {
 
   return (
     <DashboardLayout>
-      <DashboardNavbar />
       <MDBox mt={2} mb={3}>
         <Grid container justifyContent="center">
           <Grid item xs={12} md={6}>
-            <div
-              style={{
-                flex: 1,
-                flexDirection: "column",
-                justifyContent: "center",
-                alignContent: "center",
-                alignItems: "center",
-                textAlign: "center",
-              }}
-            >
-              <h1>STOMP을 이용한 채팅방입니다. </h1>
-              <div style={{ flexDirection: "row" }}>
-                <input
-                  type="text"
-                  value={messageObj.message}
-                  onChange={(e) => setMessageObj({ ...messageObj, message: e.target.value })}
-                  onKeyDown={(e) => {
-                    if (e.keyCode === 13) {
-                      stompHandler.sendMessage();
-                    }
-                  }}
-                />
-                <button onClick={stompHandler.sendMessage}>전송</button>
-              </div>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  height: 300,
-                  backgroundColor: "#f5d682",
-                  border: "1px solid red",
-                  margin: 20,
-                }}
-              >
-                {messages.map((m, index) => (
-                  <h1
-                    style={{
-                      fontSize: 13,
-                      textAlign: "left",
+            <Card>
+              <MDBox p={2} display="flex" alignItems="center" justifyContent="space-between">
+                <MDBox>
+                  <IconButton
+                    size="small"
+                    disableRipple
+                    sx={navbarIconButton}
+                    variant="contained"
+                    onClick={() => {
+                      navigate("/chat");
                     }}
-                    key={`messages-${index}`}
                   >
-                    {m.senderNickname === nickname ? `[ME] ${m.message}` : `[OTHER] ${m.message}`}
-                  </h1>
-                ))}
-              </div>
-            </div>
+                    <Icon>arrow_back_ios_icon</Icon>
+                  </IconButton>
+                </MDBox>
+                <MDBox display="flex" alignItems="center">
+                  <MDAvatar src={image} size="sm" />
+                  <MDTypography ml={1} variant="button" color="text" fontWeight="bold">
+                    {roomInfo.opponentNickname}
+                  </MDTypography>
+                </MDBox>
+                <MDBox>
+                  <MDButton variant="outlined" color="secondary" size="small">
+                    거래완료
+                  </MDButton>
+                </MDBox>
+              </MDBox>
+              <MDBox>
+                <MainContainer
+                  style={{ width: "100%", height: "550px", borderRadius: "0 0 10px 10px" }}
+                >
+                  <ChatContainer>
+                    <MessageList>
+                      {messages.map((m, index) => (
+                        <Message
+                          key={index}
+                          model={{
+                            message: m.message,
+                            direction: m.senderNickname === nickname ? "outgoing" : "incoming",
+                            position: "single",
+                          }}
+                        />
+                      ))}
+                    </MessageList>
+                    <MessageInput
+                      placeholder="메세지 작성"
+                      autoFocus={true}
+                      attachButton={false}
+                      value={messageObj.message}
+                      onChange={handleChangeMessage}
+                      onSend={stompHandler.sendMessage}
+                    />
+                  </ChatContainer>
+                </MainContainer>
+              </MDBox>
+              {/*<div*/}
+              {/*  style={{*/}
+              {/*    flex: 1,*/}
+              {/*    flexDirection: "column",*/}
+              {/*    justifyContent: "center",*/}
+              {/*    alignContent: "center",*/}
+              {/*    alignItems: "center",*/}
+              {/*    textAlign: "center",*/}
+              {/*  }}*/}
+              {/*>*/}
+              {/*  <h1>STOMP을 이용한 채팅방입니다. </h1>*/}
+              {/*  <div style={{ flexDirection: "row" }}>*/}
+              {/*    <input*/}
+              {/*      type="text"*/}
+              {/*      value={messageObj.message}*/}
+              {/*      onChange={(e) => setMessageObj({ ...messageObj, message: e.target.value })}*/}
+              {/*      onKeyDown={(e) => {*/}
+              {/*        if (e.keyCode === 13) {*/}
+              {/*          stompHandler.sendMessage();*/}
+              {/*        }*/}
+              {/*      }}*/}
+              {/*    />*/}
+              {/*    <button onClick={stompHandler.sendMessage}>전송</button>*/}
+              {/*  </div>*/}
+              {/*  <div*/}
+              {/*    style={{*/}
+              {/*      display: "flex",*/}
+              {/*      flexDirection: "column",*/}
+              {/*      height: 300,*/}
+              {/*      backgroundColor: "#f5d682",*/}
+              {/*      border: "1px solid red",*/}
+              {/*      margin: 20,*/}
+              {/*    }}*/}
+              {/*  >*/}
+              {/*    {messages.map((m, index) => (*/}
+              {/*      <h1*/}
+              {/*        style={{*/}
+              {/*          fontSize: 13,*/}
+              {/*          textAlign: "left",*/}
+              {/*        }}*/}
+              {/*        key={`messages-${index}`}*/}
+              {/*      >*/}
+              {/*        {m.senderNickname === nickname ? `[ME] ${m.message}` : `[OTHER] ${m.message}`}*/}
+              {/*      </h1>*/}
+              {/*    ))}*/}
+              {/*  </div>*/}
+              {/*</div>*/}
+            </Card>
           </Grid>
         </Grid>
       </MDBox>
