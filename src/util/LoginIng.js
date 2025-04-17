@@ -4,6 +4,7 @@ import { LoginState } from "../recoil/LoginState";
 import { useNavigate } from "react-router-dom";
 import { login } from "../apis/userApi";
 import { NicknameState } from "../recoil/NicknameState";
+import { handleAllowNotification } from "./notification";
 
 function LoginIng() {
   const [isLoggedIn, setIsLoggedIn] = useRecoilState(LoginState);
@@ -19,6 +20,9 @@ function LoginIng() {
       if (credential) {
         const nickname = await login(credential);
         setNickname(nickname);
+
+        // FCM 알림 권한 요청
+        await handleAllowNotification();
 
         // 닉네임이 없다면 신규 유저
         if (!nickname) {
