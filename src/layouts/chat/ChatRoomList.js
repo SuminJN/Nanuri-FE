@@ -25,17 +25,17 @@ function ChatRoomList() {
     getChatRooms();
   }, []);
 
-  const renderProfiles = chatRooms.map(({ roomId, itemImage, title, opponentName }) => (
+  const renderProfiles = chatRooms.map(({ roomId, itemImage, title, opponentNickname }) => (
     <MDBox key={roomId} component="li" display="flex" alignItems="center" py={1} mb={1}>
       <MDBox mr={2}>
         <MDAvatar src={itemImage} alt="something here" variant="rounded" shadow="md" size="xl" />
       </MDBox>
       <MDBox display="flex" flexDirection="column" alignItems="flex-start" justifyContent="center">
         <MDTypography variant="button" fontWeight="medium">
-          {title}
+          {opponentNickname}
         </MDTypography>
         <MDTypography variant="caption" color="text">
-          {opponentName}
+          {title}
         </MDTypography>
       </MDBox>
       <MDBox ml="auto">
