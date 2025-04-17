@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import SockJS from "sockjs-client";
 
@@ -39,6 +39,11 @@ function ChatRoom() {
   const navigate = useNavigate();
   const { roomId } = useParams();
   const [roomInfo, setRoomInfo] = useState(initState);
+  const [isLoading, setIsLoading] = useState(false); // 메시지 로딩 중인지
+  const [hasMore, setHasMore] = useState(true); // 더 불러올 메시지가 있는지
+  const [cursor, setCursor] = useState(null); // 가장 오래된 메시지 기준 커서
+  const topRef = useRef(null);
+  const messageListRef = useRef(null);
 
   const SERVER_URL = "http://localhost:8080/ws-stomp"; // STOMP 연결 엔드포인트
   const PUB_ENDPOINT = "/pub/chat/message"; // 메시지를 전송하기 위한 엔드포인트
@@ -144,13 +149,49 @@ function ChatRoom() {
     setMessageObj({ ...messageObj, message: message });
   };
 
-  const getPreviousChat = async () => {
-    const response = await axiosInstance.get(`/api/chat/room/${roomId}/messages`);
-    if (response.status === 200) {
-      console.log(response.data);
-      setMessages(response.data.reverse());
-    } else {
-      console.log("error");
+  const handleScroll = (e) => {
+    const scrollTop = e.target.scrollTop;
+
+    if (scrollTop === 0 && !isLoading && hasMore) {
+      loadMessages(); // 최상단 도달 시 과거 메시지 로딩
+    }
+  };
+
+  const loadMessages = async () => {
+    if (isLoading || !hasMore) return;
+    const container = messageListRef.current;
+    const prevScrollHeight = container?.scrollHeight;
+
+    setIsLoading(true);
+    try {
+      const res = await axiosInstance.get(`/api/chat/room/${roomId}/messages`, {
+        params: {
+          cursor: cursor,
+        },
+      });
+
+      const fetched = res.data;
+      const newMessages = fetched.reverse();
+
+      if (newMessages.length > 0) {
+        const oldest = newMessages[0];
+        setCursor(oldest.createdAt);
+      } else {
+        setHasMore(false);
+      }
+
+      setMessages((prev) => [...newMessages, ...prev]);
+
+      setTimeout(() => {
+        const newScrollHeight = container?.scrollHeight;
+        if (container && newScrollHeight && prevScrollHeight) {
+          container.scrollTop = newScrollHeight - prevScrollHeight;
+        }
+      }, 0);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -165,15 +206,35 @@ function ChatRoom() {
   };
 
   useEffect(() => {
-    getPreviousChat().then((r) => {
-      stompHandler.connect();
-    });
     getRoomInfo();
+    stompHandler.connect();
+    loadMessages();
 
     return () => {
       stompHandler.disconnect();
     };
   }, []);
+
+  useEffect(() => {
+    if (!topRef.current || isLoading || !hasMore) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          loadMessages();
+        }
+      },
+      {
+        root: document.querySelector(".chat-scroll-container"),
+        rootMargin: "0px",
+        threshold: 1.0,
+      }
+    );
+
+    observer.observe(topRef.current);
+
+    return () => observer.disconnect();
+  }, [isLoading, hasMore]);
 
   return (
     <DashboardLayout>
@@ -212,16 +273,27 @@ function ChatRoom() {
                   style={{ width: "100%", height: "550px", borderRadius: "0 0 10px 10px" }}
                 >
                   <ChatContainer>
-                    <MessageList>
+                    <MessageList
+                      ref={messageListRef}
+                      onScroll={handleScroll}
+                      style={{
+                        overflowY: "auto",
+                        height: "500px",
+                        display: "flex",
+                        flexDirection: "column",
+                      }}
+                    >
                       {messages.map((m, index) => (
-                        <Message
-                          key={index}
-                          model={{
-                            message: m.message,
-                            direction: m.senderNickname === nickname ? "outgoing" : "incoming",
-                            position: "single",
-                          }}
-                        />
+                        <div ref={index === 0 ? topRef : null} key={index}>
+                          <Message
+                            key={index}
+                            model={{
+                              message: m.message,
+                              direction: m.senderNickname === nickname ? "outgoing" : "incoming",
+                              position: "single",
+                            }}
+                          />
+                        </div>
                       ))}
                     </MessageList>
                     <MessageInput
