@@ -40,7 +40,7 @@ function ItemCard({ itemId, image, title, createdTime, category, description, vi
         <Grid
           item
           xs={12}
-          style={{ height: "200px", cursor: "pointer" }}
+          style={{ height: "180px", cursor: "pointer" }}
           onClick={() => navigate(route)}
         >
           <MDBox width="100%" display="flex" flexDirection="column">
