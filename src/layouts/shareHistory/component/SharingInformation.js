@@ -41,6 +41,7 @@ function SharingInformation() {
                         image={item.image}
                         createdTime={getCurrentTime(item.createdTime)}
                         viewCount={item.viewCount}
+                        wishCount={item.wishCount}
                         route={`/my-share/${item.itemId}`}
                       />
                     </Grid>

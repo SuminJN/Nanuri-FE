@@ -21,7 +21,7 @@ function WishItems() {
         <Card>
           <MDBox pt={3} px={2}>
             <MDTypography variant="h6" fontWeight="medium">
-              위시 리스트
+              관심 리스트
             </MDTypography>
           </MDBox>
           <MDBox pt={1} pb={2} px={2}>
@@ -38,6 +38,7 @@ function WishItems() {
                         image={item.imageUrl}
                         createdTime={item.createdTime}
                         viewCount={item.viewCount}
+                        wishCount={item.wishCount}
                         route={`/wish/${item.itemId}`}
                       />
                     </Grid>

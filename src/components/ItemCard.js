@@ -10,7 +10,17 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import useGetTime from "../hooks/useGetTime";
 
-function ItemCard({ itemId, image, title, createdTime, category, description, viewCount, route }) {
+function ItemCard({
+  itemId,
+  image,
+  title,
+  createdTime,
+  category,
+  description,
+  viewCount,
+  wishCount,
+  route,
+}) {
   const navigate = useNavigate();
   const [controller] = useMaterialUIController();
   const { darkMode } = controller;
@@ -74,7 +84,7 @@ function ItemCard({ itemId, image, title, createdTime, category, description, vi
               favorite_icon
             </Icon>
             <MDTypography variant="caption" fontWeight="medium" lineHeight={0}>
-              &nbsp;0
+              &nbsp;{wishCount}
             </MDTypography>
           </MDBox>
           <MDBox mr={2} display="flex" justifyContent="flex-end" alignItems="center">
@@ -111,6 +121,7 @@ ItemCard.propTypes = {
   image: PropTypes.string.isRequired,
   createdTime: PropTypes.string.isRequired,
   viewCount: PropTypes.number.isRequired,
+  wishCount: PropTypes.number.isRequired,
   route: PropTypes.string.isRequired,
 };
 
