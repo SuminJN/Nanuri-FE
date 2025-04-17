@@ -10,19 +10,17 @@ export default styled(Drawer)(({ theme, ownerState }) => {
   const { xxl } = boxShadows;
   const { pxToRem, linearGradient } = functions;
 
-  // 다크모드 임시 제거
-  // let backgroundValue = (() => {
-  //   if (transparentSidenav) return transparent.main;
-  //   if (whiteSidenav) return white.main;
-  //   return darkMode
-  //     ? background.sidenav
-  //     : linearGradient(gradients.dark.main, gradients.dark.state);
-  // })();
+  let backgroundValue = (() => {
+    if (transparentSidenav) return transparent.main;
+    if (whiteSidenav) return white.main;
+    return darkMode
+      ? background.sidenav
+      : linearGradient(gradients.dark.main, gradients.dark.state);
+  })();
 
   // styles for the sidenav when miniSidenav={false}
   const drawerOpenStyles = () => ({
-    // background: backgroundValue,
-    background: white.main,
+    background: backgroundValue,
     transform: "translateX(0)",
     transition: transitions.create("transform", {
       easing: transitions.easing.sharp,
@@ -44,8 +42,7 @@ export default styled(Drawer)(({ theme, ownerState }) => {
 
   // styles for the sidenav when miniSidenav={true}
   const drawerCloseStyles = () => ({
-    // background: backgroundValue,
-    background: white.main,
+    background: backgroundValue,
     transform: `translateX(${pxToRem(-320)})`,
     transition: transitions.create("transform", {
       easing: transitions.easing.sharp,
