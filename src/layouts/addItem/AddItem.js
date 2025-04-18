@@ -6,11 +6,13 @@ import Card from "@mui/material/Card";
 import MDTypography from "../../components/MDTypography";
 import TextField from "@mui/material/TextField";
 import MDButton from "../../components/MDButton";
-import { useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "../../apis/axios";
 import { Image } from "antd";
 import Footer from "../../examples/Footer";
+import { Select } from "@mui/material";
+import MenuItem from "@mui/material/MenuItem";
 
 function AddItem() {
   const navigate = useNavigate();
@@ -111,7 +113,7 @@ function AddItem() {
                 coloredShadow="info"
               >
                 <MDTypography variant="h6" color="white">
-                  나눔 등록
+                  나눠요
                 </MDTypography>
               </MDBox>
               <Grid container spacing={3} justifyContent="center">
@@ -143,9 +145,11 @@ function AddItem() {
                   </MDBox>
                   <MDBox component="form" role="form">
                     <MDBox m={3}>
+                      <MDTypography variant="h6" fontWeight="bold" color="info">
+                        제목을 입력해주세요
+                      </MDTypography>
                       <TextField
                         id="title"
-                        label="제목"
                         name="title"
                         value={title}
                         onChange={onChange}
@@ -155,9 +159,11 @@ function AddItem() {
                       />
                     </MDBox>
                     <MDBox m={3}>
+                      <MDTypography variant="h6" fontWeight="bold" color="info">
+                        나눔 희망 장소를 입력해주세요
+                      </MDTypography>
                       <TextField
                         id="place"
-                        label="장소"
                         name="place"
                         value={place}
                         onChange={onChange}
@@ -167,21 +173,34 @@ function AddItem() {
                       />
                     </MDBox>
                     <MDBox m={3}>
-                      <TextField
+                      <MDTypography variant="h6" fontWeight="bold" color="info">
+                        카테고리를 선택해주세요
+                      </MDTypography>
+                      <Select
                         id="category"
-                        label="카테고리"
                         name="category"
                         value={category}
                         onChange={onChange}
                         variant="outlined"
+                        displayEmpty
+                        sx={{ height: "45px" }}
                         fullWidth
                         required
-                      />
+                      >
+                        <MenuItem value="">선택</MenuItem>
+                        <MenuItem value="MAJOR_BOOK">전공 서적</MenuItem>
+                        <MenuItem value="GENERAL_BOOK">일반 도서</MenuItem>
+                        <MenuItem value="DIGITAL_DEVICE">디지털기기</MenuItem>
+                        <MenuItem value="STATIONERY">문구류</MenuItem>
+                        <MenuItem value="SPORTS">운동용품</MenuItem>
+                      </Select>
                     </MDBox>
                     <MDBox m={3}>
+                      <MDTypography variant="h6" fontWeight="bold" color="info">
+                        자세한 설명
+                      </MDTypography>
                       <TextField
                         id="description"
-                        label="설명"
                         name="description"
                         variant="outlined"
                         onChange={onChange}
@@ -200,7 +219,7 @@ function AddItem() {
                         onClick={handleSubmit}
                         sx={{ width: "20%", whiteSpace: "nowrap" }}
                       >
-                        나눔 등록
+                        등록하기
                       </MDButton>
                     </MDBox>
                   </MDBox>
