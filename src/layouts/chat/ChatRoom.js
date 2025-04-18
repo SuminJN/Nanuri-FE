@@ -238,10 +238,11 @@ function ChatRoom() {
 
   return (
     <DashboardLayout>
+      <DashboardNavbar />
       <MDBox mt={2} mb={3}>
         <Grid container justifyContent="center">
           <Grid item xs={12} md={6}>
-            <Card>
+            <MDBox borderRadius="lg" sx={{ borderColor: "grey.500" }} border={1} shadow="md">
               <MDBox p={2} display="flex" alignItems="center" justifyContent="space-between">
                 <MDBox>
                   <IconButton
@@ -354,7 +355,7 @@ function ChatRoom() {
               {/*    ))}*/}
               {/*  </div>*/}
               {/*</div>*/}
-            </Card>
+            </MDBox>
           </Grid>
         </Grid>
       </MDBox>
