@@ -14,6 +14,9 @@ import Tooltip from "@mui/material/Tooltip";
 import Icon from "@mui/material/Icon";
 import Card from "@mui/material/Card";
 import TextField from "@mui/material/TextField";
+import { Select } from "@mui/material";
+import MenuItem from "@mui/material/MenuItem";
+import DashboardNavbar from "../../examples/Navbars/DashboardNavbar";
 
 function Overview() {
   const [isEditing, setIsEditing] = useState(false);
@@ -22,6 +25,8 @@ function Overview() {
     name: "",
     department: "",
     nickname: "",
+    mbti: "",
+    interestCategory: [],
   });
 
   const handleClickEdit = () => {
@@ -53,6 +58,7 @@ function Overview() {
 
   return (
     <DashboardLayout>
+      <DashboardNavbar />
       <Header nickname={user.nickname} />
       <MDBox mt={2} mb={3}>
         <Grid container spacing={1}>
@@ -82,7 +88,9 @@ function Overview() {
                 </MDBox>
                 <MDBox p={2}>
                   <MDBox mb={2}>
-                    <MDTypography variant="h6">소개글</MDTypography>
+                    <MDTypography variant="h6" fontWeight="bold" color="info">
+                      소개글
+                    </MDTypography>
                     <TextField
                       name="introduction"
                       value={user.introduction}
@@ -93,10 +101,44 @@ function Overview() {
                     />
                   </MDBox>
                   <MDBox mb={2}>
-                    <MDTypography variant="h6" fontWeight="bold">
+                    <MDTypography variant="h6" fontWeight="bold" color="info">
                       닉네임
                     </MDTypography>
-                    <TextField name="nickname" value={user.nickname} onChange={handleChangeInfo} />
+                    <TextField
+                      name="nickname"
+                      value={user.nickname}
+                      onChange={handleChangeInfo}
+                      fullWidth
+                    />
+                  </MDBox>
+                  <MDBox mb={2}>
+                    <MDTypography variant="h6" fontWeight="bold" color="info">
+                      MBTI
+                    </MDTypography>
+                    <TextField
+                      name="mbti"
+                      value={user.mbti}
+                      onChange={handleChangeInfo}
+                      fullWidth
+                    />
+                  </MDBox>
+                  <MDBox mb={1}>
+                    <MDTypography variant="h6" fontWeight="bold" color="info">
+                      관심 목록
+                    </MDTypography>
+                    <Select
+                      sx={{ height: "45px" }}
+                      name="interestCategory"
+                      value={user.interestCategory}
+                      onChange={handleChangeInfo}
+                      fullWidth
+                    >
+                      <MenuItem value="MAJOR_BOOK">전공 서적</MenuItem>
+                      <MenuItem value="GENERAL_BOOK">일반 도서</MenuItem>
+                      <MenuItem value="DIGITAL_DEVICE">디지털기기</MenuItem>
+                      <MenuItem value="STATIONERY">문구류</MenuItem>
+                      <MenuItem value="SPORTS">운동용품</MenuItem>
+                    </Select>
                   </MDBox>
                 </MDBox>
               </Card>
@@ -109,6 +151,9 @@ function Overview() {
                   id: user.uniqueId,
                   fullName: user.name,
                   department: user.department,
+                  mbti: user.mbti,
+                  // interestCategory: user.interestCategory,
+                  interestCategory: "전공 서적",
                 }}
                 handleClickEdit={handleClickEdit}
               />

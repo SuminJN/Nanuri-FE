@@ -39,6 +39,7 @@ function SharingItems() {
                             createdTime={getCurrentTime(item.createdTime)}
                             viewCount={item.viewCount}
                             wishCount={item.wishCount}
+                            isWished={item.isWished}
                             route={`/home/${item.itemId}`}
                           />
                         </Badge.Ribbon>
@@ -52,6 +53,7 @@ function SharingItems() {
                           createdTime={getCurrentTime(item.createdTime)}
                           viewCount={item.viewCount}
                           wishCount={item.wishCount}
+                          isWished={item.isWished}
                           route={`/home/${item.itemId}`}
                         />
                       )}

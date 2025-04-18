@@ -21,14 +21,14 @@ const routes = [
     route: "/home",
     component: <Dashboard />,
   },
-  {
-    type: "collapse",
-    name: "My Share",
-    key: "my-share",
-    icon: <Icon fontSize="small">volunteer_activism</Icon>,
-    route: "/my-share",
-    component: <ShareHistory />,
-  },
+  // {
+  //   type: "collapse",
+  //   name: "My Share",
+  //   key: "my-share",
+  //   icon: <Icon fontSize="small">volunteer_activism</Icon>,
+  //   route: "/my-share",
+  //   component: <ShareHistory />,
+  // },
   {
     type: "collapse",
     name: "Chat",

@@ -55,6 +55,8 @@ import PostDetail from "./layouts/itemDetail/PostDetail";
 import Notifications from "./layouts/notifications";
 import EditItem from "./layouts/editItem/EditItem";
 import ChatRoom from "./layouts/chat/ChatRoom";
+import DashboardNavbar from "./examples/Navbars/DashboardNavbar";
+import EditPost from "./layouts/editItem/EditPost";
 
 export default function App() {
   const [controller, dispatch] = useMaterialUIController();
@@ -154,44 +156,39 @@ export default function App() {
     // <ThemeProvider theme={darkMode ? themeDark : theme}>
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      {layout === "dashboard" && (
-        <>
-          <Sidenav
-            color={sidenavColor}
-            // brand={(transparentSidenav && !darkMode) || whiteSidenav ? brandDark : brandWhite}
-            brand={(transparentSidenav && !darkMode) || whiteSidenav ? brandDark : brandWhite}
-            brandName="Nanuri"
-            routes={routes}
-            onMouseEnter={handleOnMouseEnter}
-            onMouseLeave={handleOnMouseLeave}
-          />
-          <Configurator />
-          {/*{configsButton}*/}
-          <FloatButton.Group
+      <>
+        <Sidenav
+          color={sidenavColor}
+          // brand={(transparentSidenav && !darkMode) || whiteSidenav ? brandDark : brandWhite}
+          brand={(transparentSidenav && !darkMode) || whiteSidenav ? brandDark : brandWhite}
+          brandName="Nanuri"
+          routes={routes}
+          onMouseEnter={handleOnMouseEnter}
+          onMouseLeave={handleOnMouseLeave}
+        />
+        <FloatButton.Group
+          shape="square"
+          trigger="hover"
+          type="primary"
+          style={{ insetInlineEnd: 24 }}
+          icon={<Icon sx={{ fontWeight: "bold" }}>add</Icon>}
+        >
+          <FloatButton
             shape="square"
-            trigger="hover"
-            type="primary"
-            style={{ insetInlineEnd: 24 }}
-            icon={<Icon sx={{ fontWeight: "bold" }}>add</Icon>}
-          >
-            <FloatButton
-              shape="square"
-              description={<strong>나눔 하기</strong>}
-              onClick={() => {
-                navigate("/home/addItem");
-              }}
-            />
-            <FloatButton
-              shape="square"
-              description={<strong>나눔 받기</strong>}
-              onClick={() => {
-                navigate("/home/addPost");
-              }}
-            />
-          </FloatButton.Group>
-        </>
-      )}
-      {/*{layout === "vr" && <Configurator />}*/}
+            description={<strong>나눔 하기</strong>}
+            onClick={() => {
+              navigate("/home/addItem");
+            }}
+          />
+          <FloatButton
+            shape="square"
+            description={<strong>나눔 받기</strong>}
+            onClick={() => {
+              navigate("/home/addPost");
+            }}
+          />
+        </FloatButton.Group>
+      </>
       <Routes>
         {loginState ? (
           <>
@@ -201,7 +198,8 @@ export default function App() {
             <Route path="/home/post/:postId" element={<PostDetail />} />
             <Route path="/home/addItem" element={<AddItem />} />
             <Route path="/home/addPost" element={<AddPost />} />
-            <Route path="/home/:itemId/edit" element={<EditItem />} />
+            <Route path="/home/edit-item/:itemId" element={<EditItem />} />
+            <Route path="/home/edit-post/:postId" element={<EditPost />} />
             <Route path="/my-share" element={<ShareHistory />} />
             <Route path="/my-share/:itemId" element={<ItemDetail />} />
             <Route path="/wish" element={<Wish />} />
@@ -209,7 +207,7 @@ export default function App() {
             <Route path="/profile/:itemId" element={<ItemDetail />} />
             <Route path="/chat" element={<Chat />} />
             <Route path="/chat/:roomId" element={<ChatRoom />} />
-            <Route path="/notice" element={<Notifications />} />
+            <Route path="/notifications" element={<Notifications />} />
           </>
         ) : (
           <>

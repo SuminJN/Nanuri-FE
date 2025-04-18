@@ -8,7 +8,6 @@ import Grid from "@mui/material/Grid";
 import { Image } from "antd";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import useGetTime from "../hooks/useGetTime";
 
 function ItemCard({
   itemId,
@@ -19,6 +18,7 @@ function ItemCard({
   description,
   viewCount,
   wishCount,
+  isWished,
   route,
 }) {
   const navigate = useNavigate();
@@ -80,15 +80,21 @@ function ItemCard({
           style={{ marginTop: "auto" }}
         >
           <MDBox mr={2} display="flex" justifyContent="flex-end" alignItems="center">
-            <Icon fontSize="small" color="secondary">
-              favorite_icon
-            </Icon>
+            {isWished ? (
+              <Icon fontSize="medium" color="error">
+                favorite_icon
+              </Icon>
+            ) : (
+              <Icon fontSize="medium" color="dark">
+                favorite_border_icon
+              </Icon>
+            )}
             <MDTypography variant="caption" fontWeight="medium" lineHeight={0}>
               &nbsp;{wishCount}
             </MDTypography>
           </MDBox>
           <MDBox mr={2} display="flex" justifyContent="flex-end" alignItems="center">
-            <Icon fontSize="small" color="secondary">
+            <Icon fontSize="small" color="dark">
               chat_icon
             </Icon>
             <MDTypography variant="caption" fontWeight="medium" lineHeight={0}>
@@ -96,7 +102,7 @@ function ItemCard({
             </MDTypography>
           </MDBox>
           <MDBox mr={2} display="flex" justifyContent="flex-end" alignItems="center">
-            <Icon fontSize="small" color="secondary">
+            <Icon fontSize="small" color="dark">
               remove_red_eye_icon
             </Icon>
             <MDTypography variant="caption" fontWeight="medium" lineHeight={0}>
@@ -111,6 +117,7 @@ function ItemCard({
 
 ItemCard.defaultProps = {
   noGutter: false,
+  isWished: false,
 };
 
 ItemCard.propTypes = {
@@ -122,6 +129,7 @@ ItemCard.propTypes = {
   createdTime: PropTypes.string.isRequired,
   viewCount: PropTypes.number.isRequired,
   wishCount: PropTypes.number.isRequired,
+  isWished: PropTypes.bool,
   route: PropTypes.string.isRequired,
 };
 

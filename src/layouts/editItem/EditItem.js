@@ -57,9 +57,21 @@ const EditItem = () => {
 
   return (
     <DashboardLayout>
-      <DashboardNavbar />
       <MDBox my={3}>
         <Card>
+          <MDBox p={2}>
+            <IconButton
+              size="small"
+              disableRipple
+              sx={navbarIconButton}
+              variant="contained"
+              onClick={() => {
+                navigate(-1);
+              }}
+            >
+              <Icon>arrow_back_ios_icon</Icon>
+            </IconButton>
+          </MDBox>
           <Grid container spacing={2} sx={{ p: { xs: 2, sm: 3, md: 5 } }}>
             <Grid item xs={12} sm={12} md={6}>
               <MDBox>
@@ -85,13 +97,23 @@ const EditItem = () => {
                   <MDTypography variant="h6" fontWeight="bold">
                     제목
                   </MDTypography>
-                  <TextField name="title" value={item.title} onChange={handleChangeItem} />
+                  <TextField
+                    name="title"
+                    value={item.title}
+                    onChange={handleChangeItem}
+                    fullWidth
+                  />
                 </MDBox>
                 <MDBox mb={2}>
                   <MDTypography variant="h6" fontWeight="bold">
                     카테고리
                   </MDTypography>
-                  <TextField name="category" value={item.category} onChange={handleChangeItem} />
+                  <TextField
+                    name="category"
+                    value={item.category}
+                    onChange={handleChangeItem}
+                    fullWidth
+                  />
                 </MDBox>
                 <MDBox mb={2}>
                   <MDTypography variant="h6">자세한 설명</MDTypography>
