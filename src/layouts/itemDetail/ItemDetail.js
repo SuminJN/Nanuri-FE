@@ -42,7 +42,7 @@ function ItemDetail() {
 
   const handleAddWish = () => {
     axiosInstance.post("/api/wish", { itemId: itemId }).then((r) => {
-      alert("위시 리시트에 등록되었습니다.");
+      alert("관심 목록에 등록되었습니다.");
     });
   };
 
