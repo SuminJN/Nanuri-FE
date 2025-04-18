@@ -67,7 +67,7 @@ const EditPost = () => {
       <MDBox mt={2} mb={3}>
         <Grid container spacing={3} mb={2} justifyContent="center">
           <Grid item xs={12} sm={4}>
-            <Card>
+            <MDBox borderRadius="lg" sx={{ borderColor: "grey.500" }} border={1} shadow="md">
               <MDBox p={2}>
                 <IconButton
                   size="small"
@@ -114,6 +114,7 @@ const EditPost = () => {
                               variant="outlined"
                               color="info"
                               fullWidth
+                              startIcon={<Icon>mode_edit_icon</Icon>}
                               onClick={handleClickEdit}
                             >
                               <MDTypography variant="h6" color="info">
@@ -128,6 +129,7 @@ const EditPost = () => {
                               variant="outlined"
                               color="error"
                               fullWidth
+                              startIcon={<Icon>delete_icon</Icon>}
                               onClick={handlePostDelete}
                             >
                               <MDTypography variant="h6" color="error">
@@ -142,6 +144,7 @@ const EditPost = () => {
                               variant="outlined"
                               color="secondary"
                               fullWidth
+                              startIcon={<Icon>close_icon</Icon>}
                               onClick={() => navigate(`/home/post/${post.id}`)}
                             >
                               <MDTypography variant="h6" color="secondary">
@@ -155,7 +158,7 @@ const EditPost = () => {
                   </Grid>
                 </Grid>
               </MDBox>
-            </Card>
+            </MDBox>
           </Grid>
         </Grid>
       </MDBox>

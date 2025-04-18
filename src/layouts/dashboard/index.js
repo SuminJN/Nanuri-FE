@@ -113,7 +113,7 @@ function Dashboard() {
               <MDButton
                 variant="outlined"
                 color="secondary"
-                endIcon={<SearchIcon />}
+                startIcon={<SearchIcon />}
                 onClick={handleModalOpen}
                 fullWidth
               >

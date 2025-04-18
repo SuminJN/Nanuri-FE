@@ -45,7 +45,7 @@ function PostDetail() {
       <MDBox mt={2} mb={3}>
         <Grid container spacing={3} mb={2} justifyContent="center">
           <Grid item xs={12} sm={4}>
-            <Card>
+            <MDBox borderRadius="lg" sx={{ borderColor: "grey.500" }} border={1} shadow="md">
               <MDBox p={2}>
                 <IconButton
                   size="small"
@@ -89,6 +89,7 @@ function PostDetail() {
                                 variant="outlined"
                                 color="info"
                                 fullWidth
+                                startIcon={<Icon>mode_edit_icon</Icon>}
                                 onClick={() => navigate(`/home/edit-post/${post.id}`)}
                               >
                                 <MDTypography variant="h6" color="info">
@@ -116,7 +117,7 @@ function PostDetail() {
                   </Grid>
                 </Grid>
               </MDBox>
-            </Card>
+            </MDBox>
           </Grid>
         </Grid>
       </MDBox>
