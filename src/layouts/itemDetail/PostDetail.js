@@ -54,6 +54,7 @@ function PostDetail() {
 
   return (
     <DashboardLayout>
+      <DashboardNavbar />
       <MDBox mt={2} mb={3}>
         <Grid container spacing={3} mb={2} justifyContent="center">
           <Grid item xs={12} sm={4}>
