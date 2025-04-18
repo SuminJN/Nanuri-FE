@@ -32,6 +32,7 @@ import {
   Radio,
   RadioGroup,
 } from "@mui/material";
+import WishItems from "../wish/WishItems";
 
 function Dashboard() {
   const [controller, dispatch] = useMaterialUIController();
@@ -82,6 +83,14 @@ function Dashboard() {
                   icon={
                     <Icon fontSize="small" sx={{ mt: -0.25 }}>
                       handshake_icon
+                    </Icon>
+                  }
+                />
+                <Tab
+                  label="관심"
+                  icon={
+                    <Icon fontSize="small" sx={{ mt: -0.25 }}>
+                      grade_icon
                     </Icon>
                   }
                 />
@@ -188,6 +197,7 @@ function Dashboard() {
       <MDBox mt={2} mb={3}>
         {tabValue === 0 && <SharingItems />}
         {tabValue === 1 && <ReceivingItems />}
+        {tabValue === 2 && <WishItems />}
       </MDBox>
       <Footer />
     </DashboardLayout>
