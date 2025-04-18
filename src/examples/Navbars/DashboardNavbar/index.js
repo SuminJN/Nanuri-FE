@@ -168,15 +168,6 @@ function DashboardNavbar({ absolute, light, isMini }) {
                   {miniSidenav ? "menu" : "menu_open"}
                 </Icon>
               </IconButton>
-              <IconButton
-                size="small"
-                disableRipple
-                color="inherit"
-                sx={navbarIconButton}
-                onClick={handleConfiguratorOpen}
-              >
-                <Icon sx={iconsStyle}>favorite_icon</Icon>
-              </IconButton>
               <Link to="/notifications">
                 <IconButton sx={navbarIconButton} size="small" disableRipple>
                   <Icon sx={iconsStyle}>notifications</Icon>

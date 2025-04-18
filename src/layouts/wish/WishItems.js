@@ -19,12 +19,7 @@ function WishItems() {
     <Grid container spacing={3}>
       <Grid item xs={12} sm={12}>
         <Card>
-          <MDBox pt={3} px={2}>
-            <MDTypography variant="h6" fontWeight="medium">
-              관심 리스트
-            </MDTypography>
-          </MDBox>
-          <MDBox pt={1} pb={2} px={2}>
+          <MDBox pt={2} pb={2} px={2}>
             <Grid container spacing={2}>
               {itemList === null
                 ? null
