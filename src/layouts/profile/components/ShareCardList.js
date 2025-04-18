@@ -21,8 +21,8 @@ function ShareCardList() {
   }, []);
 
   return (
-    <Card sx={{ height: "100%" }}>
-      <MDBox pt={2} px={2} display="flex" justifyContent="space-between" alignItems="center">
+    <MDBox borderRadius="lg" sx={{ borderColor: "grey.400" }} border={1} shadow="md">
+      <MDBox pt={2} px={2} mb={1} display="flex" justifyContent="space-between" alignItems="center">
         <MDTypography variant="h6" fontWeight="medium">
           진행중인 나눔
         </MDTypography>
@@ -35,7 +35,7 @@ function ShareCardList() {
           전체보기
         </MDButton>
       </MDBox>
-      <MDBox p={2}>
+      <MDBox>
         <MDBox component="ul" display="flex" flexDirection="column" p={0} m={0}>
           {itemList === null
             ? null
@@ -54,7 +54,7 @@ function ShareCardList() {
               ))}
         </MDBox>
       </MDBox>
-    </Card>
+    </MDBox>
   );
 }
 

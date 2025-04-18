@@ -26,7 +26,7 @@ function ChatRoomList() {
   }, []);
 
   const renderProfiles = chatRooms.map(({ roomId, itemImage, title, opponentNickname }) => (
-    <MDBox key={roomId} component="li" display="flex" alignItems="center" py={1} mb={1}>
+    <MDBox key={roomId} component="li" display="flex" alignItems="center" px={2} py={1} mb={1}>
       <MDBox mr={2}>
         <MDAvatar src={itemImage} alt="something here" variant="rounded" shadow="md" size="xl" />
       </MDBox>
@@ -53,7 +53,12 @@ function ChatRoomList() {
   ));
 
   return (
-    <Card sx={{ height: "100%" }}>
+    <MDBox
+      borderRadius="lg"
+      sx={{ borderColor: "grey.400", height: "100%" }}
+      border={1}
+      shadow="md"
+    >
       <MDBox pt={2} px={2}>
         <MDTypography variant="h6" fontWeight="medium" textTransform="capitalize">
           채팅
@@ -64,7 +69,7 @@ function ChatRoomList() {
           {renderProfiles}
         </MDBox>
       </MDBox>
-    </Card>
+    </MDBox>
   );
 }
 

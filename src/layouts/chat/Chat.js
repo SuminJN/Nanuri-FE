@@ -12,7 +12,7 @@ function Chat() {
       <DashboardNavbar />
       <MDBox position="relative" mb={3}>
         <Grid container spacing={2} justifyContent="center">
-          <Grid item xs={12} sm={10} md={8}>
+          <Grid item xs={12} sm={10} md={6}>
             <ChatRoomList />
           </Grid>
         </Grid>
