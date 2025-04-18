@@ -6,6 +6,7 @@ import MDAvatar from "../../components/MDAvatar";
 import MDButton from "../../components/MDButton";
 import { useEffect, useState } from "react";
 import axiosInstance from "../../apis/axios";
+import Icon from "@mui/material/Icon";
 
 function ChatRoomList() {
   const navigate = useNavigate();
@@ -42,6 +43,7 @@ function ChatRoomList() {
         <MDButton
           variant="text"
           color="info"
+          startIcon={<Icon>chat_icon</Icon>}
           onClick={() => {
             navigate(`/chat/${roomId}`);
           }}

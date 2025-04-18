@@ -151,6 +151,7 @@ const EditItem = () => {
                           variant="outlined"
                           color="info"
                           fullWidth
+                          startIcon={<Icon>mode_edit_icon</Icon>}
                           onClick={handleClickEdit}
                         >
                           <MDTypography variant="h6" color="info">
@@ -165,6 +166,7 @@ const EditItem = () => {
                           variant="outlined"
                           color="error"
                           fullWidth
+                          startIcon={<Icon>delete_icon</Icon>}
                           onClick={handleItemDelete}
                         >
                           <MDTypography variant="h6" color="error">
@@ -179,6 +181,7 @@ const EditItem = () => {
                           variant="outlined"
                           color="secondary"
                           fullWidth
+                          startIcon={<Icon>close_icon</Icon>}
                           onClick={() => navigate(`/home/${item.id}`)}
                         >
                           <MDTypography variant="h6" color="secondary">

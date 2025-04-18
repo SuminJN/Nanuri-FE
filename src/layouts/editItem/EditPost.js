@@ -114,6 +114,7 @@ const EditPost = () => {
                               variant="outlined"
                               color="info"
                               fullWidth
+                              startIcon={<Icon>mode_edit_icon</Icon>}
                               onClick={handleClickEdit}
                             >
                               <MDTypography variant="h6" color="info">
@@ -128,6 +129,7 @@ const EditPost = () => {
                               variant="outlined"
                               color="error"
                               fullWidth
+                              startIcon={<Icon>delete_icon</Icon>}
                               onClick={handlePostDelete}
                             >
                               <MDTypography variant="h6" color="error">
@@ -142,6 +144,7 @@ const EditPost = () => {
                               variant="outlined"
                               color="secondary"
                               fullWidth
+                              startIcon={<Icon>close_icon</Icon>}
                               onClick={() => navigate(`/home/post/${post.id}`)}
                             >
                               <MDTypography variant="h6" color="secondary">

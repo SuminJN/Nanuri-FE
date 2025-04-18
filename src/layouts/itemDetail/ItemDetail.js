@@ -129,6 +129,7 @@ function ItemDetail() {
                               variant="outlined"
                               color="info"
                               fullWidth
+                              startIcon={<Icon>mode_edit_icon</Icon>}
                               onClick={() => navigate(`/home/edit-item/${item.id}`)}
                             >
                               <MDTypography variant="h6" color="info">
