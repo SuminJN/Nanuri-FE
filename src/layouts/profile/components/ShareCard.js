@@ -17,8 +17,7 @@ function ShareCard({ itemId, image, title, category, createdTime, viewCount }) {
       display="flex"
       justifyContent="space-between"
       alignItems="center"
-      py={1}
-      pr={1}
+      px={1}
       mb={1}
     >
       <MDBox component="li" display="flex" alignItems="center" py={1} mb={1}>

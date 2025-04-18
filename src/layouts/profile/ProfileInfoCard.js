@@ -29,7 +29,12 @@ function ProfileInfoCard({ title, user, handleClickEdit }) {
   ));
 
   return (
-    <Card sx={{ height: "100%" }}>
+    <MDBox
+      borderRadius="lg"
+      sx={{ borderColor: "grey.400", height: "100%" }}
+      border={1}
+      shadow="md"
+    >
       <MDBox display="flex" justifyContent="space-between" alignItems="center" pt={2} px={2}>
         <MDTypography variant="h6" fontWeight="medium" textTransform="capitalize">
           {title}
@@ -57,7 +62,7 @@ function ProfileInfoCard({ title, user, handleClickEdit }) {
         </MDBox>
         {userInfo}
       </MDBox>
-    </Card>
+    </MDBox>
   );
 }
 

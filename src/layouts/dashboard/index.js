@@ -59,7 +59,7 @@ function Dashboard() {
   return (
     <DashboardLayout>
       <DashboardNavbar />
-      <MDBox position="relative">
+      <MDBox position="relative" px={2}>
         <Grid
           container
           spacing={1}
@@ -194,7 +194,7 @@ function Dashboard() {
           </Button>
         </DialogActions>
       </Dialog>
-      <MDBox mt={2} mb={3}>
+      <MDBox mt={1} mb={3}>
         {tabValue === 0 && <SharingItems />}
         {tabValue === 1 && <ReceivingItems />}
         {tabValue === 2 && <WishItems />}

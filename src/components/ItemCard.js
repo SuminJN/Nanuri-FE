@@ -33,7 +33,9 @@ function ItemCard({
       alignItems="flex-start"
       bgColor={darkMode ? "transparent" : "grey-100"}
       borderRadius="lg"
-      shadow="sm"
+      sx={{ borderColor: "grey.500" }}
+      border={1}
+      shadow="md"
       p={2}
       mb={1}
     >

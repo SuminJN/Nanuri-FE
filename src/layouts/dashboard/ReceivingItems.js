@@ -19,25 +19,23 @@ function ReceivingItems() {
   return (
     <Grid container spacing={3}>
       <Grid item xs={12} sm={12}>
-        <Card>
-          <MDBox pt={2} pb={2} px={2}>
-            <Grid container spacing={2}>
-              {postList === null
-                ? null
-                : postList.map((post, idx) => (
-                    <Grid item xs={12} sm={6} md={6} lg={4} xl={3} key={idx}>
-                      <PostCard
-                        itemId={post.id}
-                        title={post.title}
-                        description={post.description}
-                        createdTime={getCurrentTime(post.createdTime)}
-                        route={`/home/post/${post.id}`}
-                      />
-                    </Grid>
-                  ))}
-            </Grid>
-          </MDBox>
-        </Card>
+        <MDBox pt={2} pb={2} px={2}>
+          <Grid container spacing={2}>
+            {postList === null
+              ? null
+              : postList.map((post, idx) => (
+                  <Grid item xs={12} sm={6} md={6} lg={4} xl={3} key={idx}>
+                    <PostCard
+                      itemId={post.id}
+                      title={post.title}
+                      description={post.description}
+                      createdTime={getCurrentTime(post.createdTime)}
+                      route={`/home/post/${post.id}`}
+                    />
+                  </Grid>
+                ))}
+          </Grid>
+        </MDBox>
       </Grid>
     </Grid>
   );
