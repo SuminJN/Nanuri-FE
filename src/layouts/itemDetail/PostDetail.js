@@ -29,7 +29,7 @@ function PostDetail() {
       try {
         const response = await axiosInstance.delete(`/api/want/${postId}`);
         console.log("받아요 글 삭제 성공: ", response);
-        alert("물건이 삭제되었습니다.");
+        alert("글이 삭제되었습니다.");
         navigate("/home");
       } catch (e) {
         console.log("받아요 글 삭제 실패: ", e);
@@ -94,78 +94,49 @@ function PostDetail() {
                         <MDTypography variant="overline">신청 0 · 조회 0</MDTypography>
                       </MDBox>
                       {post.isOwner ? (
-                        <>
-                          <MDBox mb={1}>
-                            <MDButton
-                              variant="outlined"
-                              color="info"
-                              fullWidth
-                              onClick={() => navigate(`/updatePost/${post.id}`)}
-                            >
-                              <MDTypography variant="h6" color="info">
-                                받아요 글 수정
-                              </MDTypography>
-                            </MDButton>
-                          </MDBox>
-                          <MDBox>
-                            <MDButton
-                              variant="outlined"
-                              color="error"
-                              fullWidth
-                              onClick={handlePostDelete}
-                            >
-                              <MDTypography variant="h6" color="error">
-                                받아요 글 삭제
-                              </MDTypography>
-                            </MDButton>
-                          </MDBox>
-
-                          <Grid container spacing={1}>
-                            <Grid item xs={12} sm={6}>
-                              <MDBox>
-                                <MDButton
-                                  variant="outlined"
-                                  color="info"
-                                  fullWidth
-                                  onClick={() => navigate(`/updatePost/${post.id}`)}
-                                >
-                                  <MDTypography variant="h6" color="info">
-                                    받아요 글 수정
-                                  </MDTypography>
-                                </MDButton>
-                              </MDBox>
-                            </Grid>
-                            <Grid item xs={12} sm={6}>
-                              <MDBox>
-                                <MDButton
-                                  variant="outlined"
-                                  color="secondary"
-                                  fullWidth
-                                  onClick={handlePostDelete}
-                                >
-                                  <MDTypography variant="h6" color="secondary">
-                                    받아요 글 삭제
-                                  </MDTypography>
-                                </MDButton>
-                              </MDBox>
-                            </Grid>
+                        <Grid container spacing={1}>
+                          <Grid item xs={12} sm={6}>
+                            <MDBox>
+                              <MDButton
+                                variant="outlined"
+                                color="info"
+                                fullWidth
+                                onClick={() => navigate(`/home/edit-post/${post.id}`)}
+                              >
+                                <MDTypography variant="h6" color="info">
+                                  수정하기
+                                </MDTypography>
+                              </MDButton>
+                            </MDBox>
                           </Grid>
-                        </>
+                          <Grid item xs={12} sm={6}>
+                            <MDBox>
+                              <MDButton
+                                variant="outlined"
+                                color="secondary"
+                                fullWidth
+                                onClick={handlePostDelete}
+                              >
+                                <MDTypography variant="h6" color="error">
+                                  삭제하기
+                                </MDTypography>
+                              </MDButton>
+                            </MDBox>
+                          </Grid>
+                        </Grid>
                       ) : (
-                        <>
-                          <MDBox mb={1}>
-                            <MDButton
-                              variant="outlined"
-                              color="info"
-                              fullWidth
-                              onClick={handlePostApply}
-                            >
-                              <MDTypography variant="h6" color="info">
-                                나눔 신청
-                              </MDTypography>
-                            </MDButton>
-                          </MDBox>
-                        </>
+                        <MDBox mb={1}>
+                          <MDButton
+                            variant="outlined"
+                            color="info"
+                            fullWidth
+                            onClick={handlePostApply}
+                          >
+                            <MDTypography variant="h6" color="info">
+                              채팅하기
+                            </MDTypography>
+                          </MDButton>
+                        </MDBox>
                       )}
                     </Grid>
                   </Grid>

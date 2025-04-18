@@ -14,6 +14,7 @@ import SharingInformation from "../shareHistory/component/SharingInformation";
 import ShareDoneInformation from "../shareHistory/component/ShareDoneInformation";
 import SharingItems from "./SharingItems";
 import ReceivingItems from "./ReceivingItems";
+import MDInput from "../../components/MDInput";
 
 function Dashboard() {
   const [tabsOrientation, setTabsOrientation] = useState("horizontal");
@@ -24,8 +25,14 @@ function Dashboard() {
     <DashboardLayout>
       <DashboardNavbar />
       <MDBox position="relative">
-        <Grid container>
-          <Grid item xs={12} md={6} lg={4}>
+        <Grid
+          container
+          spacing={1}
+          display="flex"
+          justifyContent="space-between"
+          alignItems="center"
+        >
+          <Grid item xs={8} md={6} lg={4}>
             <AppBar position="static">
               <Tabs orientation={tabsOrientation} value={tabValue} onChange={handleSetTabValue}>
                 <Tab
@@ -46,6 +53,11 @@ function Dashboard() {
                 />
               </Tabs>
             </AppBar>
+          </Grid>
+          <Grid item xs={4} md={4} lg={2}>
+            <MDBox>
+              <MDInput label="검색어를 입력하세요" fullWidth />
+            </MDBox>
           </Grid>
         </Grid>
       </MDBox>

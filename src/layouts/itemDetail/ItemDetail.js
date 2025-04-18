@@ -141,7 +141,7 @@ function ItemDetail() {
                               variant="outlined"
                               color="info"
                               fullWidth
-                              onClick={() => navigate(`/home/${item.id}/edit`)}
+                              onClick={() => navigate(`/home/edit-item/${item.id}`)}
                             >
                               <MDTypography variant="h6" color="info">
                                 나눔정보 수정
@@ -191,7 +191,7 @@ function ItemDetail() {
                               onClick={handleAddWish}
                             >
                               <MDTypography variant="h6" color="secondary">
-                                위시리스트 추가
+                                관심 추가
                               </MDTypography>
                             </MDButton>
                           </MDBox>

@@ -13,11 +13,13 @@ function ProfileInfoCard({ title, user, handleClickEdit }) {
     { label: "ID", value: user.id },
     { label: "이름", value: user.fullName },
     { label: "학부", value: user.department },
+    { label: "MBTI", value: user.mbti },
+    { label: "관심 목록", value: user.interestCategory },
   ];
 
   const userInfo = userFields.map(({ label, value }) => (
     <MDBox key={label} display="flex" flexDirection="row" alignItems="center" justifyContent="left">
-      <MDTypography variant="h6" fontWeight="bold" gutterBottom>
+      <MDTypography variant="h6" fontWeight="bold" color="info" gutterBottom>
         {label}
       </MDTypography>
       <MDTypography variant="button" color="text" fontWeight="bold" gutterBottom>

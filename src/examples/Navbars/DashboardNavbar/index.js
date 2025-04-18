@@ -73,6 +73,10 @@ function DashboardNavbar({ absolute, light, isMini }) {
     }
   };
 
+  const goToProfile = () => {
+    navigate("/profile");
+  };
+
   useEffect(() => {
     // Setting the navbar type
     if (fixedNavbar) {
@@ -99,7 +103,6 @@ function DashboardNavbar({ absolute, light, isMini }) {
     return () => window.removeEventListener("scroll", handleTransparentNavbar);
   }, [dispatch, fixedNavbar]);
 
-  const handleMiniSidenav = () => setMiniSidenav(dispatch, !miniSidenav);
   const handleConfiguratorOpen = () => navigate("/wish");
   const handleOpenMenu = (event) => setOpenMenu(event.currentTarget);
   const handleCloseMenu = () => setOpenMenu(false);
@@ -117,9 +120,8 @@ function DashboardNavbar({ absolute, light, isMini }) {
       onClose={handleCloseMenu}
       sx={{ mt: 2 }}
     >
-      <NotificationItem icon={<Icon>email</Icon>} title="Check new messages" />
-      <NotificationItem icon={<Icon>podcasts</Icon>} title="Manage Podcast sessions" />
-      <NotificationItem icon={<Icon>shopping_cart</Icon>} title="Payment successfully completed" />
+      <NotificationItem icon={<Icon>person_icon</Icon>} title="프로필" onClick={goToProfile} />
+      <NotificationItem icon={<Icon>logout_icon</Icon>} title="로그아웃" onClick={handleLogout} />
     </Menu>
   );
 
@@ -148,9 +150,6 @@ function DashboardNavbar({ absolute, light, isMini }) {
         </MDBox>
         {isMini ? null : (
           <MDBox sx={(theme) => navbarRow(theme, { isMini })}>
-            <MDBox pr={1}>
-              <MDInput label="Search here" />
-            </MDBox>
             <MDBox color={light ? "white" : "inherit"}>
               <IconButton
                 size="small"
@@ -161,32 +160,9 @@ function DashboardNavbar({ absolute, light, isMini }) {
               >
                 <Icon sx={iconsStyle}>favorite_icon</Icon>
               </IconButton>
-              <IconButton
-                size="small"
-                disableRipple
-                color="inherit"
-                sx={navbarIconButton}
-                aria-controls="notification-menu"
-                aria-haspopup="true"
-                variant="contained"
-                onClick={handleOpenMenu}
-              >
-                <Icon sx={iconsStyle}>notifications</Icon>
-              </IconButton>
-              <IconButton
-                size="small"
-                disableRipple
-                color="inherit"
-                sx={navbarMobileMenu}
-                onClick={handleMiniSidenav}
-              >
-                <Icon sx={iconsStyle} fontSize="medium">
-                  {miniSidenav ? "menu_open" : "menu"}
-                </Icon>
-              </IconButton>
-              <Link to="/profile">
+              <Link to="/notifications">
                 <IconButton sx={navbarIconButton} size="small" disableRipple>
-                  <Icon sx={iconsStyle}>account_circle</Icon>
+                  <Icon sx={iconsStyle}>notifications</Icon>
                 </IconButton>
               </Link>
               <IconButton
@@ -194,12 +170,10 @@ function DashboardNavbar({ absolute, light, isMini }) {
                 disableRipple
                 color="inherit"
                 sx={navbarIconButton}
-                aria-controls="notification-menu"
-                aria-haspopup="true"
                 variant="contained"
-                onClick={handleLogout}
+                onClick={handleOpenMenu}
               >
-                <Icon sx={iconsStyle}>logout_icon</Icon>
+                <Icon sx={iconsStyle}>account_circle</Icon>
               </IconButton>
               {renderMenu()}
             </MDBox>
