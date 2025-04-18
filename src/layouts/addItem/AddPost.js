@@ -6,7 +6,7 @@ import Card from "@mui/material/Card";
 import MDTypography from "../../components/MDTypography";
 import TextField from "@mui/material/TextField";
 import MDButton from "../../components/MDButton";
-import { useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "../../apis/axios";
 import Footer from "../../examples/Footer";
@@ -56,16 +56,18 @@ function AddPost() {
                 coloredShadow="info"
               >
                 <MDTypography variant="h6" color="white">
-                  나눔 받기 등록
+                  필요해요
                 </MDTypography>
               </MDBox>
               <Grid container spacing={3} justifyContent="center">
                 <Grid item xs={12}>
                   <MDBox component="form" role="form">
                     <MDBox m={3}>
+                      <MDTypography variant="h6" fontWeight="bold" color="info">
+                        제목을 입력해주세요
+                      </MDTypography>
                       <TextField
                         id="title"
-                        label="제목"
                         name="title"
                         value={title}
                         onChange={onChange}
@@ -75,9 +77,11 @@ function AddPost() {
                       />
                     </MDBox>
                     <MDBox m={3}>
+                      <MDTypography variant="h6" fontWeight="bold" color="info">
+                        자세한 설명
+                      </MDTypography>
                       <TextField
                         id="description"
-                        label="설명"
                         name="description"
                         variant="outlined"
                         onChange={onChange}
@@ -96,7 +100,7 @@ function AddPost() {
                         onClick={handleSubmit}
                         sx={{ width: "20%", whiteSpace: "nowrap" }}
                       >
-                        나눔 등록
+                        등록하기
                       </MDButton>
                     </MDBox>
                   </MDBox>

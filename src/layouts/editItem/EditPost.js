@@ -11,6 +11,7 @@ import DashboardLayout from "../../examples/LayoutContainers/DashboardLayout";
 import MDTypography from "../../components/MDTypography";
 import TextField from "@mui/material/TextField";
 import MDButton from "../../components/MDButton";
+import DashboardNavbar from "../../examples/Navbars/DashboardNavbar";
 
 const initState = {
   id: "",
@@ -48,6 +49,7 @@ const EditPost = () => {
 
   return (
     <DashboardLayout>
+      <DashboardNavbar />
       <MDBox mt={2} mb={3}>
         <Grid container spacing={3} mb={2} justifyContent="center">
           <Grid item xs={12} sm={4}>

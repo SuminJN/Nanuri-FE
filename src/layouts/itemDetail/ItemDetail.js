@@ -39,7 +39,7 @@ function ItemDetail() {
         const response = await axiosInstance.delete(`/api/item/${itemId}`);
         console.log("아이템 삭제 성공: ", response);
         alert("물건이 삭제되었습니다.");
-        navigate("/items");
+        navigate("/home");
       } catch (e) {
         console.log("아이템 삭제 실패: ", e);
       }
@@ -49,7 +49,7 @@ function ItemDetail() {
   const handleItemApply = () => {
     axiosInstance.post("/api/history", { itemId: itemId }).then((r) => {
       alert("신청되었습니다.");
-      window.location.reload();
+      navigate("/chat");
     });
   };
 
@@ -69,6 +69,7 @@ function ItemDetail() {
 
   return (
     <DashboardLayout>
+      <DashboardNavbar />
       <MDBox mb={3}>
         <Card>
           <MDBox px={2} pt={3}>

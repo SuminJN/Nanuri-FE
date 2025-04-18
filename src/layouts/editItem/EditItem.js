@@ -57,6 +57,7 @@ const EditItem = () => {
 
   return (
     <DashboardLayout>
+      <DashboardNavbar />
       <MDBox my={3}>
         <Card>
           <MDBox p={2}>
