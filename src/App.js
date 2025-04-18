@@ -207,7 +207,7 @@ export default function App() {
             <Route path="/profile/:itemId" element={<ItemDetail />} />
             <Route path="/chat" element={<Chat />} />
             <Route path="/chat/:roomId" element={<ChatRoom />} />
-            <Route path="/notice" element={<Notifications />} />
+            <Route path="/notifications" element={<Notifications />} />
           </>
         ) : (
           <>
