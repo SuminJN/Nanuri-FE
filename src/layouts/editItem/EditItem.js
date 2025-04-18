@@ -48,6 +48,7 @@ const EditItem = () => {
 
   const handleClickEdit = async () => {
     const response = await axiosInstance.patch(`/api/item/${itemId}`, item);
+    alert("나눔 정보가 수정되었습니다.");
     navigate(`/home/${itemId}`);
   };
 
