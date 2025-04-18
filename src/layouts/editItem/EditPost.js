@@ -40,6 +40,7 @@ const EditPost = () => {
 
   const handleClickEdit = async () => {
     const response = await axiosInstance.patch(`/api/want/${postId}`, post);
+    alert("글이 수정되었습니다.");
     navigate(`/home/post/${postId}`);
   };
 
