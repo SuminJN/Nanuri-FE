@@ -51,6 +51,19 @@ const EditItem = () => {
     navigate(`/home/${itemId}`);
   };
 
+  const handleItemDelete = async () => {
+    if (window.confirm("정말로 삭제하시겠습니까?")) {
+      try {
+        const response = await axiosInstance.delete(`/api/item/${itemId}`);
+        console.log("아이템 삭제 성공: ", response);
+        alert("물건이 삭제되었습니다.");
+        navigate("/home");
+      } catch (e) {
+        console.log("아이템 삭제 실패: ", e);
+      }
+    }
+  };
+
   useEffect(() => {
     getItem();
   }, []);
@@ -95,7 +108,7 @@ const EditItem = () => {
             <Grid item xs={12} sm={12} md={6}>
               <MDBox>
                 <MDBox mb={2}>
-                  <MDTypography variant="h6" fontWeight="bold">
+                  <MDTypography variant="h6" fontWeight="bold" color="info">
                     제목
                   </MDTypography>
                   <TextField
@@ -106,7 +119,7 @@ const EditItem = () => {
                   />
                 </MDBox>
                 <MDBox mb={2}>
-                  <MDTypography variant="h6" fontWeight="bold">
+                  <MDTypography variant="h6" fontWeight="bold" color="info">
                     카테고리
                   </MDTypography>
                   <TextField
@@ -117,7 +130,9 @@ const EditItem = () => {
                   />
                 </MDBox>
                 <MDBox mb={2}>
-                  <MDTypography variant="h6">자세한 설명</MDTypography>
+                  <MDTypography variant="h6" fontWeight="bold" color="info">
+                    자세한 설명
+                  </MDTypography>
                   <TextField
                     name="description"
                     value={item.description}
@@ -149,9 +164,23 @@ const EditItem = () => {
                           variant="outlined"
                           color="error"
                           fullWidth
-                          onClick={() => navigate(`/home/${item.id}`)}
+                          onClick={handleItemDelete}
                         >
                           <MDTypography variant="h6" color="error">
+                            나눔 삭제
+                          </MDTypography>
+                        </MDButton>
+                      </MDBox>
+                    </Grid>
+                    <Grid item xs={12}>
+                      <MDBox>
+                        <MDButton
+                          variant="outlined"
+                          color="secondary"
+                          fullWidth
+                          onClick={() => navigate(`/home/${item.id}`)}
+                        >
+                          <MDTypography variant="h6" color="secondary">
                             취소
                           </MDTypography>
                         </MDButton>

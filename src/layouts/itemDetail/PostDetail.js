@@ -24,19 +24,6 @@ function PostDetail() {
     isOwner: null,
   });
 
-  const handlePostDelete = async () => {
-    if (window.confirm("정말로 삭제하시겠습니까?")) {
-      try {
-        const response = await axiosInstance.delete(`/api/want/${postId}`);
-        console.log("받아요 글 삭제 성공: ", response);
-        alert("글이 삭제되었습니다.");
-        navigate("/home");
-      } catch (e) {
-        console.log("받아요 글 삭제 실패: ", e);
-      }
-    }
-  };
-
   const handlePostApply = () => {
     axiosInstance.post(`/api/wand/${postId}/select`).then((r) => {
       alert("신청되었습니다.");
@@ -96,7 +83,7 @@ function PostDetail() {
                       </MDBox>
                       {post.isOwner ? (
                         <Grid container spacing={1}>
-                          <Grid item xs={12} sm={6}>
+                          <Grid item xs={12}>
                             <MDBox>
                               <MDButton
                                 variant="outlined"
@@ -106,20 +93,6 @@ function PostDetail() {
                               >
                                 <MDTypography variant="h6" color="info">
                                   수정하기
-                                </MDTypography>
-                              </MDButton>
-                            </MDBox>
-                          </Grid>
-                          <Grid item xs={12} sm={6}>
-                            <MDBox>
-                              <MDButton
-                                variant="outlined"
-                                color="secondary"
-                                fullWidth
-                                onClick={handlePostDelete}
-                              >
-                                <MDTypography variant="h6" color="error">
-                                  삭제하기
                                 </MDTypography>
                               </MDButton>
                             </MDBox>

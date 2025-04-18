@@ -33,19 +33,6 @@ function ItemDetail() {
     isOwner: null,
   });
 
-  const handleItemDelete = async () => {
-    if (window.confirm("정말로 삭제하시겠습니까?")) {
-      try {
-        const response = await axiosInstance.delete(`/api/item/${itemId}`);
-        console.log("아이템 삭제 성공: ", response);
-        alert("물건이 삭제되었습니다.");
-        navigate("/home");
-      } catch (e) {
-        console.log("아이템 삭제 실패: ", e);
-      }
-    }
-  };
-
   const handleItemApply = () => {
     axiosInstance.post("/api/history", { itemId: itemId }).then((r) => {
       alert("신청되었습니다.");
@@ -136,7 +123,7 @@ function ItemDetail() {
                   {item.isOwner ? (
                     <>
                       <Grid container spacing={1}>
-                        <Grid item xs={12} sm={6}>
+                        <Grid item xs={12}>
                           <MDBox>
                             <MDButton
                               variant="outlined"
@@ -146,20 +133,6 @@ function ItemDetail() {
                             >
                               <MDTypography variant="h6" color="info">
                                 나눔정보 수정
-                              </MDTypography>
-                            </MDButton>
-                          </MDBox>
-                        </Grid>
-                        <Grid item xs={12} sm={6}>
-                          <MDBox>
-                            <MDButton
-                              variant="outlined"
-                              color="error"
-                              fullWidth
-                              onClick={handleItemDelete}
-                            >
-                              <MDTypography variant="h6" color="error">
-                                나눔 삭제
                               </MDTypography>
                             </MDButton>
                           </MDBox>

@@ -43,6 +43,19 @@ const EditPost = () => {
     navigate(`/home/post/${postId}`);
   };
 
+  const handlePostDelete = async () => {
+    if (window.confirm("정말로 삭제하시겠습니까?")) {
+      try {
+        const response = await axiosInstance.delete(`/api/want/${postId}`);
+        console.log("받아요 글 삭제 성공: ", response);
+        alert("글이 삭제되었습니다.");
+        navigate("/home");
+      } catch (e) {
+        console.log("받아요 글 삭제 실패: ", e);
+      }
+    }
+  };
+
   useEffect(() => {
     getPost();
   }, []);
@@ -114,9 +127,23 @@ const EditPost = () => {
                               variant="outlined"
                               color="error"
                               fullWidth
-                              onClick={() => navigate(`/home/post/${post.id}`)}
+                              onClick={handlePostDelete}
                             >
                               <MDTypography variant="h6" color="error">
+                                삭제하기
+                              </MDTypography>
+                            </MDButton>
+                          </MDBox>
+                        </Grid>
+                        <Grid item xs={12}>
+                          <MDBox>
+                            <MDButton
+                              variant="outlined"
+                              color="secondary"
+                              fullWidth
+                              onClick={() => navigate(`/home/post/${post.id}`)}
+                            >
+                              <MDTypography variant="h6" color="secondary">
                                 취소
                               </MDTypography>
                             </MDButton>
