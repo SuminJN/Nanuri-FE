@@ -11,7 +11,12 @@ import AppBar from "@mui/material/AppBar";
 import SharingItems from "./SharingItems";
 import ReceivingItems from "./ReceivingItems";
 import { useMaterialUIController } from "../../context";
-import { navbarIconButton } from "../../examples/Navbars/DashboardNavbar/styles";
+import {
+  navbarDesktopMenu,
+  navbarIconButton,
+  navbarMobileMenu,
+  navbarRow,
+} from "../../examples/Navbars/DashboardNavbar/styles";
 import IconButton from "@mui/material/IconButton";
 import { useNavigate } from "react-router-dom";
 import MDButton from "../../components/MDButton";
@@ -98,28 +103,33 @@ function Dashboard() {
             </AppBar>
           </Grid>
           <Grid item xs={2} sm={4} md={4} lg={3} display="flex" justifyContent="flex-end">
-            {miniSidenav ? (
-              <IconButton
-                size="small"
-                disableRipple
-                color="inherit"
-                sx={navbarIconButton}
-                variant="contained"
-                onClick={handleModalOpen}
-              >
-                <SearchIcon />
-              </IconButton>
-            ) : (
+            <IconButton
+              size="small"
+              disableRipple
+              color="inherit"
+              sx={(navbarIconButton, navbarMobileMenu)}
+              variant="contained"
+              onClick={handleModalOpen}
+            >
+              <SearchIcon />
+            </IconButton>
+            <MDBox
+              sx={(theme) => ({
+                width: "100%",
+                ...navbarDesktopMenu(theme),
+              })}
+            >
               <MDButton
                 variant="outlined"
                 color="secondary"
+                sx={{ borderColor: "grey.400" }}
                 startIcon={<SearchIcon />}
                 onClick={handleModalOpen}
                 fullWidth
               >
                 찾아보기
               </MDButton>
-            )}
+            </MDBox>
           </Grid>
         </Grid>
       </MDBox>
