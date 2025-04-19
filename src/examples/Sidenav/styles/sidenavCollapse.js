@@ -1,17 +1,17 @@
 /**
-=========================================================
-* Material Dashboard 2 React - v2.2.0
-=========================================================
+ =========================================================
+ * Material Dashboard 2 React - v2.2.0
+ =========================================================
 
-* Product Page: https://www.creative-tim.com/product/material-dashboard-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
+ * Product Page: https://www.creative-tim.com/product/material-dashboard-react
+ * Copyright 2023 Creative Tim (https://www.creative-tim.com)
 
-Coded by www.creative-tim.com
+ Coded by www.creative-tim.com
 
  =========================================================
 
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ */
 function collapseItem(theme, ownerState) {
   const { palette, transitions, breakpoints, boxShadows, borders, functions } = theme;
   const { active, transparentSidenav, whiteSidenav, darkMode, sidenavColor } = ownerState;
@@ -25,10 +25,7 @@ function collapseItem(theme, ownerState) {
     background: active
       ? linearGradient(gradients[sidenavColor].main, gradients[sidenavColor].state)
       : transparent.main,
-    color:
-      (transparentSidenav && !darkMode && !active) || (whiteSidenav && !active)
-        ? dark.main
-        : white.main,
+    color: !active ? dark.main : white.main,
     display: "flex",
     alignItems: "center",
     width: "100%",
@@ -74,10 +71,7 @@ function collapseIconBox(theme, ownerState) {
   return {
     minWidth: pxToRem(32),
     minHeight: pxToRem(32),
-    color:
-      (transparentSidenav && !darkMode && !active) || (whiteSidenav && !active)
-        ? dark.main
-        : white.main,
+    color: !active ? dark.main : white.main,
     borderRadius: borderRadius.md,
     display: "grid",
     placeItems: "center",
@@ -117,7 +111,7 @@ function collapseText(theme, ownerState) {
     },
 
     "& span": {
-      fontWeight: active ? fontWeightRegular : fontWeightLight,
+      fontWeight: fontWeightRegular,
       fontSize: size.sm,
       lineHeight: 0,
     },

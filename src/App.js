@@ -160,7 +160,7 @@ export default function App() {
         <Sidenav
           color={sidenavColor}
           // brand={(transparentSidenav && !darkMode) || whiteSidenav ? brandDark : brandWhite}
-          brand={(transparentSidenav && !darkMode) || whiteSidenav ? brandDark : brandWhite}
+          brand={brandDark}
           brandName="Nanuri"
           routes={routes}
           onMouseEnter={handleOnMouseEnter}

@@ -56,13 +56,13 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
   const location = useLocation();
   const collapseName = location.pathname.replace("/", "");
 
-  let textColor = "white";
+  let textColor = "dark";
 
-  if (transparentSidenav || (whiteSidenav && !darkMode)) {
-    textColor = "dark";
-  } else if (whiteSidenav && darkMode) {
-    textColor = "inherit";
-  }
+  // if (transparentSidenav || (whiteSidenav && !darkMode)) {
+  //   textColor = "dark";
+  // } else if (whiteSidenav && darkMode) {
+  //   textColor = "inherit";
+  // }
 
   const closeSidenav = () => setMiniSidenav(dispatch, true);
 
@@ -175,12 +175,7 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
           </MDBox>
         </MDBox>
       </MDBox>
-      <Divider
-        light={
-          (!darkMode && !whiteSidenav && !transparentSidenav) ||
-          (darkMode && !transparentSidenav && whiteSidenav)
-        }
-      />
+      <Divider />
       <List>{renderRoutes}</List>
     </SidenavRoot>
   );
