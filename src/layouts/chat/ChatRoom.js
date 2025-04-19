@@ -242,7 +242,7 @@ function ChatRoom() {
       <MDBox mt={2} mb={3}>
         <Grid container justifyContent="center">
           <Grid item xs={12} md={6}>
-            <MDBox borderRadius="lg" sx={{ borderColor: "grey.500" }} border={1} shadow="md">
+            <MDBox borderRadius="lg" sx={{ borderColor: "grey.300" }} border={2} shadow="md">
               <MDBox p={2} display="flex" alignItems="center" justifyContent="space-between">
                 <MDBox>
                   <IconButton

@@ -31,8 +31,8 @@ function ProfileInfoCard({ title, user, handleClickEdit }) {
   return (
     <MDBox
       borderRadius="lg"
-      sx={{ borderColor: "grey.400", height: "100%" }}
-      border={1}
+      sx={{ borderColor: "grey.300", height: "100%" }}
+      border={2}
       shadow="md"
     >
       <MDBox display="flex" justifyContent="space-between" alignItems="center" pt={2} px={2}>

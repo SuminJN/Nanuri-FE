@@ -21,7 +21,7 @@ function ShareCardList() {
   }, []);
 
   return (
-    <MDBox borderRadius="lg" sx={{ borderColor: "grey.400" }} border={1} shadow="md">
+    <MDBox borderRadius="lg" sx={{ borderColor: "grey.300" }} border={2} shadow="md">
       <MDBox pt={2} px={2} mb={1} display="flex" justifyContent="space-between" alignItems="center">
         <MDTypography variant="h6" fontWeight="medium">
           진행중인 나눔

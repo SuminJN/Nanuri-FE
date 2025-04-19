@@ -57,7 +57,7 @@ function ItemDetail() {
   return (
     <DashboardLayout>
       <DashboardNavbar />
-      <MDBox mb={3} borderRadius="lg" sx={{ borderColor: "grey.500" }} border={1} shadow="md">
+      <MDBox mb={3} borderRadius="lg" sx={{ borderColor: "grey.300" }} border={2} shadow="md">
         <MDBox px={2} pt={3}>
           <IconButton
             size="small"

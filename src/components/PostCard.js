@@ -23,8 +23,8 @@ function PostCard({ itemId, title, createdTime, description, route }) {
       alignItems="flex-start"
       bgColor={darkMode ? "transparent" : "grey-100"}
       borderRadius="lg"
-      sx={{ borderColor: "grey.500" }}
-      border={1}
+      sx={{ borderColor: "grey.300" }}
+      border={2}
       shadow="md"
       p={2}
       mb={1}
