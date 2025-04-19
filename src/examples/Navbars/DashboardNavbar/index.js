@@ -147,44 +147,36 @@ function DashboardNavbar({ absolute, light, isMini }) {
       sx={(theme) => navbar(theme, { transparentNavbar, absolute, light, darkMode })}
     >
       <Toolbar sx={(theme) => navbarContainer(theme)}>
-        <MDBox
-          color="inherit"
-          mb={{ xs: 1, md: 0 }}
-          sx={(theme) => ({ ...navbarRow(theme, { isMini }), ...navbarDesktopMenu(theme) })}
-        >
-          <Breadcrumbs icon="home" title={route[route.length - 1]} route={route} light={light} />
-        </MDBox>
+        <Breadcrumbs icon="home" title={route[route.length - 1]} route={route} light={light} />
         {isMini ? null : (
-          <MDBox sx={(theme) => navbarRow(theme, { isMini })}>
-            <MDBox color={light ? "white" : "inherit"}>
-              <IconButton
-                size="small"
-                disableRipple
-                color="inherit"
-                sx={navbarMobileMenu}
-                onClick={handleMiniSidenav}
-              >
-                <Icon sx={iconsStyle} fontSize="medium">
-                  {miniSidenav ? "menu" : "menu_open"}
-                </Icon>
+          <MDBox>
+            <Link to="/notifications">
+              <IconButton sx={navbarIconButton} size="small" disableRipple>
+                <Icon sx={iconsStyle}>notifications</Icon>
               </IconButton>
-              <Link to="/notifications">
-                <IconButton sx={navbarIconButton} size="small" disableRipple>
-                  <Icon sx={iconsStyle}>notifications</Icon>
-                </IconButton>
-              </Link>
-              <IconButton
-                size="small"
-                disableRipple
-                color="inherit"
-                sx={navbarIconButton}
-                variant="contained"
-                onClick={handleOpenMenu}
-              >
-                <Icon sx={iconsStyle}>account_circle</Icon>
-              </IconButton>
-              {renderMenu()}
-            </MDBox>
+            </Link>
+            <IconButton
+              size="small"
+              disableRipple
+              color="inherit"
+              sx={navbarIconButton}
+              variant="contained"
+              onClick={handleOpenMenu}
+            >
+              <Icon sx={iconsStyle}>account_circle</Icon>
+            </IconButton>
+            <IconButton
+              size="small"
+              disableRipple
+              color="inherit"
+              sx={navbarMobileMenu}
+              onClick={handleMiniSidenav}
+            >
+              <Icon sx={iconsStyle} fontSize="medium">
+                {miniSidenav ? "menu" : "menu_open"}
+              </Icon>
+            </IconButton>
+            {renderMenu()}
           </MDBox>
         )}
       </Toolbar>

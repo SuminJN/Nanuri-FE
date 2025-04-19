@@ -73,7 +73,7 @@ function navbar(theme, ownerState) {
 }
 
 const navbarContainer = ({ breakpoints }) => ({
-  flexDirection: "column",
+  flexDirection: "row",
   alignItems: "flex-start",
   justifyContent: "space-between",
   pt: 0.5,
