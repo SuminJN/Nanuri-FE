@@ -41,7 +41,14 @@ function ShareCardList() {
         </MDButton>
       </MDBox>
       <MDBox>
-        <MDBox component="ul" display="flex" flexDirection="column" p={0} m={0}>
+        <MDBox
+          component="ul"
+          display="flex"
+          flexDirection="column"
+          p={0}
+          m={0}
+          sx={{ overflowY: "auto", maxHeight: "400px" }} // 스크롤 가능하도록 스타일 추가
+        >
           {itemList === null
             ? null
             : itemList.map((item) => (
