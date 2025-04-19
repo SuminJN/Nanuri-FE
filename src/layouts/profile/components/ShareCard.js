@@ -54,7 +54,7 @@ function ShareCard({ itemId, image, title, category, createdTime, viewCount }) {
           component={Link}
           to={`/profile/${itemId}`}
           variant="text"
-          color="text"
+          color="info"
           style={{ whiteSpace: "nowrap", padding: 5 }}
         >
           자세히 보기
