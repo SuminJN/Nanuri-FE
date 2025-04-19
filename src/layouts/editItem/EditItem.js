@@ -72,7 +72,7 @@ const EditItem = () => {
   return (
     <DashboardLayout>
       <DashboardNavbar />
-      <MDBox my={3} borderRadius="lg" sx={{ borderColor: "grey.500" }} border={1} shadow="md">
+      <MDBox my={3} borderRadius="lg" sx={{ borderColor: "grey.300" }} border={2} shadow="md">
         <MDBox p={2}>
           <IconButton
             size="small"

@@ -15,6 +15,7 @@ import Icon from "@mui/material/Icon";
 import useGetTime from "../../hooks/useGetTime";
 import MDAvatar from "../../components/MDAvatar";
 import image from "../../assets/images/team-2.jpg";
+import MDSnackbar from "../../components/MDSnackbar";
 
 function ItemDetail() {
   const { itemId } = useParams();
@@ -33,6 +34,21 @@ function ItemDetail() {
     isOwner: null,
   });
 
+  const [successSB, setSuccessSB] = useState(false);
+  const closeSuccessSB = () => setSuccessSB(false);
+  const renderSuccessSB = (
+    <MDSnackbar
+      color="info"
+      icon="check"
+      title="관심 목록에 추가되었습니다."
+      // content="Hello, world! This is a notification message"
+      // dateTime="11 mins ago"
+      open={successSB}
+      onClose={closeSuccessSB}
+      close={closeSuccessSB}
+    />
+  );
+
   const handleItemApply = () => {
     axiosInstance.post("/api/history", { itemId: itemId }).then((r) => {
       alert("신청되었습니다.");
@@ -42,7 +58,8 @@ function ItemDetail() {
 
   const handleAddWish = () => {
     axiosInstance.post("/api/wish", { itemId: itemId }).then((r) => {
-      alert("관심 목록에 등록되었습니다.");
+      // alert("관심 목록에 등록되었습니다.");
+      setSuccessSB(true);
     });
   };
 
@@ -57,7 +74,7 @@ function ItemDetail() {
   return (
     <DashboardLayout>
       <DashboardNavbar />
-      <MDBox mb={3} borderRadius="lg" sx={{ borderColor: "grey.500" }} border={1} shadow="md">
+      <MDBox mb={3} borderRadius="lg" sx={{ borderColor: "grey.300" }} border={2} shadow="md">
         <MDBox px={2} pt={3}>
           <IconButton
             size="small"
@@ -168,6 +185,7 @@ function ItemDetail() {
                               관심 추가
                             </MDTypography>
                           </MDButton>
+                          {renderSuccessSB}
                         </MDBox>
                       </Grid>
                     </Grid>

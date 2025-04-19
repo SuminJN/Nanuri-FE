@@ -64,7 +64,7 @@ function Overview() {
         <Grid container spacing={1}>
           <Grid item xs={12} md={6} xl={4}>
             {isEditing ? (
-              <MDBox borderRadius="lg" sx={{ borderColor: "grey.400" }} border={1} shadow="md">
+              <MDBox borderRadius="lg" sx={{ borderColor: "grey.300" }} border={2} shadow="md">
                 <MDBox
                   display="flex"
                   justifyContent="space-between"
