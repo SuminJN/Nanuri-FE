@@ -100,7 +100,7 @@ function AddItem() {
       <MDBox my={3}>
         <Grid container spacing={3} justifyContent="center">
           <Grid item xs={12} sm={10} md={8} lg={6}>
-            <Card>
+            <MDBox sx={{ borderColor: "grey.300" }} borderRadius="lg" border={2} shadow="md">
               <MDBox
                 mx={2}
                 mb={3}
@@ -225,7 +225,7 @@ function AddItem() {
                   </MDBox>
                 </Grid>
               </Grid>
-            </Card>
+            </MDBox>
           </Grid>
         </Grid>
       </MDBox>
