@@ -39,11 +39,11 @@ function ItemCard({
       p={2}
       mb={1}
     >
-      <Grid container spacing={1}>
-        <Grid item xs={12}>
-          <Image
+      <Grid container>
+        <Grid item xs={12} style={{ cursor: "pointer" }} onClick={() => navigate(route)}>
+          <img
             width="100%"
-            height="200px"
+            height="180px"
             src={image}
             style={{ borderRadius: "8px" }}
             alt="image"
@@ -52,7 +52,7 @@ function ItemCard({
         <Grid
           item
           xs={12}
-          style={{ height: "180px", cursor: "pointer" }}
+          style={{ height: "140px", cursor: "pointer" }}
           onClick={() => navigate(route)}
         >
           <MDBox width="100%" display="flex" flexDirection="column">
@@ -61,14 +61,24 @@ function ItemCard({
                 {title}
               </MDTypography>
             </MDBox>
-            <MDBox mb={3} lineHeight={0} display="flex" justifyContent="center">
+            <MDBox mb={1} lineHeight={0} display="flex" justifyContent="center">
               <MDTypography variant="caption" fontWeight="regular" color="text">
                 {category} · {createdTime}
               </MDTypography>
             </MDBox>
             <MDBox display="flex" justifyContent="center">
-              <MDTypography variant="caption" fontWeight="medium">
-                {description.length < 190 ? description : `${description.slice(0, 190)}...`}
+              <MDTypography
+                variant="caption"
+                fontWeight="medium"
+                sx={{
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                  display: "-webkit-box",
+                  WebkitLineClamp: 4, // 원하는 줄 수로 변경
+                  WebkitBoxOrient: "vertical",
+                }}
+              >
+                {description}
               </MDTypography>
             </MDBox>
           </MDBox>
