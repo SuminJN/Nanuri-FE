@@ -40,10 +40,10 @@ function ItemCard({
       mb={1}
     >
       <Grid container spacing={1}>
-        <Grid item xs={12}>
-          <Image
+        <Grid item xs={12} style={{ cursor: "pointer" }} onClick={() => navigate(route)}>
+          <img
             width="100%"
-            height="200px"
+            height="180px"
             src={image}
             style={{ borderRadius: "8px" }}
             alt="image"
@@ -52,7 +52,7 @@ function ItemCard({
         <Grid
           item
           xs={12}
-          style={{ height: "180px", cursor: "pointer" }}
+          style={{ height: "140px", cursor: "pointer" }}
           onClick={() => navigate(route)}
         >
           <MDBox width="100%" display="flex" flexDirection="column">
