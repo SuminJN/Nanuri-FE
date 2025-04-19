@@ -157,15 +157,19 @@ export default function App() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <>
-        <Sidenav
-          color={sidenavColor}
-          // brand={(transparentSidenav && !darkMode) || whiteSidenav ? brandDark : brandWhite}
-          brand={(transparentSidenav && !darkMode) || whiteSidenav ? brandDark : brandWhite}
-          brandName="Nanuri"
-          routes={routes}
-          onMouseEnter={handleOnMouseEnter}
-          onMouseLeave={handleOnMouseLeave}
-        />
+        {loginState ? (
+          <Sidenav
+            color={sidenavColor}
+            // brand={(transparentSidenav && !darkMode) || whiteSidenav ? brandDark : brandWhite}
+            brand={brandDark}
+            brandName="Nanuri"
+            routes={routes}
+            onMouseEnter={handleOnMouseEnter}
+            onMouseLeave={handleOnMouseLeave}
+          />
+        ) : (
+          <></>
+        )}
         <FloatButton.Group
           shape="square"
           trigger="hover"
