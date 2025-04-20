@@ -2,9 +2,7 @@ import DashboardNavbar from "../../examples/Navbars/DashboardNavbar";
 import DashboardLayout from "../../examples/LayoutContainers/DashboardLayout";
 import MDBox from "../../components/MDBox";
 import Grid from "@mui/material/Grid";
-import Card from "@mui/material/Card";
 import React, { useEffect, useState } from "react";
-import axiosInstance from "../../apis/axios";
 import { useNavigate, useParams } from "react-router-dom";
 import MDTypography from "../../components/MDTypography";
 import MDButton from "../../components/MDButton";
@@ -18,6 +16,7 @@ import image from "../../assets/images/team-2.jpg";
 import MDSnackbar from "../../components/MDSnackbar";
 import { getItem } from "../../apis/itemApi";
 import { applyItem } from "../../apis/historyApi";
+import { addWish } from "../../apis/wishApi";
 
 function DetailItem() {
   const { itemId } = useParams();
@@ -65,7 +64,7 @@ function DetailItem() {
   };
 
   const handleAddWish = () => {
-    axiosInstance.post("/api/wish", { itemId: itemId }).then((r) => {
+    addWish(itemId).then((r) => {
       // alert("관심 목록에 등록되었습니다.");
       setSuccessSB(true);
     });

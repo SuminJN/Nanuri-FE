@@ -1,16 +1,14 @@
-import Card from "@mui/material/Card";
 import { useEffect, useState } from "react";
 import Grid from "@mui/material/Grid";
-import axiosInstance from "../../apis/axios";
 import MDBox from "../../components/MDBox";
-import MDTypography from "../../components/MDTypography";
 import ItemCard from "../../components/ItemCard";
+import { getWish } from "../../apis/wishApi";
 
 function WishItems() {
   const [itemList, setItemList] = useState(null);
 
   useEffect(() => {
-    axiosInstance.get("/api/wish", { params: { done: false } }).then((res) => {
+    getWish().then((res) => {
       setItemList(res.data);
     });
   }, []);
