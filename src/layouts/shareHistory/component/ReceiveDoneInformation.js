@@ -1,17 +1,16 @@
-import Card from "@mui/material/Card";
 import MDBox from "../../../components/MDBox";
 import MDTypography from "../../../components/MDTypography";
-import axiosInstance from "../../../apis/axios";
 import { useEffect, useState } from "react";
 import Grid from "@mui/material/Grid";
 import ItemCard from "../../../components/ItemCard";
+import { getMyReceivedItems } from "../../../apis/historyApi";
 
 function ReceiveDoneInformation() {
   const [itemList, setItemList] = useState(null);
 
   useEffect(() => {
-    axiosInstance.get("/api/history/receive-done").then((res) => {
-      setItemList(res.data);
+    getMyReceivedItems().then((response) => {
+      setItemList(response.data);
     });
   }, []);
 

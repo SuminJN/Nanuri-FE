@@ -1,27 +1,28 @@
 import axiosInstance from "./axios";
 
-const prefix = "/api/nanuri/auth";
+const prefix = "/api/user";
 
-export const login = async (hisnetToken) => {
-  try {
-    console.log("Hisnet Token : ", hisnetToken);
+// 자신의 마이페이지 조회
+export const getUserInfo = () => {
+  return axiosInstance.get(prefix);
+};
 
-    const response = await axiosInstance.post(
-      `${prefix}/login`,
-      { hisnetToken: hisnetToken } // 토큰을 요청의 본문에 담아 보냅니다.
-    );
+// 자신의 유저 정보 수정
+export const updateUser = (data) => {
+  return axiosInstance.patch(prefix, data);
+};
 
-    const token = response.data.token;
-    const userId = response.data.userId;
-    const userName = response.data.userName;
-    const department = response.data.department;
-    const nickname = response.data.nickname;
+// 유저 탈퇴
+export const deleteUser = () => {
+  return axiosInstance.delete(prefix);
+};
 
-    console.log("토큰 보내기 성공");
+// 다른 유저의 마이페이지 보기
+export const getOtherPage = (nickname) => {
+  return axiosInstance.get(`${prefix}/${nickname}`);
+};
 
-    return nickname;
-  } catch (error) {
-    console.log("토큰 보내기 실패");
-    throw error;
-  }
+// 유저 닉네임 중복 체크
+export const checkNickname = (nickname) => {
+  return axiosInstance.get(`${prefix}/checkNickname`, { params: { nickname } });
 };

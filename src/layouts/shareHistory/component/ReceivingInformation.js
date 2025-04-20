@@ -1,17 +1,17 @@
 import Card from "@mui/material/Card";
 import MDBox from "../../../components/MDBox";
 import MDTypography from "../../../components/MDTypography";
-import axiosInstance from "../../../apis/axios";
 import { useEffect, useState } from "react";
 import Grid from "@mui/material/Grid";
 import ItemCard from "../../../components/ItemCard";
+import { getMyWaitingItems } from "../../../apis/historyApi";
 
 function ReceivingInformation() {
   const [itemList, setItemList] = useState(null);
 
   useEffect(() => {
-    axiosInstance.get("/api/history/receiving").then((res) => {
-      setItemList(res.data);
+    getMyWaitingItems().then((response) => {
+      setItemList(response.data);
     });
   }, []);
 
