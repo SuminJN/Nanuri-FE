@@ -3,13 +3,13 @@ import axiosInstance from "./axios";
 const prefix = "/api/user";
 
 // 자신의 마이페이지 조회
-export const getMyPage = () => {
+export const getUserInfo = () => {
   return axiosInstance.get(prefix);
 };
 
 // 자신의 유저 정보 수정
 export const updateUser = (data) => {
-  return axiosInstance.put(prefix, data);
+  return axiosInstance.patch(prefix, data);
 };
 
 // 유저 탈퇴
