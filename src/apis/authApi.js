@@ -2,6 +2,7 @@ import axiosInstance from "./axios";
 
 const prefix = "/api/nanuri/auth";
 
+// 로그인
 export const login = async (hisnetToken) => {
   try {
     console.log("Hisnet Token : ", hisnetToken);
@@ -24,4 +25,14 @@ export const login = async (hisnetToken) => {
     console.log("토큰 보내기 실패");
     throw error;
   }
+};
+
+// 회원가입
+export const register = async (userData) => {
+  return axiosInstance.post(`${prefix}/signup`, userData);
+};
+
+// 로그아웃
+export const logout = async () => {
+  return axiosInstance.post(`${prefix}/logout`);
 };
