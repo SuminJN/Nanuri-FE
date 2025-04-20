@@ -2,7 +2,6 @@ import DashboardNavbar from "../../examples/Navbars/DashboardNavbar";
 import DashboardLayout from "../../examples/LayoutContainers/DashboardLayout";
 import MDBox from "../../components/MDBox";
 import Grid from "@mui/material/Grid";
-import Card from "@mui/material/Card";
 import React, { useEffect, useState } from "react";
 import axiosInstance from "../../apis/axios";
 import { useNavigate, useParams } from "react-router-dom";
@@ -11,6 +10,7 @@ import MDButton from "../../components/MDButton";
 import IconButton from "@mui/material/IconButton";
 import { navbarIconButton } from "../../examples/Navbars/DashboardNavbar/styles";
 import Icon from "@mui/material/Icon";
+import { applyWant, getWant } from "../../apis/wantApi";
 
 function PostDetail() {
   const { postId } = useParams();
@@ -25,17 +25,27 @@ function PostDetail() {
   });
 
   const handlePostApply = () => {
-    axiosInstance.post(`/api/wand/${postId}/select`).then((r) => {
-      alert("신청되었습니다.");
-      window.location.reload();
+    applyWant(postId).then((response) => {
+      if (response.status === 200) {
+        alert("신청이 완료되었습니다.");
+        navigate("/chat");
+      } else {
+        alert("신청 오류가 발생했습니다. 다시 시도해주세요.");
+        window.location.reload();
+      }
     });
   };
 
   useEffect(() => {
     console.log(postId);
-    axiosInstance.get(`/api/want/${postId}`).then((res) => {
-      setPost(res.data);
-      console.log(res.data);
+    getWant(postId).then((response) => {
+      if (response.status === 200) {
+        console.log(response.data);
+        setPost(response.data);
+      } else {
+        alert("글 조회에 실패했습니다.");
+        navigate("/home");
+      }
     });
   }, []);
 

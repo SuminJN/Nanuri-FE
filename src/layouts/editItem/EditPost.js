@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import axiosInstance from "../../apis/axios";
 import MDBox from "../../components/MDBox";
 import IconButton from "@mui/material/IconButton";
 import { navbarIconButton } from "../../examples/Navbars/DashboardNavbar/styles";
 import Icon from "@mui/material/Icon";
-import Card from "@mui/material/Card";
 import Grid from "@mui/material/Grid";
 import DashboardLayout from "../../examples/LayoutContainers/DashboardLayout";
 import MDTypography from "../../components/MDTypography";
 import TextField from "@mui/material/TextField";
 import MDButton from "../../components/MDButton";
 import DashboardNavbar from "../../examples/Navbars/DashboardNavbar";
+import { deleteWant, editWant, getWant } from "../../apis/wantApi";
 
 const initState = {
   id: "",
@@ -28,9 +27,14 @@ const EditPost = () => {
   const [post, setPost] = useState({ ...initState });
 
   const getPost = async () => {
-    const response = await axiosInstance.get(`/api/want/${postId}`);
-    console.log(response.data);
-    setPost(response.data);
+    getWant(postId).then((response) => {
+      if (response.status === 200) {
+        setPost(response.data);
+      } else {
+        alert("글을 불러오는 데 실패했습니다.");
+        navigate("/home");
+      }
+    });
   };
 
   const handleChangePost = (e) => {
@@ -39,21 +43,28 @@ const EditPost = () => {
   };
 
   const handleClickEdit = async () => {
-    const response = await axiosInstance.patch(`/api/want/${postId}`, post);
-    alert("글이 수정되었습니다.");
-    navigate(`/home/post/${postId}`);
+    editWant(postId, post).then((response) => {
+      if (response.status === 200) {
+        alert("글이 수정되었습니다.");
+        navigate(`/home/post/${postId}`);
+      } else {
+        alert("수정 오류가 발생했습니다. 다시 시도해주세요.");
+        window.location.reload();
+      }
+    });
   };
 
   const handlePostDelete = async () => {
     if (window.confirm("정말로 삭제하시겠습니까?")) {
-      try {
-        const response = await axiosInstance.delete(`/api/want/${postId}`);
-        console.log("받아요 글 삭제 성공: ", response);
-        alert("글이 삭제되었습니다.");
-        navigate("/home");
-      } catch (e) {
-        console.log("받아요 글 삭제 실패: ", e);
-      }
+      deleteWant(postId).then((response) => {
+        if (response.status === 200) {
+          alert("글이 삭제되었습니다.");
+          navigate("/home");
+        } else {
+          alert("삭제 오류가 발생했습니다. 다시 시도해주세요.");
+          window.location.reload();
+        }
+      });
     }
   };
 

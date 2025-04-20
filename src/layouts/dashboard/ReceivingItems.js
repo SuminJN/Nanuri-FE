@@ -5,15 +5,17 @@ import { useEffect, useState } from "react";
 import axiosInstance from "../../apis/axios";
 import PostCard from "../../components/PostCard";
 import useGetTime from "../../hooks/useGetTime";
+import { getWantList } from "../../apis/wantApi";
 
 function ReceivingItems() {
   const [postList, setPostList] = useState(null);
   const { getCurrentTime } = useGetTime();
 
   useEffect(() => {
-    axiosInstance.get("/api/want/posts").then((res) => {
-      setPostList(res.data);
-      console.log(res.data);
+    getWantList().then((response) => {
+      if (response.status === 200) {
+        setPostList(response.data);
+      }
     });
   }, []);
   return (
