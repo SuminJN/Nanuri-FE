@@ -72,124 +72,125 @@ const EditItem = () => {
   return (
     <DashboardLayout>
       <DashboardNavbar />
-      <MDBox my={3} borderRadius="lg" sx={{ borderColor: "grey.300" }} border={2} shadow="md">
-        <MDBox p={2}>
-          <IconButton
-            size="small"
-            disableRipple
-            sx={navbarIconButton}
-            variant="contained"
-            onClick={() => {
-              navigate(-1);
-            }}
-          >
-            <Icon>arrow_back_ios_icon</Icon>
-          </IconButton>
-        </MDBox>
-        <Grid container spacing={2} sx={{ p: { xs: 2, sm: 3, md: 5 } }}>
-          <Grid item xs={12} sm={12} md={6}>
-            <MDBox>
-              <Carousel arrows infinite={false}>
-                {item &&
-                  item.images.map((image, index) => (
-                    <div key={index}>
-                      <Image
-                        src={image}
-                        alt="image"
-                        width="100%"
-                        height="400px"
-                        style={{ borderRadius: "8px", boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)" }}
-                      />
-                    </div>
-                  ))}
-              </Carousel>
-            </MDBox>
-          </Grid>
-          <Grid item xs={12} sm={12} md={6}>
-            <MDBox>
-              <MDBox mb={2}>
-                <MDTypography variant="h6" fontWeight="bold" color="info">
-                  제목
-                </MDTypography>
-                <TextField name="title" value={item.title} onChange={handleChangeItem} fullWidth />
-              </MDBox>
-              <MDBox mb={2}>
-                <MDTypography variant="h6" fontWeight="bold" color="info">
-                  카테고리
-                </MDTypography>
-                <TextField
-                  name="category"
-                  value={item.category}
-                  onChange={handleChangeItem}
-                  fullWidth
-                />
-              </MDBox>
-              <MDBox mb={2}>
-                <MDTypography variant="h6" fontWeight="bold" color="info">
-                  자세한 설명
-                </MDTypography>
-                <TextField
-                  name="description"
-                  value={item.description}
-                  onChange={handleChangeItem}
-                  multiline
-                  rows={6}
-                  fullWidth
-                />
-              </MDBox>
-              <MDBox>
-                <Grid container spacing={1}>
-                  <Grid item xs={12} sm={6}>
-                    <MDBox>
-                      <MDButton
-                        variant="outlined"
-                        color="info"
-                        fullWidth
-                        startIcon={<Icon>mode_edit_icon</Icon>}
-                        onClick={handleClickEdit}
-                      >
-                        <MDTypography variant="h6" color="info">
-                          수정완료
-                        </MDTypography>
-                      </MDButton>
-                    </MDBox>
-                  </Grid>
-                  <Grid item xs={12} sm={6}>
-                    <MDBox>
-                      <MDButton
-                        variant="outlined"
-                        color="error"
-                        fullWidth
-                        startIcon={<Icon>delete_icon</Icon>}
-                        onClick={handleItemDelete}
-                      >
-                        <MDTypography variant="h6" color="error">
-                          나눔 삭제
-                        </MDTypography>
-                      </MDButton>
-                    </MDBox>
-                  </Grid>
-                  <Grid item xs={12}>
-                    <MDBox>
-                      <MDButton
-                        variant="outlined"
-                        color="secondary"
-                        fullWidth
-                        startIcon={<Icon>close_icon</Icon>}
-                        onClick={() => navigate(`/home/${item.id}`)}
-                      >
-                        <MDTypography variant="h6" color="secondary">
-                          취소
-                        </MDTypography>
-                      </MDButton>
-                    </MDBox>
-                  </Grid>
-                </Grid>
-              </MDBox>
-            </MDBox>
-          </Grid>
+      <Grid container justifyContent="center">
+        <Grid item xs={12} sm={10} md={10} lg={8}>
+          <MDBox my={3} borderRadius="lg" sx={{ borderColor: "grey.300" }} border={2} shadow="md">
+            <Grid container spacing={2} sx={{ p: { xs: 2, sm: 3, md: 5 } }}>
+              <Grid item xs={12} sm={12} md={6}>
+                <MDBox>
+                  <Carousel arrows infinite={false}>
+                    {item &&
+                      item.images.map((image, index) => (
+                        <div key={index}>
+                          <img
+                            src={image}
+                            alt="image"
+                            width="100%"
+                            height="100%"
+                            style={{
+                              aspectRatio: "1 / 1",
+                              borderRadius: "8px",
+                              boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
+                              objectFit: "cover",
+                            }}
+                          />
+                        </div>
+                      ))}
+                  </Carousel>
+                </MDBox>
+              </Grid>
+              <Grid item xs={12} sm={12} md={6}>
+                <MDBox>
+                  <MDBox mb={2}>
+                    <MDTypography variant="h6" fontWeight="bold" color="info">
+                      제목
+                    </MDTypography>
+                    <TextField
+                      name="title"
+                      value={item.title}
+                      onChange={handleChangeItem}
+                      fullWidth
+                    />
+                  </MDBox>
+                  <MDBox mb={2}>
+                    <MDTypography variant="h6" fontWeight="bold" color="info">
+                      카테고리
+                    </MDTypography>
+                    <TextField
+                      name="category"
+                      value={item.category}
+                      onChange={handleChangeItem}
+                      fullWidth
+                    />
+                  </MDBox>
+                  <MDBox mb={2}>
+                    <MDTypography variant="h6" fontWeight="bold" color="info">
+                      자세한 설명
+                    </MDTypography>
+                    <TextField
+                      name="description"
+                      value={item.description}
+                      onChange={handleChangeItem}
+                      multiline
+                      rows={6}
+                      fullWidth
+                    />
+                  </MDBox>
+                  <MDBox>
+                    <Grid container spacing={1}>
+                      <Grid item xs={12} sm={6}>
+                        <MDBox>
+                          <MDButton
+                            variant="outlined"
+                            color="info"
+                            fullWidth
+                            startIcon={<Icon>mode_edit_icon</Icon>}
+                            onClick={handleClickEdit}
+                          >
+                            <MDTypography variant="h6" color="info">
+                              수정완료
+                            </MDTypography>
+                          </MDButton>
+                        </MDBox>
+                      </Grid>
+                      <Grid item xs={12} sm={6}>
+                        <MDBox>
+                          <MDButton
+                            variant="outlined"
+                            color="error"
+                            fullWidth
+                            startIcon={<Icon>delete_icon</Icon>}
+                            onClick={handleItemDelete}
+                          >
+                            <MDTypography variant="h6" color="error">
+                              나눔 삭제
+                            </MDTypography>
+                          </MDButton>
+                        </MDBox>
+                      </Grid>
+                      <Grid item xs={12}>
+                        <MDBox>
+                          <MDButton
+                            variant="outlined"
+                            color="secondary"
+                            fullWidth
+                            startIcon={<Icon>close_icon</Icon>}
+                            onClick={() => navigate(`/home/${item.id}`)}
+                          >
+                            <MDTypography variant="h6" color="secondary">
+                              취소
+                            </MDTypography>
+                          </MDButton>
+                        </MDBox>
+                      </Grid>
+                    </Grid>
+                  </MDBox>
+                </MDBox>
+              </Grid>
+            </Grid>
+          </MDBox>
         </Grid>
-      </MDBox>
+      </Grid>
     </DashboardLayout>
   );
 };
