@@ -22,7 +22,6 @@ export default styled(Drawer)(({ theme, ownerState }) => {
 
   // styles for the sidenav when miniSidenav={false}
   const drawerOpenStyles = () => ({
-    border: "2px solid",
     borderColor: grey[300],
     background: white.main,
     transform: "translateX(0)",
@@ -46,7 +45,6 @@ export default styled(Drawer)(({ theme, ownerState }) => {
 
   // styles for the sidenav when miniSidenav={true}
   const drawerCloseStyles = () => ({
-    border: "2px solid",
     borderColor: grey[300],
     background: white.main,
     transform: `translateX(${pxToRem(-320)})`,
@@ -71,8 +69,8 @@ export default styled(Drawer)(({ theme, ownerState }) => {
 
   return {
     "& .MuiDrawer-paper": {
-      boxShadow: xxl,
-      border: "none",
+      boxShadow: "none",
+      border: "2px solid",
 
       ...(miniSidenav ? drawerCloseStyles() : drawerOpenStyles()),
     },
