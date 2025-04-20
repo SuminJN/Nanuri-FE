@@ -6,19 +6,20 @@ import ProfileInfoCard from "./ProfileInfoCard";
 import ChatRoomList from "../chat/ChatRoomList";
 import Header from "layouts/profile/components/Header";
 import profilesListData from "layouts/profile/data/profilesListData";
-import axiosInstance from "../../apis/axios";
 import React, { useEffect, useState } from "react";
 import ShareCardList from "./components/ShareCardList";
 import MDTypography from "../../components/MDTypography";
 import Tooltip from "@mui/material/Tooltip";
 import Icon from "@mui/material/Icon";
-import Card from "@mui/material/Card";
 import TextField from "@mui/material/TextField";
 import { Select } from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
 import DashboardNavbar from "../../examples/Navbars/DashboardNavbar";
+import { getUserInfo, updateUser } from "../../apis/userApi";
+import { useNavigate } from "react-router-dom";
 
 function Overview() {
+  const navigate = useNavigate();
   const [isEditing, setIsEditing] = useState(false);
   const [user, setUser] = useState({
     uniqueId: "",
@@ -38,22 +39,27 @@ function Overview() {
     setUser({ ...user });
   };
 
-  const handleSubmitEdit = async () => {
-    const response = await axiosInstance.patch("/api/user", user);
-    console.log(response.data);
-    setUser(response.data);
-    setIsEditing(false);
-    window.location.reload();
-  };
-
-  const getUser = async () => {
-    const response = await axiosInstance.get("/api/user");
-    console.log(response.data);
-    setUser(response.data);
+  const handleSubmitEdit = () => {
+    updateUser(user).then((response) => {
+      if (response.status === 200) {
+        alert("프로필 수정이 완료되었습니다.");
+        window.location.reload();
+      } else {
+        alert("프로필 수정에 실패했습니다.");
+        window.location.reload();
+      }
+    });
   };
 
   useEffect(() => {
-    getUser();
+    getUserInfo().then((response) => {
+      if (response.status === 200) {
+        setUser(response.data);
+      } else {
+        alert("유저 정보를 가져오는 데 실패했습니다.");
+        navigate("/home");
+      }
+    });
   }, []);
 
   return (

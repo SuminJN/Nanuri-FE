@@ -14,6 +14,7 @@ import Grid from "@mui/material/Grid";
 import Divider from "@mui/material/Divider";
 import SelectInput from "@mui/material/Select/SelectInput";
 import { NicknameState } from "../../../recoil/NicknameState";
+import { getUserInfo } from "../../../apis/userApi";
 
 function Cover() {
   const [nicknameState, setNicknameState] = useRecoilState(NicknameState);
@@ -50,8 +51,10 @@ function Cover() {
   };
 
   useEffect(() => {
-    axiosInstance.get("/api/user").then((res) => {
-      setUserInfo(res.data);
+    getUserInfo().then((response) => {
+      if (response.status === 200) {
+        setUserInfo(response.data);
+      }
     });
   }, []);
 
