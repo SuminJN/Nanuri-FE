@@ -17,6 +17,7 @@ import MDAvatar from "../../components/MDAvatar";
 import image from "../../assets/images/team-2.jpg";
 import MDSnackbar from "../../components/MDSnackbar";
 import { getItem } from "../../apis/itemApi";
+import { applyItem } from "../../apis/historyApi";
 
 function DetailItem() {
   const { itemId } = useParams();
@@ -51,10 +52,16 @@ function DetailItem() {
   );
 
   const handleItemApply = () => {
-    axiosInstance.post("/api/history", { itemId: itemId }).then((r) => {
-      alert("신청되었습니다.");
-      navigate("/chat");
-    });
+    applyItem(itemId)
+      .then((response) => {
+        alert("신청이 완료되었습니다.");
+        navigate("/chat");
+      })
+      .catch((error) => {
+        if (error.response.status === 409) {
+          alert(error.response.data.errors[0]);
+        }
+      });
   };
 
   const handleAddWish = () => {
