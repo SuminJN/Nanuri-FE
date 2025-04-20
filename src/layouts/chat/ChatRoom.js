@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
 import SockJS from "sockjs-client";
 
 import { useRecoilValue } from "recoil";
@@ -92,6 +94,7 @@ function ChatRoom() {
                   senderNickname: receiveData.senderNickname,
                   roomId: receiveData.roomId,
                   receiverNickname: receiveData.receiverNickname,
+                  createdAt: receiveData.createdAt,
                 },
               ]);
             });
@@ -205,6 +208,31 @@ function ChatRoom() {
     }
   };
 
+  const formatDateGroupHeader = (timestamp) => {
+    const date = new Date(timestamp);
+    return date.toLocaleDateString("ko-KR", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      weekday: "long",
+    }); // 예: 2025년 4월 19일 토요일
+  };
+
+  /**
+   * 시간 변환 함수
+   * @param timestamp
+   * @returns {`${string} ${number}:${string}`}
+   */
+  const formatTime = (timestamp) => {
+    if (!timestamp) return "";
+    const date = new Date(timestamp);
+    let hours = date.getHours();
+    const minutes = date.getMinutes();
+    const ampm = hours >= 12 ? "오후" : "오전";
+    hours = hours % 12 || 12; // 0시는 12시로 변환
+    return `${ampm} ${hours}:${minutes.toString().padStart(2, "0")}`;
+  };
+
   useEffect(() => {
     getRoomInfo();
     stompHandler.connect();
@@ -284,18 +312,73 @@ function ChatRoom() {
                         flexDirection: "column",
                       }}
                     >
-                      {messages.map((m, index) => (
-                        <div ref={index === 0 ? topRef : null} key={index}>
-                          <Message
-                            key={index}
-                            model={{
-                              message: m.message,
-                              direction: m.senderNickname === nickname ? "outgoing" : "incoming",
-                              position: "single",
-                            }}
-                          />
-                        </div>
-                      ))}
+                      {(() => {
+                        let lastDate = null;
+                        return messages.map((m, index) => {
+                          const messageDate = new Date(m.createdAt).toDateString();
+                          const showDateHeader = messageDate !== lastDate;
+                          lastDate = messageDate;
+
+                          const isMine = m.senderNickname === nickname;
+
+                          return (
+                            <div
+                              key={index}
+                              ref={index === 0 ? topRef : null} // ✅ 이제 observer가 감지할 수 있어짐
+                            >
+                              {showDateHeader && (
+                                <div style={{ textAlign: "center", margin: "12px 0" }}>
+                                  <span
+                                    style={{
+                                      backgroundColor: "#eee",
+                                      color: "#666",
+                                      padding: "6px 14px",
+                                      borderRadius: "20px",
+                                      fontSize: "13px",
+                                    }}
+                                  >
+                                    {formatDateGroupHeader(m.createdAt)}
+                                  </span>
+                                </div>
+                              )}
+                              <div
+                                style={{
+                                  display: "flex",
+                                  justifyContent: isMine ? "flex-end" : "flex-start",
+                                }}
+                              >
+                                <div
+                                  style={{
+                                    display: "flex",
+                                    flexDirection: isMine ? "row-reverse" : "row",
+                                    alignItems: "flex-end",
+                                  }}
+                                >
+                                  <Message
+                                    model={{
+                                      message: m.message,
+                                      direction: isMine ? "outgoing" : "incoming",
+                                      position: "single",
+                                    }}
+                                  />
+                                  <div
+                                    style={{
+                                      fontSize: "12px",
+                                      color: "#999",
+                                      marginLeft: isMine ? "0px" : "6px",
+                                      marginRight: isMine ? "6px" : "0px",
+                                      alignSelf: "flex-end",
+                                      whiteSpace: "nowrap",
+                                    }}
+                                  >
+                                    {formatTime(m.createdAt)}
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          );
+                        });
+                      })()}
                     </MessageList>
                     <MessageInput
                       placeholder="메세지 작성"
@@ -308,53 +391,6 @@ function ChatRoom() {
                   </ChatContainer>
                 </MainContainer>
               </MDBox>
-              {/*<div*/}
-              {/*  style={{*/}
-              {/*    flex: 1,*/}
-              {/*    flexDirection: "column",*/}
-              {/*    justifyContent: "center",*/}
-              {/*    alignContent: "center",*/}
-              {/*    alignItems: "center",*/}
-              {/*    textAlign: "center",*/}
-              {/*  }}*/}
-              {/*>*/}
-              {/*  <h1>STOMP을 이용한 채팅방입니다. </h1>*/}
-              {/*  <div style={{ flexDirection: "row" }}>*/}
-              {/*    <input*/}
-              {/*      type="text"*/}
-              {/*      value={messageObj.message}*/}
-              {/*      onChange={(e) => setMessageObj({ ...messageObj, message: e.target.value })}*/}
-              {/*      onKeyDown={(e) => {*/}
-              {/*        if (e.keyCode === 13) {*/}
-              {/*          stompHandler.sendMessage();*/}
-              {/*        }*/}
-              {/*      }}*/}
-              {/*    />*/}
-              {/*    <button onClick={stompHandler.sendMessage}>전송</button>*/}
-              {/*  </div>*/}
-              {/*  <div*/}
-              {/*    style={{*/}
-              {/*      display: "flex",*/}
-              {/*      flexDirection: "column",*/}
-              {/*      height: 300,*/}
-              {/*      backgroundColor: "#f5d682",*/}
-              {/*      border: "1px solid red",*/}
-              {/*      margin: 20,*/}
-              {/*    }}*/}
-              {/*  >*/}
-              {/*    {messages.map((m, index) => (*/}
-              {/*      <h1*/}
-              {/*        style={{*/}
-              {/*          fontSize: 13,*/}
-              {/*          textAlign: "left",*/}
-              {/*        }}*/}
-              {/*        key={`messages-${index}`}*/}
-              {/*      >*/}
-              {/*        {m.senderNickname === nickname ? `[ME] ${m.message}` : `[OTHER] ${m.message}`}*/}
-              {/*      </h1>*/}
-              {/*    ))}*/}
-              {/*  </div>*/}
-              {/*</div>*/}
             </MDBox>
           </Grid>
         </Grid>
