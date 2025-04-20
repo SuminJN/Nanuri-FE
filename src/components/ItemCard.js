@@ -18,7 +18,7 @@ function ItemCard({
   description,
   viewCount,
   wishCount,
-  isWished,
+  wishStatus,
   route,
 }) {
   const navigate = useNavigate();
@@ -92,7 +92,7 @@ function ItemCard({
           style={{ marginTop: "auto" }}
         >
           <MDBox mr={2} display="flex" justifyContent="flex-end" alignItems="center">
-            {isWished ? (
+            {wishStatus ? (
               <Icon fontSize="medium" color="error">
                 favorite_icon
               </Icon>
@@ -129,7 +129,7 @@ function ItemCard({
 
 ItemCard.defaultProps = {
   noGutter: false,
-  isWished: false,
+  wishStatus: false,
 };
 
 ItemCard.propTypes = {
@@ -142,6 +142,7 @@ ItemCard.propTypes = {
   viewCount: PropTypes.number.isRequired,
   wishCount: PropTypes.number.isRequired,
   isWished: PropTypes.bool,
+  wishStatus: PropTypes.bool,
   route: PropTypes.string.isRequired,
 };
 
