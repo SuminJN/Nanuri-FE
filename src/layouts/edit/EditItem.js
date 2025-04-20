@@ -139,13 +139,13 @@ const EditItem = () => {
                       <Grid item xs={12} sm={6}>
                         <MDBox>
                           <MDButton
-                            variant="outlined"
+                            variant="gradient"
                             color="info"
                             fullWidth
                             startIcon={<Icon>mode_edit_icon</Icon>}
                             onClick={handleClickEdit}
                           >
-                            <MDTypography variant="h6" color="info">
+                            <MDTypography variant="h6" color="white">
                               수정완료
                             </MDTypography>
                           </MDButton>
@@ -154,13 +154,13 @@ const EditItem = () => {
                       <Grid item xs={12} sm={6}>
                         <MDBox>
                           <MDButton
-                            variant="outlined"
+                            variant="gradient"
                             color="error"
                             fullWidth
                             startIcon={<Icon>delete_icon</Icon>}
                             onClick={handleItemDelete}
                           >
-                            <MDTypography variant="h6" color="error">
+                            <MDTypography variant="h6" color="white">
                               나눔 삭제
                             </MDTypography>
                           </MDButton>
@@ -169,13 +169,13 @@ const EditItem = () => {
                       <Grid item xs={12}>
                         <MDBox>
                           <MDButton
-                            variant="outlined"
+                            variant="gradient"
                             color="secondary"
                             fullWidth
                             startIcon={<Icon>close_icon</Icon>}
                             onClick={() => navigate(`/home/${item.id}`)}
                           >
-                            <MDTypography variant="h6" color="secondary">
+                            <MDTypography variant="h6" color="white">
                               취소
                             </MDTypography>
                           </MDButton>
