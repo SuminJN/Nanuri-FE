@@ -5,13 +5,16 @@ import axiosInstance from "../../../apis/axios";
 import { useEffect, useState } from "react";
 import Grid from "@mui/material/Grid";
 import ItemCard from "../../../components/ItemCard";
+import { getMyCompletedItemList } from "../../../apis/itemApi";
 
 function ShareDoneInformation() {
   const [itemList, setItemList] = useState(null);
 
   useEffect(() => {
-    axiosInstance.get("/api/items/shared", { params: { done: "Completed" } }).then((res) => {
-      setItemList(res.data);
+    getMyCompletedItemList().then((response) => {
+      if (response.status === 200) {
+        setItemList(response.data);
+      }
     });
   }, []);
 

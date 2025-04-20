@@ -1,7 +1,5 @@
 // Material Dashboard 2 React layouts
 import Dashboard from "layouts/dashboard";
-import Tables from "layouts/tables";
-import Billing from "layouts/billing";
 import Notifications from "layouts/notifications";
 import Profile from "layouts/profile";
 import SignIn from "layouts/authentication/sign-in";
@@ -21,14 +19,6 @@ const routes = [
     route: "/home",
     component: <Dashboard />,
   },
-  // {
-  //   type: "collapse",
-  //   name: "My Share",
-  //   key: "my-share",
-  //   icon: <Icon fontSize="small">volunteer_activism</Icon>,
-  //   route: "/my-share",
-  //   component: <ShareHistory />,
-  // },
   {
     type: "collapse",
     name: "Chat",
@@ -37,22 +27,6 @@ const routes = [
     route: "/chat",
     component: <Chat />,
   },
-  // {
-  //   type: "collapse",
-  //   name: "Tables",
-  //   key: "tables",
-  //   icon: <Icon fontSize="small">table_view</Icon>,
-  //   route: "/tables",
-  //   component: <Tables />,
-  // },
-  // {
-  //   type: "collapse",
-  //   name: "Billing",
-  //   key: "billing",
-  //   icon: <Icon fontSize="small">receipt_long</Icon>,
-  //   route: "/billing",
-  //   component: <Billing />,
-  // },
   // {
   //   type: "collapse",
   //   name: "Notifications",

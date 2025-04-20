@@ -1,20 +1,20 @@
 import Grid from "@mui/material/Grid";
 import MDBox from "../../components/MDBox";
 import ItemCard from "../../components/ItemCard";
-import Card from "@mui/material/Card";
 import { useEffect, useState } from "react";
-import axiosInstance from "../../apis/axios";
 import { Badge } from "antd";
 import useGetTime from "../../hooks/useGetTime";
+import { getItemList } from "../../apis/itemApi";
 
 function SharingItems() {
   const [itemList, setItemList] = useState(null);
   const { getCurrentTime, isNew } = useGetTime();
 
   useEffect(() => {
-    axiosInstance.get("/api/items").then((res) => {
-      setItemList(res.data);
-      console.log(res.data);
+    getItemList().then((response) => {
+      if (response.status === 200) {
+        setItemList(response.data);
+      }
     });
   }, []);
 

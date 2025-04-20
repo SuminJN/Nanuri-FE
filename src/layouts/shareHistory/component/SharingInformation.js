@@ -6,15 +6,17 @@ import { useEffect, useState } from "react";
 import Grid from "@mui/material/Grid";
 import ItemCard from "../../../components/ItemCard";
 import useGetTime from "../../../hooks/useGetTime";
+import { getMyItemList } from "../../../apis/itemApi";
 
 function SharingInformation() {
   const [itemList, setItemList] = useState(null);
   const { getCurrentTime } = useGetTime();
 
   useEffect(() => {
-    axiosInstance.get("/api/items/shared", { params: { done: "None" } }).then((res) => {
-      setItemList(res.data);
-      console.log(res.data);
+    getMyItemList().then((response) => {
+      if (response.status === 200) {
+        setItemList(response.data);
+      }
     });
   }, []);
 

@@ -2,14 +2,13 @@ import DashboardLayout from "../../examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "../../examples/Navbars/DashboardNavbar";
 import MDBox from "../../components/MDBox";
 import Grid from "@mui/material/Grid";
-import Card from "@mui/material/Card";
 import MDTypography from "../../components/MDTypography";
 import TextField from "@mui/material/TextField";
 import MDButton from "../../components/MDButton";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axiosInstance from "../../apis/axios";
 import Footer from "../../examples/Footer";
+import { addWant } from "../../apis/wantApi";
 
 function AddPost() {
   const navigate = useNavigate();
@@ -27,14 +26,15 @@ function AddPost() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    try {
-      const response = await axiosInstance.post("/api/want", inputs);
-      alert("글이 등록되었습니다.");
-      navigate("/items");
-    } catch (e) {
-      alert("등록 오류가 발생했습니다. 다시 시도해주세요.");
-      window.location.reload();
-    }
+    addWant(inputs).then((response) => {
+      if (response.status === 200) {
+        alert("글이 등록되었습니다.");
+        navigate("/home");
+      } else {
+        alert("등록 오류가 발생했습니다. 다시 시도해주세요.");
+        window.location.reload();
+      }
+    });
   };
 
   return (
