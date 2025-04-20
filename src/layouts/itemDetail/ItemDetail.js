@@ -16,6 +16,7 @@ import useGetTime from "../../hooks/useGetTime";
 import MDAvatar from "../../components/MDAvatar";
 import image from "../../assets/images/team-2.jpg";
 import MDSnackbar from "../../components/MDSnackbar";
+import { getItem } from "../../apis/itemApi";
 
 function ItemDetail() {
   const { itemId } = useParams();
@@ -64,10 +65,10 @@ function ItemDetail() {
   };
 
   useEffect(() => {
-    console.log(itemId);
-    axiosInstance.get(`/api/item/${itemId}`).then((res) => {
-      setItem(res.data);
-      console.log(res.data);
+    getItem(itemId).then((response) => {
+      if (response.status === 200) {
+        setItem(response.data);
+      }
     });
   }, []);
 

@@ -2,17 +2,16 @@ import DashboardLayout from "../../examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "../../examples/Navbars/DashboardNavbar";
 import MDBox from "../../components/MDBox";
 import Grid from "@mui/material/Grid";
-import Card from "@mui/material/Card";
 import MDTypography from "../../components/MDTypography";
 import TextField from "@mui/material/TextField";
 import MDButton from "../../components/MDButton";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axiosInstance from "../../apis/axios";
 import { Image } from "antd";
 import Footer from "../../examples/Footer";
 import { Select } from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
+import { addItem, uploadImages } from "../../apis/itemApi";
 
 function AddItem() {
   const navigate = useNavigate();
@@ -73,17 +72,11 @@ function AddItem() {
       formData.append("files", file);
     });
 
-    axiosInstance.post("/api/item", inputs).then((response) => {
+    addItem(inputs).then((response) => {
       if (response.status === 200) {
         const itemId = response.data;
 
-        axiosInstance
-          .post(`/api/image/${itemId}`, formData, {
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
-          })
-          .then((res) => console.log(res));
+        uploadImages(itemId, formData).then((res) => console.log(res));
 
         alert("물건이 등록되었습니다.");
         navigate("/items");

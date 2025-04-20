@@ -15,6 +15,7 @@ import image from "../../assets/images/team-2.jpg";
 import MDTypography from "../../components/MDTypography";
 import MDButton from "../../components/MDButton";
 import TextField from "@mui/material/TextField";
+import { deleteItem, editItem } from "../../apis/itemApi";
 
 const initState = {
   id: 0,
@@ -36,9 +37,11 @@ const EditItem = () => {
   const [item, setItem] = useState({ ...initState });
 
   const getItem = async () => {
-    const response = await axiosInstance.get(`/api/item/${itemId}`);
-    console.log(response.data);
-    setItem(response.data);
+    getItem().then((response) => {
+      if (response.status === 200) {
+        setItem(response.data);
+      }
+    });
   };
 
   const handleChangeItem = (e) => {
@@ -47,21 +50,22 @@ const EditItem = () => {
   };
 
   const handleClickEdit = async () => {
-    const response = await axiosInstance.patch(`/api/item/${itemId}`, item);
-    alert("나눔 정보가 수정되었습니다.");
-    navigate(`/home/${itemId}`);
+    editItem(itemId, item).then((response) => {
+      if (response.status === 200) {
+        alert("수정되었습니다.");
+        navigate(`/home/${itemId}`);
+      }
+    });
   };
 
   const handleItemDelete = async () => {
     if (window.confirm("정말로 삭제하시겠습니까?")) {
-      try {
-        const response = await axiosInstance.delete(`/api/item/${itemId}`);
-        console.log("아이템 삭제 성공: ", response);
-        alert("물건이 삭제되었습니다.");
-        navigate("/home");
-      } catch (e) {
-        console.log("아이템 삭제 실패: ", e);
-      }
+      deleteItem(itemId).then((response) => {
+        if (response.status === 200) {
+          alert("삭제되었습니다.");
+          navigate("/home");
+        }
+      });
     }
   };
 
