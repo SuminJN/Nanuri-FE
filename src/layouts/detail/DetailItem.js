@@ -16,7 +16,7 @@ import image from "../../assets/images/team-2.jpg";
 import MDSnackbar from "../../components/MDSnackbar";
 import { getItem } from "../../apis/itemApi";
 import { applyItem } from "../../apis/historyApi";
-import { addWish } from "../../apis/wishApi";
+import { addWish, deleteWish } from "../../apis/wishApi";
 
 function DetailItem() {
   const { itemId } = useParams();
@@ -31,9 +31,11 @@ function DetailItem() {
     category: "",
     createdAt: "",
     wishCount: 0,
+    wishStatus: false,
     images: [],
     isOwner: null,
   });
+  const [isWish, setIsWish] = useState(false);
 
   const [successSB, setSuccessSB] = useState(false);
   const closeSuccessSB = () => setSuccessSB(false);
@@ -42,11 +44,24 @@ function DetailItem() {
       color="info"
       icon="check"
       title="관심 목록에 추가되었습니다."
-      // content="Hello, world! This is a notification message"
-      // dateTime="11 mins ago"
       open={successSB}
       onClose={closeSuccessSB}
       close={closeSuccessSB}
+      bgWhite
+    />
+  );
+
+  const [deleteSB, setDeleteSB] = useState(false);
+  const closeDeleteSB = () => setDeleteSB(false);
+  const renderDeleteSB = (
+    <MDSnackbar
+      color="error"
+      icon="check"
+      title="관심 목록에서 삭제되었습니다."
+      open={deleteSB}
+      onClose={closeDeleteSB}
+      close={closeDeleteSB}
+      bgWhite
     />
   );
 
@@ -65,8 +80,17 @@ function DetailItem() {
 
   const handleAddWish = () => {
     addWish(itemId).then((r) => {
-      // alert("관심 목록에 등록되었습니다.");
+      item.wishCount++;
+      setIsWish(true);
       setSuccessSB(true);
+    });
+  };
+
+  const handleDeleteWish = () => {
+    deleteWish(itemId).then((r) => {
+      item.wishCount--;
+      setIsWish(false);
+      setDeleteSB(true);
     });
   };
 
@@ -74,6 +98,7 @@ function DetailItem() {
     getItem(itemId).then((response) => {
       if (response.status === 200) {
         setItem(response.data);
+        setIsWish(response.data.wishStatus);
       }
     });
   }, []);
@@ -91,13 +116,13 @@ function DetailItem() {
                 sx={navbarIconButton}
                 variant="contained"
                 onClick={() => {
-                  navigate("/home");
+                  navigate(-1);
                 }}
               >
                 <Icon>arrow_back_ios_icon</Icon>
               </IconButton>
             </MDBox>
-            <Grid container spacing={2} sx={{ p: { xs: 2, sm: 3, md: 5 } }}>
+            <Grid container spacing={5} sx={{ p: { xs: 2, sm: 3, md: 5 } }}>
               <Grid item xs={12} sm={12} md={6}>
                 <MDBox>
                   <Carousel arrows infinite={false}>
@@ -131,17 +156,17 @@ function DetailItem() {
               </Grid>
               <Grid item xs={12} sm={12} md={6}>
                 <MDBox>
-                  <MDBox mb={1}>
+                  <MDBox mb={0}>
                     <MDTypography variant="h4" color="info">
                       {item.title}
                     </MDTypography>
                   </MDBox>
-                  <MDBox mb={5}>
+                  <MDBox mb={2}>
                     <MDTypography variant="h6" opacity="60%">
                       {item.category} · {item.createdTime}
                     </MDTypography>
                   </MDBox>
-                  <MDBox mb={2}>
+                  <MDBox mb={5}>
                     <MDTypography variant="h6">{item.description}</MDTypography>
                   </MDBox>
                   <MDBox>
@@ -149,20 +174,20 @@ function DetailItem() {
                       신청 0 · 관심 {item.wishCount ? item.wishCount : 0} · 조회 {item.viewCount}
                     </MDTypography>
                   </MDBox>
-                  <MDBox>
+                  <MDBox mx={1}>
                     {item.isOwner ? (
                       <>
                         <Grid container spacing={1}>
                           <Grid item xs={12}>
                             <MDBox>
                               <MDButton
-                                variant="outlined"
+                                variant="gradient"
                                 color="info"
                                 fullWidth
                                 startIcon={<Icon>mode_edit_icon</Icon>}
                                 onClick={() => navigate(`/home/edit-item/${item.id}`)}
                               >
-                                <MDTypography variant="h6" color="info">
+                                <MDTypography variant="h6" color="white">
                                   나눔정보 수정
                                 </MDTypography>
                               </MDButton>
@@ -172,39 +197,50 @@ function DetailItem() {
                       </>
                     ) : (
                       <>
-                        <Grid container spacing={1}>
-                          <Grid item xs={12} sm={6}>
+                        <Grid container spacing={3}>
+                          <Grid
+                            item
+                            xs={1}
+                            display="flex"
+                            justifyContent="center"
+                            alignItems="center"
+                            sx={{ cursor: "pointer" }}
+                          >
+                            {isWish ? (
+                              <MDBox onClick={handleDeleteWish}>
+                                <Icon fontSize="medium" color="error">
+                                  favorite_icon
+                                </Icon>
+                                <MDTypography lineHeight={0}>{item.wishCount}</MDTypography>
+                              </MDBox>
+                            ) : (
+                              <MDBox onClick={handleAddWish}>
+                                <Icon fontSize="medium" color="dark">
+                                  favorite_border_icon
+                                </Icon>
+                                <MDTypography lineHeight={0}>{item.wishCount}</MDTypography>
+                              </MDBox>
+                            )}
+                          </Grid>
+                          <Grid item xs={11}>
                             <MDBox>
                               <MDButton
-                                variant="outlined"
-                                color="info"
+                                variant="gradient"
+                                color="secondary"
                                 fullWidth
                                 onClick={handleItemApply}
                               >
-                                <MDTypography variant="h6" color="info">
+                                <MDTypography variant="h6" color="white">
                                   채팅하기
                                 </MDTypography>
                               </MDButton>
                             </MDBox>
                           </Grid>
-                          <Grid item xs={12} sm={6}>
-                            <MDBox>
-                              <MDButton
-                                variant="outlined"
-                                color="secondary"
-                                fullWidth
-                                onClick={handleAddWish}
-                              >
-                                <MDTypography variant="h6" color="secondary">
-                                  관심 추가
-                                </MDTypography>
-                              </MDButton>
-                              {renderSuccessSB}
-                            </MDBox>
-                          </Grid>
                         </Grid>
                       </>
                     )}
+                    {renderSuccessSB}
+                    {renderDeleteSB}
                   </MDBox>
                 </MDBox>
               </Grid>
