@@ -41,8 +41,8 @@ import { useRecoilValue } from "recoil";
 import { LoginState } from "./recoil/LoginState";
 import SignIn from "./layouts/authentication/sign-in";
 import LoginIng from "./util/LoginIng";
-import ItemDetail from "./layouts/itemDetail/ItemDetail";
-import AddItem from "./layouts/addItem/AddItem";
+import DetailItem from "./layouts/detail/DetailItem";
+import AddItem from "./layouts/add/AddItem";
 import SignUp from "./layouts/authentication/sign-up";
 import ShareHistory from "./layouts/shareHistory";
 import { CommentOutlined, CustomerServiceOutlined } from "@ant-design/icons";
@@ -50,13 +50,13 @@ import { FloatButton } from "antd";
 import Wish from "./layouts/wish/Wish";
 import Chat from "./layouts/chat/Chat";
 import ChatField from "./layouts/chat/ChatField";
-import AddPost from "./layouts/addItem/AddPost";
-import PostDetail from "./layouts/itemDetail/PostDetail";
+import AddPost from "./layouts/add/AddPost";
+import DetailPost from "./layouts/detail/DetailPost";
 import Notifications from "./layouts/notifications";
-import EditItem from "./layouts/editItem/EditItem";
+import EditItem from "./layouts/edit/EditItem";
 import ChatRoom from "./layouts/chat/ChatRoom";
 import DashboardNavbar from "./examples/Navbars/DashboardNavbar";
-import EditPost from "./layouts/editItem/EditPost";
+import EditPost from "./layouts/edit/EditPost";
 
 export default function App() {
   const [controller, dispatch] = useMaterialUIController();
@@ -198,17 +198,17 @@ export default function App() {
           <>
             {getRoutes(routes)}
             <Route path="*" element={<Navigate to="/home" />} />
-            <Route path="/home/:itemId" element={<ItemDetail />} />
-            <Route path="/home/post/:postId" element={<PostDetail />} />
+            <Route path="/home/:itemId" element={<DetailItem />} />
+            <Route path="/home/post/:postId" element={<DetailPost />} />
             <Route path="/home/addItem" element={<AddItem />} />
             <Route path="/home/addPost" element={<AddPost />} />
             <Route path="/home/edit-item/:itemId" element={<EditItem />} />
             <Route path="/home/edit-post/:postId" element={<EditPost />} />
             <Route path="/my-share" element={<ShareHistory />} />
-            <Route path="/my-share/:itemId" element={<ItemDetail />} />
+            <Route path="/my-share/:itemId" element={<DetailItem />} />
             <Route path="/wish" element={<Wish />} />
-            <Route path="/wish/:itemId" element={<ItemDetail />} />
-            <Route path="/profile/:itemId" element={<ItemDetail />} />
+            <Route path="/wish/:itemId" element={<DetailItem />} />
+            <Route path="/profile/:itemId" element={<DetailItem />} />
             <Route path="/chat" element={<Chat />} />
             <Route path="/chat/:roomId" element={<ChatRoom />} />
             <Route path="/notifications" element={<Notifications />} />

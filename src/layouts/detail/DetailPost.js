@@ -12,7 +12,7 @@ import { navbarIconButton } from "../../examples/Navbars/DashboardNavbar/styles"
 import Icon from "@mui/material/Icon";
 import { applyWant, getWant } from "../../apis/wantApi";
 
-function PostDetail() {
+function DetailPost() {
   const { postId } = useParams();
   const navigate = useNavigate();
   const [post, setPost] = useState({
@@ -135,4 +135,4 @@ function PostDetail() {
   );
 }
 
-export default PostDetail;
+export default DetailPost;

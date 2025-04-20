@@ -18,7 +18,7 @@ import image from "../../assets/images/team-2.jpg";
 import MDSnackbar from "../../components/MDSnackbar";
 import { getItem } from "../../apis/itemApi";
 
-function ItemDetail() {
+function DetailItem() {
   const { itemId } = useParams();
   const navigate = useNavigate();
   const { getCurrentTime } = useGetTime();
@@ -210,4 +210,4 @@ function ItemDetail() {
   );
 }
 
-export default ItemDetail;
+export default DetailItem;
