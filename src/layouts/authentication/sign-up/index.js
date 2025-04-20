@@ -1,20 +1,25 @@
 import Card from "@mui/material/Card";
-import Checkbox from "@mui/material/Checkbox";
 import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
 import MDButton from "components/MDButton";
 import CoverLayout from "layouts/authentication/components/CoverLayout";
 import bgImage from "assets/images/bg-sign-up-cover.jpeg";
-import axiosInstance from "../../../apis/axios";
 import { useEffect, useRef, useState } from "react";
 import { useRecoilState } from "recoil";
 import { LoginState } from "../../../recoil/LoginState";
 import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
 import Divider from "@mui/material/Divider";
-import SelectInput from "@mui/material/Select/SelectInput";
 import { NicknameState } from "../../../recoil/NicknameState";
 import { getUserInfo } from "../../../apis/userApi";
+import { register } from "../../../apis/authApi";
+
+const initialUserInfo = {
+  nickname: "",
+  mbti: "",
+  interestItemCategory: "",
+  introduction: "",
+};
 
 function Cover() {
   const [nicknameState, setNicknameState] = useRecoilState(NicknameState);
@@ -24,30 +29,23 @@ function Cover() {
     name: null,
     department: null,
   });
-  const [nickname, setNickname] = useState("");
-  const [introduction, setIntroduction] = useState("");
-  const [mbti, setMbti] = useState("");
-  const [hobby, setHobby] = useState("");
-  const [tag, setTag] = useState("");
+
+  const [additionalInfo, setAdditionalInfo] = useState(initialUserInfo);
+
+  const handleChangeInfo = (e) => {
+    additionalInfo[e.target.name] = e.target.value;
+    setAdditionalInfo({ ...additionalInfo });
+  };
 
   // 폼 제출 함수
   const onSubmit = (event) => {
     event.preventDefault();
 
-    axiosInstance
-      .post("/api/nanuri/auth/signup", {
-        uniqueId: userInfo.uniqueId,
-        nickname: nickname,
-        introduction: introduction,
-        mbti: mbti,
-        hobby: hobby,
-        tag: tag,
-      })
-      .then((res) => {
-        setIsLoggedIn(true);
-        setNicknameState(nickname);
-        window.location.href = "/";
-      });
+    register(additionalInfo).then((response) => {
+      setIsLoggedIn(true);
+      setNicknameState(additionalInfo.nickname);
+      window.location.href = "/";
+    });
   };
 
   useEffect(() => {
@@ -115,10 +113,8 @@ function Cover() {
                   fullWidth
                   required
                   autoFocus
-                  value={nickname}
-                  onChange={(event) => {
-                    setNickname(event.target.value);
-                  }}
+                  value={additionalInfo.nickname}
+                  onChange={handleChangeInfo}
                 />
               </MDBox>
             </MDBox>
@@ -137,10 +133,8 @@ function Cover() {
                   label="소개말"
                   variant="outlined"
                   fullWidth
-                  value={introduction}
-                  onChange={(event) => {
-                    setIntroduction(event.target.value);
-                  }}
+                  value={additionalInfo.introduction}
+                  onChange={handleChangeInfo}
                 />
               </MDBox>
               <MDBox mb={3}>
@@ -149,34 +143,18 @@ function Cover() {
                   label="MBTI"
                   variant="outlined"
                   fullWidth
-                  value={mbti}
-                  onChange={(event) => {
-                    setMbti(event.target.value);
-                  }}
-                />
-              </MDBox>
-              <MDBox mb={3}>
-                <TextField
-                  id="hobby"
-                  label="취미"
-                  variant="outlined"
-                  fullWidth
-                  value={hobby}
-                  onChange={(event) => {
-                    setHobby(event.target.value);
-                  }}
+                  value={additionalInfo.mbti}
+                  onChange={handleChangeInfo}
                 />
               </MDBox>
               <MDBox mb={3}>
                 <TextField
                   id="tag"
-                  label="관심 태그"
+                  label="관심 카테고리"
                   variant="outlined"
                   fullWidth
-                  value={tag}
-                  onChange={(event) => {
-                    setTag(event.target.value);
-                  }}
+                  value={additionalInfo.interestItemCategory}
+                  onChange={handleChangeInfo}
                 />
               </MDBox>
             </MDBox>

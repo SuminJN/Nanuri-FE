@@ -53,9 +53,9 @@ import {
   setMiniSidenav,
   setOpenConfigurator,
 } from "context";
-import axiosInstance from "../../../apis/axios";
 import { useRecoilState } from "recoil";
 import { LoginState } from "../../../recoil/LoginState";
+import { logout } from "../../../apis/authApi";
 
 function DashboardNavbar({ absolute, light, isMini }) {
   const [navbarType, setNavbarType] = useState();
@@ -68,7 +68,7 @@ function DashboardNavbar({ absolute, light, isMini }) {
 
   const handleLogout = () => {
     if (window.confirm("정말로 로그아웃 하시겠습니까?")) {
-      axiosInstance.get("/api/nanuri/auth/logout").then((r) => {
+      logout().then((r) => {
         setIsLoggedIn(false);
       });
     }
