@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useRecoilState } from "recoil";
 import { LoginState } from "../recoil/LoginState";
 import { useNavigate } from "react-router-dom";
-import { login } from "../apis/userApi";
+import { login } from "../apis/authApi";
 import { NicknameState } from "../recoil/NicknameState";
 import { handleAllowNotification } from "./notification";
 
