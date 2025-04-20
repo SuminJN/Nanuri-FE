@@ -15,7 +15,7 @@ import image from "../../assets/images/team-2.jpg";
 import MDTypography from "../../components/MDTypography";
 import MDButton from "../../components/MDButton";
 import TextField from "@mui/material/TextField";
-import { deleteItem, editItem } from "../../apis/itemApi";
+import { deleteItem, editItem, getItem } from "../../apis/itemApi";
 
 const initState = {
   id: 0,
@@ -35,14 +35,6 @@ const EditItem = () => {
   const navigate = useNavigate();
   const { itemId } = useParams();
   const [item, setItem] = useState({ ...initState });
-
-  const getItem = async () => {
-    getItem().then((response) => {
-      if (response.status === 200) {
-        setItem(response.data);
-      }
-    });
-  };
 
   const handleChangeItem = (e) => {
     item[e.target.name] = e.target.value;
@@ -70,7 +62,9 @@ const EditItem = () => {
   };
 
   useEffect(() => {
-    getItem();
+    getItem(itemId).then((response) => {
+      setItem(response.data);
+    });
   }, []);
 
   return (
