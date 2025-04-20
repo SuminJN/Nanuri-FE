@@ -96,13 +96,13 @@ function DetailPost() {
                           <Grid item xs={12}>
                             <MDBox>
                               <MDButton
-                                variant="outlined"
+                                variant="gradient"
                                 color="info"
                                 fullWidth
                                 startIcon={<Icon>mode_edit_icon</Icon>}
                                 onClick={() => navigate(`/home/edit-post/${post.id}`)}
                               >
-                                <MDTypography variant="h6" color="info">
+                                <MDTypography variant="h6" color="white">
                                   수정하기
                                 </MDTypography>
                               </MDButton>
@@ -112,12 +112,12 @@ function DetailPost() {
                       ) : (
                         <MDBox mb={1}>
                           <MDButton
-                            variant="outlined"
-                            color="info"
+                            variant="gradient"
+                            color="secondary"
                             fullWidth
                             onClick={handlePostApply}
                           >
-                            <MDTypography variant="h6" color="info">
+                            <MDTypography variant="h6" color="white">
                               채팅하기
                             </MDTypography>
                           </MDButton>

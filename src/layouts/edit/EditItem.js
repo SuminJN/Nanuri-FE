@@ -73,6 +73,9 @@ const EditItem = () => {
       <Grid container justifyContent="center">
         <Grid item xs={12} sm={10} md={10} lg={8}>
           <MDBox my={3} borderRadius="lg" sx={{ borderColor: "grey.300" }} border={2} shadow="md">
+            <MDBox display="flex" justifyContent="center" alignItems="center" p={2}>
+              <MDTypography variant="h3">나눔 글 수정하기</MDTypography>
+            </MDBox>
             <Grid container spacing={2} sx={{ p: { xs: 2, sm: 3, md: 5 } }}>
               <Grid item xs={12} sm={12} md={6}>
                 <MDBox>
@@ -173,7 +176,7 @@ const EditItem = () => {
                             color="secondary"
                             fullWidth
                             startIcon={<Icon>close_icon</Icon>}
-                            onClick={() => navigate(`/home/${item.id}`)}
+                            onClick={() => navigate(`/home/${item.id}`, { replace: true })}
                           >
                             <MDTypography variant="h6" color="white">
                               취소
