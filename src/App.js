@@ -213,12 +213,12 @@ export default function App() {
             <Route path="/chat" element={<Chat />} />
             <Route path="/chat/:roomId" element={<ChatRoom />} />
             <Route path="/notifications" element={<Notifications />} />
+            <Route path="/signup" element={<SignUp />} />
           </>
         ) : (
           <>
             <Route path="*" element={<SignIn />} />
             <Route path="/nanuri/callback" element={<LoginIng />} />
-            <Route path="/signup" element={<SignUp />} />
           </>
         )}
       </Routes>
