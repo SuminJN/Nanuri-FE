@@ -156,7 +156,7 @@ export default function App() {
     // <ThemeProvider theme={darkMode ? themeDark : theme}>
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      {loginState ? (
+      {layout === "dashboard" && (
         <>
           <Sidenav
             color={sidenavColor}
@@ -191,8 +191,6 @@ export default function App() {
             />
           </FloatButton.Group>
         </>
-      ) : (
-        <></>
       )}
       <Routes>
         {loginState ? (
