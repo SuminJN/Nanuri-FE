@@ -3,7 +3,6 @@ import MDBox from "components/MDBox";
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import Footer from "examples/Footer";
 import ProfileInfoCard from "./ProfileInfoCard";
-import ChatRoomList from "../chat/ChatRoomList";
 import Header from "layouts/profile/components/Header";
 import profilesListData from "layouts/profile/data/profilesListData";
 import React, { useEffect, useState } from "react";
@@ -17,6 +16,7 @@ import MenuItem from "@mui/material/MenuItem";
 import DashboardNavbar from "../../examples/Navbars/DashboardNavbar";
 import { getUserInfo, updateUser } from "../../apis/userApi";
 import { useNavigate } from "react-router-dom";
+import ProfileChatRoomList from "./ProfileChatRoomList";
 
 function Overview() {
   const navigate = useNavigate();
@@ -169,7 +169,7 @@ function Overview() {
             <ShareCardList />
           </Grid>
           <Grid item xs={12} xl={4}>
-            <ChatRoomList title="conversations" profiles={profilesListData} shadow={false} />
+            <ProfileChatRoomList />
           </Grid>
         </Grid>
       </MDBox>

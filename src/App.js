@@ -49,7 +49,6 @@ import { CommentOutlined, CustomerServiceOutlined } from "@ant-design/icons";
 import { FloatButton } from "antd";
 import Wish from "./layouts/wish/Wish";
 import Chat from "./layouts/chat/Chat";
-import ChatField from "./layouts/chat/ChatField";
 import AddPost from "./layouts/add/AddPost";
 import DetailPost from "./layouts/detail/DetailPost";
 import Notifications from "./layouts/notifications";
