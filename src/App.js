@@ -156,8 +156,8 @@ export default function App() {
     // <ThemeProvider theme={darkMode ? themeDark : theme}>
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <>
-        {loginState ? (
+      {layout === "dashboard" && (
+        <>
           <Sidenav
             color={sidenavColor}
             // brand={(transparentSidenav && !darkMode) || whiteSidenav ? brandDark : brandWhite}
@@ -167,32 +167,31 @@ export default function App() {
             onMouseEnter={handleOnMouseEnter}
             onMouseLeave={handleOnMouseLeave}
           />
-        ) : (
-          <></>
-        )}
-        <FloatButton.Group
-          shape="square"
-          trigger="hover"
-          type="primary"
-          style={{ insetInlineEnd: 24 }}
-          icon={<Icon sx={{ fontWeight: "bold" }}>add</Icon>}
-        >
-          <FloatButton
+
+          <FloatButton.Group
             shape="square"
-            description={<strong>나눔 하기</strong>}
-            onClick={() => {
-              navigate("/home/addItem");
-            }}
-          />
-          <FloatButton
-            shape="square"
-            description={<strong>나눔 받기</strong>}
-            onClick={() => {
-              navigate("/home/addPost");
-            }}
-          />
-        </FloatButton.Group>
-      </>
+            trigger="hover"
+            type="primary"
+            style={{ insetInlineEnd: 24 }}
+            icon={<Icon sx={{ fontWeight: "bold" }}>add</Icon>}
+          >
+            <FloatButton
+              shape="square"
+              description={<strong>나눔 하기</strong>}
+              onClick={() => {
+                navigate("/home/addItem");
+              }}
+            />
+            <FloatButton
+              shape="square"
+              description={<strong>나눔 받기</strong>}
+              onClick={() => {
+                navigate("/home/addPost");
+              }}
+            />
+          </FloatButton.Group>
+        </>
+      )}
       <Routes>
         {loginState ? (
           <>
@@ -212,12 +211,12 @@ export default function App() {
             <Route path="/chat" element={<Chat />} />
             <Route path="/chat/:roomId" element={<ChatRoom />} />
             <Route path="/notifications" element={<Notifications />} />
+            <Route path="/signup" element={<SignUp />} />
           </>
         ) : (
           <>
             <Route path="*" element={<SignIn />} />
             <Route path="/nanuri/callback" element={<LoginIng />} />
-            <Route path="/signup" element={<SignUp />} />
           </>
         )}
       </Routes>

@@ -15,7 +15,7 @@ import image from "../../assets/images/team-2.jpg";
 import MDTypography from "../../components/MDTypography";
 import MDButton from "../../components/MDButton";
 import TextField from "@mui/material/TextField";
-import { deleteItem, editItem } from "../../apis/itemApi";
+import { deleteItem, editItem, getItem } from "../../apis/itemApi";
 
 const initState = {
   id: 0,
@@ -35,14 +35,6 @@ const EditItem = () => {
   const navigate = useNavigate();
   const { itemId } = useParams();
   const [item, setItem] = useState({ ...initState });
-
-  const getItem = async () => {
-    getItem().then((response) => {
-      if (response.status === 200) {
-        setItem(response.data);
-      }
-    });
-  };
 
   const handleChangeItem = (e) => {
     item[e.target.name] = e.target.value;
@@ -70,7 +62,9 @@ const EditItem = () => {
   };
 
   useEffect(() => {
-    getItem();
+    getItem(itemId).then((response) => {
+      setItem(response.data);
+    });
   }, []);
 
   return (
@@ -79,6 +73,9 @@ const EditItem = () => {
       <Grid container justifyContent="center">
         <Grid item xs={12} sm={10} md={10} lg={8}>
           <MDBox my={3} borderRadius="lg" sx={{ borderColor: "grey.300" }} border={2} shadow="md">
+            <MDBox display="flex" justifyContent="center" alignItems="center" p={2}>
+              <MDTypography variant="h3">나눔 글 수정하기</MDTypography>
+            </MDBox>
             <Grid container spacing={2} sx={{ p: { xs: 2, sm: 3, md: 5 } }}>
               <Grid item xs={12} sm={12} md={6}>
                 <MDBox>
@@ -145,13 +142,13 @@ const EditItem = () => {
                       <Grid item xs={12} sm={6}>
                         <MDBox>
                           <MDButton
-                            variant="outlined"
+                            variant="gradient"
                             color="info"
                             fullWidth
                             startIcon={<Icon>mode_edit_icon</Icon>}
                             onClick={handleClickEdit}
                           >
-                            <MDTypography variant="h6" color="info">
+                            <MDTypography variant="h6" color="white">
                               수정완료
                             </MDTypography>
                           </MDButton>
@@ -160,13 +157,13 @@ const EditItem = () => {
                       <Grid item xs={12} sm={6}>
                         <MDBox>
                           <MDButton
-                            variant="outlined"
+                            variant="gradient"
                             color="error"
                             fullWidth
                             startIcon={<Icon>delete_icon</Icon>}
                             onClick={handleItemDelete}
                           >
-                            <MDTypography variant="h6" color="error">
+                            <MDTypography variant="h6" color="white">
                               나눔 삭제
                             </MDTypography>
                           </MDButton>
@@ -175,13 +172,13 @@ const EditItem = () => {
                       <Grid item xs={12}>
                         <MDBox>
                           <MDButton
-                            variant="outlined"
+                            variant="gradient"
                             color="secondary"
                             fullWidth
                             startIcon={<Icon>close_icon</Icon>}
-                            onClick={() => navigate(`/home/${item.id}`)}
+                            onClick={() => navigate(`/home/${item.id}`, { replace: true })}
                           >
-                            <MDTypography variant="h6" color="secondary">
+                            <MDTypography variant="h6" color="white">
                               취소
                             </MDTypography>
                           </MDButton>

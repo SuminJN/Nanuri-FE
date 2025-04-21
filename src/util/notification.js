@@ -33,7 +33,7 @@ async function getDeviceToken() {
   });
   console.log("토큰: ", token);
 
-  const response = axiosInstance.post("/api/fcm/token", { token: token });
-
-  console.log("토큰 전송 성공: ", response);
+  // const response = axiosInstance.post("/api/fcm/token", { token: token });
+  //
+  // console.log("토큰 전송 성공: ", response);
 }

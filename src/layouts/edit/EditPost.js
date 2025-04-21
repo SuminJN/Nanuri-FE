@@ -79,18 +79,8 @@ const EditPost = () => {
         <Grid container spacing={3} mb={2} justifyContent="center">
           <Grid item xs={12} sm={4}>
             <MDBox borderRadius="lg" sx={{ borderColor: "grey.300" }} border={2} shadow="md">
-              <MDBox p={2}>
-                <IconButton
-                  size="small"
-                  disableRipple
-                  sx={navbarIconButton}
-                  variant="contained"
-                  onClick={() => {
-                    navigate(-1);
-                  }}
-                >
-                  <Icon>arrow_back_ios_icon</Icon>
-                </IconButton>
+              <MDBox display="flex" justifyContent="center" alignItems="center" p={2}>
+                <MDTypography variant="h3">나눔 글 수정하기</MDTypography>
               </MDBox>
               <MDBox p={4}>
                 <Grid container spacing={1}>
@@ -122,13 +112,13 @@ const EditPost = () => {
                         <Grid item xs={12} sm={6}>
                           <MDBox>
                             <MDButton
-                              variant="outlined"
+                              variant="gradient"
                               color="info"
                               fullWidth
                               startIcon={<Icon>mode_edit_icon</Icon>}
                               onClick={handleClickEdit}
                             >
-                              <MDTypography variant="h6" color="info">
+                              <MDTypography variant="h6" color="white">
                                 수정완료
                               </MDTypography>
                             </MDButton>
@@ -137,13 +127,13 @@ const EditPost = () => {
                         <Grid item xs={12} sm={6}>
                           <MDBox>
                             <MDButton
-                              variant="outlined"
+                              variant="gradient"
                               color="error"
                               fullWidth
                               startIcon={<Icon>delete_icon</Icon>}
                               onClick={handlePostDelete}
                             >
-                              <MDTypography variant="h6" color="error">
+                              <MDTypography variant="h6" color="white">
                                 삭제하기
                               </MDTypography>
                             </MDButton>
@@ -152,13 +142,13 @@ const EditPost = () => {
                         <Grid item xs={12}>
                           <MDBox>
                             <MDButton
-                              variant="outlined"
+                              variant="gradient"
                               color="secondary"
                               fullWidth
                               startIcon={<Icon>close_icon</Icon>}
-                              onClick={() => navigate(`/home/post/${post.id}`)}
+                              onClick={() => navigate(`/home/post/${post.id}`, { replace: true })}
                             >
-                              <MDTypography variant="h6" color="secondary">
+                              <MDTypography variant="h6" color="white">
                                 취소
                               </MDTypography>
                             </MDButton>
