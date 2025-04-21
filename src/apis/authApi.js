@@ -34,5 +34,5 @@ export const register = async (userData) => {
 
 // 로그아웃
 export const logout = async () => {
-  return axiosInstance.post(`${prefix}/logout`);
+  return axiosInstance.get(`${prefix}/logout`);
 };
