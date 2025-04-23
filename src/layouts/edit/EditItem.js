@@ -139,37 +139,7 @@ const EditItem = () => {
                   </MDBox>
                   <MDBox>
                     <Grid container spacing={1}>
-                      <Grid item xs={12} sm={6}>
-                        <MDBox>
-                          <MDButton
-                            variant="gradient"
-                            color="info"
-                            fullWidth
-                            startIcon={<Icon>mode_edit_icon</Icon>}
-                            onClick={handleClickEdit}
-                          >
-                            <MDTypography variant="h6" color="white">
-                              수정완료
-                            </MDTypography>
-                          </MDButton>
-                        </MDBox>
-                      </Grid>
-                      <Grid item xs={12} sm={6}>
-                        <MDBox>
-                          <MDButton
-                            variant="gradient"
-                            color="error"
-                            fullWidth
-                            startIcon={<Icon>delete_icon</Icon>}
-                            onClick={handleItemDelete}
-                          >
-                            <MDTypography variant="h6" color="white">
-                              나눔 삭제
-                            </MDTypography>
-                          </MDButton>
-                        </MDBox>
-                      </Grid>
-                      <Grid item xs={12}>
+                      <Grid item xs={8}>
                         <MDBox>
                           <MDButton
                             variant="gradient"
@@ -180,6 +150,36 @@ const EditItem = () => {
                           >
                             <MDTypography variant="h6" color="white">
                               취소
+                            </MDTypography>
+                          </MDButton>
+                        </MDBox>
+                      </Grid>
+                      <Grid item xs={4}>
+                        <MDBox>
+                          <MDButton
+                            variant="gradient"
+                            color="error"
+                            fullWidth
+                            startIcon={<Icon>delete_icon</Icon>}
+                            onClick={handleItemDelete}
+                          >
+                            <MDTypography variant="h6" color="white" sx={{ whiteSpace: "nowrap" }}>
+                              삭제하기
+                            </MDTypography>
+                          </MDButton>
+                        </MDBox>
+                      </Grid>
+                      <Grid item xs={12}>
+                        <MDBox>
+                          <MDButton
+                            variant="gradient"
+                            color="info"
+                            fullWidth
+                            startIcon={<Icon>mode_edit_icon</Icon>}
+                            onClick={handleClickEdit}
+                          >
+                            <MDTypography variant="h6" color="white">
+                              수정완료
                             </MDTypography>
                           </MDButton>
                         </MDBox>

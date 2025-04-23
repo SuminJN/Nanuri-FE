@@ -171,7 +171,8 @@ function Dashboard() {
           <MDBox>
             <FormControl>
               <FormLabel>카테고리</FormLabel>
-              <RadioGroup defaultValue="female" name="radio-buttons-group" row>
+              <RadioGroup defaultValue="전체" name="radio-buttons-group" row>
+                <FormControlLabel value="전체" control={<Radio />} label="전체" />
                 <FormControlLabel value="전공 서적" control={<Radio />} label="전공 서적" />
                 <FormControlLabel value="일반 도서" control={<Radio />} label="일반 도서" />
                 <FormControlLabel value="디지털기기" control={<Radio />} label="디지털기기" />
