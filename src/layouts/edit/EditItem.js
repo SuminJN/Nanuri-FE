@@ -45,7 +45,7 @@ const EditItem = () => {
     editItem(itemId, item).then((response) => {
       if (response.status === 200) {
         alert("수정되었습니다.");
-        navigate(`/home/${itemId}`);
+        navigate(`/home/${itemId}`, { replace: true });
       }
     });
   };
@@ -55,7 +55,7 @@ const EditItem = () => {
       deleteItem(itemId).then((response) => {
         if (response.status === 200) {
           alert("삭제되었습니다.");
-          navigate("/home");
+          navigate("/home", { replace: true });
         }
       });
     }
