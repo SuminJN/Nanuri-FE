@@ -116,7 +116,7 @@ const EditPost = () => {
                               color="secondary"
                               fullWidth
                               startIcon={<Icon>close_icon</Icon>}
-                              onClick={() => navigate(`/home/post/${post.id}`, { replace: true })}
+                              onClick={() => navigate(-1)}
                             >
                               <MDTypography variant="h6" color="white">
                                 취소
