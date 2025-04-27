@@ -103,7 +103,7 @@ const EditPost = () => {
                         value={post.description}
                         onChange={handleChangePost}
                         multiline
-                        rows={6}
+                        rows={10}
                         fullWidth
                       />
                     </MDBox>
