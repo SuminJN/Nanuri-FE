@@ -45,7 +45,7 @@ const EditItem = () => {
     editItem(itemId, item).then((response) => {
       if (response.status === 200) {
         alert("수정되었습니다.");
-        navigate(`/home/${itemId}`, { replace: true });
+        navigate(-1, { replace: true });
       }
     });
   };
