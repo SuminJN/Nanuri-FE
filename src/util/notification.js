@@ -29,7 +29,7 @@ function registerServiceWorker() {
 async function getDeviceToken() {
   // 권한이 허용된 후에 토큰을 가져옴
   const token = await getToken(messaging, {
-    vapidKey: process.env.VAPIDKEY,
+    vapidKey: process.env.REACT_APP_VAPIDKEY,
   });
   console.log("토큰: ", token);
 
