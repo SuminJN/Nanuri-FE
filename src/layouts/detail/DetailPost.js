@@ -89,7 +89,9 @@ function DetailPost() {
                   <Grid container display="flex" justifyContent="end">
                     <Grid item xs={12}>
                       <MDBox>
-                        <MDTypography variant="overline">신청 0 · 조회 0</MDTypography>
+                        <MDTypography variant="overline">
+                          신청 0 · 조회 {post.viewCount}
+                        </MDTypography>
                       </MDBox>
                       {post.isOwner ? (
                         <Grid container spacing={1}>

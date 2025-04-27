@@ -32,6 +32,7 @@ function ReceivingItems() {
                       title={post.title}
                       description={post.description}
                       createdTime={getCurrentTime(post.createdTime)}
+                      viewCount={post.viewCount}
                       route={`/home/post/${post.id}`}
                     />
                   </Grid>
