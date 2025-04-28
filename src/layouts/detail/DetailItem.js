@@ -170,7 +170,7 @@ function DetailItem() {
                     <MDTypography variant="h6">{item.description}</MDTypography>
                   </MDBox>
                   <MDBox>
-                    <MDTypography variant="overline">
+                    <MDTypography variant="h6" color="text" fontWeight="bold">
                       신청 0 · 관심 {item.wishCount ? item.wishCount : 0} · 조회 {item.viewCount}
                     </MDTypography>
                   </MDBox>
