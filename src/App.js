@@ -36,7 +36,8 @@ import { useMaterialUIController, setMiniSidenav, setOpenConfigurator } from "co
 
 // Images
 import brandWhite from "assets/images/logo-ct.png";
-import brandDark from "assets/images/logo-ct-dark.png";
+// import brandDark from "assets/images/logo-ct-dark.png";
+import logo from "assets/logo.png";
 import { useRecoilValue } from "recoil";
 import { LoginState } from "./recoil/LoginState";
 import SignIn from "./layouts/authentication/sign-in";
@@ -160,8 +161,8 @@ export default function App() {
           <Sidenav
             color={sidenavColor}
             // brand={(transparentSidenav && !darkMode) || whiteSidenav ? brandDark : brandWhite}
-            brand={brandDark}
-            brandName="한 줌"
+            brand={logo}
+            brandName="Han Jum"
             routes={routes}
             onMouseEnter={handleOnMouseEnter}
             onMouseLeave={handleOnMouseLeave}
