@@ -8,7 +8,16 @@ import MDAvatar from "../../../components/MDAvatar";
 import { Image } from "antd";
 import { Link } from "react-router-dom";
 
-function ShareCard({ itemId, image, title, category, createdTime, viewCount }) {
+function ShareCard({
+  itemId,
+  image,
+  title,
+  category,
+  createdTime,
+  viewCount,
+  wishCount,
+  chatCount,
+}) {
   const { getCurrentTime } = useGetTime();
 
   return (
@@ -39,15 +48,15 @@ function ShareCard({ itemId, image, title, category, createdTime, viewCount }) {
             favorite_icon
           </Icon>
           <MDTypography variant="caption" fontWeight="medium" lineHeight={0}>
-            &nbsp;0
+            &nbsp;{wishCount}
           </MDTypography>
         </MDBox>
-        <MDBox mr={2} display="flex" justifyContent="flex-end" alignItems="center">
+        <MDBox mr={2} display="flex" alignItems="center">
           <Icon fontSize="small" color="secondary">
-            remove_red_eye_icon
+            chat_icon
           </Icon>
           <MDTypography variant="caption" fontWeight="medium" lineHeight={0}>
-            &nbsp;{viewCount}
+            &nbsp;{chatCount}
           </MDTypography>
         </MDBox>
         <MDButton
@@ -75,6 +84,8 @@ ShareCard.propTypes = {
   category: PropTypes.string.isRequired,
   createdTime: PropTypes.string.isRequired,
   viewCount: PropTypes.number.isRequired,
+  wishCount: PropTypes.number.isRequired,
+  chatCount: PropTypes.number.isRequired,
 };
 
 export default ShareCard;

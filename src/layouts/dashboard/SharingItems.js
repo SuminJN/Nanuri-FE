@@ -39,6 +39,7 @@ function SharingItems() {
                           viewCount={item.viewCount}
                           wishCount={item.wishCount}
                           wishStatus={item.wishStatus}
+                          chatCount={item.chatCount}
                           route={`/home/${item.itemId}`}
                         />
                       </Badge.Ribbon>
@@ -54,6 +55,7 @@ function SharingItems() {
                         wishCount={item.wishCount}
                         isWished={item.isWished}
                         wishStatus={item.wishStatus}
+                        chatCount={item.chatCount}
                         route={`/home/${item.itemId}`}
                       />
                     )}
