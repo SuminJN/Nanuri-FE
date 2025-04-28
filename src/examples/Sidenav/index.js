@@ -169,7 +169,7 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
             width={!brandName && "100%"}
             sx={(theme) => sidenavLogoLabel(theme, { miniSidenav })}
           >
-            <MDTypography component="h6" variant="button" fontWeight="medium" color={textColor}>
+            <MDTypography variant="h6" fontWeight="bold" color={textColor}>
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{brandName}
             </MDTypography>
           </MDBox>
