@@ -32,6 +32,7 @@ function WishItems() {
                       viewCount={item.viewCount}
                       wishCount={item.wishCount}
                       wishStatus={item.wishStatus}
+                      chatCount={item.chatCount}
                       route={`/wish/${item.itemId}`}
                     />
                   </Grid>

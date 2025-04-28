@@ -10,7 +10,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import useGetTime from "../hooks/useGetTime";
 
-function PostCard({ itemId, title, createdTime, description, route }) {
+function PostCard({ itemId, title, createdTime, description, viewCount, route }) {
   const navigate = useNavigate();
   const [controller] = useMaterialUIController();
   const { darkMode } = controller;
@@ -73,7 +73,7 @@ function PostCard({ itemId, title, createdTime, description, route }) {
           <MDBox mr={2} display="flex" justifyContent="flex-end" alignItems="center">
             <Icon fontSize="small">remove_red_eye_icon</Icon>
             <MDTypography variant="caption" fontWeight="medium" lineHeight={0}>
-              &nbsp;0
+              &nbsp;{viewCount}
             </MDTypography>
           </MDBox>
           {/*<MDButton*/}
@@ -100,6 +100,7 @@ PostCard.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   createdTime: PropTypes.string.isRequired,
+  viewCount: PropTypes.number.isRequired,
   route: PropTypes.string.isRequired,
 };
 

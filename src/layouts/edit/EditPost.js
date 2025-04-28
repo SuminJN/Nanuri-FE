@@ -46,7 +46,7 @@ const EditPost = () => {
     editWant(postId, post).then((response) => {
       if (response.status === 200) {
         alert("글이 수정되었습니다.");
-        navigate(`/home/post/${postId}`);
+        navigate(-1, { replace: true });
       } else {
         alert("수정 오류가 발생했습니다. 다시 시도해주세요.");
         window.location.reload();
@@ -103,7 +103,7 @@ const EditPost = () => {
                         value={post.description}
                         onChange={handleChangePost}
                         multiline
-                        rows={6}
+                        rows={10}
                         fullWidth
                       />
                     </MDBox>
@@ -116,7 +116,7 @@ const EditPost = () => {
                               color="secondary"
                               fullWidth
                               startIcon={<Icon>close_icon</Icon>}
-                              onClick={() => navigate(`/home/post/${post.id}`, { replace: true })}
+                              onClick={() => navigate(-1)}
                             >
                               <MDTypography variant="h6" color="white">
                                 취소

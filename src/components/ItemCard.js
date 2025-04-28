@@ -19,6 +19,7 @@ function ItemCard({
   viewCount,
   wishCount,
   wishStatus,
+  chatCount,
   route,
 }) {
   const navigate = useNavigate();
@@ -110,7 +111,7 @@ function ItemCard({
               chat_icon
             </Icon>
             <MDTypography variant="caption" fontWeight="medium" lineHeight={0}>
-              &nbsp;0
+              &nbsp;{chatCount}
             </MDTypography>
           </MDBox>
           <MDBox mr={2} display="flex" justifyContent="flex-end" alignItems="center">
@@ -143,6 +144,7 @@ ItemCard.propTypes = {
   wishCount: PropTypes.number.isRequired,
   isWished: PropTypes.bool,
   wishStatus: PropTypes.bool,
+  chatCount: PropTypes.number.isRequired,
   route: PropTypes.string.isRequired,
 };
 

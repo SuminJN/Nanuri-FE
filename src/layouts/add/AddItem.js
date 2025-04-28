@@ -9,7 +9,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Image } from "antd";
 import Footer from "../../examples/Footer";
-import { Select } from "@mui/material";
+import { Input, Select } from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
 import { addItem, uploadImages } from "../../apis/itemApi";
 
@@ -151,20 +151,7 @@ function AddItem() {
                         required
                       />
                     </MDBox>
-                    <MDBox m={3}>
-                      <MDTypography variant="h6" fontWeight="bold" color="info">
-                        나눔 희망 장소를 입력해주세요
-                      </MDTypography>
-                      <TextField
-                        id="place"
-                        name="place"
-                        value={place}
-                        onChange={onChange}
-                        variant="outlined"
-                        fullWidth
-                        required
-                      />
-                    </MDBox>
+
                     <MDBox m={3}>
                       <MDTypography variant="h6" fontWeight="bold" color="info">
                         카테고리를 선택해주세요
@@ -187,6 +174,18 @@ function AddItem() {
                         <MenuItem value="STATIONERY">문구류</MenuItem>
                         <MenuItem value="SPORTS">운동용품</MenuItem>
                       </Select>
+                    </MDBox>
+                    <MDBox m={3}>
+                      <MDTypography variant="h6" fontWeight="bold" color="info">
+                        나눔 마감 기한을 선택해주세요
+                      </MDTypography>
+                      <TextField
+                        id="deadline"
+                        type="datetime-local"
+                        fullWidth
+                        required
+                        min={new Date().toISOString().slice(0, 16)}
+                      />
                     </MDBox>
                     <MDBox m={3}>
                       <MDTypography variant="h6" fontWeight="bold" color="info">

@@ -45,7 +45,7 @@ const EditItem = () => {
     editItem(itemId, item).then((response) => {
       if (response.status === 200) {
         alert("수정되었습니다.");
-        navigate(`/home/${itemId}`);
+        navigate(-1, { replace: true });
       }
     });
   };
@@ -55,7 +55,7 @@ const EditItem = () => {
       deleteItem(itemId).then((response) => {
         if (response.status === 200) {
           alert("삭제되었습니다.");
-          navigate("/home");
+          navigate("/home", { replace: true });
         }
       });
     }
@@ -146,7 +146,7 @@ const EditItem = () => {
                             color="secondary"
                             fullWidth
                             startIcon={<Icon>close_icon</Icon>}
-                            onClick={() => navigate(`/home/${item.id}`, { replace: true })}
+                            onClick={() => navigate(-1)}
                           >
                             <MDTypography variant="h6" color="white">
                               취소

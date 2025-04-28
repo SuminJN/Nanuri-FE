@@ -33,7 +33,7 @@ function LoginIng() {
         }
         // 닉네임이 있다면 기존 유저
         else {
-          navigate("/");
+          navigate("/", { replace: true });
         }
       } else {
         throw new Error("히즈넷 토큰이 존재하지 않습니다.");

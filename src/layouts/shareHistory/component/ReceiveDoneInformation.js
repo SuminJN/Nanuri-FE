@@ -37,6 +37,7 @@ function ReceiveDoneInformation() {
                       createdTime={item.createdTime}
                       viewCount={item.viewCount}
                       wishCount={item.wishCount}
+                      chatCount={item.chatCount}
                       route={`/my-share/${item.itemId}`}
                     />
                   </Grid>
