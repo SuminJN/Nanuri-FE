@@ -23,6 +23,7 @@ import MDButton from "../../components/MDButton";
 import Button from "@mui/material/Button";
 import SearchIcon from "@mui/icons-material/Search";
 import {
+  Chip,
   Dialog,
   DialogActions,
   DialogContent,
@@ -34,15 +35,18 @@ import {
   Input,
   InputAdornment,
   InputLabel,
+  OutlinedInput,
   Radio,
   RadioGroup,
 } from "@mui/material";
 import WishItems from "../wish/WishItems";
+import AppsIcon from "@mui/icons-material/Apps";
 
 function Dashboard() {
   const [controller, dispatch] = useMaterialUIController();
   const { miniSidenav } = controller;
   const navigate = useNavigate();
+  const [category, setCategory] = useState("");
 
   const [tabsOrientation, setTabsOrientation] = useState("horizontal");
   const [tabValue, setTabValue] = useState(0);
@@ -61,18 +65,16 @@ function Dashboard() {
     setModal(false);
   };
 
+  const handleChipDelete = () => {
+    setCategory("");
+  };
+
   return (
     <DashboardLayout>
       <DashboardNavbar />
       <MDBox position="relative" px={2}>
-        <Grid
-          container
-          spacing={1}
-          display="flex"
-          justifyContent="space-between"
-          alignItems="center"
-        >
-          <Grid item xs={10} sm={8} md={8} lg={6}>
+        <Grid container spacing={3} display="flex" alignItems="center">
+          <Grid item xs={12} sm={6}>
             <AppBar position="static">
               <Tabs orientation={tabsOrientation} value={tabValue} onChange={handleSetTabValue}>
                 <Tab
@@ -102,33 +104,34 @@ function Dashboard() {
               </Tabs>
             </AppBar>
           </Grid>
-          <Grid item xs={2} sm={4} md={4} lg={3} display="flex" justifyContent="flex-end">
-            <IconButton
-              size="small"
-              disableRipple
-              color="inherit"
-              sx={(navbarIconButton, navbarMobileMenu)}
-              variant="contained"
-              onClick={handleModalOpen}
-            >
-              <SearchIcon />
-            </IconButton>
-            <MDBox
-              sx={(theme) => ({
-                width: "100%",
-                ...navbarDesktopMenu(theme),
-              })}
-            >
-              <MDButton
-                variant="outlined"
+          <Grid item xs={6} sm={3}>
+            <OutlinedInput
+              placeholder="검색어를 입력하세요"
+              fullWidth
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton>
+                    <SearchIcon />
+                  </IconButton>
+                </InputAdornment>
+              }
+            />
+          </Grid>
+          <Grid item xs={6} sm={3} display="flex" justifyContent="end">
+            <MDBox>
+              {category ? (
+                <Chip label={category} variant="outlined" onDelete={handleChipDelete} />
+              ) : (
+                <></>
+              )}
+              <IconButton
+                size="midium"
                 color="secondary"
-                sx={{ borderColor: "grey.400" }}
-                startIcon={<SearchIcon />}
+                sx={navbarIconButton}
                 onClick={handleModalOpen}
-                fullWidth
               >
-                찾아보기
-              </MDButton>
+                <AppsIcon />
+              </IconButton>
             </MDBox>
           </Grid>
         </Grid>
@@ -142,37 +145,31 @@ function Dashboard() {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle>{"검색 필터"}</DialogTitle>
+        <DialogTitle>{"필터"}</DialogTitle>
         <DialogContent sx={{ m: 2 }}>
-          <MDBox mb={3}>
-            <Input
-              placeholder="검색어를 입력하세요"
-              fullWidth
-              autoFocus
-              endAdornment={
-                <InputAdornment position="end">
-                  <IconButton>
-                    <SearchIcon />
-                  </IconButton>
-                </InputAdornment>
-              }
-            />
-          </MDBox>
-          <MDBox mb={3}>
-            <FormControl>
-              <FormLabel>분류</FormLabel>
-              <RadioGroup defaultValue="최신순" name="radio-buttons-group" row>
-                <FormControlLabel value="최신순" control={<Radio />} label="최신순" />
-                <FormControlLabel value="오래된순" control={<Radio />} label="오래된순" />
-                <FormControlLabel value="나눔완료" control={<Radio />} label="나눔완료" />
-              </RadioGroup>
-            </FormControl>
-          </MDBox>
+          {/*<MDBox mb={3}>*/}
+          {/*  <FormControl>*/}
+          {/*    <FormLabel>분류</FormLabel>*/}
+          {/*    <RadioGroup defaultValue="최신순" name="radio-buttons-group" row>*/}
+          {/*      <FormControlLabel value="최신순" control={<Radio />} label="최신순" />*/}
+          {/*      <FormControlLabel value="오래된순" control={<Radio />} label="오래된순" />*/}
+          {/*      <FormControlLabel value="나눔완료" control={<Radio />} label="나눔완료" />*/}
+          {/*    </RadioGroup>*/}
+          {/*  </FormControl>*/}
+          {/*</MDBox>*/}
           <MDBox>
             <FormControl>
               <FormLabel>카테고리</FormLabel>
-              <RadioGroup defaultValue="전체" name="radio-buttons-group" row>
-                <FormControlLabel value="전체" control={<Radio />} label="전체" />
+              <RadioGroup
+                defaultValue=""
+                name="radio-buttons-group"
+                row
+                onChange={(e) => {
+                  setCategory(e.target.value);
+                  handleModalClose();
+                }}
+              >
+                <FormControlLabel value="" control={<Radio />} label="전체" />
                 <FormControlLabel value="전공 서적" control={<Radio />} label="전공 서적" />
                 <FormControlLabel value="일반 도서" control={<Radio />} label="일반 도서" />
                 <FormControlLabel value="디지털기기" control={<Radio />} label="디지털기기" />
