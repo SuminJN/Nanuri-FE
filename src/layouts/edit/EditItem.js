@@ -1,7 +1,7 @@
 import DashboardNavbar from "../../examples/Navbars/DashboardNavbar";
 import DashboardLayout from "../../examples/LayoutContainers/DashboardLayout";
 import MDBox from "../../components/MDBox";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axiosInstance from "../../apis/axios";
 import Card from "@mui/material/Card";
@@ -35,13 +35,42 @@ const EditItem = () => {
   const navigate = useNavigate();
   const { itemId } = useParams();
   const [item, setItem] = useState({ ...initState });
+  const uploadRef = useRef();
 
   const handleChangeItem = (e) => {
     item[e.target.name] = e.target.value;
     setItem({ ...item });
   };
 
+  const deleteOldImages = (imageName) => {
+    if (item.images.length === 1) {
+      alert("이미지는 최소 한 장 이상 있어야 합니다.");
+      return;
+    }
+
+    const resultFileNames = item.images.filter((fileName) => fileName !== imageName);
+
+    item.images = resultFileNames;
+
+    setItem({ ...item });
+    console.log("images", item.images);
+  };
+
   const handleClickEdit = async () => {
+    const files = uploadRef.current.files;
+    const formData = new FormData();
+
+    for (let i = 0; i < files.length; i++) {
+      formData.append("files", files[i]);
+    }
+
+    // other data
+    formData.append("title", item.title);
+    formData.append("description", item.description);
+    formData.append("category", item.category);
+
+    // 아이템 formdata로 넘기기 추가 예정
+
     editItem(itemId, item).then((response) => {
       if (response.status === 200) {
         alert("수정되었습니다.");
@@ -74,15 +103,36 @@ const EditItem = () => {
         <Grid item xs={12} sm={10} md={10} lg={8}>
           <MDBox my={3} borderRadius="lg" sx={{ borderColor: "grey.300" }} border={2} shadow="md">
             <MDBox display="flex" justifyContent="center" alignItems="center" p={2}>
-              <MDTypography variant="h3">나눔 글 수정하기</MDTypography>
+              <MDTypography variant="h3" mt={2}>
+                나눔 글 수정하기
+              </MDTypography>
             </MDBox>
             <Grid container spacing={2} sx={{ p: { xs: 2, sm: 3, md: 5 } }}>
               <Grid item xs={12} sm={12} md={6}>
                 <MDBox>
-                  <Carousel arrows infinite={false}>
+                  <MDTypography variant="h6" color="error" fontWeight="bold">
+                    ⚠️ 이미지는 최소 한 장 이상 있어야 합니다!
+                  </MDTypography>
+                </MDBox>
+                <MDBox>
+                  <Carousel arrows infinite={true}>
                     {item &&
                       item.images.map((image, index) => (
-                        <div key={index}>
+                        <div key={index} style={{ position: "relative" }}>
+                          <MDBox
+                            display="flex"
+                            justifyContent="center"
+                            alignItems="center"
+                            sx={{
+                              backgroundColor: "#F44335",
+                              cursor: "pointer",
+                              borderRadius: "8px 8px 0 0", // 위쪽에 라운드 추가
+                              padding: "8px", // 두께 추가
+                            }}
+                            onClick={() => deleteOldImages(image)}
+                          >
+                            <Icon fontSize="medium">close</Icon>
+                          </MDBox>
                           <img
                             src={image}
                             alt="image"
@@ -90,7 +140,7 @@ const EditItem = () => {
                             height="100%"
                             style={{
                               aspectRatio: "1 / 1",
-                              borderRadius: "8px",
+                              borderRadius: "0 0 8px 8px",
                               boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
                               objectFit: "cover",
                             }}
@@ -102,6 +152,26 @@ const EditItem = () => {
               </Grid>
               <Grid item xs={12} sm={12} md={6}>
                 <MDBox>
+                  <MDBox display="flex" justifyContent="flex-end">
+                    <input
+                      accept="image/*"
+                      id="upload-button"
+                      multiple
+                      type="file"
+                      style={{ display: "none" }}
+                      ref={uploadRef}
+                      onChange={(e) => {
+                        const files = Array.from(e.target.files);
+                        const newImages = files.map((file) => URL.createObjectURL(file));
+                        setItem({ ...item, images: [...item.images, ...newImages] });
+                      }}
+                    />
+                    <label htmlFor="upload-button">
+                      <MDButton variant="outlined" color="info" component="span" fullWidth>
+                        이미지 추가
+                      </MDButton>
+                    </label>
+                  </MDBox>
                   <MDBox mb={2}>
                     <MDTypography variant="h6" fontWeight="bold" color="info">
                       제목

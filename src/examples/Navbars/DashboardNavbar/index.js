@@ -16,7 +16,7 @@
 import { useState, useEffect } from "react";
 
 // react-router components
-import { useLocation, Link, useNavigate } from "react-router-dom";
+import { useLocation, Link, useNavigate, NavLink } from "react-router-dom";
 
 // prop-types is a library for typechecking of props.
 import PropTypes from "prop-types";
@@ -56,6 +56,9 @@ import {
 import { useRecoilState } from "recoil";
 import { LoginState } from "../../../recoil/LoginState";
 import { logout } from "../../../apis/authApi";
+import sidenavLogoLabel from "../../Sidenav/styles/sidenav";
+import MDTypography from "../../../components/MDTypography";
+import brand from "assets/logo.png";
 
 function DashboardNavbar({ absolute, light, isMini }) {
   const [navbarType, setNavbarType] = useState();
@@ -109,6 +112,8 @@ function DashboardNavbar({ absolute, light, isMini }) {
   const handleOpenMenu = (event) => setOpenMenu(event.currentTarget);
   const handleCloseMenu = () => setOpenMenu(false);
 
+  const brandName = "한 줌";
+
   // Render the notifications menu
   const renderMenu = () => (
     <Menu
@@ -147,7 +152,19 @@ function DashboardNavbar({ absolute, light, isMini }) {
       sx={(theme) => navbar(theme, { transparentNavbar, absolute, light, darkMode })}
     >
       <Toolbar sx={(theme) => navbarContainer(theme)}>
-        <Breadcrumbs icon="home" title={route[route.length - 1]} route={route} light={light} />
+        <MDBox sx={navbarDesktopMenu}>
+          <Breadcrumbs icon="home" title={route[route.length - 1]} route={route} light={light} />
+        </MDBox>
+        <MDBox sx={navbarMobileMenu}>
+          <MDBox component={NavLink} to="/" display="flex" alignItems="center">
+            {brand && <MDBox component="img" src={brand} alt="Brand" width="2rem" />}
+            <MDBox sx={(theme) => sidenavLogoLabel(theme, { miniSidenav })}>
+              <MDTypography variant="h4" fontWeight="bold" color="dark" opacity="0.8">
+                &nbsp;{brandName}
+              </MDTypography>
+            </MDBox>
+          </MDBox>
+        </MDBox>
         {isMini ? null : (
           <MDBox>
             <Link to="/notifications">

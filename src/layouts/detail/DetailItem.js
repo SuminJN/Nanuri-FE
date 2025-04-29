@@ -170,78 +170,76 @@ function DetailItem() {
                     <MDTypography variant="h6">{item.description}</MDTypography>
                   </MDBox>
                   <MDBox>
-                    <MDTypography variant="overline">
+                    <MDTypography variant="h6" color="text" fontWeight="bold">
                       신청 0 · 관심 {item.wishCount ? item.wishCount : 0} · 조회 {item.viewCount}
                     </MDTypography>
                   </MDBox>
-                  <MDBox mx={1}>
-                    {item.isOwner ? (
-                      <>
-                        <Grid container spacing={1}>
-                          <Grid item xs={12}>
-                            <MDBox>
-                              <MDButton
-                                variant="gradient"
-                                color="info"
-                                fullWidth
-                                startIcon={<Icon>mode_edit_icon</Icon>}
-                                onClick={() => navigate(`/home/edit-item/${item.id}`)}
-                              >
-                                <MDTypography variant="h6" color="white">
-                                  나눔정보 수정
-                                </MDTypography>
-                              </MDButton>
-                            </MDBox>
-                          </Grid>
+                  {item.isOwner ? (
+                    <MDBox>
+                      <Grid container spacing={1}>
+                        <Grid item xs={12}>
+                          <MDBox>
+                            <MDButton
+                              variant="gradient"
+                              color="info"
+                              fullWidth
+                              startIcon={<Icon>mode_edit_icon</Icon>}
+                              onClick={() => navigate(`/home/edit-item/${item.id}`)}
+                            >
+                              <MDTypography variant="h6" color="white">
+                                나눔정보 수정
+                              </MDTypography>
+                            </MDButton>
+                          </MDBox>
                         </Grid>
-                      </>
-                    ) : (
-                      <>
-                        <Grid container spacing={3}>
-                          <Grid
-                            item
-                            xs={1}
-                            display="flex"
-                            justifyContent="center"
-                            alignItems="center"
-                            sx={{ cursor: "pointer" }}
-                          >
-                            {isWish ? (
-                              <MDBox onClick={handleDeleteWish}>
-                                <Icon fontSize="medium" color="error">
-                                  favorite_icon
-                                </Icon>
-                                <MDTypography lineHeight={0}>{item.wishCount}</MDTypography>
-                              </MDBox>
-                            ) : (
-                              <MDBox onClick={handleAddWish}>
-                                <Icon fontSize="medium" color="dark">
-                                  favorite_border_icon
-                                </Icon>
-                                <MDTypography lineHeight={0}>{item.wishCount}</MDTypography>
-                              </MDBox>
-                            )}
-                          </Grid>
-                          <Grid item xs={11}>
-                            <MDBox>
-                              <MDButton
-                                variant="gradient"
-                                color="secondary"
-                                fullWidth
-                                onClick={handleItemApply}
-                              >
-                                <MDTypography variant="h6" color="white">
-                                  채팅하기
-                                </MDTypography>
-                              </MDButton>
+                      </Grid>
+                    </MDBox>
+                  ) : (
+                    <MDBox mx={1}>
+                      <Grid container spacing={3}>
+                        <Grid
+                          item
+                          xs={1}
+                          display="flex"
+                          justifyContent="center"
+                          alignItems="center"
+                          sx={{ cursor: "pointer" }}
+                        >
+                          {isWish ? (
+                            <MDBox onClick={handleDeleteWish}>
+                              <Icon fontSize="medium" color="error">
+                                favorite_icon
+                              </Icon>
+                              <MDTypography lineHeight={0}>{item.wishCount}</MDTypography>
                             </MDBox>
-                          </Grid>
+                          ) : (
+                            <MDBox onClick={handleAddWish}>
+                              <Icon fontSize="medium" color="dark">
+                                favorite_border_icon
+                              </Icon>
+                              <MDTypography lineHeight={0}>{item.wishCount}</MDTypography>
+                            </MDBox>
+                          )}
                         </Grid>
-                      </>
-                    )}
-                    {renderSuccessSB}
-                    {renderDeleteSB}
-                  </MDBox>
+                        <Grid item xs={11}>
+                          <MDBox>
+                            <MDButton
+                              variant="gradient"
+                              color="secondary"
+                              fullWidth
+                              onClick={handleItemApply}
+                            >
+                              <MDTypography variant="h6" color="white">
+                                채팅하기
+                              </MDTypography>
+                            </MDButton>
+                          </MDBox>
+                        </Grid>
+                      </Grid>
+                    </MDBox>
+                  )}
+                  {renderSuccessSB}
+                  {renderDeleteSB}
                 </MDBox>
               </Grid>
             </Grid>
