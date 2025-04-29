@@ -41,6 +41,8 @@ import {
 } from "@mui/material";
 import WishItems from "../wish/WishItems";
 import AppsIcon from "@mui/icons-material/Apps";
+import { useRecoilState } from "recoil";
+import { TabValue } from "../../recoil/TabValueState";
 
 function Dashboard() {
   const [controller, dispatch] = useMaterialUIController();
@@ -49,7 +51,7 @@ function Dashboard() {
   const [category, setCategory] = useState("");
 
   const [tabsOrientation, setTabsOrientation] = useState("horizontal");
-  const [tabValue, setTabValue] = useState(0);
+  const [tabValue, setTabValue] = useRecoilState(TabValue);
   const handleSetTabValue = (event, newValue) => setTabValue(newValue);
   const handleWishListOpen = () => {
     navigate("/wish");
@@ -104,36 +106,42 @@ function Dashboard() {
               </Tabs>
             </AppBar>
           </Grid>
-          <Grid item xs={6} sm={3}>
-            <OutlinedInput
-              placeholder="검색어를 입력하세요"
-              fullWidth
-              endAdornment={
-                <InputAdornment position="end">
-                  <IconButton>
-                    <SearchIcon />
+          {tabValue === 0 ? (
+            <>
+              <Grid item xs={6} sm={3}>
+                <OutlinedInput
+                  placeholder="검색어를 입력하세요"
+                  fullWidth
+                  endAdornment={
+                    <InputAdornment position="end">
+                      <IconButton>
+                        <SearchIcon />
+                      </IconButton>
+                    </InputAdornment>
+                  }
+                />
+              </Grid>
+              <Grid item xs={6} sm={3} display="flex" justifyContent="end">
+                <MDBox>
+                  {category ? (
+                    <Chip label={category} variant="outlined" onDelete={handleChipDelete} />
+                  ) : (
+                    <></>
+                  )}
+                  <IconButton
+                    size="midium"
+                    color="secondary"
+                    sx={navbarIconButton}
+                    onClick={handleModalOpen}
+                  >
+                    <AppsIcon />
                   </IconButton>
-                </InputAdornment>
-              }
-            />
-          </Grid>
-          <Grid item xs={6} sm={3} display="flex" justifyContent="end">
-            <MDBox>
-              {category ? (
-                <Chip label={category} variant="outlined" onDelete={handleChipDelete} />
-              ) : (
-                <></>
-              )}
-              <IconButton
-                size="midium"
-                color="secondary"
-                sx={navbarIconButton}
-                onClick={handleModalOpen}
-              >
-                <AppsIcon />
-              </IconButton>
-            </MDBox>
-          </Grid>
+                </MDBox>
+              </Grid>
+            </>
+          ) : (
+            <></>
+          )}
         </Grid>
       </MDBox>
       <Dialog
