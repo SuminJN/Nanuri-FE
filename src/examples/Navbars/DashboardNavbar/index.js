@@ -112,7 +112,7 @@ function DashboardNavbar({ absolute, light, isMini }) {
   const handleOpenMenu = (event) => setOpenMenu(event.currentTarget);
   const handleCloseMenu = () => setOpenMenu(false);
 
-  const brandName = "한 줌";
+  const brandName = "한줌";
 
   // Render the notifications menu
   const renderMenu = () => (

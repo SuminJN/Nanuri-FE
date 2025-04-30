@@ -162,7 +162,7 @@ export default function App() {
             color={sidenavColor}
             // brand={(transparentSidenav && !darkMode) || whiteSidenav ? brandDark : brandWhite}
             brand={logo}
-            brandName="한 줌"
+            brandName="한줌"
             routes={routes}
             onMouseEnter={handleOnMouseEnter}
             onMouseLeave={handleOnMouseLeave}
