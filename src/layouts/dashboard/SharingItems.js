@@ -5,18 +5,19 @@ import { useEffect, useState } from "react";
 import { Badge } from "antd";
 import useGetTime from "../../hooks/useGetTime";
 import { getItemList } from "../../apis/itemApi";
+import PropTypes from "prop-types";
 
-function SharingItems() {
+function SharingItems({ category }) {
   const [itemList, setItemList] = useState(null);
   const { getCurrentTime, isNew } = useGetTime();
 
   useEffect(() => {
-    getItemList().then((response) => {
+    getItemList(category).then((response) => {
       if (response.status === 200) {
         setItemList(response.data);
       }
     });
-  }, []);
+  }, [category]);
 
   return (
     <Grid container spacing={3}>
@@ -67,5 +68,13 @@ function SharingItems() {
     </Grid>
   );
 }
+
+SharingItems.defaultProps = {
+  category: "",
+};
+
+SharingItems.propTypes = {
+  category: PropTypes.string.isRequired,
+};
 
 export default SharingItems;
