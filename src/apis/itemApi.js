@@ -17,8 +17,12 @@ export const uploadImages = async (itemId, formData) => {
 };
 
 // 아이템 목록 조회
-export const getItemList = async () => {
-  return await axiosInstance.get("/api/items");
+export const getItemList = async (category) => {
+  return await axiosInstance.get("/api/items", {
+    params: {
+      category: category,
+    },
+  });
 };
 
 // 아이템 목록 조회 (다른 유저의 아이템)

@@ -13,11 +13,23 @@ import Divider from "@mui/material/Divider";
 import { NicknameState } from "../../../recoil/NicknameState";
 import { getUserInfo } from "../../../apis/userApi";
 import { register } from "../../../apis/authApi";
+import {
+  FormControl,
+  FormLabel,
+  InputLabel,
+  OutlinedInput,
+  RadioGroup,
+  Select,
+} from "@mui/material";
+import MenuItem from "@mui/material/MenuItem";
+import { categoryList } from "../../../assets/category/categoryList";
+import { MBTIList } from "../../../assets/mbti/mbtiList";
 
 const initialUserInfo = {
+  uniqueId: "",
   nickname: "",
   mbti: "",
-  interestItemCategory: "",
+  interestItemCategory: [],
   introduction: "",
 };
 
@@ -25,6 +37,7 @@ function Cover() {
   const [nicknameState, setNicknameState] = useRecoilState(NicknameState);
   const [isLoggedIn, setIsLoggedIn] = useRecoilState(LoginState);
   const [userInfo, setUserInfo] = useState({
+    uniqueId: null,
     userInfo: null,
     name: null,
     department: null,
@@ -33,8 +46,11 @@ function Cover() {
   const [additionalInfo, setAdditionalInfo] = useState(initialUserInfo);
 
   const handleChangeInfo = (e) => {
-    additionalInfo[e.target.name] = e.target.value;
-    setAdditionalInfo({ ...additionalInfo });
+    const { name, value } = e.target;
+    setAdditionalInfo((prev) => ({
+      ...prev,
+      [name]: name === "interestItemCategory" ? [...value] : value,
+    }));
   };
 
   // 폼 제출 함수
@@ -52,6 +68,10 @@ function Cover() {
     getUserInfo().then((response) => {
       if (response.status === 200) {
         setUserInfo(response.data);
+        setAdditionalInfo((prev) => ({
+          ...prev,
+          uniqueId: response.data.uniqueId,
+        }));
       }
     });
   }, []);
@@ -109,6 +129,7 @@ function Cover() {
                 <TextField
                   id="nickname"
                   label="닉네임"
+                  name="nickname"
                   variant="outlined"
                   fullWidth
                   required
@@ -131,31 +152,52 @@ function Cover() {
                 <TextField
                   id="introduction"
                   label="소개말"
+                  name="introduction"
                   variant="outlined"
                   fullWidth
+                  multiline
+                  rows={5}
                   value={additionalInfo.introduction}
                   onChange={handleChangeInfo}
                 />
               </MDBox>
               <MDBox mb={3}>
-                <TextField
-                  id="mbti"
-                  label="MBTI"
-                  variant="outlined"
-                  fullWidth
-                  value={additionalInfo.mbti}
-                  onChange={handleChangeInfo}
-                />
+                <FormControl fullWidth variant="outlined">
+                  <InputLabel>MBTI</InputLabel>
+                  <Select
+                    defaultValue=""
+                    sx={{ height: "45px" }}
+                    name="mbti"
+                    fullWidth
+                    value={additionalInfo.mbti}
+                    onChange={handleChangeInfo}
+                  >
+                    {MBTIList.map((mbti, index) => (
+                      <MenuItem key={index} value={mbti.value}>
+                        {mbti.label}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
               </MDBox>
               <MDBox mb={3}>
-                <TextField
-                  id="tag"
-                  label="관심 카테고리"
-                  variant="outlined"
-                  fullWidth
-                  value={additionalInfo.interestItemCategory}
-                  onChange={handleChangeInfo}
-                />
+                <FormControl fullWidth variant="outlined">
+                  <InputLabel>관심 목록</InputLabel>
+                  <Select
+                    multiple
+                    sx={{ height: "45px" }}
+                    input={<OutlinedInput label="Name" />}
+                    name="interestItemCategory"
+                    value={additionalInfo.interestItemCategory}
+                    onChange={handleChangeInfo}
+                  >
+                    {categoryList.map((category) => (
+                      <MenuItem key={category.englishName} value={category.englishName}>
+                        {category.koreanName}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
               </MDBox>
             </MDBox>
           </Grid>

@@ -43,6 +43,7 @@ import WishItems from "../wish/WishItems";
 import AppsIcon from "@mui/icons-material/Apps";
 import { useRecoilState } from "recoil";
 import { TabValue } from "../../recoil/TabValueState";
+import { categoryList } from "../../assets/category/categoryList";
 
 function Dashboard() {
   const [controller, dispatch] = useMaterialUIController();
@@ -124,7 +125,14 @@ function Dashboard() {
               <Grid item xs={6} sm={3} display="flex" justifyContent="end">
                 <MDBox>
                   {category ? (
-                    <Chip label={category} variant="outlined" onDelete={handleChipDelete} />
+                    <Chip
+                      label={
+                        categoryList.find((cat) => cat.englishName === category)?.koreanName ||
+                        category
+                      }
+                      variant="outlined"
+                      onDelete={handleChipDelete}
+                    />
                   ) : (
                     <></>
                   )}
@@ -177,25 +185,14 @@ function Dashboard() {
                   handleModalClose();
                 }}
               >
-                <FormControlLabel value="" control={<Radio />} label="전체" />
-                <FormControlLabel value="전공 서적" control={<Radio />} label="전공 서적" />
-                <FormControlLabel value="일반 도서" control={<Radio />} label="일반 도서" />
-                <FormControlLabel value="디지털기기" control={<Radio />} label="디지털기기" />
-                <FormControlLabel value="문구류" control={<Radio />} label="문구류" />
-                <FormControlLabel value="운동용품" control={<Radio />} label="운동용품" />
-                <FormControlLabel value="생활용품" control={<Radio />} label="생활용품" />
-                <FormControlLabel value="식료품" control={<Radio />} label="식료품" />
-                <FormControlLabel value="남성 의류" control={<Radio />} label="남성 의류" />
-                <FormControlLabel value="여성 의류" control={<Radio />} label="여성 의류" />
-                <FormControlLabel value="화장품" control={<Radio />} label="화장품" />
-                <FormControlLabel value="티켓, 쿠폰류" control={<Radio />} label="티켓, 쿠폰류" />
-                <FormControlLabel
-                  value="반려 동물 용품"
-                  control={<Radio />}
-                  label="반려 동물 용품"
-                />
-                <FormControlLabel value="취미 관련" control={<Radio />} label="취미 관련" />
-                <FormControlLabel value="가구" control={<Radio />} label="가구" />
+                {categoryList.map((category) => (
+                  <FormControlLabel
+                    key={category.englishName}
+                    value={category.englishName}
+                    control={<Radio />}
+                    label={category.koreanName}
+                  />
+                ))}
               </RadioGroup>
             </FormControl>
           </MDBox>
@@ -211,7 +208,7 @@ function Dashboard() {
         </DialogActions>
       </Dialog>
       <MDBox mt={1} mb={3}>
-        {tabValue === 0 && <SharingItems />}
+        {tabValue === 0 && <SharingItems category={category} />}
         {tabValue === 1 && <ReceivingItems />}
         {tabValue === 2 && <WishItems />}
       </MDBox>

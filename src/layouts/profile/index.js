@@ -11,12 +11,14 @@ import MDTypography from "../../components/MDTypography";
 import Tooltip from "@mui/material/Tooltip";
 import Icon from "@mui/material/Icon";
 import TextField from "@mui/material/TextField";
-import { Select } from "@mui/material";
+import { FormControl, InputLabel, OutlinedInput, Select } from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
 import DashboardNavbar from "../../examples/Navbars/DashboardNavbar";
 import { getUserInfo, updateUser } from "../../apis/userApi";
 import { useNavigate } from "react-router-dom";
 import ProfileChatRoomList from "./ProfileChatRoomList";
+import { categoryList } from "../../assets/category/categoryList";
+import { MBTIList } from "../../assets/mbti/mbtiList";
 
 function Overview() {
   const navigate = useNavigate();
@@ -35,8 +37,11 @@ function Overview() {
   };
 
   const handleChangeInfo = (e) => {
-    user[e.target.name] = e.target.value;
-    setUser({ ...user });
+    const { name, value } = e.target;
+    setUser((prev) => ({
+      ...prev,
+      [name]: name === "interestItemCategory" ? [...value] : value,
+    }));
   };
 
   const handleSubmitEdit = () => {
@@ -118,33 +123,45 @@ function Overview() {
                     />
                   </MDBox>
                   <MDBox mb={2}>
-                    <MDTypography variant="h6" fontWeight="bold" color="info">
-                      MBTI
-                    </MDTypography>
-                    <TextField
-                      name="mbti"
-                      value={user.mbti}
-                      onChange={handleChangeInfo}
-                      fullWidth
-                    />
+                    <FormControl fullWidth variant="outlined">
+                      <MDTypography variant="h6" fontWeight="bold" color="info">
+                        MBTI
+                      </MDTypography>
+                      <Select
+                        defaultValue=""
+                        sx={{ height: "45px" }}
+                        name="mbti"
+                        fullWidth
+                        value={user.mbti}
+                        onChange={handleChangeInfo}
+                      >
+                        {MBTIList.map((mbti, index) => (
+                          <MenuItem key={index} value={mbti.value}>
+                            {mbti.label}
+                          </MenuItem>
+                        ))}
+                      </Select>
+                    </FormControl>
                   </MDBox>
                   <MDBox mb={1}>
-                    <MDTypography variant="h6" fontWeight="bold" color="info">
-                      관심 목록
-                    </MDTypography>
-                    <Select
-                      sx={{ height: "45px" }}
-                      name="interestCategory"
-                      value={user.interestCategory}
-                      onChange={handleChangeInfo}
-                      fullWidth
-                    >
-                      <MenuItem value="MAJOR_BOOK">전공 서적</MenuItem>
-                      <MenuItem value="GENERAL_BOOK">일반 도서</MenuItem>
-                      <MenuItem value="DIGITAL_DEVICE">디지털기기</MenuItem>
-                      <MenuItem value="STATIONERY">문구류</MenuItem>
-                      <MenuItem value="SPORTS">운동용품</MenuItem>
-                    </Select>
+                    <FormControl fullWidth variant="outlined">
+                      <MDTypography variant="h6" fontWeight="bold" color="info">
+                        관심 목록
+                      </MDTypography>
+                      <Select
+                        multiple
+                        sx={{ height: "45px" }}
+                        name="interestItemCategory"
+                        value={user.interestItemCategory}
+                        onChange={handleChangeInfo}
+                      >
+                        {categoryList.map((category) => (
+                          <MenuItem key={category.englishName} value={category.englishName}>
+                            {category.koreanName}
+                          </MenuItem>
+                        ))}
+                      </Select>
+                    </FormControl>
                   </MDBox>
                 </MDBox>
               </MDBox>
