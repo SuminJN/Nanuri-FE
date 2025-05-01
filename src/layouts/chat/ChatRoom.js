@@ -1,17 +1,37 @@
 import React, { useState, useEffect, useRef } from "react";
-import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
-import SockJS from "sockjs-client";
+import { useNavigate, useParams } from "react-router-dom";
 
+// State & Messaging
 import { useRecoilValue } from "recoil";
 import { NicknameState } from "../../recoil/NicknameState";
-import { Stomp, Client } from "@stomp/stompjs";
+import { Client, Stomp } from "@stomp/stompjs";
+import SockJS from "sockjs-client";
+
+// Material UI
 import Grid from "@mui/material/Grid";
-import DashboardNavbar from "../../examples/Navbars/DashboardNavbar";
+import Card from "@mui/material/Card";
+import IconButton from "@mui/material/IconButton";
+import Icon from "@mui/material/Icon";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import Dialog from "@mui/material/Dialog";
+import DialogTitle from "@mui/material/DialogTitle";
+import DialogContent from "@mui/material/DialogContent";
+import DialogActions from "@mui/material/DialogActions";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
+
+// Custom Components
 import DashboardLayout from "../../examples/LayoutContainers/DashboardLayout";
+import DashboardNavbar from "../../examples/Navbars/DashboardNavbar";
+import { navbarIconButton } from "../../examples/Navbars/DashboardNavbar/styles";
 import MDBox from "../../components/MDBox";
-import axiosInstance from "../../apis/axios";
+import MDAvatar from "../../components/MDAvatar";
+import MDButton from "../../components/MDButton";
+import MDTypography from "../../components/MDTypography";
+
+// Chat UI Kit
 import {
   ChatContainer,
   ConversationHeader,
@@ -20,16 +40,11 @@ import {
   MessageInput,
   MessageList,
 } from "@chatscope/chat-ui-kit-react";
-import MDAvatar from "../../components/MDAvatar";
-import image from "../../assets/images/team-2.jpg";
-import Card from "@mui/material/Card";
-import MDTypography from "../../components/MDTypography";
-import MDButton from "../../components/MDButton";
-import IconButton from "@mui/material/IconButton";
-import { navbarIconButton } from "../../examples/Navbars/DashboardNavbar/styles";
-import Icon from "@mui/material/Icon";
-import { useNavigate, useParams } from "react-router-dom";
+import "@chatscope/chat-ui-kit-styles/dist/default/styles.min.css";
 
+// Assets & API
+import axiosInstance from "../../apis/axios";
+import image from "../../assets/images/team-2.jpg";
 const initState = {
   itemId: "",
   postId: "",
@@ -47,6 +62,8 @@ function ChatRoom() {
   const [cursor, setCursor] = useState(null); // 가장 오래된 메시지 기준 커서
   const topRef = useRef(null);
   const messageListRef = useRef(null);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [openConfirm, setOpenConfirm] = useState(false);
 
   const SERVER_URL = "http://localhost:8080/ws-stomp"; // STOMP 연결 엔드포인트
   const PUB_ENDPOINT = "/pub/chat/message"; // 메시지를 전송하기 위한 엔드포인트
@@ -234,6 +251,25 @@ function ChatRoom() {
     return `${ampm} ${hours}:${minutes.toString().padStart(2, "0")}`;
   };
 
+  const handleExitClick = () => {
+    setOpenConfirm(true);
+    handleClose(); // 메뉴 닫기
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleConfirmExit = async () => {
+    try {
+      await axiosInstance.delete(`/api/chat/room/${roomId}`);
+      navigate("/chat");
+    } catch (error) {
+      console.error("채팅방 나가기 실패", error);
+    }
+    setOpenConfirm(false);
+  };
+
   useEffect(() => {
     getRoomInfo();
     stompHandler.connect();
@@ -289,13 +325,18 @@ function ChatRoom() {
                 <MDBox display="flex" alignItems="center">
                   <MDAvatar src={image} size="sm" />
                   <MDTypography ml={1} variant="button" color="text" fontWeight="bold">
-                    {roomInfo.opponentNickname}
+                    {roomInfo.title}
                   </MDTypography>
                 </MDBox>
                 <MDBox>
-                  <MDButton variant="outlined" color="secondary" size="small">
-                    거래완료
-                  </MDButton>
+                  <MDBox display="flex" alignItems="center">
+                    <MDButton variant="outlined" color="secondary" size="small">
+                      거래완료
+                    </MDButton>
+                    <IconButton onClick={(e) => setAnchorEl(e.currentTarget)}>
+                      <MoreVertIcon />
+                    </IconButton>
+                  </MDBox>
                 </MDBox>
               </MDBox>
               <MDBox>
@@ -396,6 +437,27 @@ function ChatRoom() {
           </Grid>
         </Grid>
       </MDBox>
+      <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleClose}>
+        <MenuItem onClick={handleExitClick}>채팅방 나가기</MenuItem>
+      </Menu>
+
+      <Dialog open={openConfirm} onClose={() => setOpenConfirm(false)}>
+        <DialogTitle>채팅방 나가기</DialogTitle>
+        <DialogContent>
+          <Typography>
+            진짜 나가시겠습니까? <br />
+            나가시면 이전 대화 내용을 불러올 수 없습니다.
+          </Typography>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setOpenConfirm(false)} color="inherit">
+            취소
+          </Button>
+          <Button onClick={handleConfirmExit} color="error">
+            나가기
+          </Button>
+        </DialogActions>
+      </Dialog>
     </DashboardLayout>
   );
 }

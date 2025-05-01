@@ -22,6 +22,11 @@ function ChatRoomList() {
     }
   };
 
+  const handleExitRoom = async () => {
+    await axiosInstance.delete(`/api/chat/room/${roomId}`); // 실제 나가기 API
+    navigate("/chat");
+  };
+
   useEffect(() => {
     getChatRooms();
   }, []);
@@ -33,10 +38,10 @@ function ChatRoomList() {
       </MDBox>
       <MDBox display="flex" flexDirection="column" alignItems="flex-start" justifyContent="center">
         <MDTypography variant="button" fontWeight="medium">
-          {opponentNickname}
+          {title}
         </MDTypography>
         <MDTypography variant="caption" color="text">
-          {title}
+          {opponentNickname} 님과의 대화
         </MDTypography>
       </MDBox>
       <MDBox ml="auto">
