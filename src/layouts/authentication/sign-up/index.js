@@ -23,6 +23,7 @@ import {
 } from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
 import { categoryList } from "../../../assets/category/categoryList";
+import { MBTIList } from "../../../assets/mbti/mbtiList";
 
 const initialUserInfo = {
   uniqueId: "",
@@ -41,26 +42,6 @@ function Cover() {
     name: null,
     department: null,
   });
-
-  const MBTIList = [
-    { value: "", label: "선택안함" },
-    { value: "ISTJ", label: "ISTJ" },
-    { value: "ISFJ", label: "ISFJ" },
-    { value: "INFJ", label: "INFJ" },
-    { value: "INTJ", label: "INTJ" },
-    { value: "ISTP", label: "ISTP" },
-    { value: "ISFP", label: "ISFP" },
-    { value: "INFP", label: "INFP" },
-    { value: "INTP", label: "INTP" },
-    { value: "ESTP", label: "ESTP" },
-    { value: "ESFP", label: "ESFP" },
-    { value: "ENFP", label: "ENFP" },
-    { value: "ENTP", label: "ENTP" },
-    { value: "ESTJ", label: "ESTJ" },
-    { value: "ESFJ", label: "ESFJ" },
-    { value: "ENFJ", label: "ENFJ" },
-    { value: "ENTJ", label: "ENTJ" },
-  ];
 
   const [additionalInfo, setAdditionalInfo] = useState(initialUserInfo);
 
