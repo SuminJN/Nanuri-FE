@@ -166,20 +166,7 @@ function Overview() {
                 </MDBox>
               </MDBox>
             ) : (
-              <ProfileInfoCard
-                title="프로필 정보"
-                user={{
-                  introduction: user.introduction,
-                  nickname: user.nickname,
-                  id: user.uniqueId,
-                  fullName: user.name,
-                  department: user.department,
-                  mbti: user.mbti,
-                  // interestCategory: user.interestCategory,
-                  interestCategory: "전공 서적",
-                }}
-                handleClickEdit={handleClickEdit}
-              />
+              <ProfileInfoCard title="프로필 정보" user={user} handleClickEdit={handleClickEdit} />
             )}
           </Grid>
           <Grid item xs={12} md={6} xl={4}>

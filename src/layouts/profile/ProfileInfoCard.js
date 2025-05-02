@@ -10,11 +10,14 @@ import { useState } from "react";
 function ProfileInfoCard({ title, user, handleClickEdit }) {
   const userFields = [
     { label: "닉네임", value: user.nickname },
-    { label: "ID", value: user.id },
-    { label: "이름", value: user.fullName },
+    { label: "ID", value: user.uniqueId },
+    { label: "이름", value: user.name },
     { label: "학부", value: user.department },
     { label: "MBTI", value: user.mbti },
-    { label: "관심 목록", value: user.interestCategory },
+    {
+      label: "관심 목록",
+      value: Array.isArray(user.interestItemCategory) ? user.interestItemCategory.join(", ") : " ",
+    },
   ];
 
   const userInfo = userFields.map(({ label, value }) => (

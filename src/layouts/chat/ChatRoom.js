@@ -45,6 +45,7 @@ import "@chatscope/chat-ui-kit-styles/dist/default/styles.min.css";
 // Assets & API
 import axiosInstance from "../../apis/axios";
 import image from "../../assets/images/team-2.jpg";
+
 const initState = {
   itemId: "",
   postId: "",
@@ -323,7 +324,7 @@ function ChatRoom() {
                   </IconButton>
                 </MDBox>
                 <MDBox display="flex" alignItems="center">
-                  <MDAvatar src={image} size="sm" />
+                  <MDAvatar src={roomInfo.itemImage} variant="rounded" shadow="md" size="md" />
                   <MDTypography ml={1} variant="button" color="text" fontWeight="bold">
                     {roomInfo.title}
                   </MDTypography>
@@ -445,7 +446,7 @@ function ChatRoom() {
         <DialogTitle>채팅방 나가기</DialogTitle>
         <DialogContent>
           <Typography>
-            진짜 나가시겠습니까? <br />
+            정말로 나가시겠습니까? <br />
             나가시면 이전 대화 내용을 불러올 수 없습니다.
           </Typography>
         </DialogContent>

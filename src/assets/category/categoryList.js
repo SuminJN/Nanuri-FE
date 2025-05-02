@@ -1,9 +1,5 @@
 export const categoryList = [
   {
-    koreanName: "전체",
-    englishName: "",
-  },
-  {
     koreanName: "전공 서적",
     englishName: "MAJOR_BOOK",
   },
