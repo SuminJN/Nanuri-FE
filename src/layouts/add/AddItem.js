@@ -12,6 +12,7 @@ import Footer from "../../examples/Footer";
 import { Input, Select } from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
 import { addItem, uploadImages } from "../../apis/itemApi";
+import { categoryList } from "../../assets/category/categoryList";
 
 function AddItem() {
   const navigate = useNavigate();
@@ -167,12 +168,11 @@ function AddItem() {
                         fullWidth
                         required
                       >
-                        <MenuItem value="">선택</MenuItem>
-                        <MenuItem value="MAJOR_BOOK">전공 서적</MenuItem>
-                        <MenuItem value="GENERAL_BOOK">일반 도서</MenuItem>
-                        <MenuItem value="DIGITAL_DEVICE">디지털기기</MenuItem>
-                        <MenuItem value="STATIONERY">문구류</MenuItem>
-                        <MenuItem value="SPORTS">운동용품</MenuItem>
+                        {categoryList.map((category) => (
+                          <MenuItem key={category.englishName} value={category.englishName}>
+                            {category.koreanName}
+                          </MenuItem>
+                        ))}
                       </Select>
                     </MDBox>
                     <MDBox m={3}>

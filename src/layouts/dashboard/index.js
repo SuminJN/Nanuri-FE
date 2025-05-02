@@ -44,6 +44,7 @@ import AppsIcon from "@mui/icons-material/Apps";
 import { useRecoilState } from "recoil";
 import { TabValue } from "../../recoil/TabValueState";
 import { categoryList } from "../../assets/category/categoryList";
+import MenuItem from "@mui/material/MenuItem";
 
 function Dashboard() {
   const [controller, dispatch] = useMaterialUIController();
@@ -185,6 +186,7 @@ function Dashboard() {
                   handleModalClose();
                 }}
               >
+                <FormControlLabel value="" control={<Radio />} label="전체"></FormControlLabel>
                 {categoryList.map((category) => (
                   <FormControlLabel
                     key={category.englishName}
