@@ -58,8 +58,23 @@ function Dashboard() {
   const handleWishListOpen = () => {
     navigate("/wish");
   };
+  const [search, setSearch] = useState("");
+  const [searchValue, setSearchValue] = useState("");
 
   const [modal, setModal] = useState(false);
+
+  const handleSearch = (event) => {
+    setSearch(event.target.value);
+    if (event.target.value === "") {
+      setSearchValue("");
+    }
+  };
+
+  const handleSubmitSearch = (event) => {
+    event.preventDefault();
+    setSearchValue(search);
+    console.log(searchValue);
+  };
 
   const handleModalOpen = () => {
     setModal(true);
@@ -111,17 +126,21 @@ function Dashboard() {
           {tabValue === 0 ? (
             <>
               <Grid item xs={6} sm={3}>
-                <OutlinedInput
-                  placeholder="검색어를 입력하세요"
-                  fullWidth
-                  endAdornment={
-                    <InputAdornment position="end">
-                      <IconButton>
-                        <SearchIcon />
-                      </IconButton>
-                    </InputAdornment>
-                  }
-                />
+                <form onSubmit={handleSubmitSearch}>
+                  <OutlinedInput
+                    placeholder="검색어를 입력하세요"
+                    fullWidth
+                    value={search}
+                    onChange={handleSearch}
+                    endAdornment={
+                      <InputAdornment position="end">
+                        <IconButton type="submit">
+                          <SearchIcon />
+                        </IconButton>
+                      </InputAdornment>
+                    }
+                  />
+                </form>
               </Grid>
               <Grid item xs={6} sm={3} display="flex" justifyContent="end">
                 <MDBox>
@@ -210,7 +229,7 @@ function Dashboard() {
         </DialogActions>
       </Dialog>
       <MDBox mt={1} mb={3}>
-        {tabValue === 0 && <SharingItems category={category} />}
+        {tabValue === 0 && <SharingItems category={category} search={searchValue} />}
         {tabValue === 1 && <ReceivingItems />}
         {tabValue === 2 && <WishItems />}
       </MDBox>

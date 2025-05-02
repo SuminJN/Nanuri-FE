@@ -4,20 +4,24 @@ import ItemCard from "../../components/ItemCard";
 import { useEffect, useState } from "react";
 import { Badge } from "antd";
 import useGetTime from "../../hooks/useGetTime";
-import { getItemList } from "../../apis/itemApi";
+import { getItemList, getSearchItemList } from "../../apis/itemApi";
 import PropTypes from "prop-types";
 
-function SharingItems({ category }) {
+function SharingItems({ category, search }) {
   const [itemList, setItemList] = useState(null);
   const { getCurrentTime, isNew } = useGetTime();
 
+  const fetchItemList = async () => {
+    const fetchFunction = search ? getSearchItemList : getItemList;
+    const response = await fetchFunction(category, search);
+    if (response.status === 200) {
+      setItemList(response.data);
+    }
+  };
+
   useEffect(() => {
-    getItemList(category).then((response) => {
-      if (response.status === 200) {
-        setItemList(response.data);
-      }
-    });
-  }, [category]);
+    fetchItemList();
+  }, [category, search]);
 
   return (
     <Grid container spacing={3}>
@@ -75,6 +79,7 @@ SharingItems.defaultProps = {
 
 SharingItems.propTypes = {
   category: PropTypes.string.isRequired,
+  search: PropTypes.string,
 };
 
 export default SharingItems;
