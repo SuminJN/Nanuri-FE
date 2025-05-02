@@ -16,6 +16,9 @@ import MDTypography from "../../components/MDTypography";
 import MDButton from "../../components/MDButton";
 import TextField from "@mui/material/TextField";
 import { deleteItem, editItem, getItem } from "../../apis/itemApi";
+import { categoryList } from "../../assets/category/categoryList";
+import MenuItem from "@mui/material/MenuItem";
+import { FormControl, Select } from "@mui/material";
 
 const initState = {
   id: 0,
@@ -92,7 +95,11 @@ const EditItem = () => {
 
   useEffect(() => {
     getItem(itemId).then((response) => {
-      setItem(response.data);
+      setItem({
+        ...response.data,
+        category:
+          categoryList.find((cat) => cat.koreanName === response.data.category)?.englishName || "",
+      });
     });
   }, []);
 
@@ -184,15 +191,23 @@ const EditItem = () => {
                     />
                   </MDBox>
                   <MDBox mb={2}>
-                    <MDTypography variant="h6" fontWeight="bold" color="info">
-                      카테고리
-                    </MDTypography>
-                    <TextField
-                      name="category"
-                      value={item.category}
-                      onChange={handleChangeItem}
-                      fullWidth
-                    />
+                    <FormControl fullWidth variant="outlined">
+                      <MDTypography variant="h6" fontWeight="bold" color="info">
+                        카테고리
+                      </MDTypography>
+                      <Select
+                        sx={{ height: "45px" }}
+                        name="category"
+                        value={item.category}
+                        onChange={handleChangeItem}
+                      >
+                        {categoryList.map((category) => (
+                          <MenuItem key={category.englishName} value={category.englishName}>
+                            {category.koreanName}
+                          </MenuItem>
+                        ))}
+                      </Select>
+                    </FormControl>
                   </MDBox>
                   <MDBox mb={2}>
                     <MDTypography variant="h6" fontWeight="bold" color="info">
