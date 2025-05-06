@@ -63,6 +63,10 @@ function AddItem() {
       alert("이미지를 등록해주세요.");
       return;
     }
+    if (imageFiles.length > 5) {
+      alert("이미지는 총 5장까지 추가 가능합니다.");
+      return;
+    }
     if (!category) {
       alert("카테고리를 선택해주세요.");
       return;
