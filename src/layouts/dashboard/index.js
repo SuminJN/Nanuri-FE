@@ -128,7 +128,7 @@ function Dashboard() {
               <Grid item xs={6} sm={3}>
                 <form onSubmit={handleSubmitSearch}>
                   <OutlinedInput
-                    placeholder="검색어를 입력하세요"
+                    placeholder="검색"
                     fullWidth
                     value={search}
                     onChange={handleSearch}
