@@ -125,7 +125,7 @@ function DetailItem() {
             <Grid container spacing={5} sx={{ p: { xs: 2, sm: 3, md: 5 } }}>
               <Grid item xs={12} sm={12} md={6}>
                 <MDBox>
-                  <Carousel arrows infinite={false}>
+                  <Carousel arrows infinite={true}>
                     {item &&
                       item.images.map((image, index) => (
                         <div key={index}>
