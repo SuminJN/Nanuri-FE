@@ -3,9 +3,11 @@ import Grid from "@mui/material/Grid";
 import MDBox from "../../components/MDBox";
 import ItemCard from "../../components/ItemCard";
 import { getWish } from "../../apis/wishApi";
+import useGetTime from "../../hooks/useGetTime";
 
 function WishItems() {
   const [itemList, setItemList] = useState(null);
+  const { getCurrentTime, isNew } = useGetTime();
 
   useEffect(() => {
     getWish().then((res) => {
@@ -28,7 +30,7 @@ function WishItems() {
                       description={item.description}
                       category={item.category}
                       image={item.imageUrl}
-                      createdTime={item.createdTime}
+                      createdTime={getCurrentTime(item.createdTime)}
                       viewCount={item.viewCount}
                       wishCount={item.wishCount}
                       wishStatus={item.wishStatus}

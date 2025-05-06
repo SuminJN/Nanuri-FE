@@ -17,8 +17,17 @@ export const uploadImages = async (itemId, formData) => {
 };
 
 // 아이템 목록 조회
-export const getItemList = async (category) => {
+export const getItemList = async (category, search) => {
   return await axiosInstance.get("/api/items", {
+    params: {
+      category: category,
+    },
+  });
+};
+
+// 아이템 목록 조회 + 검색
+export const getSearchItemList = async (category, search) => {
+  return await axiosInstance.get(`/api/items/search/${search}`, {
     params: {
       category: category,
     },

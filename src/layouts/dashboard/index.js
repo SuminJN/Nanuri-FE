@@ -58,8 +58,22 @@ function Dashboard() {
   const handleWishListOpen = () => {
     navigate("/wish");
   };
+  const [search, setSearch] = useState("");
 
   const [modal, setModal] = useState(false);
+  const [refresh, setRefresh] = useState(false);
+
+  const handleSearch = (event) => {
+    setSearch(event.target.value);
+    if (event.target.value === "") {
+      setRefresh(!refresh);
+    }
+  };
+
+  const handleSubmitSearch = (event) => {
+    event.preventDefault();
+    setRefresh(!refresh);
+  };
 
   const handleModalOpen = () => {
     setModal(true);
@@ -71,6 +85,7 @@ function Dashboard() {
 
   const handleChipDelete = () => {
     setCategory("");
+    setRefresh(!refresh);
   };
 
   return (
@@ -101,7 +116,7 @@ function Dashboard() {
                   label="관심"
                   icon={
                     <Icon fontSize="small" sx={{ mt: -0.25 }}>
-                      grade_icon
+                      favorite_icon
                     </Icon>
                   }
                 />
@@ -111,17 +126,21 @@ function Dashboard() {
           {tabValue === 0 ? (
             <>
               <Grid item xs={6} sm={3}>
-                <OutlinedInput
-                  placeholder="검색어를 입력하세요"
-                  fullWidth
-                  endAdornment={
-                    <InputAdornment position="end">
-                      <IconButton>
-                        <SearchIcon />
-                      </IconButton>
-                    </InputAdornment>
-                  }
-                />
+                <form onSubmit={handleSubmitSearch}>
+                  <OutlinedInput
+                    placeholder="검색"
+                    fullWidth
+                    value={search}
+                    onChange={handleSearch}
+                    endAdornment={
+                      <InputAdornment position="end">
+                        <IconButton type="submit">
+                          <SearchIcon />
+                        </IconButton>
+                      </InputAdornment>
+                    }
+                  />
+                </form>
               </Grid>
               <Grid item xs={6} sm={3} display="flex" justifyContent="end">
                 <MDBox>
@@ -164,16 +183,18 @@ function Dashboard() {
       >
         <DialogTitle>{"필터"}</DialogTitle>
         <DialogContent sx={{ m: 2 }}>
-          {/*<MDBox mb={3}>*/}
-          {/*  <FormControl>*/}
-          {/*    <FormLabel>분류</FormLabel>*/}
-          {/*    <RadioGroup defaultValue="최신순" name="radio-buttons-group" row>*/}
-          {/*      <FormControlLabel value="최신순" control={<Radio />} label="최신순" />*/}
-          {/*      <FormControlLabel value="오래된순" control={<Radio />} label="오래된순" />*/}
-          {/*      <FormControlLabel value="나눔완료" control={<Radio />} label="나눔완료" />*/}
-          {/*    </RadioGroup>*/}
-          {/*  </FormControl>*/}
-          {/*</MDBox>*/}
+          <MDBox mb={3}>
+            <FormControl>
+              <FormLabel>분류</FormLabel>
+              <RadioGroup defaultValue="최신순" name="radio-buttons-group" row>
+                <FormControlLabel value="최신순" control={<Radio />} label="최신순" />
+                <FormControlLabel value="오래된순" control={<Radio />} label="오래된순" />
+                <FormControlLabel value="나눔완료" control={<Radio />} label="나눔완료" />
+                <FormControlLabel value="관심순" control={<Radio />} label="관심순" />
+                <FormControlLabel value="조회순" control={<Radio />} label="조회순" />
+              </RadioGroup>
+            </FormControl>
+          </MDBox>
           <MDBox>
             <FormControl>
               <FormLabel>카테고리</FormLabel>
@@ -183,7 +204,6 @@ function Dashboard() {
                 row
                 onChange={(e) => {
                   setCategory(e.target.value);
-                  handleModalClose();
                 }}
               >
                 <FormControlLabel value="" control={<Radio />} label="전체"></FormControlLabel>
@@ -204,13 +224,19 @@ function Dashboard() {
           {/*</DialogContentText>*/}
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleModalClose} autoFocus>
-            닫기
+          <Button onClick={handleModalClose}>닫기</Button>
+          <Button
+            onClick={() => {
+              setRefresh(!refresh);
+              handleModalClose();
+            }}
+          >
+            적용
           </Button>
         </DialogActions>
       </Dialog>
       <MDBox mt={1} mb={3}>
-        {tabValue === 0 && <SharingItems category={category} />}
+        {tabValue === 0 && <SharingItems category={category} search={search} refresh={refresh} />}
         {tabValue === 1 && <ReceivingItems />}
         {tabValue === 2 && <WishItems />}
       </MDBox>

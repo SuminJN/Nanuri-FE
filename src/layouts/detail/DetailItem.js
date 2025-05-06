@@ -125,7 +125,7 @@ function DetailItem() {
             <Grid container spacing={5} sx={{ p: { xs: 2, sm: 3, md: 5 } }}>
               <Grid item xs={12} sm={12} md={6}>
                 <MDBox>
-                  <Carousel arrows infinite={false}>
+                  <Carousel arrows infinite={true}>
                     {item &&
                       item.images.map((image, index) => (
                         <div key={index}>
@@ -210,14 +210,18 @@ function DetailItem() {
                               <Icon fontSize="medium" color="error">
                                 favorite_icon
                               </Icon>
-                              <MDTypography lineHeight={0}>{item.wishCount}</MDTypography>
+                              <MDTypography lineHeight={0} textAlign="center">
+                                {item.wishCount}
+                              </MDTypography>
                             </MDBox>
                           ) : (
                             <MDBox onClick={handleAddWish}>
                               <Icon fontSize="medium" color="dark">
                                 favorite_border_icon
                               </Icon>
-                              <MDTypography lineHeight={0}>{item.wishCount}</MDTypography>
+                              <MDTypography lineHeight={0} textAlign="center">
+                                {item.wishCount}
+                              </MDTypography>
                             </MDBox>
                           )}
                         </Grid>

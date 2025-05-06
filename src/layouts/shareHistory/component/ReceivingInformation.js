@@ -5,9 +5,11 @@ import { useEffect, useState } from "react";
 import Grid from "@mui/material/Grid";
 import ItemCard from "../../../components/ItemCard";
 import { getMyWaitingItems } from "../../../apis/historyApi";
+import useGetTime from "../../../hooks/useGetTime";
 
 function ReceivingInformation() {
   const [itemList, setItemList] = useState(null);
+  const { getCurrentTime, isNew } = useGetTime();
 
   useEffect(() => {
     getMyWaitingItems().then((response) => {
@@ -36,7 +38,7 @@ function ReceivingInformation() {
                         description={item.description}
                         category={item.category}
                         image={item.image}
-                        createdTime={item.createdTime}
+                        createdTime={getCurrentTime(item.createdTime)}
                         viewCount={item.viewCount}
                         wishCount={item.wishCount}
                         chatCount={item.chatCount}
