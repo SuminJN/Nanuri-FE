@@ -6,9 +6,11 @@ import { useEffect, useState } from "react";
 import Grid from "@mui/material/Grid";
 import ItemCard from "../../../components/ItemCard";
 import { getMyCompletedItemList } from "../../../apis/itemApi";
+import useGetTime from "../../../hooks/useGetTime";
 
 function ShareDoneInformation() {
   const [itemList, setItemList] = useState(null);
+  const { getCurrentTime, isNew } = useGetTime();
 
   useEffect(() => {
     getMyCompletedItemList().then((response) => {
@@ -38,7 +40,7 @@ function ShareDoneInformation() {
                       description={item.description}
                       category={item.category}
                       image={item.image}
-                      createdTime={item.createdTime}
+                      createdTime={getCurrentTime(item.createdTime)}
                       viewCount={item.viewCount}
                       wishCount={item.wishCount}
                       chatCount={item.chatCount}
