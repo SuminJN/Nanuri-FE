@@ -116,7 +116,7 @@ function Dashboard() {
                   label="관심"
                   icon={
                     <Icon fontSize="small" sx={{ mt: -0.25 }}>
-                      grade_icon
+                      favorite_icon
                     </Icon>
                   }
                 />
