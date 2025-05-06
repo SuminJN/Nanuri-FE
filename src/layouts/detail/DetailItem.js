@@ -210,14 +210,18 @@ function DetailItem() {
                               <Icon fontSize="medium" color="error">
                                 favorite_icon
                               </Icon>
-                              <MDTypography lineHeight={0}>{item.wishCount}</MDTypography>
+                              <MDTypography lineHeight={0} textAlign="center">
+                                {item.wishCount}
+                              </MDTypography>
                             </MDBox>
                           ) : (
                             <MDBox onClick={handleAddWish}>
                               <Icon fontSize="medium" color="dark">
                                 favorite_border_icon
                               </Icon>
-                              <MDTypography lineHeight={0}>{item.wishCount}</MDTypography>
+                              <MDTypography lineHeight={0} textAlign="center">
+                                {item.wishCount}
+                              </MDTypography>
                             </MDBox>
                           )}
                         </Grid>
