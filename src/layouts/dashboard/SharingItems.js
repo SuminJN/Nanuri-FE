@@ -7,7 +7,7 @@ import useGetTime from "../../hooks/useGetTime";
 import { getItemList, getSearchItemList } from "../../apis/itemApi";
 import PropTypes from "prop-types";
 
-function SharingItems({ category, search }) {
+function SharingItems({ category, search, refresh }) {
   const [itemList, setItemList] = useState(null);
   const { getCurrentTime, isNew } = useGetTime();
 
@@ -21,7 +21,7 @@ function SharingItems({ category, search }) {
 
   useEffect(() => {
     fetchItemList();
-  }, [category, search]);
+  }, [refresh]);
 
   return (
     <Grid container spacing={3}>
@@ -80,6 +80,7 @@ SharingItems.defaultProps = {
 SharingItems.propTypes = {
   category: PropTypes.string.isRequired,
   search: PropTypes.string,
+  refresh: PropTypes.bool.isRequired,
 };
 
 export default SharingItems;
