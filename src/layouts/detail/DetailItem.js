@@ -18,6 +18,7 @@ import { getItem } from "../../apis/itemApi";
 import { applyItem } from "../../apis/historyApi";
 import { addWish, deleteWish } from "../../apis/wishApi";
 import LinearProgress from "@mui/material/LinearProgress";
+import Tooltip from "@mui/material/Tooltip";
 
 function DetailItem() {
   const { itemId } = useParams();
@@ -155,22 +156,24 @@ function DetailItem() {
                       {item.nickname}
                     </MDTypography>
                   </MDBox>
-                  <MDBox
-                    sx={{ width: "20%" }}
-                    display="flex"
-                    flexDirection="column"
-                    alignItems="center"
-                  >
-                    <MDTypography lineHeight={0} color="info" variant="h6" opacity="60%">
-                      38.0°C
-                    </MDTypography>
-                    <Progress
-                      percent={38}
-                      size="small"
-                      showInfo={false}
-                      strokeColor={{ from: "#108ee9", to: "#87d068" }}
-                    />
-                  </MDBox>
+                  <Tooltip title="나눔온도">
+                    <MDBox
+                      sx={{ width: "20%" }}
+                      display="flex"
+                      flexDirection="column"
+                      alignItems="center"
+                    >
+                      <MDTypography lineHeight={0} color="info" variant="h6" opacity="60%">
+                        38.0°C
+                      </MDTypography>
+                      <Progress
+                        percent={38}
+                        size="small"
+                        showInfo={false}
+                        strokeColor={{ from: "#108ee9", to: "#87d068" }}
+                      />
+                    </MDBox>
+                  </Tooltip>
                 </MDBox>
               </Grid>
               <Grid item xs={12} sm={12} md={6}>
