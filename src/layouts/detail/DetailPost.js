@@ -14,6 +14,7 @@ import { applyWant, getWant } from "../../apis/wantApi";
 import Tooltip from "@mui/material/Tooltip";
 import MDAvatar from "../../components/MDAvatar";
 import image from "../../assets/images/team-2.jpg";
+import Linkify from "react-linkify";
 
 function DetailPost() {
   const { postId } = useParams();
@@ -26,6 +27,11 @@ function DetailPost() {
     createdAt: "",
     isOwner: null,
   });
+
+  const options = {
+    target: "_blank",
+    rel: "noopener noreferrer",
+  };
 
   const handleNeedIt = () => {
     const response = axiosInstance.post(`/api/want/${postId}/emotion`, { emotionType: "NEED_IT" });
@@ -119,7 +125,9 @@ function DetailPost() {
                       </MDTypography>
                     </MDBox>
                     <MDBox mb={2} height="200px">
-                      <MDTypography variant="h6">{post.description}</MDTypography>
+                      <MDTypography variant="h6">
+                        <Linkify options={options}>{post.description}</Linkify>
+                      </MDTypography>
                     </MDBox>
                   </Grid>
                   <Grid container display="flex" justifyContent="end">

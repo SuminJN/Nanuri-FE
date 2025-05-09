@@ -19,6 +19,7 @@ import { applyItem } from "../../apis/historyApi";
 import { addWish, deleteWish } from "../../apis/wishApi";
 import LinearProgress from "@mui/material/LinearProgress";
 import Tooltip from "@mui/material/Tooltip";
+import Linkify from "react-linkify";
 
 function DetailItem() {
   const { itemId } = useParams();
@@ -38,6 +39,11 @@ function DetailItem() {
     isOwner: null,
   });
   const [isWish, setIsWish] = useState(false);
+
+  const options = {
+    target: "_blank",
+    rel: "noopener noreferrer",
+  };
 
   const [successSB, setSuccessSB] = useState(false);
   const closeSuccessSB = () => setSuccessSB(false);
@@ -189,7 +195,9 @@ function DetailItem() {
                     </MDTypography>
                   </MDBox>
                   <MDBox mb={5}>
-                    <MDTypography variant="h6">{item.description}</MDTypography>
+                    <MDTypography variant="h6">
+                      <Linkify options={options}>{item.description}</Linkify>
+                    </MDTypography>
                   </MDBox>
                   <MDBox>
                     <MDTypography variant="h6" color="text" fontWeight="bold">
