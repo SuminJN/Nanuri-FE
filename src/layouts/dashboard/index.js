@@ -224,7 +224,9 @@ function Dashboard() {
           {/*</DialogContentText>*/}
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleModalClose}>닫기</Button>
+          <Button color="secondary" onClick={handleModalClose}>
+            닫기
+          </Button>
           <Button
             onClick={() => {
               setRefresh(!refresh);
