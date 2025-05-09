@@ -6,7 +6,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import MDTypography from "../../components/MDTypography";
 import MDButton from "../../components/MDButton";
-import { Carousel, Image } from "antd";
+import { Carousel, Image, Progress } from "antd";
 import IconButton from "@mui/material/IconButton";
 import { navbarIconButton } from "../../examples/Navbars/DashboardNavbar/styles";
 import Icon from "@mui/material/Icon";
@@ -17,6 +17,7 @@ import MDSnackbar from "../../components/MDSnackbar";
 import { getItem } from "../../apis/itemApi";
 import { applyItem } from "../../apis/historyApi";
 import { addWish, deleteWish } from "../../apis/wishApi";
+import LinearProgress from "@mui/material/LinearProgress";
 
 function DetailItem() {
   const { itemId } = useParams();
@@ -145,13 +146,31 @@ function DetailItem() {
                       ))}
                   </Carousel>
                 </MDBox>
-                <MDBox mb={3} display="flex" alignItems="center">
-                  <MDBox p={1}>
-                    <MDAvatar src={image} alt="something here" shadow="md" size="md" />
+                <MDBox mb={3} display="flex" alignItems="center" justifyContent="space-between">
+                  <MDBox p={1} display="flex" alignItems="center">
+                    <MDBox pr={1}>
+                      <MDAvatar src={image} alt="something here" shadow="md" size="md" />
+                    </MDBox>
+                    <MDTypography variant="h6" opacity="60%">
+                      {item.nickname}
+                    </MDTypography>
                   </MDBox>
-                  <MDTypography variant="h6" opacity="60%">
-                    {item.nickname}
-                  </MDTypography>
+                  <MDBox
+                    sx={{ width: "20%" }}
+                    display="flex"
+                    flexDirection="column"
+                    alignItems="center"
+                  >
+                    <MDTypography lineHeight={0} color="info" variant="h6" opacity="60%">
+                      38.0°C
+                    </MDTypography>
+                    <Progress
+                      percent={38}
+                      size="small"
+                      showInfo={false}
+                      strokeColor={{ from: "#108ee9", to: "#87d068" }}
+                    />
+                  </MDBox>
                 </MDBox>
               </Grid>
               <Grid item xs={12} sm={12} md={6}>
