@@ -25,6 +25,7 @@ function DetailItem() {
   const { itemId } = useParams();
   const navigate = useNavigate();
   const { getCurrentTime } = useGetTime();
+
   const [item, setItem] = useState({
     id: "",
     title: "",
@@ -191,7 +192,7 @@ function DetailItem() {
                   </MDBox>
                   <MDBox mb={2}>
                     <MDTypography variant="h6" opacity="60%">
-                      {item.category} · {item.createdTime}
+                      {item.category} · {item.createdTime ? getCurrentTime(item.createdTime) : ""}
                     </MDTypography>
                   </MDBox>
                   <MDBox mb={5}>
@@ -261,6 +262,7 @@ function DetailItem() {
                               variant="gradient"
                               color="secondary"
                               fullWidth
+                              startIcon={<Icon>forum_icon</Icon>}
                               onClick={handleItemApply}
                             >
                               <MDTypography variant="h6" color="white">

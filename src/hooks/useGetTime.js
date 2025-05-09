@@ -32,4 +32,23 @@ const useGetTime = () => {
   return { getCurrentTime, isNew };
 };
 
+export const formattedDate = (stringDate, splitter = "/") => {
+  const date = new Date(stringDate);
+  if (isNaN(date.getTime())) return "유효하지 않은 날짜";
+
+  const nowDate = new Date();
+  const timeDifference = nowDate.getTime() - date.getTime();
+
+  const dayDifference = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+  const hourDifference = Math.floor(timeDifference / (1000 * 60 * 60));
+  const minuteDifference = Math.floor(timeDifference / (1000 * 60));
+
+  if (minuteDifference < 1) return "방금 전";
+  else if (hourDifference < 1) return `${minuteDifference}분 전`;
+  else if (hourDifference < 24) return `${hourDifference}시간 전`;
+  else if (dayDifference < 30) return `${dayDifference}일 전`;
+
+  return date.toISOString().slice(2, 10).replace(/-/g, splitter);
+};
+
 export default useGetTime;
