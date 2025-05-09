@@ -45,6 +45,7 @@ import { useRecoilState } from "recoil";
 import { TabValue } from "../../recoil/TabValueState";
 import { categoryList } from "../../assets/category/categoryList";
 import MenuItem from "@mui/material/MenuItem";
+import MDTypography from "../../components/MDTypography";
 
 function Dashboard() {
   const [controller, dispatch] = useMaterialUIController();
@@ -97,7 +98,7 @@ function Dashboard() {
             <AppBar position="static">
               <Tabs orientation={tabsOrientation} value={tabValue} onChange={handleSetTabValue}>
                 <Tab
-                  label="나눠요"
+                  label={<MDTypography variant={tabValue === 0 ? "h6" : ""}>나눠요</MDTypography>}
                   icon={
                     <Icon fontSize="small" sx={{ mt: -0.25 }}>
                       volunteer_activism
@@ -105,7 +106,7 @@ function Dashboard() {
                   }
                 />
                 <Tab
-                  label="필요해요"
+                  label={<MDTypography variant={tabValue === 1 ? "h6" : ""}>필요해요</MDTypography>}
                   icon={
                     <Icon fontSize="small" sx={{ mt: -0.25 }}>
                       handshake_icon
@@ -113,7 +114,7 @@ function Dashboard() {
                   }
                 />
                 <Tab
-                  label="관심"
+                  label={<MDTypography variant={tabValue === 2 ? "h6" : ""}>관심</MDTypography>}
                   icon={
                     <Icon fontSize="small" sx={{ mt: -0.25 }}>
                       favorite_icon

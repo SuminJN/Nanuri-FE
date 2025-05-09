@@ -108,7 +108,7 @@ function ItemCard({
           </MDBox>
           <MDBox mr={2} display="flex" justifyContent="flex-end" alignItems="center">
             <Icon fontSize="small" color="dark">
-              chat_icon
+              forum_icon
             </Icon>
             <MDTypography variant="caption" fontWeight="medium" lineHeight={0}>
               &nbsp;{chatCount}
