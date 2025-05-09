@@ -73,7 +73,7 @@ function Overview() {
       <Header nickname={user.nickname} />
       <MDBox mt={2} mb={3}>
         <Grid container spacing={1} justifyContent="center">
-          <Grid item xs={12} md={6} xl={4}>
+          <Grid item xs={12} md={6}>
             {isEditing ? (
               <MDBox borderRadius="lg" sx={{ borderColor: "grey.300" }} border={2} shadow="md">
                 <MDBox
@@ -169,7 +169,7 @@ function Overview() {
               <ProfileInfoCard title="프로필 정보" user={user} handleClickEdit={handleClickEdit} />
             )}
           </Grid>
-          <Grid item xs={12} md={6} xl={4}>
+          <Grid item xs={12} md={6}>
             <ShareCardList />
           </Grid>
           {/*<Grid item xs={12} xl={4}>*/}
