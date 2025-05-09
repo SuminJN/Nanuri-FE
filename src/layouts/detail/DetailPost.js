@@ -12,6 +12,8 @@ import { navbarIconButton } from "../../examples/Navbars/DashboardNavbar/styles"
 import Icon from "@mui/material/Icon";
 import { applyWant, getWant } from "../../apis/wantApi";
 import Tooltip from "@mui/material/Tooltip";
+import MDAvatar from "../../components/MDAvatar";
+import image from "../../assets/images/team-2.jpg";
 
 function DetailPost() {
   const { postId } = useParams();
@@ -103,9 +105,17 @@ function DetailPost() {
                         {post.title}
                       </MDTypography>
                     </MDBox>
-                    <MDBox mb={8}>
+                    <MDBox mb={2}>
                       <MDTypography variant="h6" opacity="60%">
                         {post.createdTime}
+                      </MDTypography>
+                    </MDBox>
+                    <MDBox mb={8} display="flex" alignItems="center">
+                      <MDBox pr={1}>
+                        <MDAvatar src={image} alt="something here" shadow="md" size="sm" />
+                      </MDBox>
+                      <MDTypography variant="h6" opacity="60%">
+                        {post.receiverNickName}
                       </MDTypography>
                     </MDBox>
                     <MDBox mb={2} height="200px">
@@ -115,7 +125,7 @@ function DetailPost() {
                   <Grid container display="flex" justifyContent="end">
                     <Grid item xs={12}>
                       <MDBox>
-                        <MDTypography variant="overline">
+                        <MDTypography variant="h6" color="text" fontWeight="bold">
                           신청 0 · 조회 {post.viewCount}
                         </MDTypography>
                       </MDBox>
