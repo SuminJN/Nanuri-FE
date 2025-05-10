@@ -132,7 +132,7 @@ function DetailPost() {
                   </Grid>
                   <Grid container display="flex" justifyContent="end">
                     <Grid item xs={12}>
-                      <MDBox>
+                      <MDBox m={1} display="flex" justifyContent="end">
                         <MDTypography variant="h6" color="text" fontWeight="bold">
                           신청 0 · 조회 {post.viewCount}
                         </MDTypography>
@@ -158,19 +158,20 @@ function DetailPost() {
                       ) : (
                         <MDBox display="flex" justifyContent="center">
                           <Tooltip placement="top" title="나도 필요해요">
-                            <MDButton onClick={handleNeedIt} sx={{ fontSize: 30 }}>
-                              🙋‍♂️
+                            <MDButton onClick={handleNeedIt} sx={{ fontSize: 15 }}>
+                              🤲
                             </MDButton>
                           </Tooltip>
                           <Tooltip placement="top" title="응원해요">
-                            <MDButton onClick={handleCheering} sx={{ fontSize: 30 }}>
-                              👍
+                            <MDButton onClick={handleCheering} sx={{ fontSize: 15 }}>
+                              🥳
                             </MDButton>
                           </Tooltip>
-                          <Tooltip onClick={handleAmazing} placement="top" title="놀라워요">
-                            <MDButton sx={{ fontSize: 30 }}>🤩</MDButton>
+                          <Tooltip placement="top" title="놀라워요">
+                            <MDButton onClick={handleAmazing} sx={{ fontSize: 15 }}>
+                              🤩
+                            </MDButton>
                           </Tooltip>
-
                           <MDButton
                             variant="gradient"
                             color="secondary"

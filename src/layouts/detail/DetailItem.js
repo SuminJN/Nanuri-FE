@@ -200,9 +200,9 @@ function DetailItem() {
                       <Linkify options={options}>{item.description}</Linkify>
                     </MDTypography>
                   </MDBox>
-                  <MDBox>
+                  <MDBox m={1} display="flex" justifyContent="end">
                     <MDTypography variant="h6" color="text" fontWeight="bold">
-                      신청 0 · 관심 {item.wishCount ? item.wishCount : 0} · 조회 {item.viewCount}
+                      채팅 0 · 관심 {item.wishCount ? item.wishCount : 0} · 조회 {item.viewCount}
                     </MDTypography>
                   </MDBox>
                   {item.isOwner ? (
