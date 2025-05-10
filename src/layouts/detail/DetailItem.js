@@ -116,8 +116,8 @@ function DetailItem() {
     <DashboardLayout>
       <DashboardNavbar />
       <Grid container justifyContent="center">
-        <Grid item xs={12} sm={10} md={10} lg={8}>
-          <MDBox mb={3} borderRadius="lg" sx={{ borderColor: "grey.300" }} border={2} shadow="md">
+        <Grid item xs={12} sm={10} md={10}>
+          <MDBox mb={3}>
             <MDBox px={2} pt={3}>
               <IconButton
                 size="small"

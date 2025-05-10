@@ -89,7 +89,7 @@ function DetailPost() {
       <MDBox mt={2} mb={3}>
         <Grid container spacing={3} mb={2} justifyContent="center">
           <Grid item xs={12} sm={10} md={8} lg={6}>
-            <MDBox borderRadius="lg" sx={{ borderColor: "grey.300" }} border={2} shadow="md">
+            <MDBox>
               <MDBox p={2}>
                 <IconButton
                   size="small"
