@@ -18,11 +18,14 @@ import { getItem } from "../../apis/itemApi";
 import { applyItem } from "../../apis/historyApi";
 import { addWish, deleteWish } from "../../apis/wishApi";
 import LinearProgress from "@mui/material/LinearProgress";
+import Tooltip from "@mui/material/Tooltip";
+import Linkify from "react-linkify";
 
 function DetailItem() {
   const { itemId } = useParams();
   const navigate = useNavigate();
   const { getCurrentTime } = useGetTime();
+
   const [item, setItem] = useState({
     id: "",
     title: "",
@@ -37,6 +40,11 @@ function DetailItem() {
     isOwner: null,
   });
   const [isWish, setIsWish] = useState(false);
+
+  const options = {
+    target: "_blank",
+    rel: "noopener noreferrer",
+  };
 
   const [successSB, setSuccessSB] = useState(false);
   const closeSuccessSB = () => setSuccessSB(false);
@@ -108,8 +116,8 @@ function DetailItem() {
     <DashboardLayout>
       <DashboardNavbar />
       <Grid container justifyContent="center">
-        <Grid item xs={12} sm={10} md={10} lg={8}>
-          <MDBox mb={3} borderRadius="lg" sx={{ borderColor: "grey.300" }} border={2} shadow="md">
+        <Grid item xs={12} sm={10} md={10}>
+          <MDBox mb={3}>
             <MDBox px={2} pt={3}>
               <IconButton
                 size="small"
@@ -155,22 +163,24 @@ function DetailItem() {
                       {item.nickname}
                     </MDTypography>
                   </MDBox>
-                  <MDBox
-                    sx={{ width: "20%" }}
-                    display="flex"
-                    flexDirection="column"
-                    alignItems="center"
-                  >
-                    <MDTypography lineHeight={0} color="info" variant="h6" opacity="60%">
-                      38.0°C
-                    </MDTypography>
-                    <Progress
-                      percent={38}
-                      size="small"
-                      showInfo={false}
-                      strokeColor={{ from: "#108ee9", to: "#87d068" }}
-                    />
-                  </MDBox>
+                  <Tooltip title="나눔온도">
+                    <MDBox
+                      sx={{ width: "20%" }}
+                      display="flex"
+                      flexDirection="column"
+                      alignItems="center"
+                    >
+                      <MDTypography lineHeight={0} color="info" variant="h6" opacity="60%">
+                        38.0°C
+                      </MDTypography>
+                      <Progress
+                        percent={38}
+                        size="small"
+                        showInfo={false}
+                        strokeColor={{ from: "#108ee9", to: "#87d068" }}
+                      />
+                    </MDBox>
+                  </Tooltip>
                 </MDBox>
               </Grid>
               <Grid item xs={12} sm={12} md={6}>
@@ -182,15 +192,17 @@ function DetailItem() {
                   </MDBox>
                   <MDBox mb={2}>
                     <MDTypography variant="h6" opacity="60%">
-                      {item.category} · {item.createdTime}
+                      {item.category} · {item.createdTime ? getCurrentTime(item.createdTime) : ""}
                     </MDTypography>
                   </MDBox>
                   <MDBox mb={5}>
-                    <MDTypography variant="h6">{item.description}</MDTypography>
+                    <MDTypography variant="h6">
+                      <Linkify options={options}>{item.description}</Linkify>
+                    </MDTypography>
                   </MDBox>
-                  <MDBox>
+                  <MDBox m={1} display="flex" justifyContent="end">
                     <MDTypography variant="h6" color="text" fontWeight="bold">
-                      신청 0 · 관심 {item.wishCount ? item.wishCount : 0} · 조회 {item.viewCount}
+                      채팅 0 · 관심 {item.wishCount ? item.wishCount : 0} · 조회 {item.viewCount}
                     </MDTypography>
                   </MDBox>
                   {item.isOwner ? (
@@ -250,6 +262,7 @@ function DetailItem() {
                               variant="gradient"
                               color="secondary"
                               fullWidth
+                              startIcon={<Icon>forum_icon</Icon>}
                               onClick={handleItemApply}
                             >
                               <MDTypography variant="h6" color="white">

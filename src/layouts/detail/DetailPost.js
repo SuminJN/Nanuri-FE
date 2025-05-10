@@ -14,6 +14,7 @@ import { applyWant, getWant } from "../../apis/wantApi";
 import Tooltip from "@mui/material/Tooltip";
 import MDAvatar from "../../components/MDAvatar";
 import image from "../../assets/images/team-2.jpg";
+import Linkify from "react-linkify";
 
 function DetailPost() {
   const { postId } = useParams();
@@ -26,6 +27,11 @@ function DetailPost() {
     createdAt: "",
     isOwner: null,
   });
+
+  const options = {
+    target: "_blank",
+    rel: "noopener noreferrer",
+  };
 
   const handleNeedIt = () => {
     const response = axiosInstance.post(`/api/want/${postId}/emotion`, { emotionType: "NEED_IT" });
@@ -83,7 +89,7 @@ function DetailPost() {
       <MDBox mt={2} mb={3}>
         <Grid container spacing={3} mb={2} justifyContent="center">
           <Grid item xs={12} sm={10} md={8} lg={6}>
-            <MDBox borderRadius="lg" sx={{ borderColor: "grey.300" }} border={2} shadow="md">
+            <MDBox>
               <MDBox p={2}>
                 <IconButton
                   size="small"
@@ -119,12 +125,14 @@ function DetailPost() {
                       </MDTypography>
                     </MDBox>
                     <MDBox mb={2} height="200px">
-                      <MDTypography variant="h6">{post.description}</MDTypography>
+                      <MDTypography variant="h6">
+                        <Linkify options={options}>{post.description}</Linkify>
+                      </MDTypography>
                     </MDBox>
                   </Grid>
                   <Grid container display="flex" justifyContent="end">
                     <Grid item xs={12}>
-                      <MDBox>
+                      <MDBox m={1} display="flex" justifyContent="end">
                         <MDTypography variant="h6" color="text" fontWeight="bold">
                           신청 0 · 조회 {post.viewCount}
                         </MDTypography>
@@ -150,19 +158,20 @@ function DetailPost() {
                       ) : (
                         <MDBox display="flex" justifyContent="center">
                           <Tooltip placement="top" title="나도 필요해요">
-                            <MDButton onClick={handleNeedIt} sx={{ fontSize: 30 }}>
-                              🙋‍♂️
+                            <MDButton onClick={handleNeedIt} sx={{ fontSize: 15 }}>
+                              🤲
                             </MDButton>
                           </Tooltip>
                           <Tooltip placement="top" title="응원해요">
-                            <MDButton onClick={handleCheering} sx={{ fontSize: 30 }}>
-                              👍
+                            <MDButton onClick={handleCheering} sx={{ fontSize: 15 }}>
+                              🥳
                             </MDButton>
                           </Tooltip>
-                          <Tooltip onClick={handleAmazing} placement="top" title="놀라워요">
-                            <MDButton sx={{ fontSize: 30 }}>🤩</MDButton>
+                          <Tooltip placement="top" title="놀라워요">
+                            <MDButton onClick={handleAmazing} sx={{ fontSize: 15 }}>
+                              🤩
+                            </MDButton>
                           </Tooltip>
-
                           <MDButton
                             variant="gradient"
                             color="secondary"
