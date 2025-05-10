@@ -60,7 +60,7 @@ function Footer({ company, links }) {
         fontSize={size.sm}
         px={1.5}
       >
-        &copy; {new Date().getFullYear()} HGU · NANURI
+        &copy; {new Date().getFullYear()} HGU · 한줌
       </MDBox>
       <MDBox
         component="ul"
@@ -87,7 +87,7 @@ function Footer({ company, links }) {
 
 // Setting default values for the props of Footer
 Footer.defaultProps = {
-  company: { href: "https://www.creative-tim.com/", name: "NANURI" },
+  company: { href: "https://github.com/HGU-WALAB", name: "한줌" },
   links: [
     { href: "https://github.com/HGU-WALAB", name: "팀소개" },
     { href: "https://github.com/HGU-WALAB", name: "이용약관" },
