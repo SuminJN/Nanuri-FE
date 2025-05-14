@@ -1,17 +1,17 @@
 /**
-=========================================================
-* Material Dashboard 2 React - v2.2.0
-=========================================================
+ =========================================================
+ * Material Dashboard 2 React - v2.2.0
+ =========================================================
 
-* Product Page: https://www.creative-tim.com/product/material-dashboard-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
+ * Product Page: https://www.creative-tim.com/product/material-dashboard-react
+ * Copyright 2023 Creative Tim (https://www.creative-tim.com)
 
-Coded by www.creative-tim.com
+ Coded by www.creative-tim.com
 
  =========================================================
 
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ */
 
 import { useState } from "react";
 
@@ -118,75 +118,135 @@ function Notifications() {
           <Grid item xs={12} lg={8}>
             <Card>
               <MDBox p={2}>
-                <MDTypography variant="h5">Alerts</MDTypography>
+                <MDTypography variant="h4" fontWeight="bold" color="info">
+                  알림 목록
+                </MDTypography>
               </MDBox>
               <MDBox pt={2} px={2}>
-                <MDAlert color="primary" dismissible>
-                  {alertContent("primary")}
-                </MDAlert>
-                <MDAlert color="secondary" dismissible>
-                  {alertContent("secondary")}
-                </MDAlert>
-                <MDAlert color="success" dismissible>
-                  {alertContent("success")}
-                </MDAlert>
-                <MDAlert color="error" dismissible>
-                  {alertContent("error")}
-                </MDAlert>
-                <MDAlert color="warning" dismissible>
-                  {alertContent("warning")}
-                </MDAlert>
-                <MDAlert color="info" dismissible>
-                  {alertContent("info")}
+                <MDAlert color="light" dismissible>
+                  <MDTypography variant="body2" color="black">
+                    <MDTypography
+                      component="a"
+                      href="#"
+                      variant="body2"
+                      fontWeight="medium"
+                      color="black"
+                    >
+                      고질라님에게 온 채팅{" "}
+                      <MDTypography variant="body2" color="black">
+                        나눔 받고싶어 채팅 드립니다.
+                      </MDTypography>
+                    </MDTypography>
+                  </MDTypography>
                 </MDAlert>
                 <MDAlert color="light" dismissible>
-                  {alertContent("light")}
+                  <MDTypography variant="body2" color="black">
+                    <MDTypography
+                      component="a"
+                      href="#"
+                      variant="body2"
+                      fontWeight="medium"
+                      color="black"
+                    >
+                      고질라님에게 온 채팅{" "}
+                      <MDTypography variant="body2" color="black">
+                        안녕하세요!
+                      </MDTypography>
+                    </MDTypography>
+                  </MDTypography>
                 </MDAlert>
-                <MDAlert color="dark" dismissible>
-                  {alertContent("dark")}
+                <MDAlert color="light" dismissible>
+                  <MDTypography variant="body2" color="black">
+                    <MDTypography
+                      component="a"
+                      href="#"
+                      variant="body2"
+                      fontWeight="medium"
+                      color="black"
+                    >
+                      예루살렘님에게 온 채팅{" "}
+                      <MDTypography variant="body2" color="black">
+                        나눔 감사합니다~~!
+                      </MDTypography>
+                    </MDTypography>
+                  </MDTypography>
                 </MDAlert>
+                <MDAlert color="light" dismissible>
+                  <MDTypography variant="body2" color="black">
+                    <MDTypography
+                      component="a"
+                      href="#"
+                      variant="body2"
+                      fontWeight="medium"
+                      color="black"
+                    >
+                      초상화님에게 온 채팅{" "}
+                      <MDTypography variant="body2" color="black">
+                        잘 쓰겠습니다~!
+                      </MDTypography>
+                    </MDTypography>
+                  </MDTypography>
+                </MDAlert>
+                {/*<MDAlert color="success" dismissible>*/}
+                {/*  {alertContent("success")}*/}
+                {/*</MDAlert>*/}
+                {/*<MDAlert color="error" dismissible>*/}
+                {/*  {alertContent("error")}*/}
+                {/*</MDAlert>*/}
+                {/*<MDAlert color="warning" dismissible>*/}
+                {/*  {alertContent("warning")}*/}
+                {/*</MDAlert>*/}
+                {/*<MDAlert color="info" dismissible>*/}
+                {/*  {alertContent("info")}*/}
+                {/*</MDAlert>*/}
+                {/*<MDAlert color="light" dismissible>*/}
+                {/*  {alertContent("light")}*/}
+                {/*</MDAlert>*/}
+                {/*<MDAlert color="dark" dismissible>*/}
+                {/*  {alertContent("dark")}*/}
+                {/*</MDAlert>*/}
               </MDBox>
             </Card>
           </Grid>
 
-          <Grid item xs={12} lg={8}>
-            <Card>
-              <MDBox p={2} lineHeight={0}>
-                <MDTypography variant="h5">Notifications</MDTypography>
-                <MDTypography variant="button" color="text" fontWeight="regular">
-                  Notifications on this page use Toasts from Bootstrap. Read more details here.
-                </MDTypography>
-              </MDBox>
-              <MDBox p={2}>
-                <Grid container spacing={3}>
-                  <Grid item xs={12} sm={6} lg={3}>
-                    <MDButton variant="gradient" color="success" onClick={openSuccessSB} fullWidth>
-                      success notification
-                    </MDButton>
-                    {renderSuccessSB}
-                  </Grid>
-                  <Grid item xs={12} sm={6} lg={3}>
-                    <MDButton variant="gradient" color="info" onClick={openInfoSB} fullWidth>
-                      info notification
-                    </MDButton>
-                    {renderInfoSB}
-                  </Grid>
-                  <Grid item xs={12} sm={6} lg={3}>
-                    <MDButton variant="gradient" color="warning" onClick={openWarningSB} fullWidth>
-                      warning notification
-                    </MDButton>
-                    {renderWarningSB}
-                  </Grid>
-                  <Grid item xs={12} sm={6} lg={3}>
-                    <MDButton variant="gradient" color="error" onClick={openErrorSB} fullWidth>
-                      error notification
-                    </MDButton>
-                    {renderErrorSB}
-                  </Grid>
-                </Grid>
-              </MDBox>
-            </Card>
-          </Grid>
+          {/*<Grid item xs={12} lg={8}>*/}
+          {/*  <Card>*/}
+          {/*    <MDBox p={2} lineHeight={0}>*/}
+          {/*      <MDTypography variant="h5">Notifications</MDTypography>*/}
+          {/*      <MDTypography variant="button" color="text" fontWeight="regular">*/}
+          {/*        Notifications on this page use Toasts from Bootstrap. Read more details here.*/}
+          {/*      </MDTypography>*/}
+          {/*    </MDBox>*/}
+          {/*    <MDBox p={2}>*/}
+          {/*      <Grid container spacing={3}>*/}
+          {/*        <Grid item xs={12} sm={6} lg={3}>*/}
+          {/*          <MDButton variant="gradient" color="success" onClick={openSuccessSB} fullWidth>*/}
+          {/*            success notification*/}
+          {/*          </MDButton>*/}
+          {/*          {renderSuccessSB}*/}
+          {/*        </Grid>*/}
+          {/*        <Grid item xs={12} sm={6} lg={3}>*/}
+          {/*          <MDButton variant="gradient" color="info" onClick={openInfoSB} fullWidth>*/}
+          {/*            info notification*/}
+          {/*          </MDButton>*/}
+          {/*          {renderInfoSB}*/}
+          {/*        </Grid>*/}
+          {/*        <Grid item xs={12} sm={6} lg={3}>*/}
+          {/*          <MDButton variant="gradient" color="warning" onClick={openWarningSB} fullWidth>*/}
+          {/*            warning notification*/}
+          {/*          </MDButton>*/}
+          {/*          {renderWarningSB}*/}
+          {/*        </Grid>*/}
+          {/*        <Grid item xs={12} sm={6} lg={3}>*/}
+          {/*          <MDButton variant="gradient" color="error" onClick={openErrorSB} fullWidth>*/}
+          {/*            error notification*/}
+          {/*          </MDButton>*/}
+          {/*          {renderErrorSB}*/}
+          {/*        </Grid>*/}
+          {/*      </Grid>*/}
+          {/*    </MDBox>*/}
+          {/*  </Card>*/}
+          {/*</Grid>*/}
         </Grid>
       </MDBox>
       <Footer />
