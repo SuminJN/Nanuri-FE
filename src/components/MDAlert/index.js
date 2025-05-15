@@ -1,17 +1,17 @@
 /**
-=========================================================
-* Material Dashboard 2 React - v2.2.0
-=========================================================
+ =========================================================
+ * Material Dashboard 2 React - v2.2.0
+ =========================================================
 
-* Product Page: https://www.creative-tim.com/product/material-dashboard-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
+ * Product Page: https://www.creative-tim.com/product/material-dashboard-react
+ * Copyright 2023 Creative Tim (https://www.creative-tim.com)
 
-Coded by www.creative-tim.com
+ Coded by www.creative-tim.com
 
  =========================================================
 
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ */
 
 import { useState } from "react";
 
@@ -27,11 +27,15 @@ import MDBox from "components/MDBox";
 // Custom styles for the MDAlert
 import MDAlertRoot from "components/MDAlert/MDAlertRoot";
 import MDAlertCloseIcon from "components/MDAlert/MDAlertCloseIcon";
+import { readNotification } from "../../apis/notificationApi";
 
-function MDAlert({ color, dismissible, children, ...rest }) {
+function MDAlert({ notificationId, color, dismissible, children, ...rest }) {
   const [alertStatus, setAlertStatus] = useState("mount");
 
-  const handleAlertStatus = () => setAlertStatus("fadeOut");
+  const handleAlertStatus = () => {
+    setAlertStatus("fadeOut");
+    readNotification(notificationId);
+  };
 
   // The base template for the alert
   const alertTemplate = (mount = true) => (
@@ -69,6 +73,7 @@ MDAlert.defaultProps = {
 
 // Typechecking props of the MDAlert
 MDAlert.propTypes = {
+  notificationId: PropTypes.number,
   color: PropTypes.oneOf([
     "primary",
     "secondary",
