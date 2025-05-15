@@ -160,7 +160,12 @@ function DetailItem() {
                     <MDBox pr={1}>
                       <MDAvatar src={image} alt="something here" shadow="md" size="md" />
                     </MDBox>
-                    <MDTypography variant="h6" opacity="60%">
+                    <MDTypography
+                      variant="h6"
+                      opacity="60%"
+                      sx={{ cursor: "pointer" }}
+                      onClick={() => navigate(`/user/${item.nickname}`)}
+                    >
                       {item.nickname}
                     </MDTypography>
                   </MDBox>

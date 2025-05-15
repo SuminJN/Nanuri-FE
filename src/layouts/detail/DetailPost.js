@@ -120,7 +120,12 @@ function DetailPost() {
                       <MDBox pr={1}>
                         <MDAvatar src={image} alt="something here" shadow="md" size="sm" />
                       </MDBox>
-                      <MDTypography variant="h6" opacity="60%">
+                      <MDTypography
+                        variant="h6"
+                        opacity="60%"
+                        sx={{ cursor: "pointer" }}
+                        onClick={() => navigate(`/user/${post.receiverNickName}`)}
+                      >
                         {post.receiverNickName}
                       </MDTypography>
                     </MDBox>
