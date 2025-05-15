@@ -157,21 +157,21 @@ function DetailPost() {
                         </Grid>
                       ) : (
                         <MDBox display="flex" justifyContent="center">
-                          <Tooltip placement="top" title="나도 필요해요">
-                            <MDButton onClick={handleNeedIt} sx={{ fontSize: 15 }}>
-                              🤲
-                            </MDButton>
-                          </Tooltip>
-                          <Tooltip placement="top" title="응원해요">
-                            <MDButton onClick={handleCheering} sx={{ fontSize: 15 }}>
-                              🥳
-                            </MDButton>
-                          </Tooltip>
-                          <Tooltip placement="top" title="놀라워요">
-                            <MDButton onClick={handleAmazing} sx={{ fontSize: 15 }}>
-                              🤩
-                            </MDButton>
-                          </Tooltip>
+                          {/*<Tooltip placement="top" title="나도 필요해요">*/}
+                          {/*  <MDButton onClick={handleNeedIt} sx={{ fontSize: 15 }}>*/}
+                          {/*    🤲*/}
+                          {/*  </MDButton>*/}
+                          {/*</Tooltip>*/}
+                          {/*<Tooltip placement="top" title="응원해요">*/}
+                          {/*  <MDButton onClick={handleCheering} sx={{ fontSize: 15 }}>*/}
+                          {/*    🥳*/}
+                          {/*  </MDButton>*/}
+                          {/*</Tooltip>*/}
+                          {/*<Tooltip placement="top" title="놀라워요">*/}
+                          {/*  <MDButton onClick={handleAmazing} sx={{ fontSize: 15 }}>*/}
+                          {/*    🤩*/}
+                          {/*  </MDButton>*/}
+                          {/*</Tooltip>*/}
                           <MDButton
                             variant="gradient"
                             color="secondary"
