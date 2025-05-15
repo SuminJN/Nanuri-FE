@@ -155,7 +155,7 @@ function DetailItem() {
                       ))}
                   </Carousel>
                 </MDBox>
-                <MDBox mb={3} display="flex" alignItems="center" justifyContent="space-between">
+                <MDBox display="flex" alignItems="center" justifyContent="space-between">
                   <MDBox p={1} display="flex" alignItems="center">
                     <MDBox pr={1}>
                       <MDAvatar src={image} alt="something here" shadow="md" size="md" />
