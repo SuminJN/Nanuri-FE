@@ -20,9 +20,10 @@ function AddItem() {
     title: "",
     category: "",
     place: "",
+    deadline: "",
     description: "",
   });
-  const { title, place, category, description } = inputs;
+  const { title, place, deadline, category, description } = inputs;
 
   const onChange = (e) => {
     const { value, name } = e.target;
@@ -185,9 +186,12 @@ function AddItem() {
                       </MDTypography>
                       <TextField
                         id="deadline"
+                        name="deadline"
                         type="datetime-local"
                         fullWidth
                         required
+                        value={deadline}
+                        onChange={onChange}
                         min={new Date().toISOString().slice(0, 16)}
                       />
                     </MDBox>

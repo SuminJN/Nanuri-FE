@@ -38,6 +38,7 @@ function DetailItem() {
     wishStatus: false,
     images: [],
     isOwner: null,
+    deadline: "",
   });
   const [isWish, setIsWish] = useState(false);
 
@@ -258,17 +259,25 @@ function DetailItem() {
                         </Grid>
                         <Grid item xs={11}>
                           <MDBox>
-                            <MDButton
-                              variant="gradient"
-                              color="secondary"
-                              fullWidth
-                              startIcon={<Icon>forum_icon</Icon>}
-                              onClick={handleItemApply}
-                            >
-                              <MDTypography variant="h6" color="white">
-                                채팅하기
-                              </MDTypography>
-                            </MDButton>
+                            {new Date(item.deadline) > new Date() ? (
+                              <MDButton
+                                variant="gradient"
+                                color="secondary"
+                                fullWidth
+                                startIcon={<Icon>forum_icon</Icon>}
+                                onClick={handleItemApply}
+                              >
+                                <MDTypography variant="h6" color="white">
+                                  채팅하기
+                                </MDTypography>
+                              </MDButton>
+                            ) : (
+                              <MDButton variant="gradient" color="error" fullWidth disabled>
+                                <MDTypography variant="h6" color="white">
+                                  마감된 나눔입니다.
+                                </MDTypography>
+                              </MDButton>
+                            )}
                           </MDBox>
                         </Grid>
                       </Grid>

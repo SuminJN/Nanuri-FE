@@ -32,6 +32,7 @@ const initState = {
   wishCount: 0,
   images: [],
   isOwner: null,
+  deadline: "",
 };
 
 const EditItem = () => {
@@ -208,6 +209,20 @@ const EditItem = () => {
                         ))}
                       </Select>
                     </FormControl>
+                  </MDBox>
+                  <MDBox mb={2}>
+                    <MDTypography variant="h6" fontWeight="bold" color="info">
+                      나눔 마감 기한
+                    </MDTypography>
+                    <TextField
+                      name="deadline"
+                      type="datetime-local"
+                      fullWidth
+                      required
+                      value={item.deadline}
+                      onChange={handleChangeItem}
+                      min={new Date().toISOString().slice(0, 16)}
+                    />
                   </MDBox>
                   <MDBox mb={2}>
                     <MDTypography variant="h6" fontWeight="bold" color="info">
