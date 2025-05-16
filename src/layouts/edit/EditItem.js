@@ -109,7 +109,13 @@ const EditItem = () => {
       <DashboardNavbar />
       <Grid container justifyContent="center">
         <Grid item xs={12} sm={10} md={10}>
-          <MDBox my={3}>
+          <MDBox
+            my={3}
+            borderRadius="lg"
+            sx={{ borderColor: "grey.300", height: "100%" }}
+            border={2}
+            shadow="md"
+          >
             <MDBox display="flex" justifyContent="center" alignItems="center" p={2}>
               <MDTypography variant="h3" mt={2}>
                 나눔 글 수정하기

@@ -13,6 +13,7 @@ import Icon from "@mui/material/Icon";
 import useGetTime from "../../hooks/useGetTime";
 import MDAvatar from "../../components/MDAvatar";
 import image from "../../assets/images/team-2.jpg";
+import defaultProfile from "../../assets/images/default_profile.png";
 import MDSnackbar from "../../components/MDSnackbar";
 import { getItem } from "../../apis/itemApi";
 import { applyItem } from "../../apis/historyApi";
@@ -136,7 +137,13 @@ function DetailItem() {
       <DashboardNavbar />
       <Grid container justifyContent="center">
         <Grid item xs={12} sm={10} md={10}>
-          <MDBox mb={3}>
+          <MDBox
+            mb={3}
+            borderRadius="lg"
+            sx={{ borderColor: "grey.300", height: "100%" }}
+            border={2}
+            shadow="md"
+          >
             <MDBox px={2} pt={3}>
               <IconButton
                 size="small"
@@ -176,7 +183,7 @@ function DetailItem() {
                 <MDBox display="flex" alignItems="center" justifyContent="space-between">
                   <MDBox p={1} display="flex" alignItems="center">
                     <MDBox pr={1}>
-                      <MDAvatar src={image} alt="something here" shadow="md" size="md" />
+                      <MDAvatar src={defaultProfile} alt="something here" shadow="md" size="md" />
                     </MDBox>
                     <MDTypography
                       variant="h6"
@@ -201,7 +208,7 @@ function DetailItem() {
                         percent={38}
                         size="small"
                         showInfo={false}
-                        strokeColor={{ from: "#108ee9", to: "#87d068" }}
+                        strokeColor={{ from: "#90bd92", to: "#22dc2a" }}
                       />
                     </MDBox>
                   </Tooltip>
@@ -297,7 +304,7 @@ function DetailItem() {
                             ) : (
                               <MDButton variant="gradient" color="error" fullWidth disabled>
                                 <MDTypography variant="h6" color="white">
-                                  마감된 나눔입니다.
+                                  마감된 나눔입니다
                                 </MDTypography>
                               </MDButton>
                             )}

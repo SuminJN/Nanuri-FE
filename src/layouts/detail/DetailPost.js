@@ -14,10 +14,13 @@ import { applyWant, getWant } from "../../apis/wantApi";
 import Tooltip from "@mui/material/Tooltip";
 import MDAvatar from "../../components/MDAvatar";
 import image from "../../assets/images/team-2.jpg";
+import defaultProfile from "../../assets/images/default_profile.png";
 import Linkify from "react-linkify";
+import useGetTime from "../../hooks/useGetTime";
 
 function DetailPost() {
   const { postId } = useParams();
+  const { getCurrentTime } = useGetTime();
   const navigate = useNavigate();
   const [post, setPost] = useState({
     id: "",
@@ -89,7 +92,12 @@ function DetailPost() {
       <MDBox mt={2} mb={3}>
         <Grid container spacing={3} mb={2} justifyContent="center">
           <Grid item xs={12} sm={10} md={8} lg={6}>
-            <MDBox>
+            <MDBox
+              borderRadius="lg"
+              sx={{ borderColor: "grey.300", height: "100%" }}
+              border={2}
+              shadow="md"
+            >
               <MDBox p={2}>
                 <IconButton
                   size="small"
@@ -113,12 +121,12 @@ function DetailPost() {
                     </MDBox>
                     <MDBox mb={2}>
                       <MDTypography variant="h6" opacity="60%">
-                        {post.createdTime}
+                        {post.createdTime ? getCurrentTime(post.createdTime) : ""}
                       </MDTypography>
                     </MDBox>
                     <MDBox mb={8} display="flex" alignItems="center">
                       <MDBox pr={1}>
-                        <MDAvatar src={image} alt="something here" shadow="md" size="sm" />
+                        <MDAvatar src={defaultProfile} alt="something here" shadow="md" size="sm" />
                       </MDBox>
                       <MDTypography
                         variant="h6"

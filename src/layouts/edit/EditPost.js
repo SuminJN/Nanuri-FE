@@ -78,7 +78,12 @@ const EditPost = () => {
       <MDBox mt={2} mb={3}>
         <Grid container spacing={3} mb={2} justifyContent="center">
           <Grid item xs={12} sm={10} md={8} lg={6}>
-            <MDBox>
+            <MDBox
+              borderRadius="lg"
+              sx={{ borderColor: "grey.300", height: "100%" }}
+              border={2}
+              shadow="md"
+            >
               <MDBox display="flex" justifyContent="center" alignItems="center" p={2}>
                 <MDTypography variant="h3">나눔 글 수정하기</MDTypography>
               </MDBox>
