@@ -75,6 +75,20 @@ function DetailItem() {
     />
   );
 
+  const [deadlineAlert, setDeadlineAlert] = useState(false);
+  const closeDeadlineAlert = () => setDeadlineAlert(false);
+  const renderDeadlineAlert = (
+    <MDSnackbar
+      color="error"
+      icon="check"
+      title="나눔 기한이 지났습니다. 나눔 마감 기한을 수정해주세요."
+      open={deadlineAlert}
+      onClose={closeDeadlineAlert}
+      close={closeDeadlineAlert}
+      bgWhite
+    />
+  );
+
   const handleItemApply = () => {
     applyItem(itemId)
       .then((response) => {
@@ -109,6 +123,10 @@ function DetailItem() {
       if (response.status === 200) {
         setItem(response.data);
         setIsWish(response.data.wishStatus);
+
+        if (item.isOwner && new Date(response.data.deadline) < new Date()) {
+          setDeadlineAlert(true);
+        }
       }
     });
   }, []);
@@ -290,6 +308,7 @@ function DetailItem() {
                   )}
                   {renderSuccessSB}
                   {renderDeleteSB}
+                  {renderDeadlineAlert}
                 </MDBox>
               </Grid>
             </Grid>

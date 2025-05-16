@@ -132,7 +132,7 @@ const EditItem = () => {
                             justifyContent="center"
                             alignItems="center"
                             sx={{
-                              backgroundColor: "#F44335",
+                              backgroundColor: "#ee5855",
                               cursor: "pointer",
                               borderRadius: "8px 8px 0 0", // 위쪽에 라운드 추가
                               padding: "8px", // 두께 추가
