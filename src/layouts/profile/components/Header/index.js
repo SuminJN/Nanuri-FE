@@ -36,6 +36,7 @@ import breakpoints from "assets/theme/base/breakpoints";
 
 // Images
 import burceMars from "assets/images/bruce-mars.jpg";
+import defaultProfile from "assets/images/default_profile.png";
 // import backgroundImage from "assets/images/bg-profile.jpeg";
 import backgroundImage from "assets/images/curved.jpg";
 
@@ -67,38 +68,49 @@ function Header({ nickname }) {
 
   return (
     <MDBox position="relative">
-      <MDBox
-        display="flex"
-        alignItems="center"
-        position="relative"
-        minHeight="8rem"
-        borderRadius="xl"
-        sx={{
-          backgroundImage: ({ functions: { rgba, linearGradient }, palette: { gradients } }) =>
-            `${linearGradient(
-              rgba(gradients.info.main, 0.6),
-              rgba(gradients.info.state, 0.6)
-            )}, url(${backgroundImage})`,
-          backgroundSize: "cover",
-          backgroundPosition: "50%",
-          overflow: "hidden",
-        }}
-      />
+      {/*<MDBox*/}
+      {/*  display="flex"*/}
+      {/*  alignItems="center"*/}
+      {/*  position="relative"*/}
+      {/*  minHeight="8rem"*/}
+      {/*  borderRadius="xl"*/}
+      {/*  sx={{*/}
+      {/*    backgroundImage: ({ functions: { rgba, linearGradient }, palette: { gradients } }) =>*/}
+      {/*      `${linearGradient(*/}
+      {/*        rgba(gradients.info.main, 0.6),*/}
+      {/*        rgba(gradients.info.state, 0.6)*/}
+      {/*      )}, url(${backgroundImage})`,*/}
+      {/*    backgroundSize: "cover",*/}
+      {/*    backgroundPosition: "50%",*/}
+      {/*    overflow: "hidden",*/}
+      {/*  }}*/}
+      {/*/>*/}
       <Card
         sx={{
-          backdropFilter: `saturate(200%) blur(30px)`,
-          backgroundColor: ({ functions: { rgba }, palette: { white } }) => rgba(white.main, 0.8),
-          boxShadow: ({ boxShadows: { navbarBoxShadow } }) => navbarBoxShadow,
-          position: "relative",
-          mt: -8,
-          mx: 3,
-          py: 2,
-          px: 2,
+          p: 2,
+          backgroundColor: "#d5e8d6e6", // 원하는 RGB 값에 투명도 추가
         }}
+        // sx={{
+        //   backdropFilter: `saturate(200%) blur(30px)`,
+        //   // backgroundColor: ({ functions: { rgba }, palette: { white } }) => rgba(white.main, 0.8),
+        //   backgroundColor: "secondary.main",
+        //   // boxShadow: ({ boxShadows: { navbarBoxShadow } }) => navbarBoxShadow,
+        //   position: "relative",
+        //   // mt: -8,
+        //   // mx: 3,
+        //   py: 2,
+        //   px: 2,
+        // }}
       >
         <Grid container spacing={3} alignItems="center">
           <Grid item>
-            <MDAvatar src={burceMars} alt="profile-image" variant="rounded" size="xl" shadow="sm" />
+            <MDAvatar
+              src={defaultProfile}
+              alt="profile-image"
+              variant="rounded"
+              size="xl"
+              // shadow="sm"
+            />
           </Grid>
           <Grid item>
             <MDBox height="100%" mt={0.5} lineHeight={1}>
