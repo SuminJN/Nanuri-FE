@@ -7,10 +7,20 @@ import MDButton from "../../components/MDButton";
 import { useEffect, useState } from "react";
 import axiosInstance from "../../apis/axios";
 import Icon from "@mui/material/Icon";
+import AppBar from "@mui/material/AppBar";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+import Grid from "@mui/material/Grid";
+import { useRecoilState } from "recoil";
+import { TabValue } from "../../recoil/TabValueState";
 
 function ChatRoomList() {
   const navigate = useNavigate();
   const [chatRooms, setChatRooms] = useState([]);
+
+  const [tabsOrientation, setTabsOrientation] = useState("horizontal");
+  const [tabValue, setTabValue] = useRecoilState(TabValue);
+  const handleSetTabValue = (event, newValue) => setTabValue(newValue);
 
   const getChatRooms = async () => {
     const response = await axiosInstance("/api/chat/rooms");
@@ -71,9 +81,26 @@ function ChatRoomList() {
           채팅
         </MDTypography>
       </MDBox>
+      <MDBox pt={2} px={2}>
+        <Grid item xs={12} sm={6}>
+          <AppBar position="static">
+            <Tabs orientation={tabsOrientation} value={tabValue} onChange={handleSetTabValue}>
+              <Tab label={<MDTypography variant={tabValue === 0 ? "h6" : ""}>전체</MDTypography>} />
+              <Tab
+                label={<MDTypography variant={tabValue === 1 ? "h6" : ""}>나눠요</MDTypography>}
+              />
+              <Tab
+                label={<MDTypography variant={tabValue === 2 ? "h6" : ""}>필요해요</MDTypography>}
+              />
+            </Tabs>
+          </AppBar>
+        </Grid>
+      </MDBox>
       <MDBox p={2}>
         <MDBox component="ul" display="flex" flexDirection="column" p={0} m={0}>
-          {renderProfiles}
+          {tabValue === 0 && renderProfiles}
+          {tabValue === 1 && renderProfiles}
+          {tabValue === 2 && null}
         </MDBox>
       </MDBox>
     </MDBox>
