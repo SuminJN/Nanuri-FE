@@ -64,12 +64,12 @@ function PostCard({ itemId, title, createdTime, description, viewCount, route })
           alignItems="center"
           style={{ marginTop: "auto" }}
         >
-          <MDBox mr={2} display="flex" justifyContent="flex-end" alignItems="center">
-            <Icon fontSize="small">emoji_objects_icon</Icon>
-            <MDTypography variant="caption" fontWeight="medium" lineHeight={0}>
-              &nbsp;0
-            </MDTypography>
-          </MDBox>
+          {/*<MDBox mr={2} display="flex" justifyContent="flex-end" alignItems="center">*/}
+          {/*  <Icon fontSize="small">emoji_objects_icon</Icon>*/}
+          {/*  <MDTypography variant="caption" fontWeight="medium" lineHeight={0}>*/}
+          {/*    &nbsp;0*/}
+          {/*  </MDTypography>*/}
+          {/*</MDBox>*/}
           <MDBox mr={2} display="flex" justifyContent="flex-end" alignItems="center">
             <Icon fontSize="small">remove_red_eye_icon</Icon>
             <MDTypography variant="caption" fontWeight="medium" lineHeight={0}>
