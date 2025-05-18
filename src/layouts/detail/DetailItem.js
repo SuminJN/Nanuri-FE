@@ -125,7 +125,7 @@ function DetailItem() {
         setItem(response.data);
         setIsWish(response.data.wishStatus);
 
-        if (item.isOwner && new Date(response.data.deadline) < new Date()) {
+        if (response.data.isOwner && new Date(response.data.deadline) < new Date()) {
           setDeadlineAlert(true);
         }
       }
