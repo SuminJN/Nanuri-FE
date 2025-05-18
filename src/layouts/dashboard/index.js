@@ -38,6 +38,7 @@ import {
   OutlinedInput,
   Radio,
   RadioGroup,
+  Select,
 } from "@mui/material";
 import WishItems from "../wish/WishItems";
 import AppsIcon from "@mui/icons-material/Apps";
@@ -46,6 +47,7 @@ import { TabValue } from "../../recoil/TabValueState";
 import { categoryList } from "../../assets/category/categoryList";
 import MenuItem from "@mui/material/MenuItem";
 import MDTypography from "../../components/MDTypography";
+import Box from "@mui/material/Box";
 
 function Dashboard() {
   const [controller, dispatch] = useMaterialUIController();
@@ -63,6 +65,8 @@ function Dashboard() {
 
   const [modal, setModal] = useState(false);
   const [refresh, setRefresh] = useState(false);
+
+  const [searchMode, setSearchMode] = useState("제목");
 
   const handleSearch = (event) => {
     setSearch(event.target.value);
@@ -90,7 +94,7 @@ function Dashboard() {
   };
 
   return (
-    <DashboardLayout>
+    <DashboardLayout pValue={miniSidenav ? 0 : 3}>
       <DashboardNavbar />
       <MDBox position="relative" px={2}>
         <Grid container spacing={3} display="flex" alignItems="center">
@@ -126,24 +130,46 @@ function Dashboard() {
           </Grid>
           {tabValue === 0 ? (
             <>
-              <Grid item xs={6} sm={3}>
-                <form onSubmit={handleSubmitSearch}>
-                  <OutlinedInput
-                    placeholder="검색"
-                    fullWidth
-                    value={search}
-                    onChange={handleSearch}
-                    endAdornment={
-                      <InputAdornment position="end">
-                        <IconButton type="submit">
-                          <SearchIcon />
-                        </IconButton>
-                      </InputAdornment>
-                    }
-                  />
-                </form>
+              <Grid item xs={8} sm={3}>
+                <MDBox display="flex" alignItems="center">
+                  <MDBox mr={1} display="flex" alignItems="center">
+                    <FormControl
+                      variant="outlined"
+                      size="medium"
+                      sx={{ minWidth: 100, height: "100%" }}
+                    >
+                      <Select
+                        style={{ height: 42 }}
+                        value={searchMode}
+                        onChange={(e) => setSearchMode(e.target.value)}
+                        displayEmpty
+                        inputProps={{ "aria-label": "검색 모드 선택" }}
+                      >
+                        <MenuItem value="제목">제목</MenuItem>
+                        <MenuItem value="내용">내용</MenuItem>
+                        <MenuItem value="제목+내용">제목+내용</MenuItem>
+                        <MenuItem value="닉네임">닉네임</MenuItem>
+                      </Select>
+                    </FormControl>
+                  </MDBox>
+                  <form onSubmit={handleSubmitSearch}>
+                    <OutlinedInput
+                      placeholder="검색"
+                      fullWidth
+                      value={search}
+                      onChange={handleSearch}
+                      endAdornment={
+                        <InputAdornment position="end">
+                          <IconButton type="submit">
+                            <SearchIcon />
+                          </IconButton>
+                        </InputAdornment>
+                      }
+                    />
+                  </form>
+                </MDBox>
               </Grid>
-              <Grid item xs={6} sm={3} display="flex" justifyContent="end">
+              <Grid item xs={4} sm={3} display="flex" justifyContent="end">
                 <MDBox>
                   {category ? (
                     <Chip
