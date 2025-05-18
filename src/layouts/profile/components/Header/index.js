@@ -88,7 +88,7 @@ function Header({ nickname }) {
       <Card
         sx={{
           p: 2,
-          backgroundColor: "#d5e8d6e6", // 원하는 RGB 값에 투명도 추가
+          backgroundColor: "rgba(217,236,217,0.9)", // 원하는 RGB 값에 투명도 추가
         }}
         // sx={{
         //   backdropFilter: `saturate(200%) blur(30px)`,
