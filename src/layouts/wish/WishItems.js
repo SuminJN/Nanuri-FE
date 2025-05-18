@@ -26,6 +26,7 @@ function WishItems() {
                   <Grid item xs={12} sm={6} md={6} lg={4} xl={3} key={idx}>
                     <ItemCard
                       itemId={item.itemId}
+                      nickname={item.nickname}
                       title={item.title}
                       description={item.description}
                       category={item.category}

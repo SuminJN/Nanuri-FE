@@ -6,11 +6,12 @@ import MDButton from "components/MDButton";
 import { useMaterialUIController } from "context";
 import Grid from "@mui/material/Grid";
 import { Image } from "antd";
-import { useState } from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 function ItemCard({
   itemId,
+  nickname,
   image,
   title,
   createdTime,
@@ -32,30 +33,29 @@ function ItemCard({
       display="flex"
       justifyContent="space-between"
       alignItems="flex-start"
-      bgColor={darkMode ? "transparent" : "grey-100"}
-      borderRadius="lg"
-      sx={{ borderColor: "grey.300" }}
-      border={2}
-      shadow="md"
-      p={2}
-      mb={1}
+      // bgColor={darkMode ? "transparent" : "grey-100"}
+      // borderRadius="lg"
+      // sx={{ borderColor: "grey.300" }}
+      // border={2}
+      // shadow="md"
+      mb={3}
     >
       <Grid container>
         <Grid item xs={12} style={{ cursor: "pointer" }} onClick={() => navigate(route)}>
-          <img
-            width="100%"
-            height="180px"
+          <Image
             src={image}
-            style={{ borderRadius: "8px" }}
             alt="image"
+            width="100%"
+            height="100%"
+            style={{
+              aspectRatio: "1 / 1",
+              borderRadius: "6px",
+              // boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
+              objectFit: "fill",
+            }}
           />
         </Grid>
-        <Grid
-          item
-          xs={12}
-          style={{ height: "140px", cursor: "pointer" }}
-          onClick={() => navigate(route)}
-        >
+        <Grid item xs={12} style={{ cursor: "pointer" }} onClick={() => navigate(route)}>
           <MDBox width="100%" display="flex" flexDirection="column">
             <MDBox mt={1} mb={0.5} lineHeight={0} display="flex" justifyContent="center">
               <MDTypography variant="h5" fontWeight="bold" textTransform="capitalize" color="info">
@@ -63,11 +63,16 @@ function ItemCard({
               </MDTypography>
             </MDBox>
             <MDBox mb={1} lineHeight={0} display="flex" justifyContent="center">
+              <MDTypography variant="caption" fontWeight="bold" color="text">
+                [{nickname}]
+              </MDTypography>
+            </MDBox>
+            <MDBox mb={1} lineHeight={0} display="flex" justifyContent="center">
               <MDTypography variant="caption" fontWeight="regular" color="text">
                 {category} · {createdTime}
               </MDTypography>
             </MDBox>
-            <MDBox display="flex" justifyContent="center">
+            <MDBox display="flex" justifyContent="center" mb={1}>
               <MDTypography
                 variant="caption"
                 fontWeight="medium"
@@ -75,8 +80,9 @@ function ItemCard({
                   overflow: "hidden",
                   textOverflow: "ellipsis",
                   display: "-webkit-box",
-                  WebkitLineClamp: 4, // 원하는 줄 수로 변경
+                  WebkitLineClamp: 3, // 원하는 줄 수로 변경
                   WebkitBoxOrient: "vertical",
+                  minHeight: "3em", // 3줄의 높이를 고정
                 }}
               >
                 {description}
@@ -88,7 +94,7 @@ function ItemCard({
           item
           xs={12}
           display="flex"
-          justifyContent="flex-end"
+          justifyContent="center"
           alignItems="center"
           style={{ marginTop: "auto" }}
         >
@@ -131,10 +137,12 @@ function ItemCard({
 ItemCard.defaultProps = {
   noGutter: false,
   wishStatus: false,
+  nickname: "",
 };
 
 ItemCard.propTypes = {
   itemId: PropTypes.string.isRequired,
+  nickname: PropTypes.string,
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   category: PropTypes.string.isRequired,

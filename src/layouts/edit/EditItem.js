@@ -32,6 +32,7 @@ const initState = {
   wishCount: 0,
   images: [],
   isOwner: null,
+  deadline: "",
 };
 
 const EditItem = () => {
@@ -108,7 +109,13 @@ const EditItem = () => {
       <DashboardNavbar />
       <Grid container justifyContent="center">
         <Grid item xs={12} sm={10} md={10}>
-          <MDBox my={3}>
+          <MDBox
+            my={3}
+            borderRadius="lg"
+            sx={{ borderColor: "grey.300", height: "100%" }}
+            border={2}
+            shadow="md"
+          >
             <MDBox display="flex" justifyContent="center" alignItems="center" p={2}>
               <MDTypography variant="h3" mt={2}>
                 나눔 글 수정하기
@@ -131,7 +138,7 @@ const EditItem = () => {
                             justifyContent="center"
                             alignItems="center"
                             sx={{
-                              backgroundColor: "#F44335",
+                              backgroundColor: "#ee5855",
                               cursor: "pointer",
                               borderRadius: "8px 8px 0 0", // 위쪽에 라운드 추가
                               padding: "8px", // 두께 추가
@@ -208,6 +215,20 @@ const EditItem = () => {
                         ))}
                       </Select>
                     </FormControl>
+                  </MDBox>
+                  <MDBox mb={2}>
+                    <MDTypography variant="h6" fontWeight="bold" color="info">
+                      나눔 마감 기한
+                    </MDTypography>
+                    <TextField
+                      name="deadline"
+                      type="datetime-local"
+                      fullWidth
+                      required
+                      value={item.deadline}
+                      onChange={handleChangeItem}
+                      min={new Date().toISOString().slice(0, 16)}
+                    />
                   </MDBox>
                   <MDBox mb={2}>
                     <MDTypography variant="h6" fontWeight="bold" color="info">

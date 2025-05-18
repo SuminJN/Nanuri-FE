@@ -27,15 +27,16 @@ function SharingItems({ category, search, refresh }) {
     <Grid container spacing={3}>
       <Grid item xs={12} sm={12}>
         <MDBox pt={1} pb={2} px={2}>
-          <Grid container spacing={2}>
+          <Grid container spacing={3}>
             {itemList === null
               ? null
               : itemList.map((item, idx) => (
-                  <Grid item xs={12} sm={6} md={6} lg={4} xl={3} key={idx}>
+                  <Grid item xs={6} sm={6} md={6} lg={4} xl={3} key={idx}>
                     {isNew(item.createdTime) ? (
                       <Badge.Ribbon text="New" color="red">
                         <ItemCard
                           itemId={item.itemId}
+                          nickname={item.nickname}
                           title={item.title}
                           description={item.description}
                           category={item.category}
@@ -51,6 +52,7 @@ function SharingItems({ category, search, refresh }) {
                     ) : (
                       <ItemCard
                         itemId={item.itemId}
+                        nickname={item.nickname}
                         title={item.title}
                         description={item.description}
                         category={item.category}

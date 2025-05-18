@@ -57,6 +57,7 @@ import EditItem from "./layouts/edit/EditItem";
 import ChatRoom from "./layouts/chat/ChatRoom";
 import DashboardNavbar from "./examples/Navbars/DashboardNavbar";
 import EditPost from "./layouts/edit/EditPost";
+import User from "./layouts/user";
 
 export default function App() {
   const [controller, dispatch] = useMaterialUIController();
@@ -205,6 +206,7 @@ export default function App() {
             <Route path="/home/edit-post/:postId" element={<EditPost />} />
             <Route path="/my-share" element={<ShareHistory />} />
             <Route path="/my-share/:itemId" element={<DetailItem />} />
+            <Route path="/user/:nickname" element={<User />} />
             <Route path="/wish" element={<Wish />} />
             <Route path="/wish/:itemId" element={<DetailItem />} />
             <Route path="/profile/:itemId" element={<DetailItem />} />

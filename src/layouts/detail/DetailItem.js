@@ -13,6 +13,7 @@ import Icon from "@mui/material/Icon";
 import useGetTime from "../../hooks/useGetTime";
 import MDAvatar from "../../components/MDAvatar";
 import image from "../../assets/images/team-2.jpg";
+import defaultProfile from "../../assets/images/default_profile.png";
 import MDSnackbar from "../../components/MDSnackbar";
 import { getItem } from "../../apis/itemApi";
 import { applyItem } from "../../apis/historyApi";
@@ -38,6 +39,7 @@ function DetailItem() {
     wishStatus: false,
     images: [],
     isOwner: null,
+    deadline: "",
   });
   const [isWish, setIsWish] = useState(false);
 
@@ -70,6 +72,20 @@ function DetailItem() {
       open={deleteSB}
       onClose={closeDeleteSB}
       close={closeDeleteSB}
+      bgWhite
+    />
+  );
+
+  const [deadlineAlert, setDeadlineAlert] = useState(false);
+  const closeDeadlineAlert = () => setDeadlineAlert(false);
+  const renderDeadlineAlert = (
+    <MDSnackbar
+      color="error"
+      icon="check"
+      title="나눔 기한이 지났습니다. 나눔 마감 기한을 수정해주세요."
+      open={deadlineAlert}
+      onClose={closeDeadlineAlert}
+      close={closeDeadlineAlert}
       bgWhite
     />
   );
@@ -108,6 +124,10 @@ function DetailItem() {
       if (response.status === 200) {
         setItem(response.data);
         setIsWish(response.data.wishStatus);
+
+        if (response.data.isOwner && new Date(response.data.deadline) < new Date()) {
+          setDeadlineAlert(true);
+        }
       }
     });
   }, []);
@@ -117,7 +137,13 @@ function DetailItem() {
       <DashboardNavbar />
       <Grid container justifyContent="center">
         <Grid item xs={12} sm={10} md={10}>
-          <MDBox mb={3}>
+          <MDBox
+            mb={3}
+            borderRadius="lg"
+            sx={{ borderColor: "grey.300", height: "100%" }}
+            border={2}
+            shadow="md"
+          >
             <MDBox px={2} pt={3}>
               <IconButton
                 size="small"
@@ -154,12 +180,17 @@ function DetailItem() {
                       ))}
                   </Carousel>
                 </MDBox>
-                <MDBox mb={3} display="flex" alignItems="center" justifyContent="space-between">
+                <MDBox display="flex" alignItems="center" justifyContent="space-between">
                   <MDBox p={1} display="flex" alignItems="center">
                     <MDBox pr={1}>
-                      <MDAvatar src={image} alt="something here" shadow="md" size="md" />
+                      <MDAvatar src={defaultProfile} alt="something here" shadow="md" size="md" />
                     </MDBox>
-                    <MDTypography variant="h6" opacity="60%">
+                    <MDTypography
+                      variant="h6"
+                      opacity="60%"
+                      sx={{ cursor: "pointer" }}
+                      onClick={() => navigate(`/user/${item.nickname}`)}
+                    >
                       {item.nickname}
                     </MDTypography>
                   </MDBox>
@@ -177,7 +208,7 @@ function DetailItem() {
                         percent={38}
                         size="small"
                         showInfo={false}
-                        strokeColor={{ from: "#108ee9", to: "#87d068" }}
+                        strokeColor={{ from: "#90bd92", to: "#22dc2a" }}
                       />
                     </MDBox>
                   </Tooltip>
@@ -258,17 +289,25 @@ function DetailItem() {
                         </Grid>
                         <Grid item xs={11}>
                           <MDBox>
-                            <MDButton
-                              variant="gradient"
-                              color="secondary"
-                              fullWidth
-                              startIcon={<Icon>forum_icon</Icon>}
-                              onClick={handleItemApply}
-                            >
-                              <MDTypography variant="h6" color="white">
-                                채팅하기
-                              </MDTypography>
-                            </MDButton>
+                            {new Date(item.deadline) > new Date() ? (
+                              <MDButton
+                                variant="gradient"
+                                color="secondary"
+                                fullWidth
+                                startIcon={<Icon>forum_icon</Icon>}
+                                onClick={handleItemApply}
+                              >
+                                <MDTypography variant="h6" color="white">
+                                  채팅하기
+                                </MDTypography>
+                              </MDButton>
+                            ) : (
+                              <MDButton variant="gradient" color="error" fullWidth disabled>
+                                <MDTypography variant="h6" color="white">
+                                  마감된 나눔입니다
+                                </MDTypography>
+                              </MDButton>
+                            )}
                           </MDBox>
                         </Grid>
                       </Grid>
@@ -276,6 +315,7 @@ function DetailItem() {
                   )}
                   {renderSuccessSB}
                   {renderDeleteSB}
+                  {renderDeadlineAlert}
                 </MDBox>
               </Grid>
             </Grid>
