@@ -1,42 +1,15 @@
 import { useState, useEffect, useMemo } from "react";
-
-// react-router components
 import { Routes, Route, Navigate, useLocation, Link, useNavigate } from "react-router-dom";
-
-// @mui material components
 import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import Icon from "@mui/material/Icon";
-
-// Material Dashboard 2 React components
 import MDBox from "components/MDBox";
-
-// Material Dashboard 2 React example components
 import Sidenav from "examples/Sidenav";
-import Configurator from "examples/Configurator";
-
-// Material Dashboard 2 React themes
 import theme from "assets/theme";
-import themeRTL from "assets/theme/theme-rtl";
-
-// Material Dashboard 2 React Dark Mode themes
-import themeDark from "assets/theme-dark";
-import themeDarkRTL from "assets/theme-dark/theme-rtl";
-
-// RTL plugins
 import rtlPlugin from "stylis-plugin-rtl";
-import { CacheProvider } from "@emotion/react";
 import createCache from "@emotion/cache";
-
-// Material Dashboard 2 React routes
 import routes from "routes";
-
-// Material Dashboard 2 React contexts
 import { useMaterialUIController, setMiniSidenav, setOpenConfigurator } from "context";
-
-// Images
-import brandWhite from "assets/images/logo-ct.png";
-// import brandDark from "assets/images/logo-ct-dark.png";
 import logo from "assets/logo.png";
 import { useRecoilValue } from "recoil";
 import { LoginState } from "./recoil/LoginState";
@@ -46,7 +19,6 @@ import DetailItem from "./layouts/detail/DetailItem";
 import AddItem from "./layouts/add/AddItem";
 import SignUp from "./layouts/authentication/sign-up";
 import ShareHistory from "./layouts/shareHistory";
-import { CommentOutlined, CustomerServiceOutlined } from "@ant-design/icons";
 import { FloatButton } from "antd";
 import Wish from "./layouts/wish/Wish";
 import Chat from "./layouts/chat/Chat";
@@ -55,7 +27,6 @@ import DetailPost from "./layouts/detail/DetailPost";
 import Notifications from "./layouts/notifications";
 import EditItem from "./layouts/edit/EditItem";
 import ChatRoom from "./layouts/chat/ChatRoom";
-import DashboardNavbar from "./examples/Navbars/DashboardNavbar";
 import EditPost from "./layouts/edit/EditPost";
 import User from "./layouts/user";
 
@@ -218,7 +189,7 @@ export default function App() {
         ) : (
           <>
             <Route path="*" element={<SignIn />} />
-            <Route path="/nanuri/callback" element={<LoginIng />} />
+            <Route path="/callback" element={<LoginIng />} />
           </>
         )}
       </Routes>
