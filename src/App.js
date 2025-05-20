@@ -185,6 +185,9 @@ export default function App() {
             <Route path="/chat/:roomId" element={<ChatRoom />} />
             <Route path="/notifications" element={<Notifications />} />
             <Route path="/signup" element={<SignUp />} />
+
+            <Route path="/login" element={<SignIn />} />
+            <Route path="/callback" element={<LoginIng />} />
           </>
         ) : (
           <>

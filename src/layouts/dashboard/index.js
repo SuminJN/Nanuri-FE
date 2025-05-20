@@ -3,7 +3,7 @@ import MDBox from "components/MDBox";
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import Footer from "examples/Footer";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Icon from "@mui/material/Icon";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
@@ -92,6 +92,10 @@ function Dashboard() {
     setCategory("");
     setRefresh(!refresh);
   };
+
+  useEffect(() => {
+    console.log("test");
+  }, []);
 
   return (
     <DashboardLayout pValue={miniSidenav ? 0 : 3}>
