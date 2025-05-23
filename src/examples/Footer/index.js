@@ -49,7 +49,9 @@ function Footer({ company, links }) {
       flexDirection={{ xs: "column", lg: "row" }}
       justifyContent="space-between"
       alignItems="center"
-      px={1.5}
+      px={3}
+      mt={5}
+      mb={3}
     >
       <MDBox
         display="flex"
