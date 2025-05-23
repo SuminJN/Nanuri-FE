@@ -33,6 +33,7 @@ function Overview() {
   const navigate = useNavigate();
   const [isEditing, setIsEditing] = useState(false);
   const [user, setUser] = useState(initialUserInfo);
+  const [userInterest, setUserInterest] = useState([]);
 
   const handleClickEdit = () => {
     setIsEditing(!isEditing);
@@ -70,6 +71,7 @@ function Overview() {
   useEffect(() => {
     getUserInfo().then((response) => {
       setUser(response.data);
+      setUserInterest(response.data.interestItemCategory);
     });
   }, []);
 
