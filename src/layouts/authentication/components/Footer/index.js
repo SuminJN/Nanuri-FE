@@ -50,7 +50,7 @@ function Footer({ light }) {
             color={light ? "white" : "text"}
             fontSize={size.sm}
           >
-            &copy; {new Date().getFullYear()} HGU · NANURI
+            &copy; {new Date().getFullYear()} HGU · 한줌
           </MDBox>
           <MDBox
             component="ul"
