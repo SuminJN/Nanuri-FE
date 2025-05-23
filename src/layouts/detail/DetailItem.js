@@ -21,11 +21,15 @@ import { addWish, deleteWish } from "../../apis/wishApi";
 import LinearProgress from "@mui/material/LinearProgress";
 import Tooltip from "@mui/material/Tooltip";
 import Linkify from "react-linkify";
+import { LoginState } from "../../recoil/LoginState";
+import { useRecoilValue } from "recoil";
+import { LoginToast } from "../../components/LoginToast";
 
 function DetailItem() {
   const { itemId } = useParams();
   const navigate = useNavigate();
   const { getCurrentTime } = useGetTime();
+  const isLogin = useRecoilValue(LoginState);
 
   const [item, setItem] = useState({
     id: "",
@@ -91,6 +95,11 @@ function DetailItem() {
   );
 
   const handleItemApply = () => {
+    if (!isLogin) {
+      LoginToast();
+      return;
+    }
+
     applyItem(itemId)
       .then((response) => {
         alert("신청이 완료되었습니다.");
@@ -104,6 +113,10 @@ function DetailItem() {
   };
 
   const handleAddWish = () => {
+    if (!isLogin) {
+      LoginToast();
+      return;
+    }
     addWish(itemId).then((r) => {
       item.wishCount++;
       setIsWish(true);
@@ -117,6 +130,14 @@ function DetailItem() {
       setIsWish(false);
       setDeleteSB(true);
     });
+  };
+
+  const handleGoToUserInfo = () => {
+    if (isLogin) {
+      navigate(`/user/${item.nickname}`);
+    } else {
+      LoginToast();
+    }
   };
 
   useEffect(() => {
@@ -189,7 +210,7 @@ function DetailItem() {
                       variant="h6"
                       opacity="60%"
                       sx={{ cursor: "pointer" }}
-                      onClick={() => navigate(`/user/${item.nickname}`)}
+                      onClick={handleGoToUserInfo}
                     >
                       {item.nickname}
                     </MDTypography>
