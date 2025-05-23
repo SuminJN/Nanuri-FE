@@ -39,6 +39,7 @@ function LoginIng() {
       }
     } catch (error) {
       alert("로그인 실패!");
+      navigate("/home");
       console.log("Login API 오류:", error);
     }
   };
