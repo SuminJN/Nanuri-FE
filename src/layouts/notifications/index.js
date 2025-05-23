@@ -29,41 +29,42 @@ function Notifications() {
 
   return (
     <DashboardLayout>
-      <DashboardNavbar />
-      <MDBox mt={6} mb={3}>
-        <Grid container spacing={3} justifyContent="center">
-          <Grid item xs={12} lg={8}>
-            <Card>
-              <MDBox p={2}>
-                <MDTypography variant="h4" fontWeight="bold" color="info">
-                  알림 목록
-                </MDTypography>
-              </MDBox>
-              <MDBox pt={2} px={2}>
-                {notificationList.map((notification, index) => (
-                  <MDAlert key={index} notificationId={notification.id} color="light" dismissible>
-                    <MDTypography variant="body2" color="black">
-                      <MDTypography
-                        component="a"
-                        href="#"
-                        variant="body2"
-                        fontWeight="medium"
-                        color="black"
-                      >
-                        {notification.title}
-                        <MDTypography variant="body2" color="black">
-                          {notification.body}
+      <MDBox p={3}>
+        <DashboardNavbar />
+        <MDBox mt={6} mb={3}>
+          <Grid container spacing={3} justifyContent="center">
+            <Grid item xs={12} lg={8}>
+              <Card>
+                <MDBox p={2}>
+                  <MDTypography variant="h4" fontWeight="bold" color="info">
+                    알림 목록
+                  </MDTypography>
+                </MDBox>
+                <MDBox pt={2} px={2}>
+                  {notificationList.map((notification, index) => (
+                    <MDAlert key={index} notificationId={notification.id} color="light" dismissible>
+                      <MDTypography variant="body2" color="black">
+                        <MDTypography
+                          component="a"
+                          href="#"
+                          variant="body2"
+                          fontWeight="medium"
+                          color="black"
+                        >
+                          {notification.title}
+                          <MDTypography variant="body2" color="black">
+                            {notification.body}
+                          </MDTypography>
                         </MDTypography>
                       </MDTypography>
-                    </MDTypography>
-                  </MDAlert>
-                ))}
-              </MDBox>
-            </Card>
+                    </MDAlert>
+                  ))}
+                </MDBox>
+              </Card>
+            </Grid>
           </Grid>
-        </Grid>
+        </MDBox>
       </MDBox>
-      <Footer />
     </DashboardLayout>
   );
 }
