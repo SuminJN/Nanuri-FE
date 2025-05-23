@@ -17,11 +17,16 @@ import image from "../../assets/images/team-2.jpg";
 import defaultProfile from "../../assets/images/default_profile.png";
 import Linkify from "react-linkify";
 import useGetTime from "../../hooks/useGetTime";
+import { LoginToast } from "../../components/LoginToast";
+import { useRecoilValue } from "recoil";
+import { LoginState } from "../../recoil/LoginState";
 
 function DetailPost() {
   const { postId } = useParams();
   const { getCurrentTime } = useGetTime();
   const navigate = useNavigate();
+  const isLogin = useRecoilValue(LoginState);
+
   const [post, setPost] = useState({
     id: "",
     receiverNickName: "",
@@ -62,6 +67,10 @@ function DetailPost() {
   };
 
   const handlePostApply = () => {
+    if (!isLogin) {
+      LoginToast();
+      return;
+    }
     applyWant(postId).then((response) => {
       if (response.status === 200) {
         alert("신청이 완료되었습니다.");
@@ -71,6 +80,14 @@ function DetailPost() {
         window.location.reload();
       }
     });
+  };
+
+  const handleGoToUserInfo = () => {
+    if (isLogin) {
+      navigate(`/user/${post.receiverNickName}`);
+    } else {
+      LoginToast();
+    }
   };
 
   useEffect(() => {
@@ -132,7 +149,7 @@ function DetailPost() {
                         variant="h6"
                         opacity="60%"
                         sx={{ cursor: "pointer" }}
-                        onClick={() => navigate(`/user/${post.receiverNickName}`)}
+                        onClick={handleGoToUserInfo}
                       >
                         {post.receiverNickName}
                       </MDTypography>
