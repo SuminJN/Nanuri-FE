@@ -26,7 +26,7 @@ function SharingItems({ category, search, refresh }) {
   return (
     <Grid container spacing={3}>
       <Grid item xs={12} sm={12}>
-        <MDBox pt={1} pb={2} px={2}>
+        <MDBox pt={2} pb={2} px={2}>
           <Grid container spacing={3}>
             {itemList === null
               ? null
