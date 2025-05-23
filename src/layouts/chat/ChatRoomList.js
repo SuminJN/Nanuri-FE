@@ -12,14 +12,14 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Grid from "@mui/material/Grid";
 import { useRecoilState } from "recoil";
-import { TabValue } from "../../recoil/TabValueState";
+import { ChatTabValue } from "../../recoil/ChatTapValue";
 
 function ChatRoomList() {
   const navigate = useNavigate();
   const [chatRooms, setChatRooms] = useState([]);
 
   const [tabsOrientation, setTabsOrientation] = useState("horizontal");
-  const [tabValue, setTabValue] = useRecoilState(TabValue);
+  const [tabValue, setTabValue] = useRecoilState(ChatTabValue);
   const handleSetTabValue = (event, newValue) => setTabValue(newValue);
 
   const getChatRooms = async () => {
