@@ -198,7 +198,7 @@ export default function App() {
             <Route path="/home/:itemId" element={<DetailItem />} />
             <Route path="/home/post/:postId" element={<DetailPost />} />
             <Route path="/login" element={<SignIn />} />
-            <Route path="/ㅋcallback" element={<LoginIng />} />
+            <Route path="/callback" element={<LoginIng />} />
             <Route path="/signup" element={<SignUp />} />
 
             <Route element={<PrivateRoutes />}>
