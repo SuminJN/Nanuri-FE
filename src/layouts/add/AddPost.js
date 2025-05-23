@@ -110,7 +110,6 @@ function AddPost() {
           </Grid>
         </Grid>
       </MDBox>
-      <Footer />
     </DashboardLayout>
   );
 }

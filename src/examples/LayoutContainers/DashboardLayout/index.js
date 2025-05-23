@@ -1,17 +1,17 @@
 /**
-=========================================================
-* Material Dashboard 2 React - v2.2.0
-=========================================================
+ =========================================================
+ * Material Dashboard 2 React - v2.2.0
+ =========================================================
 
-* Product Page: https://www.creative-tim.com/product/material-dashboard-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
+ * Product Page: https://www.creative-tim.com/product/material-dashboard-react
+ * Copyright 2023 Creative Tim (https://www.creative-tim.com)
 
-Coded by www.creative-tim.com
+ Coded by www.creative-tim.com
 
  =========================================================
 
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ */
 
 import { useEffect } from "react";
 
@@ -26,8 +26,9 @@ import MDBox from "components/MDBox";
 
 // Material Dashboard 2 React context
 import { useMaterialUIController, setLayout } from "context";
+import Footer from "../../Footer";
 
-function DashboardLayout({ children, pValue }) {
+function DashboardLayout({ children }) {
   const [controller, dispatch] = useMaterialUIController();
   const { miniSidenav } = controller;
   const { pathname } = useLocation();
@@ -39,7 +40,7 @@ function DashboardLayout({ children, pValue }) {
   return (
     <MDBox
       sx={({ breakpoints, transitions, functions: { pxToRem } }) => ({
-        p: pValue, // 전체 패딩값
+        p: 0, // 전체 패딩값
         position: "relative",
 
         [breakpoints.up("xl")]: {
@@ -52,18 +53,14 @@ function DashboardLayout({ children, pValue }) {
       })}
     >
       {children}
+      <Footer />
     </MDBox>
   );
 }
 
-DashboardLayout.defaultProps = {
-  pValue: 3,
-};
-
 // Typechecking props for the DashboardLayout
 DashboardLayout.propTypes = {
   children: PropTypes.node.isRequired,
-  pValue: PropTypes.string,
 };
 
 export default DashboardLayout;

@@ -21,9 +21,6 @@ function LoginIng() {
         const nickname = await login(credential);
         setNickname(nickname);
 
-        // 로그인 성공 시 상태 업데이트
-        setIsLoggedIn(true);
-
         // FCM 알림 권한 요청
         await handleAllowNotification();
 
@@ -33,6 +30,8 @@ function LoginIng() {
         }
         // 닉네임이 있다면 기존 유저
         else {
+          // 로그인 성공 시 상태 업데이트
+          setIsLoggedIn(true);
           navigate("/", { replace: true });
         }
       } else {

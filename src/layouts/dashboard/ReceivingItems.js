@@ -26,7 +26,7 @@ function ReceivingItems() {
             {postList === null
               ? null
               : postList.map((post, idx) => (
-                  <Grid item xs={12} sm={6} md={6} lg={4} xl={3} key={idx}>
+                  <Grid item xs={6} sm={4} md={4} lg={4} xl={3} key={idx}>
                     <PostCard
                       itemId={post.id}
                       title={post.title}

@@ -53,12 +53,14 @@ import {
   setMiniSidenav,
   setOpenConfigurator,
 } from "context";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { LoginState } from "../../../recoil/LoginState";
 import { logout } from "../../../apis/authApi";
 import sidenavLogoLabel from "../../Sidenav/styles/sidenav";
 import MDTypography from "../../../components/MDTypography";
 import brand from "assets/logo.png";
+import Button from "@mui/material/Button";
+import Tooltip from "@mui/material/Tooltip";
 
 function DashboardNavbar({ absolute, light, isMini }) {
   const [navbarType, setNavbarType] = useState();
@@ -73,6 +75,7 @@ function DashboardNavbar({ absolute, light, isMini }) {
     if (window.confirm("정말로 로그아웃 하시겠습니까?")) {
       logout().then((r) => {
         setIsLoggedIn(false);
+        handleCloseMenu();
       });
     }
   };
@@ -114,6 +117,8 @@ function DashboardNavbar({ absolute, light, isMini }) {
 
   const brandName = "한줌";
 
+  const isLogin = useRecoilValue(LoginState);
+
   // Render the notifications menu
   const renderMenu = () => (
     <Menu
@@ -127,11 +132,12 @@ function DashboardNavbar({ absolute, light, isMini }) {
       onClose={handleCloseMenu}
       sx={{ mt: 2 }}
     >
-      <NotificationItem icon={<Icon>person_icon</Icon>} title="프로필" onClick={goToProfile} />
-      <NotificationItem icon={<Icon>logout_icon</Icon>} title="로그아웃" onClick={handleLogout} />
+      <>
+        <NotificationItem icon={<Icon>person_icon</Icon>} title="프로필" onClick={goToProfile} />
+        <NotificationItem icon={<Icon>logout_icon</Icon>} title="로그아웃" onClick={handleLogout} />
+      </>
     </Menu>
   );
-
   // Styles for the navbar icons
   const iconsStyle = ({ palette: { dark, white, text }, functions: { rgba } }) => ({
     color: () => {
@@ -152,7 +158,7 @@ function DashboardNavbar({ absolute, light, isMini }) {
       sx={(theme) => navbar(theme, { transparentNavbar, absolute, light, darkMode })}
     >
       <Toolbar sx={(theme) => navbarContainer(theme)}>
-        <MDBox sx={navbarDesktopMenu}>
+        <MDBox sx={navbarDesktopMenu} px={3}>
           <Breadcrumbs icon="home" title={route[route.length - 1]} route={route} light={light} />
         </MDBox>
         <MDBox sx={navbarMobileMenu}>
@@ -165,37 +171,45 @@ function DashboardNavbar({ absolute, light, isMini }) {
             </MDBox>
           </MDBox>
         </MDBox>
-        {isMini ? null : (
-          <MDBox>
-            <Link to="/notifications">
-              <IconButton sx={navbarIconButton} size="small" disableRipple>
-                <Icon sx={iconsStyle}>notifications</Icon>
+        <MDBox>
+          {isLogin ? (
+            <>
+              <Link to="/notifications">
+                <IconButton sx={navbarIconButton} size="small" disableRipple>
+                  <Icon sx={iconsStyle}>notifications</Icon>
+                </IconButton>
+              </Link>
+              <IconButton
+                size="small"
+                disableRipple
+                color="inherit"
+                sx={navbarIconButton}
+                variant="contained"
+                onClick={handleOpenMenu}
+              >
+                <Icon sx={iconsStyle}>account_circle</Icon>
               </IconButton>
-            </Link>
-            <IconButton
-              size="small"
-              disableRipple
-              color="inherit"
-              sx={navbarIconButton}
-              variant="contained"
-              onClick={handleOpenMenu}
-            >
-              <Icon sx={iconsStyle}>account_circle</Icon>
-            </IconButton>
-            <IconButton
-              size="small"
-              disableRipple
-              color="inherit"
-              sx={navbarMobileMenu}
-              onClick={handleMiniSidenav}
-            >
-              <Icon sx={iconsStyle} fontSize="medium">
-                {miniSidenav ? "menu" : "menu_open"}
-              </Icon>
-            </IconButton>
-            {renderMenu()}
-          </MDBox>
-        )}
+            </>
+          ) : (
+            <>
+              <Button size="large" onClick={() => navigate("/login")}>
+                Login
+              </Button>
+            </>
+          )}
+          <IconButton
+            size="small"
+            disableRipple
+            color="inherit"
+            sx={navbarMobileMenu}
+            onClick={handleMiniSidenav}
+          >
+            <Icon sx={iconsStyle} fontSize="medium">
+              {miniSidenav ? "menu" : "menu_open"}
+            </Icon>
+          </IconButton>
+          {renderMenu()}
+        </MDBox>
       </Toolbar>
     </AppBar>
   );

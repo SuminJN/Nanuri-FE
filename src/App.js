@@ -29,6 +29,10 @@ import EditItem from "./layouts/edit/EditItem";
 import ChatRoom from "./layouts/chat/ChatRoom";
 import EditPost from "./layouts/edit/EditPost";
 import User from "./layouts/user";
+import { ToastContainer } from "react-toastify";
+import PrivateRoutes from "./components/privateRoutes";
+import Dashboard from "./layouts/dashboard";
+import Profile from "./layouts/profile";
 
 export default function App() {
   const [controller, dispatch] = useMaterialUIController();
@@ -128,6 +132,7 @@ export default function App() {
     // <ThemeProvider theme={darkMode ? themeDark : theme}>
     <ThemeProvider theme={theme}>
       <CssBaseline />
+      <ToastContainer />
       {layout === "dashboard" && (
         <>
           <Sidenav
@@ -184,15 +189,35 @@ export default function App() {
             <Route path="/chat" element={<Chat />} />
             <Route path="/chat/:roomId" element={<ChatRoom />} />
             <Route path="/notifications" element={<Notifications />} />
-            <Route path="/signup" element={<SignUp />} />
-
-            <Route path="/login" element={<SignIn />} />
-            <Route path="/callback" element={<LoginIng />} />
           </>
         ) : (
           <>
-            <Route path="*" element={<SignIn />} />
-            <Route path="/callback" element={<LoginIng />} />
+            <Route path="*" element={<Navigate to="/home" />} />
+            <Route path="/home" element={<Dashboard />} />
+
+            <Route path="/home/:itemId" element={<DetailItem />} />
+            <Route path="/home/post/:postId" element={<DetailPost />} />
+            <Route path="/login" element={<SignIn />} />
+            <Route path="/handful/callback" element={<LoginIng />} />
+            <Route path="/signup" element={<SignUp />} />
+
+            <Route element={<PrivateRoutes />}>
+              <Route path="/home/post/:postId" element={<DetailPost />} />
+              <Route path="/home/addItem" element={<AddItem />} />
+              <Route path="/home/addPost" element={<AddPost />} />
+              <Route path="/home/edit-item/:itemId" element={<EditItem />} />
+              <Route path="/home/edit-post/:postId" element={<EditPost />} />
+              <Route path="/my-share" element={<ShareHistory />} />
+              <Route path="/my-share/:itemId" element={<DetailItem />} />
+              <Route path="/user/:nickname" element={<User />} />
+              <Route path="/wish" element={<Wish />} />
+              <Route path="/wish/:itemId" element={<DetailItem />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/profile/:itemId" element={<DetailItem />} />
+              <Route path="/chat" element={<Chat />} />
+              <Route path="/chat/:roomId" element={<ChatRoom />} />
+              <Route path="/notifications" element={<Notifications />} />
+            </Route>
           </>
         )}
       </Routes>

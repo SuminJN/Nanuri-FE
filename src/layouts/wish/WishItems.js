@@ -4,15 +4,26 @@ import MDBox from "../../components/MDBox";
 import ItemCard from "../../components/ItemCard";
 import { getWish } from "../../apis/wishApi";
 import useGetTime from "../../hooks/useGetTime";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { LoginState } from "../../recoil/LoginState";
+import { LoginToast } from "../../components/LoginToast";
+import { TabValue } from "../../recoil/TabValueState";
 
 function WishItems() {
   const [itemList, setItemList] = useState(null);
   const { getCurrentTime, isNew } = useGetTime();
+  const isLogin = useRecoilValue(LoginState);
+  const [tabValue, setTabValue] = useRecoilState(TabValue);
 
   useEffect(() => {
-    getWish().then((res) => {
-      setItemList(res.data);
-    });
+    if (isLogin) {
+      getWish().then((res) => {
+        setItemList(res.data);
+      });
+    } else {
+      LoginToast();
+      setTabValue(0);
+    }
   }, []);
 
   return (

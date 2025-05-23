@@ -12,7 +12,6 @@ function Wish() {
       <MDBox mt={2} mb={3}>
         <WishItems />
       </MDBox>
-      <Footer />
     </DashboardLayout>
   );
 }

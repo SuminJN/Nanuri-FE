@@ -98,9 +98,9 @@ function Dashboard() {
   }, []);
 
   return (
-    <DashboardLayout pValue={miniSidenav ? 0 : 3}>
+    <DashboardLayout>
       <DashboardNavbar />
-      <MDBox position="relative" px={2}>
+      <MDBox p={3}>
         <Grid container spacing={3} display="flex" alignItems="center">
           <Grid item xs={12} sm={6}>
             <AppBar position="static">
@@ -268,12 +268,11 @@ function Dashboard() {
           </Button>
         </DialogActions>
       </Dialog>
-      <MDBox mt={1} mb={3}>
+      <MDBox mt={1} mb={3} sx={{ px: { lg: 2 } }}>
         {tabValue === 0 && <SharingItems category={category} search={search} refresh={refresh} />}
         {tabValue === 1 && <ReceivingItems />}
         {tabValue === 2 && <WishItems />}
       </MDBox>
-      <Footer />
     </DashboardLayout>
   );
 }

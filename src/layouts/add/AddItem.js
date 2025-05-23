@@ -229,7 +229,6 @@ function AddItem() {
           </Grid>
         </Grid>
       </MDBox>
-      <Footer />
     </DashboardLayout>
   );
 }

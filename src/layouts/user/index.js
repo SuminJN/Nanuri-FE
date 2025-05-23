@@ -117,7 +117,6 @@ function User() {
           </MDBox>
         </Grid>
       </Grid>
-      <Footer />
     </DashboardLayout>
   );
 }

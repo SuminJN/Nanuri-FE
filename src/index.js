@@ -9,7 +9,7 @@ const container = document.getElementById("app");
 const root = createRoot(container);
 
 root.render(
-  <BrowserRouter basename="/handful">
+  <BrowserRouter>
     <MaterialUIControllerProvider>
       <RecoilRoot>
         <App />
