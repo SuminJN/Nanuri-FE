@@ -1,13 +1,6 @@
-// Material Dashboard 2 React layouts
 import Dashboard from "layouts/dashboard";
-import Notifications from "layouts/notifications";
 import Profile from "layouts/profile";
-import SignIn from "layouts/authentication/sign-in";
-import SignUp from "layouts/authentication/sign-up";
-
-// @mui icons
 import Icon from "@mui/material/Icon";
-import ShareHistory from "./layouts/shareHistory";
 import Chat from "./layouts/chat/Chat";
 
 const routes = [
@@ -27,14 +20,6 @@ const routes = [
     route: "/chat",
     component: <Chat />,
   },
-  // {
-  //   type: "collapse",
-  //   name: "Notifications",
-  //   key: "notifications",
-  //   icon: <Icon fontSize="small">notifications</Icon>,
-  //   route: "/notifications",
-  //   component: <Notifications />,
-  // },
   {
     type: "collapse",
     name: "Profile",
@@ -43,22 +28,6 @@ const routes = [
     route: "/profile",
     component: <Profile />,
   },
-  // {
-  //   type: "collapse",
-  //   name: "Sign In",
-  //   key: "sign-in",
-  //   icon: <Icon fontSize="small">login</Icon>,
-  //   route: "/authentication/sign-in",
-  //   component: <SignIn />,
-  // },
-  // {
-  //   type: "collapse",
-  //   name: "Sign Up",
-  //   key: "signup",
-  //   icon: <Icon fontSize="small">assignment</Icon>,
-  //   route: "/signup",
-  //   component: <SignUp />,
-  // },
 ];
 
 export default routes;
