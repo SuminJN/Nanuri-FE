@@ -60,7 +60,8 @@ function Cover() {
     register(additionalInfo).then((response) => {
       setIsLoggedIn(true);
       setNicknameState(additionalInfo.nickname);
-      window.location.href = "/";
+      // window.location.href = "/";
+      navigate("/home", { replace: true });
     });
   };
 

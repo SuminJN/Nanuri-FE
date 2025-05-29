@@ -66,7 +66,7 @@ function ChatRoom() {
   const [anchorEl, setAnchorEl] = useState(null);
   const [openConfirm, setOpenConfirm] = useState(false);
 
-  const SERVER_URL = "http://localhost:8080/ws-stomp"; // STOMP 연결 엔드포인트
+  const SERVER_URL = process.env.REACT_APP_STOMP_SERVER_URL; // STOMP 연결 엔드포인트
   const PUB_ENDPOINT = "/pub/chat/message"; // 메시지를 전송하기 위한 엔드포인트
   const SUB_ENDPOINT = `/sub/chat/room/${roomId}`; // 메시지를 수신하기 위한 엔드포인트
 

@@ -26,7 +26,8 @@ function LoginIng() {
 
         // 닉네임이 없다면 신규 유저
         if (!nickname) {
-          window.location.href = "/signup";
+          // window.location.href = "/signup";
+          navigate("/signup", { replace: true });
         }
         // 닉네임이 있다면 기존 유저
         else {
