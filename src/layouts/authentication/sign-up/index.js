@@ -24,6 +24,7 @@ import {
 import MenuItem from "@mui/material/MenuItem";
 import { categoryList } from "../../../assets/category/categoryList";
 import { MBTIList } from "../../../assets/mbti/mbtiList";
+import { useNavigate } from "react-router-dom";
 
 const initialUserInfo = {
   uniqueId: "",
@@ -36,6 +37,7 @@ const initialUserInfo = {
 function Cover() {
   const [nicknameState, setNicknameState] = useRecoilState(NicknameState);
   const [isLoggedIn, setIsLoggedIn] = useRecoilState(LoginState);
+  const navigate = useNavigate();
   const [userInfo, setUserInfo] = useState({
     uniqueId: null,
     userInfo: null,
@@ -60,7 +62,8 @@ function Cover() {
     register(additionalInfo).then((response) => {
       setIsLoggedIn(true);
       setNicknameState(additionalInfo.nickname);
-      window.location.href = "/";
+      // window.location.href = "/handful";
+      navigate("/home", { replace: true });
     });
   };
 
