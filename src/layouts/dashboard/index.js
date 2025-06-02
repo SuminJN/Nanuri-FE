@@ -41,7 +41,7 @@ import {
   Select,
 } from "@mui/material";
 import WishItems from "../wish/WishItems";
-import AppsIcon from "@mui/icons-material/Apps";
+import CategoryIcon from "@mui/icons-material/Category";
 import { useRecoilState } from "recoil";
 import { TabValue } from "../../recoil/TabValueState";
 import { categoryList } from "../../assets/category/categoryList";
@@ -101,7 +101,7 @@ function Dashboard() {
     <DashboardLayout>
       <DashboardNavbar />
       <MDBox p={3}>
-        <Grid container spacing={3} display="flex" alignItems="center">
+        <Grid container spacing={1} display="flex" alignItems="center">
           <Grid item xs={12} sm={6}>
             <AppBar position="static">
               <Tabs orientation={tabsOrientation} value={tabValue} onChange={handleSetTabValue}>
@@ -134,46 +134,7 @@ function Dashboard() {
           </Grid>
           {tabValue === 0 ? (
             <>
-              <Grid item xs={8} sm={3}>
-                <MDBox display="flex" alignItems="center">
-                  <MDBox mr={1} display="flex" alignItems="center">
-                    <FormControl
-                      variant="outlined"
-                      size="medium"
-                      sx={{ minWidth: 100, height: "100%" }}
-                    >
-                      <Select
-                        style={{ height: 42 }}
-                        value={searchMode}
-                        onChange={(e) => setSearchMode(e.target.value)}
-                        displayEmpty
-                        inputProps={{ "aria-label": "검색 모드 선택" }}
-                      >
-                        <MenuItem value="제목">제목</MenuItem>
-                        <MenuItem value="내용">내용</MenuItem>
-                        <MenuItem value="제목+내용">제목+내용</MenuItem>
-                        <MenuItem value="닉네임">닉네임</MenuItem>
-                      </Select>
-                    </FormControl>
-                  </MDBox>
-                  <form onSubmit={handleSubmitSearch}>
-                    <OutlinedInput
-                      placeholder="검색"
-                      fullWidth
-                      value={search}
-                      onChange={handleSearch}
-                      endAdornment={
-                        <InputAdornment position="end">
-                          <IconButton type="submit">
-                            <SearchIcon />
-                          </IconButton>
-                        </InputAdornment>
-                      }
-                    />
-                  </form>
-                </MDBox>
-              </Grid>
-              <Grid item xs={4} sm={3} display="flex" justifyContent="end">
+              <Grid item xs={12} sm={3} display="flex" justifyContent="end">
                 <MDBox>
                   {category ? (
                     <Chip
@@ -193,9 +154,26 @@ function Dashboard() {
                     sx={navbarIconButton}
                     onClick={handleModalOpen}
                   >
-                    <AppsIcon />
+                    <CategoryIcon />
                   </IconButton>
                 </MDBox>
+              </Grid>
+              <Grid item xs={12} sm={3}>
+                <form onSubmit={handleSubmitSearch}>
+                  <OutlinedInput
+                    placeholder="검색"
+                    fullWidth
+                    value={search}
+                    onChange={handleSearch}
+                    endAdornment={
+                      <InputAdornment position="end">
+                        <IconButton type="submit">
+                          <SearchIcon />
+                        </IconButton>
+                      </InputAdornment>
+                    }
+                  />
+                </form>
               </Grid>
             </>
           ) : (

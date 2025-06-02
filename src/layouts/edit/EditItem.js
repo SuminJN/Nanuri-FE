@@ -15,7 +15,7 @@ import image from "../../assets/images/team-2.jpg";
 import MDTypography from "../../components/MDTypography";
 import MDButton from "../../components/MDButton";
 import TextField from "@mui/material/TextField";
-import { deleteItem, editItem, getItem } from "../../apis/itemApi";
+import { deleteItem, editItem, getItem, uploadImages } from "../../apis/itemApi";
 import { categoryList } from "../../assets/category/categoryList";
 import MenuItem from "@mui/material/MenuItem";
 import { FormControl, Select } from "@mui/material";
@@ -57,7 +57,6 @@ const EditItem = () => {
     item.images = resultFileNames;
 
     setItem({ ...item });
-    console.log("images", item.images);
   };
 
   const handleClickEdit = async () => {
@@ -68,17 +67,15 @@ const EditItem = () => {
       formData.append("files", files[i]);
     }
 
-    // other data
-    formData.append("title", item.title);
-    formData.append("description", item.description);
-    formData.append("category", item.category);
-
-    // 아이템 formdata로 넘기기 추가 예정
-
     editItem(itemId, item).then((response) => {
       if (response.status === 200) {
+        uploadImages(itemId, formData).then((res) => console.log(res));
+
         alert("수정되었습니다.");
         navigate(-1, { replace: true });
+      } else {
+        alert("등록 오류가 발생했습니다. 다시 시도해주세요.");
+        window.location.reload();
       }
     });
   };

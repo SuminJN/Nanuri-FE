@@ -6,7 +6,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import MDTypography from "../../components/MDTypography";
 import MDButton from "../../components/MDButton";
-import { Carousel, Image, Progress } from "antd";
+import { Carousel, Image, Modal, Progress } from "antd";
 import IconButton from "@mui/material/IconButton";
 import { navbarIconButton } from "../../examples/Navbars/DashboardNavbar/styles";
 import Icon from "@mui/material/Icon";
@@ -46,6 +46,13 @@ function DetailItem() {
     deadline: "",
   });
   const [isWish, setIsWish] = useState(false);
+  const [visible, setVisible] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(null);
+
+  const handleImageClick = (image) => {
+    setSelectedImage(image);
+    setVisible(true);
+  };
 
   const options = {
     target: "_blank",
@@ -108,6 +115,7 @@ function DetailItem() {
       .catch((error) => {
         if (error.response.status === 409) {
           alert(error.response.data.errors[0]);
+          navigate("/chat");
         }
       });
   };
@@ -181,7 +189,7 @@ function DetailItem() {
             <Grid container spacing={5} sx={{ p: { xs: 2, sm: 3, md: 5 } }}>
               <Grid item xs={12} sm={12} md={6}>
                 <MDBox>
-                  <Carousel arrows infinite={true}>
+                  <Carousel arrows infinite autoplay autoplaySpeed={3000}>
                     {item &&
                       item.images.map((image, index) => (
                         <div key={index}>
@@ -190,16 +198,54 @@ function DetailItem() {
                             alt="image"
                             width="100%"
                             height="100%"
+                            preview={false}
+                            onClick={() => handleImageClick(image)}
                             style={{
+                              cursor: "pointer",
                               aspectRatio: "1 / 1",
                               borderRadius: "8px",
                               boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
-                              objectFit: "fill",
+                              objectFit: "cover",
                             }}
                           />
                         </div>
                       ))}
                   </Carousel>
+
+                  <Modal
+                    open={visible}
+                    footer={null}
+                    closable={false}
+                    onCancel={() => setVisible(false)}
+                    centered
+                    maskStyle={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}
+                    bodyStyle={{
+                      padding: 0,
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                  >
+                    {selectedImage && (
+                      <div
+                        style={{
+                          width: "70vmin",
+                          aspectRatio: "1 / 1",
+                          overflow: "hidden",
+                        }}
+                      >
+                        <img
+                          src={selectedImage}
+                          alt="preview"
+                          style={{
+                            width: "100%",
+                            height: "100%",
+                            objectFit: "cover",
+                          }}
+                        />
+                      </div>
+                    )}
+                  </Modal>
                 </MDBox>
                 <MDBox display="flex" alignItems="center" justifyContent="space-between">
                   <MDBox p={1} display="flex" alignItems="center">

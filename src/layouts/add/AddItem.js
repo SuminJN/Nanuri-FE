@@ -7,7 +7,6 @@ import TextField from "@mui/material/TextField";
 import MDButton from "../../components/MDButton";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Image } from "antd";
 import Footer from "../../examples/Footer";
 import { Input, Select } from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
@@ -98,7 +97,7 @@ function AddItem() {
       <DashboardNavbar />
       <MDBox my={3}>
         <Grid container spacing={3} justifyContent="center">
-          <Grid item xs={12} sm={10} md={8} lg={6}>
+          <Grid item xs={12} sm={10} md={10} lg={6}>
             <MDBox sx={{ borderColor: "grey.300" }} borderRadius="lg" border={2} shadow="md">
               <MDBox
                 mx={2}
@@ -117,19 +116,25 @@ function AddItem() {
               </MDBox>
               <Grid container spacing={3} justifyContent="center">
                 {previews.map((src, index) => (
-                  <Grid item xs={10} sm={3} key={index}>
-                    <Image
+                  <Grid item xs={5} sm={3} mx={1} key={index}>
+                    <img
                       width="100%"
-                      height="150px"
+                      height="100%"
                       src={src}
-                      style={{ borderRadius: "8px", boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)" }}
+                      alt={`image`}
+                      style={{
+                        aspectRatio: "1 / 1",
+                        borderRadius: "8px",
+                        boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
+                        objectFit: "fill",
+                      }}
                     />
                   </Grid>
                 ))}
                 <Grid item xs={12}>
                   <MDBox mx={3} display="flex" justifyContent="flex-end">
                     <input
-                      accept="image/*"
+                      accept=".jpg,.jpeg,.png"
                       id="upload-button"
                       multiple
                       type="file"
