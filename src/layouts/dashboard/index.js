@@ -135,43 +135,21 @@ function Dashboard() {
           {tabValue === 0 ? (
             <>
               <Grid item xs={8} sm={3}>
-                <MDBox display="flex" alignItems="center">
-                  <MDBox mr={1} display="flex" alignItems="center">
-                    <FormControl
-                      variant="outlined"
-                      size="medium"
-                      sx={{ minWidth: 100, height: "100%" }}
-                    >
-                      <Select
-                        style={{ height: 42 }}
-                        value={searchMode}
-                        onChange={(e) => setSearchMode(e.target.value)}
-                        displayEmpty
-                        inputProps={{ "aria-label": "검색 모드 선택" }}
-                      >
-                        <MenuItem value="제목">제목</MenuItem>
-                        <MenuItem value="내용">내용</MenuItem>
-                        <MenuItem value="제목+내용">제목+내용</MenuItem>
-                        <MenuItem value="닉네임">닉네임</MenuItem>
-                      </Select>
-                    </FormControl>
-                  </MDBox>
-                  <form onSubmit={handleSubmitSearch}>
-                    <OutlinedInput
-                      placeholder="검색"
-                      fullWidth
-                      value={search}
-                      onChange={handleSearch}
-                      endAdornment={
-                        <InputAdornment position="end">
-                          <IconButton type="submit">
-                            <SearchIcon />
-                          </IconButton>
-                        </InputAdornment>
-                      }
-                    />
-                  </form>
-                </MDBox>
+                <form onSubmit={handleSubmitSearch}>
+                  <OutlinedInput
+                    placeholder="검색"
+                    fullWidth
+                    value={search}
+                    onChange={handleSearch}
+                    endAdornment={
+                      <InputAdornment position="end">
+                        <IconButton type="submit">
+                          <SearchIcon />
+                        </IconButton>
+                      </InputAdornment>
+                    }
+                  />
+                </form>
               </Grid>
               <Grid item xs={4} sm={3} display="flex" justifyContent="end">
                 <MDBox>
