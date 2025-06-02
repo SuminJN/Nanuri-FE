@@ -19,7 +19,7 @@ import DetailItem from "./layouts/detail/DetailItem";
 import AddItem from "./layouts/add/AddItem";
 import SignUp from "./layouts/authentication/sign-up";
 import ShareHistory from "./layouts/shareHistory";
-import { FloatButton } from "antd";
+import { ConfigProvider, FloatButton } from "antd";
 import Wish from "./layouts/wish/Wish";
 import Chat from "./layouts/chat/Chat";
 import AddPost from "./layouts/add/AddPost";
@@ -131,77 +131,58 @@ export default function App() {
   return (
     // <ThemeProvider theme={darkMode ? themeDark : theme}>
     <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <ToastContainer />
-      {layout === "dashboard" && (
-        <>
-          <Sidenav
-            color={sidenavColor}
-            // brand={(transparentSidenav && !darkMode) || whiteSidenav ? brandDark : brandWhite}
-            brand={logo}
-            brandName="한줌"
-            routes={routes}
-            onMouseEnter={handleOnMouseEnter}
-            onMouseLeave={handleOnMouseLeave}
-          />
-
-          <FloatButton.Group
-            shape="square"
-            trigger="hover"
-            type="primary"
-            style={{ insetInlineEnd: 24 }}
-            icon={<Icon sx={{ fontWeight: "bold" }}>add</Icon>}
-          >
-            <FloatButton
-              shape="square"
-              description={<strong>나눔 하기</strong>}
-              onClick={() => {
-                navigate("/home/addItem");
-              }}
-            />
-            <FloatButton
-              shape="square"
-              description={<strong>나눔 받기</strong>}
-              onClick={() => {
-                navigate("/home/addPost");
-              }}
-            />
-          </FloatButton.Group>
-        </>
-      )}
-      <Routes>
-        {loginState ? (
+      <ConfigProvider
+        theme={{
+          token: {
+            colorPrimary: "rgb(91,161,94)",
+            colorPrimaryHover: "rgba(26,108,29,0.53)",
+          },
+        }}
+      >
+        <CssBaseline />
+        <ToastContainer />
+        {layout === "dashboard" && (
           <>
-            {getRoutes(routes)}
-            <Route path="*" element={<Navigate to="/home" />} />
-            <Route path="/home/:itemId" element={<DetailItem />} />
-            <Route path="/home/post/:postId" element={<DetailPost />} />
-            <Route path="/home/addItem" element={<AddItem />} />
-            <Route path="/home/addPost" element={<AddPost />} />
-            <Route path="/home/edit-item/:itemId" element={<EditItem />} />
-            <Route path="/home/edit-post/:postId" element={<EditPost />} />
-            <Route path="/my-share" element={<ShareHistory />} />
-            <Route path="/my-share/:itemId" element={<DetailItem />} />
-            <Route path="/user/:nickname" element={<User />} />
-            <Route path="/wish" element={<Wish />} />
-            <Route path="/wish/:itemId" element={<DetailItem />} />
-            <Route path="/profile/:itemId" element={<DetailItem />} />
-            <Route path="/chat" element={<Chat />} />
-            <Route path="/chat/:roomId" element={<ChatRoom />} />
-            <Route path="/notifications" element={<Notifications />} />
+            <Sidenav
+              color={sidenavColor}
+              // brand={(transparentSidenav && !darkMode) || whiteSidenav ? brandDark : brandWhite}
+              brand={logo}
+              brandName="한줌"
+              routes={routes}
+              onMouseEnter={handleOnMouseEnter}
+              onMouseLeave={handleOnMouseLeave}
+            />
+
+            <FloatButton.Group
+              shape="square"
+              trigger="hover"
+              type="primary"
+              style={{ insetInlineEnd: 24 }}
+              icon={<Icon sx={{ fontWeight: "bold" }}>add</Icon>}
+            >
+              <FloatButton
+                shape="square"
+                description={<strong>나눔 하기</strong>}
+                onClick={() => {
+                  navigate("/home/addItem");
+                }}
+              />
+              <FloatButton
+                shape="square"
+                description={<strong>나눔 받기</strong>}
+                onClick={() => {
+                  navigate("/home/addPost");
+                }}
+              />
+            </FloatButton.Group>
           </>
-        ) : (
-          <>
-            <Route path="*" element={<Navigate to="/home" />} />
-            <Route path="/home" element={<Dashboard />} />
-
-            <Route path="/home/:itemId" element={<DetailItem />} />
-            <Route path="/home/post/:postId" element={<DetailPost />} />
-            <Route path="/login" element={<SignIn />} />
-            <Route path="/handful/callback" element={<LoginIng />} />
-            <Route path="/signup" element={<SignUp />} />
-
-            <Route element={<PrivateRoutes />}>
+        )}
+        <Routes>
+          {loginState ? (
+            <>
+              {getRoutes(routes)}
+              <Route path="*" element={<Navigate to="/home" />} />
+              <Route path="/home/:itemId" element={<DetailItem />} />
               <Route path="/home/post/:postId" element={<DetailPost />} />
               <Route path="/home/addItem" element={<AddItem />} />
               <Route path="/home/addPost" element={<AddPost />} />
@@ -212,15 +193,43 @@ export default function App() {
               <Route path="/user/:nickname" element={<User />} />
               <Route path="/wish" element={<Wish />} />
               <Route path="/wish/:itemId" element={<DetailItem />} />
-              <Route path="/profile" element={<Profile />} />
               <Route path="/profile/:itemId" element={<DetailItem />} />
               <Route path="/chat" element={<Chat />} />
               <Route path="/chat/:roomId" element={<ChatRoom />} />
               <Route path="/notifications" element={<Notifications />} />
-            </Route>
-          </>
-        )}
-      </Routes>
+            </>
+          ) : (
+            <>
+              <Route path="*" element={<Navigate to="/home" />} />
+              <Route path="/home" element={<Dashboard />} />
+
+              <Route path="/home/:itemId" element={<DetailItem />} />
+              <Route path="/home/post/:postId" element={<DetailPost />} />
+              <Route path="/login" element={<SignIn />} />
+              <Route path="/handful/callback" element={<LoginIng />} />
+              <Route path="/signup" element={<SignUp />} />
+
+              <Route element={<PrivateRoutes />}>
+                <Route path="/home/post/:postId" element={<DetailPost />} />
+                <Route path="/home/addItem" element={<AddItem />} />
+                <Route path="/home/addPost" element={<AddPost />} />
+                <Route path="/home/edit-item/:itemId" element={<EditItem />} />
+                <Route path="/home/edit-post/:postId" element={<EditPost />} />
+                <Route path="/my-share" element={<ShareHistory />} />
+                <Route path="/my-share/:itemId" element={<DetailItem />} />
+                <Route path="/user/:nickname" element={<User />} />
+                <Route path="/wish" element={<Wish />} />
+                <Route path="/wish/:itemId" element={<DetailItem />} />
+                <Route path="/profile" element={<Profile />} />
+                <Route path="/profile/:itemId" element={<DetailItem />} />
+                <Route path="/chat" element={<Chat />} />
+                <Route path="/chat/:roomId" element={<ChatRoom />} />
+                <Route path="/notifications" element={<Notifications />} />
+              </Route>
+            </>
+          )}
+        </Routes>
+      </ConfigProvider>
     </ThemeProvider>
   );
 }
