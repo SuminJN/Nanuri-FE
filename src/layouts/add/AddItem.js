@@ -7,7 +7,6 @@ import TextField from "@mui/material/TextField";
 import MDButton from "../../components/MDButton";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Image } from "antd";
 import Footer from "../../examples/Footer";
 import { Input, Select } from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
@@ -118,10 +117,11 @@ function AddItem() {
               <Grid container spacing={3} justifyContent="center">
                 {previews.map((src, index) => (
                   <Grid item xs={5} sm={3} mx={1} key={index}>
-                    <Image
+                    <img
                       width="100%"
                       height="100%"
                       src={src}
+                      alt={`image`}
                       style={{
                         aspectRatio: "1 / 1",
                         borderRadius: "8px",
