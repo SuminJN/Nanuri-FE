@@ -101,7 +101,7 @@ function Dashboard() {
     <DashboardLayout>
       <DashboardNavbar />
       <MDBox p={3}>
-        <Grid container spacing={3} display="flex" alignItems="center">
+        <Grid container spacing={1} display="flex" alignItems="center">
           <Grid item xs={12} sm={6}>
             <AppBar position="static">
               <Tabs orientation={tabsOrientation} value={tabValue} onChange={handleSetTabValue}>
@@ -134,24 +134,7 @@ function Dashboard() {
           </Grid>
           {tabValue === 0 ? (
             <>
-              <Grid item xs={8} sm={3}>
-                <form onSubmit={handleSubmitSearch}>
-                  <OutlinedInput
-                    placeholder="검색"
-                    fullWidth
-                    value={search}
-                    onChange={handleSearch}
-                    endAdornment={
-                      <InputAdornment position="end">
-                        <IconButton type="submit">
-                          <SearchIcon />
-                        </IconButton>
-                      </InputAdornment>
-                    }
-                  />
-                </form>
-              </Grid>
-              <Grid item xs={4} sm={3} display="flex" justifyContent="end">
+              <Grid item xs={12} sm={3} display="flex" justifyContent="end">
                 <MDBox>
                   {category ? (
                     <Chip
@@ -174,6 +157,23 @@ function Dashboard() {
                     <CategoryIcon />
                   </IconButton>
                 </MDBox>
+              </Grid>
+              <Grid item xs={12} sm={3}>
+                <form onSubmit={handleSubmitSearch}>
+                  <OutlinedInput
+                    placeholder="검색"
+                    fullWidth
+                    value={search}
+                    onChange={handleSearch}
+                    endAdornment={
+                      <InputAdornment position="end">
+                        <IconButton type="submit">
+                          <SearchIcon />
+                        </IconButton>
+                      </InputAdornment>
+                    }
+                  />
+                </form>
               </Grid>
             </>
           ) : (
