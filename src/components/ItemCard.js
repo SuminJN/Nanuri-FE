@@ -42,7 +42,7 @@ function ItemCard({
     >
       <Grid container>
         <Grid item xs={12} style={{ cursor: "pointer" }} onClick={() => navigate(route)}>
-          <Image
+          <img
             src={image}
             alt="image"
             width="100%"
