@@ -134,7 +134,7 @@ function AddItem() {
                 <Grid item xs={12}>
                   <MDBox mx={3} display="flex" justifyContent="flex-end">
                     <input
-                      accept="image/*"
+                      accept=".jpg,.jpeg,.png"
                       id="upload-button"
                       multiple
                       type="file"
