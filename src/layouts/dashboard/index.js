@@ -41,7 +41,7 @@ import {
   Select,
 } from "@mui/material";
 import WishItems from "../wish/WishItems";
-import AppsIcon from "@mui/icons-material/Apps";
+import CategoryIcon from "@mui/icons-material/Category";
 import { useRecoilState } from "recoil";
 import { TabValue } from "../../recoil/TabValueState";
 import { categoryList } from "../../assets/category/categoryList";
@@ -193,7 +193,7 @@ function Dashboard() {
                     sx={navbarIconButton}
                     onClick={handleModalOpen}
                   >
-                    <AppsIcon />
+                    <CategoryIcon />
                   </IconButton>
                 </MDBox>
               </Grid>
