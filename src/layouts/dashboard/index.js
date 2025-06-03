@@ -2,8 +2,7 @@ import Grid from "@mui/material/Grid";
 import MDBox from "components/MDBox";
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
-import Footer from "examples/Footer";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Icon from "@mui/material/Icon";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
@@ -11,62 +10,49 @@ import AppBar from "@mui/material/AppBar";
 import SharingItems from "./SharingItems";
 import ReceivingItems from "./ReceivingItems";
 import { useMaterialUIController } from "../../context";
-import {
-  navbarDesktopMenu,
-  navbarIconButton,
-  navbarMobileMenu,
-  navbarRow,
-} from "../../examples/Navbars/DashboardNavbar/styles";
 import IconButton from "@mui/material/IconButton";
 import { useNavigate } from "react-router-dom";
-import MDButton from "../../components/MDButton";
-import Button from "@mui/material/Button";
 import SearchIcon from "@mui/icons-material/Search";
 import {
   Chip,
   Dialog,
   DialogActions,
   DialogContent,
-  DialogContentText,
   DialogTitle,
   FormControl,
   FormControlLabel,
   FormLabel,
-  Input,
-  InputAdornment,
-  InputLabel,
   OutlinedInput,
   Radio,
   RadioGroup,
-  Select,
+  Button,
+  InputAdornment,
 } from "@mui/material";
 import WishItems from "../wish/WishItems";
 import CategoryIcon from "@mui/icons-material/Category";
 import { useRecoilState } from "recoil";
 import { TabValue } from "../../recoil/TabValueState";
 import { categoryList } from "../../assets/category/categoryList";
-import MenuItem from "@mui/material/MenuItem";
 import MDTypography from "../../components/MDTypography";
-import Box from "@mui/material/Box";
 
 function Dashboard() {
-  const [controller, dispatch] = useMaterialUIController();
+  const [controller] = useMaterialUIController();
   const { miniSidenav } = controller;
   const navigate = useNavigate();
+
+  // 필터 상태들
   const [category, setCategory] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("");
 
-  const [tabsOrientation, setTabsOrientation] = useState("horizontal");
+  const [sortOrder, setSortOrder] = useState("");
+  const [selectedSortOrder, setSelectedSortOrder] = useState("");
+
   const [tabValue, setTabValue] = useRecoilState(TabValue);
-  const handleSetTabValue = (event, newValue) => setTabValue(newValue);
-  const handleWishListOpen = () => {
-    navigate("/wish");
-  };
   const [search, setSearch] = useState("");
-
   const [modal, setModal] = useState(false);
   const [refresh, setRefresh] = useState(false);
 
-  const [searchMode, setSearchMode] = useState("제목");
+  const handleSetTabValue = (event, newValue) => setTabValue(newValue);
 
   const handleSearch = (event) => {
     setSearch(event.target.value);
@@ -80,85 +66,79 @@ function Dashboard() {
     setRefresh(!refresh);
   };
 
-  const handleModalOpen = () => {
-    setModal(true);
+  const handleModalOpen = () => setModal(true);
+  const handleModalClose = () => setModal(false);
+
+  const handleApplyFilters = () => {
+    setCategory(selectedCategory);
+    setSortOrder(selectedSortOrder);
+    setRefresh(!refresh);
+    handleModalClose();
   };
 
-  const handleModalClose = () => {
-    setModal(false);
-  };
-
-  const handleChipDelete = () => {
-    setCategory("");
+  const handleChipDelete = (type) => {
+    if (type === "category") {
+      setCategory("");
+      setSelectedCategory("");
+    } else if (type === "sort") {
+      setSortOrder("");
+      setSelectedSortOrder("");
+    }
     setRefresh(!refresh);
   };
-
-  useEffect(() => {
-    console.log("test");
-  }, []);
 
   return (
     <DashboardLayout>
       <DashboardNavbar />
       <MDBox p={3}>
-        <Grid container spacing={1} display="flex" alignItems="center">
-          <Grid item xs={12} sm={6}>
+        <Grid container spacing={1} alignItems="center">
+          <Grid item xs={12} lg={6}>
             <AppBar position="static">
-              <Tabs orientation={tabsOrientation} value={tabValue} onChange={handleSetTabValue}>
+              <Tabs orientation="horizontal" value={tabValue} onChange={handleSetTabValue}>
                 <Tab
                   label={<MDTypography variant={tabValue === 0 ? "h6" : ""}>나눠요</MDTypography>}
-                  icon={
-                    <Icon fontSize="small" sx={{ mt: -0.25 }}>
-                      volunteer_activism
-                    </Icon>
-                  }
+                  icon={<Icon fontSize="small">volunteer_activism</Icon>}
                 />
                 <Tab
                   label={<MDTypography variant={tabValue === 1 ? "h6" : ""}>필요해요</MDTypography>}
-                  icon={
-                    <Icon fontSize="small" sx={{ mt: -0.25 }}>
-                      handshake_icon
-                    </Icon>
-                  }
+                  icon={<Icon fontSize="small">handshake_icon</Icon>}
                 />
                 <Tab
                   label={<MDTypography variant={tabValue === 2 ? "h6" : ""}>관심</MDTypography>}
-                  icon={
-                    <Icon fontSize="small" sx={{ mt: -0.25 }}>
-                      favorite_icon
-                    </Icon>
-                  }
+                  icon={<Icon fontSize="small">favorite_icon</Icon>}
                 />
               </Tabs>
             </AppBar>
           </Grid>
-          {tabValue === 0 ? (
+
+          {tabValue === 0 && (
             <>
-              <Grid item xs={12} sm={3} display="flex" justifyContent="end">
-                <MDBox>
-                  {category ? (
+              <Grid item xs={12} lg={3} display="flex" justifyContent="end" alignItems="center">
+                <MDBox display="flex" gap={1}>
+                  {category && (
                     <Chip
                       label={
                         categoryList.find((cat) => cat.englishName === category)?.koreanName ||
                         category
                       }
                       variant="outlined"
-                      onDelete={handleChipDelete}
+                      onDelete={() => handleChipDelete("category")}
                     />
-                  ) : (
-                    <></>
                   )}
-                  <IconButton
-                    size="midium"
-                    color="secondary"
-                    sx={navbarIconButton}
-                    onClick={handleModalOpen}
-                  >
+                  {sortOrder && (
+                    <Chip
+                      label={sortOrder}
+                      variant="outlined"
+                      onDelete={() => handleChipDelete("sort")}
+                    />
+                  )}
+                  <IconButton size="medium" color="secondary" onClick={handleModalOpen}>
                     <CategoryIcon />
                   </IconButton>
                 </MDBox>
               </Grid>
-              <Grid item xs={12} sm={3}>
+
+              <Grid item xs={12} lg={3}>
                 <form onSubmit={handleSubmitSearch}>
                   <OutlinedInput
                     placeholder="검색"
@@ -176,78 +156,72 @@ function Dashboard() {
                 </form>
               </Grid>
             </>
-          ) : (
-            <></>
           )}
         </Grid>
       </MDBox>
-      <Dialog
-        fullWidth
-        maxWidth={"sm"}
-        scroll={"paper"}
-        open={modal}
-        onClose={handleModalClose}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogTitle>{"필터"}</DialogTitle>
-        <DialogContent sx={{ m: 2 }}>
-          <MDBox mb={3}>
-            <FormControl>
-              <FormLabel>분류</FormLabel>
-              <RadioGroup defaultValue="최신순" name="radio-buttons-group" row>
-                <FormControlLabel value="최신순" control={<Radio />} label="최신순" />
-                <FormControlLabel value="오래된순" control={<Radio />} label="오래된순" />
-                <FormControlLabel value="나눔완료" control={<Radio />} label="나눔완료" />
-                <FormControlLabel value="관심순" control={<Radio />} label="관심순" />
-                <FormControlLabel value="조회순" control={<Radio />} label="조회순" />
+
+      {/* 필터 다이얼로그 */}
+      <Dialog fullWidth maxWidth="sm" scroll="paper" open={modal} onClose={handleModalClose}>
+        <DialogTitle>필터</DialogTitle>
+        <DialogContent dividers>
+          <MDBox mb={3} mx={2}>
+            <FormControl fullWidth>
+              <FormLabel sx={{ mb: 1 }}>정렬</FormLabel>
+              <RadioGroup
+                row
+                name="sort"
+                value={selectedSortOrder}
+                onChange={(e) => setSelectedSortOrder(e.target.value)}
+              >
+                {["최신순", "오래된순", "나눔완료", "관심순", "조회순"].map((label) => (
+                  <FormControlLabel key={label} value={label} control={<Radio />} label={label} />
+                ))}
               </RadioGroup>
             </FormControl>
           </MDBox>
-          <MDBox>
-            <FormControl>
-              <FormLabel>카테고리</FormLabel>
+
+          <MDBox mx={2}>
+            <FormControl fullWidth>
+              <FormLabel sx={{ mb: 1 }}>카테고리</FormLabel>
               <RadioGroup
-                defaultValue=""
-                name="radio-buttons-group"
                 row
-                onChange={(e) => {
-                  setCategory(e.target.value);
-                }}
+                name="category"
+                value={selectedCategory}
+                onChange={(e) => setSelectedCategory(e.target.value)}
               >
-                <FormControlLabel value="" control={<Radio />} label="전체"></FormControlLabel>
-                {categoryList.map((category) => (
+                <FormControlLabel value="" control={<Radio />} label="전체" />
+                {categoryList.map((cat) => (
                   <FormControlLabel
-                    key={category.englishName}
-                    value={category.englishName}
+                    key={cat.englishName}
+                    value={cat.englishName}
                     control={<Radio />}
-                    label={category.koreanName}
+                    label={cat.koreanName}
                   />
                 ))}
               </RadioGroup>
             </FormControl>
           </MDBox>
-          {/*<DialogContentText id="alert-dialog-description">*/}
-          {/*  Let Google help apps determine location. This means sending anonymous location data to*/}
-          {/*  Google, even when no apps are running.*/}
-          {/*</DialogContentText>*/}
         </DialogContent>
+
         <DialogActions>
           <Button color="secondary" onClick={handleModalClose}>
             닫기
           </Button>
-          <Button
-            onClick={() => {
-              setRefresh(!refresh);
-              handleModalClose();
-            }}
-          >
+          <Button color="primary" onClick={handleApplyFilters}>
             적용
           </Button>
         </DialogActions>
       </Dialog>
+
       <MDBox mt={1} mb={3} sx={{ px: { lg: 2 } }}>
-        {tabValue === 0 && <SharingItems category={category} search={search} refresh={refresh} />}
+        {tabValue === 0 && (
+          <SharingItems
+            category={category}
+            search={search}
+            refresh={refresh}
+            sortOrder={sortOrder} // 추후 API 연결용
+          />
+        )}
         {tabValue === 1 && <ReceivingItems />}
         {tabValue === 2 && <WishItems />}
       </MDBox>
