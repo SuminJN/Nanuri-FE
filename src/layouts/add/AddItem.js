@@ -1,3 +1,5 @@
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import DashboardLayout from "../../examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "../../examples/Navbars/DashboardNavbar";
 import MDBox from "../../components/MDBox";
@@ -5,11 +7,9 @@ import Grid from "@mui/material/Grid";
 import MDTypography from "../../components/MDTypography";
 import TextField from "@mui/material/TextField";
 import MDButton from "../../components/MDButton";
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import Footer from "../../examples/Footer";
-import { Input, Select } from "@mui/material";
-import MenuItem from "@mui/material/MenuItem";
+import { Select, MenuItem } from "@mui/material";
+import { Upload } from "antd";
+import ImgCrop from "antd-img-crop";
 import { addItem, uploadImages } from "../../apis/itemApi";
 import { categoryList } from "../../assets/category/categoryList";
 
@@ -24,72 +24,72 @@ function AddItem() {
   });
   const { title, place, deadline, category, description } = inputs;
 
-  const onChange = (e) => {
-    const { value, name } = e.target;
-    setInputs({ ...inputs, [name]: value });
+  const [fileList, setFileList] = useState([]);
+
+  const onChange = ({ fileList: newFileList }) => {
+    setFileList(newFileList);
   };
 
-  const [imageFiles, setImageFiles] = useState([]);
-  const [previews, setPreviews] = useState([]);
-
-  const addImageFile = (e) => {
-    const images = e.target.files;
-
-    if (images) {
-      setImageFiles(images);
-      setPreviews([]);
-
-      for (let i = 0; i < images.length; i++) {
+  const onPreview = async (file) => {
+    let src = file.url;
+    if (!src && file.originFileObj) {
+      src = await new Promise((resolve) => {
         const reader = new FileReader();
-        reader.readAsDataURL(images[i]);
-        reader.onloadend = () => {
-          if (reader.result) {
-            setPreviews((prev) => [...prev, reader.result]);
-          }
-        };
-      }
+        reader.readAsDataURL(file.originFileObj);
+        reader.onload = () => resolve(reader.result);
+      });
     }
+    const image = new Image();
+    image.src = src;
+    const imgWindow = window.open(src);
+    imgWindow?.document.write(image.outerHTML);
   };
 
-  const removeImageFile = (idx) => {
-    setImageFiles(previews.filter((e, i) => i !== idx));
-    setPreviews(previews.filter((e, i) => i !== idx));
+  const onInputChange = (e) => {
+    const { name, value } = e.target;
+    setInputs((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (imageFiles.length === 0) {
+    if (fileList.length === 0) {
       alert("이미지를 등록해주세요.");
       return;
     }
-    if (imageFiles.length > 5) {
+
+    if (fileList.length > 5) {
       alert("이미지는 총 5장까지 추가 가능합니다.");
       return;
     }
+
     if (!category) {
       alert("카테고리를 선택해주세요.");
       return;
     }
 
     const formData = new FormData();
-    Array.from(imageFiles).forEach((file) => {
-      formData.append("files", file);
-    });
 
-    addItem(inputs).then((response) => {
+    for (const file of fileList) {
+      if (file.originFileObj) {
+        formData.append("files", file.originFileObj);
+      }
+    }
+
+    try {
+      const response = await addItem(inputs);
       if (response.status === 200) {
         const itemId = response.data;
-
-        uploadImages(itemId, formData).then((res) => console.log(res));
-
+        await uploadImages(itemId, formData);
         alert("물건이 등록되었습니다.");
         navigate("/items");
       } else {
-        alert("등록 오류가 발생했습니다. 다시 시도해주세요.");
-        window.location.reload();
+        throw new Error("등록 실패");
       }
-    });
+    } catch (error) {
+      alert("등록 오류가 발생했습니다. 다시 시도해주세요.");
+      window.location.reload();
+    }
   };
 
   return (
@@ -114,39 +114,24 @@ function AddItem() {
                   나눠요
                 </MDTypography>
               </MDBox>
+
               <Grid container spacing={3} justifyContent="center">
-                {previews.map((src, index) => (
-                  <Grid item xs={5} sm={3} mx={1} key={index}>
-                    <img
-                      width="100%"
-                      height="100%"
-                      src={src}
-                      alt={`image`}
-                      style={{
-                        aspectRatio: "1 / 1",
-                        borderRadius: "8px",
-                        boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
-                        objectFit: "fill",
-                      }}
-                    />
-                  </Grid>
-                ))}
                 <Grid item xs={12}>
-                  <MDBox mx={3} display="flex" justifyContent="flex-end">
-                    <input
-                      accept=".jpg,.jpeg,.png"
-                      id="upload-button"
-                      multiple
-                      type="file"
-                      style={{ display: "none" }}
-                      onChange={addImageFile}
-                    />
-                    <label htmlFor="upload-button">
-                      <MDButton variant="outlined" color="info" component="span" fullWidth>
-                        이미지 업로드
-                      </MDButton>
-                    </label>
+                  <MDBox mx={3} display="flex" justifyContent="center">
+                    <ImgCrop rotationSlider>
+                      <Upload
+                        action={null}
+                        listType="picture-card"
+                        fileList={fileList}
+                        onChange={onChange}
+                        onPreview={onPreview}
+                        beforeUpload={(file) => Promise.resolve(file)} // 핵심: 크롭된 이미지 반영
+                      >
+                        {fileList.length < 5 && "+ Upload"}
+                      </Upload>
+                    </ImgCrop>
                   </MDBox>
+
                   <MDBox component="form" role="form">
                     <MDBox m={3}>
                       <MDTypography variant="h6" fontWeight="bold" color="info">
@@ -156,7 +141,7 @@ function AddItem() {
                         id="title"
                         name="title"
                         value={title}
-                        onChange={onChange}
+                        onChange={onInputChange}
                         variant="outlined"
                         fullWidth
                         required
@@ -171,7 +156,7 @@ function AddItem() {
                         id="category"
                         name="category"
                         value={category}
-                        onChange={onChange}
+                        onChange={onInputChange}
                         variant="outlined"
                         displayEmpty
                         sx={{ height: "45px" }}
@@ -185,6 +170,7 @@ function AddItem() {
                         ))}
                       </Select>
                     </MDBox>
+
                     <MDBox m={3}>
                       <MDTypography variant="h6" fontWeight="bold" color="info">
                         나눔 마감 기한을 선택해주세요
@@ -196,10 +182,11 @@ function AddItem() {
                         fullWidth
                         required
                         value={deadline}
-                        onChange={onChange}
-                        min={new Date().toISOString().slice(0, 16)}
+                        onChange={onInputChange}
+                        inputProps={{ min: new Date().toISOString().slice(0, 16) }}
                       />
                     </MDBox>
+
                     <MDBox m={3}>
                       <MDTypography variant="h6" fontWeight="bold" color="info">
                         자세한 설명
@@ -208,7 +195,7 @@ function AddItem() {
                         id="description"
                         name="description"
                         variant="outlined"
-                        onChange={onChange}
+                        onChange={onInputChange}
                         value={description}
                         fullWidth
                         required
@@ -216,6 +203,7 @@ function AddItem() {
                         rows={8}
                       />
                     </MDBox>
+
                     <MDBox display="flex" justifyContent="center" mb={3}>
                       <MDButton
                         variant="gradient"
