@@ -173,7 +173,8 @@ function Dashboard() {
                 value={selectedSortOrder}
                 onChange={(e) => setSelectedSortOrder(e.target.value)}
               >
-                {["최신순", "오래된순", "나눔완료", "관심순", "조회순"].map((label) => (
+                <FormControlLabel value="" control={<Radio />} label="최신순" />
+                {["오래된순", "나눔완료", "관심순", "조회순"].map((label) => (
                   <FormControlLabel key={label} value={label} control={<Radio />} label={label} />
                 ))}
               </RadioGroup>
