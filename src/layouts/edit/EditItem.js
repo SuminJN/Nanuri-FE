@@ -1,24 +1,20 @@
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import DashboardNavbar from "../../examples/Navbars/DashboardNavbar";
 import DashboardLayout from "../../examples/LayoutContainers/DashboardLayout";
 import MDBox from "../../components/MDBox";
-import React, { useEffect, useRef, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import axiosInstance from "../../apis/axios";
-import Card from "@mui/material/Card";
-import IconButton from "@mui/material/IconButton";
-import { navbarIconButton } from "../../examples/Navbars/DashboardNavbar/styles";
-import Icon from "@mui/material/Icon";
 import Grid from "@mui/material/Grid";
-import { Carousel, Image } from "antd";
-import MDAvatar from "../../components/MDAvatar";
-import image from "../../assets/images/team-2.jpg";
+import Card from "@mui/material/Card";
+import Icon from "@mui/material/Icon";
+import IconButton from "@mui/material/IconButton";
+import TextField from "@mui/material/TextField";
 import MDTypography from "../../components/MDTypography";
 import MDButton from "../../components/MDButton";
-import TextField from "@mui/material/TextField";
-import { deleteItem, editItem, getItem, uploadImages } from "../../apis/itemApi";
+import { Select, MenuItem, FormControl } from "@mui/material";
+import { Upload } from "antd";
+import ImgCrop from "antd-img-crop";
+import { editItem, getItem, deleteItem, uploadImages } from "../../apis/itemApi";
 import { categoryList } from "../../assets/category/categoryList";
-import MenuItem from "@mui/material/MenuItem";
-import { FormControl, Select } from "@mui/material";
 
 const initState = {
   id: 0,
@@ -38,81 +34,102 @@ const initState = {
 const EditItem = () => {
   const navigate = useNavigate();
   const { itemId } = useParams();
+
   const [item, setItem] = useState({ ...initState });
-  const uploadRef = useRef();
-
-  const handleChangeItem = (e) => {
-    item[e.target.name] = e.target.value;
-    setItem({ ...item });
-  };
-
-  const deleteOldImages = (imageName) => {
-    if (item.images.length === 1) {
-      alert("이미지는 최소 한 장 이상 있어야 합니다.");
-      return;
-    }
-
-    const resultFileNames = item.images.filter((fileName) => fileName !== imageName);
-
-    item.images = resultFileNames;
-
-    setItem({ ...item });
-  };
-
-  const handleClickEdit = async () => {
-    const files = uploadRef.current.files;
-    const formData = new FormData();
-
-    for (let i = 0; i < files.length; i++) {
-      formData.append("files", files[i]);
-    }
-
-    editItem(itemId, item).then((response) => {
-      if (response.status === 200) {
-        uploadImages(itemId, formData).then((res) => console.log(res));
-
-        alert("수정되었습니다.");
-        navigate(-1, { replace: true });
-      } else {
-        alert("등록 오류가 발생했습니다. 다시 시도해주세요.");
-        window.location.reload();
-      }
-    });
-  };
-
-  const handleItemDelete = async () => {
-    if (window.confirm("정말로 삭제하시겠습니까?")) {
-      deleteItem(itemId).then((response) => {
-        if (response.status === 200) {
-          alert("삭제되었습니다.");
-          navigate("/home", { replace: true });
-        }
-      });
-    }
-  };
+  const [fileList, setFileList] = useState([]);
 
   useEffect(() => {
     getItem(itemId).then((response) => {
+      const filesFromServer = response.data.images.map((url, idx) => ({
+        uid: `-${idx}`,
+        name: `image-${idx}`,
+        status: "done",
+        url,
+      }));
+
+      setFileList(filesFromServer);
       setItem({
         ...response.data,
         category:
           categoryList.find((cat) => cat.koreanName === response.data.category)?.englishName || "",
       });
     });
-  }, []);
+  }, [itemId]);
+
+  const handleChangeItem = (e) => {
+    const { name, value } = e.target;
+    setItem((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleImageChange = ({ fileList: newFileList }) => {
+    if (newFileList.length === 0) {
+      alert("이미지는 최소 한 장 이상 있어야 합니다.");
+      return;
+    }
+    setFileList(newFileList);
+  };
+
+  const onPreview = async (file) => {
+    let src = file.url;
+    if (!src && file.originFileObj) {
+      src = await new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file.originFileObj);
+        reader.onload = () => resolve(reader.result);
+      });
+    }
+    const image = new Image();
+    image.src = src;
+    const imgWindow = window.open(src);
+    imgWindow?.document.write(image.outerHTML);
+  };
+
+  const handleClickEdit = async () => {
+    if (fileList.length === 0) {
+      alert("이미지를 한 장 이상 등록해야 합니다.");
+      return;
+    }
+
+    const formData = new FormData();
+    for (const file of fileList) {
+      if (file.originFileObj) {
+        formData.append("files", file.originFileObj);
+      }
+    }
+
+    try {
+      const response = await editItem(itemId, item);
+      if (response.status === 200) {
+        if (formData.has("files")) {
+          await uploadImages(itemId, formData);
+        }
+        alert("수정되었습니다.");
+        navigate(-1, { replace: true });
+      } else {
+        throw new Error("수정 실패");
+      }
+    } catch (error) {
+      alert("수정 오류가 발생했습니다. 다시 시도해주세요.");
+      window.location.reload();
+    }
+  };
+
+  const handleItemDelete = async () => {
+    if (window.confirm("정말로 삭제하시겠습니까?")) {
+      const response = await deleteItem(itemId);
+      if (response.status === 200) {
+        alert("삭제되었습니다.");
+        navigate("/home", { replace: true });
+      }
+    }
+  };
 
   return (
     <DashboardLayout>
       <DashboardNavbar />
       <Grid container justifyContent="center">
         <Grid item xs={12} sm={10} md={10}>
-          <MDBox
-            my={3}
-            borderRadius="lg"
-            sx={{ borderColor: "grey.300", height: "100%" }}
-            border={2}
-            shadow="md"
-          >
+          <MDBox my={3} borderRadius="lg" sx={{ borderColor: "grey.300" }} border={2} shadow="md">
             <MDBox display="flex" justifyContent="center" alignItems="center" p={2}>
               <MDTypography variant="h3" mt={2}>
                 나눔 글 수정하기
@@ -120,69 +137,27 @@ const EditItem = () => {
             </MDBox>
             <Grid container spacing={2} sx={{ p: { xs: 2, sm: 3, md: 5 } }}>
               <Grid item xs={12} sm={12} md={6}>
-                <MDBox>
-                  <MDTypography variant="h6" color="error" fontWeight="bold">
+                <MDBox mx={2}>
+                  <MDTypography variant="h6" color="error" fontWeight="bold" mb={1}>
                     ⚠️ 이미지는 최소 한 장 이상 있어야 합니다!
                   </MDTypography>
-                </MDBox>
-                <MDBox>
-                  <Carousel arrows infinite={true}>
-                    {item &&
-                      item.images.map((image, index) => (
-                        <div key={index} style={{ position: "relative" }}>
-                          <MDBox
-                            display="flex"
-                            justifyContent="center"
-                            alignItems="center"
-                            sx={{
-                              backgroundColor: "#ee5855",
-                              cursor: "pointer",
-                              borderRadius: "8px 8px 0 0", // 위쪽에 라운드 추가
-                              padding: "8px", // 두께 추가
-                            }}
-                            onClick={() => deleteOldImages(image)}
-                          >
-                            <Icon fontSize="medium">close</Icon>
-                          </MDBox>
-                          <img
-                            src={image}
-                            alt="image"
-                            width="100%"
-                            height="100%"
-                            style={{
-                              aspectRatio: "1 / 1",
-                              borderRadius: "0 0 8px 8px",
-                              boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
-                              objectFit: "cover",
-                            }}
-                          />
-                        </div>
-                      ))}
-                  </Carousel>
+                  <ImgCrop rotationSlider>
+                    <Upload
+                      action={null}
+                      listType="picture-card"
+                      fileList={fileList}
+                      onChange={handleImageChange}
+                      onPreview={onPreview}
+                      beforeUpload={(file) => Promise.resolve(file)}
+                    >
+                      {fileList.length < 5 && "+ Upload"}
+                    </Upload>
+                  </ImgCrop>
                 </MDBox>
               </Grid>
+
               <Grid item xs={12} sm={12} md={6}>
                 <MDBox>
-                  <MDBox display="flex" justifyContent="flex-end">
-                    <input
-                      accept="image/*"
-                      id="upload-button"
-                      multiple
-                      type="file"
-                      style={{ display: "none" }}
-                      ref={uploadRef}
-                      onChange={(e) => {
-                        const files = Array.from(e.target.files);
-                        const newImages = files.map((file) => URL.createObjectURL(file));
-                        setItem({ ...item, images: [...item.images, ...newImages] });
-                      }}
-                    />
-                    <label htmlFor="upload-button">
-                      <MDButton variant="outlined" color="info" component="span" fullWidth>
-                        이미지 추가
-                      </MDButton>
-                    </label>
-                  </MDBox>
                   <MDBox mb={2}>
                     <MDTypography variant="h6" fontWeight="bold" color="info">
                       제목
@@ -194,6 +169,7 @@ const EditItem = () => {
                       fullWidth
                     />
                   </MDBox>
+
                   <MDBox mb={2}>
                     <FormControl fullWidth variant="outlined">
                       <MDTypography variant="h6" fontWeight="bold" color="info">
@@ -213,6 +189,7 @@ const EditItem = () => {
                       </Select>
                     </FormControl>
                   </MDBox>
+
                   <MDBox mb={2}>
                     <MDTypography variant="h6" fontWeight="bold" color="info">
                       나눔 마감 기한
@@ -224,9 +201,10 @@ const EditItem = () => {
                       required
                       value={item.deadline}
                       onChange={handleChangeItem}
-                      min={new Date().toISOString().slice(0, 16)}
+                      inputProps={{ min: new Date().toISOString().slice(0, 16) }}
                     />
                   </MDBox>
+
                   <MDBox mb={2}>
                     <MDTypography variant="h6" fontWeight="bold" color="info">
                       자세한 설명
@@ -240,55 +218,48 @@ const EditItem = () => {
                       fullWidth
                     />
                   </MDBox>
-                  <MDBox>
-                    <Grid container spacing={1}>
-                      <Grid item xs={8}>
-                        <MDBox>
-                          <MDButton
-                            variant="gradient"
-                            color="secondary"
-                            fullWidth
-                            startIcon={<Icon>close_icon</Icon>}
-                            onClick={() => navigate(-1)}
-                          >
-                            <MDTypography variant="h6" color="white">
-                              취소
-                            </MDTypography>
-                          </MDButton>
-                        </MDBox>
-                      </Grid>
-                      <Grid item xs={4}>
-                        <MDBox>
-                          <MDButton
-                            variant="gradient"
-                            color="error"
-                            fullWidth
-                            startIcon={<Icon>delete_icon</Icon>}
-                            onClick={handleItemDelete}
-                          >
-                            <MDTypography variant="h6" color="white" sx={{ whiteSpace: "nowrap" }}>
-                              삭제하기
-                            </MDTypography>
-                          </MDButton>
-                        </MDBox>
-                      </Grid>
-                      <Grid item xs={12}>
-                        <MDBox>
-                          <MDButton
-                            variant="gradient"
-                            color="info"
-                            fullWidth
-                            startIcon={<Icon>mode_edit_icon</Icon>}
-                            onClick={handleClickEdit}
-                          >
-                            <MDTypography variant="h6" color="white">
-                              수정완료
-                            </MDTypography>
-                          </MDButton>
-                        </MDBox>
-                      </Grid>
+
+                  <Grid container spacing={1}>
+                    <Grid item xs={8}>
+                      <MDButton
+                        variant="gradient"
+                        color="secondary"
+                        fullWidth
+                        startIcon={<Icon>close_icon</Icon>}
+                        onClick={() => navigate(-1)}
+                      >
+                        <MDTypography variant="h6" color="white">
+                          취소
+                        </MDTypography>
+                      </MDButton>
                     </Grid>
-                  </MDBox>
+                    <Grid item xs={4}>
+                      <MDButton
+                        variant="gradient"
+                        color="error"
+                        fullWidth
+                        startIcon={<Icon>delete_icon</Icon>}
+                        onClick={handleItemDelete}
+                      >
+                        <MDTypography variant="h6" color="white" sx={{ whiteSpace: "nowrap" }}>
+                          삭제하기
+                        </MDTypography>
+                      </MDButton>
+                    </Grid>
+                    <Grid item xs={12}>
+                      <MDButton
+                        variant="gradient"
+                        color="info"
+                        fullWidth
+                        startIcon={<Icon>mode_edit_icon</Icon>}
+                        onClick={handleClickEdit}
+                      >
+                        <MDTypography variant="h6" color="white">
+                          수정완료
+                        </MDTypography>
+                      </MDButton>
+                    </Grid>
+                  </Grid>
                 </MDBox>
               </Grid>
             </Grid>
