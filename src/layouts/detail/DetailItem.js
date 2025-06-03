@@ -23,6 +23,7 @@ import Linkify from "react-linkify";
 import { LoginState } from "../../recoil/LoginState";
 import { useRecoilValue } from "recoil";
 import { LoginToast } from "../../components/LoginToast";
+import MuiImageCarousel from "./MuiImageCarousel";
 
 function DetailItem() {
   const { itemId } = useParams();
@@ -180,28 +181,7 @@ function DetailItem() {
               <Grid container spacing={5} sx={{ p: { xs: 2, sm: 3, md: 5 } }}>
                 <Grid item xs={12} sm={12} md={6}>
                   <MDBox>
-                    <Carousel arrows infinite autoplay autoplaySpeed={3000}>
-                      {item &&
-                        item.images.map((image, index) => (
-                          <div key={index}>
-                            <Image
-                              src={image}
-                              alt="image"
-                              width="100%"
-                              height="100%"
-                              preview={false}
-                              onClick={() => handleImageClick(image)}
-                              style={{
-                                cursor: "pointer",
-                                aspectRatio: "1 / 1",
-                                borderRadius: "8px",
-                                boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
-                                objectFit: "cover",
-                              }}
-                            />
-                          </div>
-                        ))}
-                    </Carousel>
+                    <MuiImageCarousel images={item.images} onImageClick={handleImageClick} />
 
                     <Modal
                       open={visible}
