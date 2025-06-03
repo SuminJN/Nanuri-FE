@@ -125,7 +125,16 @@ function AddItem() {
                         fileList={fileList}
                         onChange={onChange}
                         onPreview={onPreview}
-                        beforeUpload={(file) => Promise.resolve(file)} // 핵심: 크롭된 이미지 반영
+                        beforeUpload={(file) => {
+                          const isValidType = ["image/jpeg", "image/png", "image/jpg"].includes(
+                            file.type
+                          );
+                          if (!isValidType) {
+                            alert("JPG, JPEG, PNG 형식의 이미지 파일만 업로드할 수 있습니다.");
+                            return Upload.LIST_IGNORE;
+                          }
+                          return Promise.resolve(file); // 크롭 처리된 이미지 반영
+                        }}
                       >
                         {fileList.length < 5 && "+ Upload"}
                       </Upload>
