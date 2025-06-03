@@ -30,44 +30,47 @@ function SharingItems({ category, search, refresh }) {
           <Grid container spacing={3}>
             {itemList === null
               ? null
-              : itemList.map((item, idx) => (
-                  <Grid item xs={6} sm={4} md={4} lg={4} xl={3} key={idx}>
-                    {isNew(item.createdTime) ? (
-                      <Badge.Ribbon text="New" color="red">
-                        <ItemCard
-                          itemId={item.itemId}
-                          nickname={item.nickname}
-                          title={item.title}
-                          description={item.description}
-                          category={item.category}
-                          image={item.image}
-                          createdTime={getCurrentTime(item.createdTime)}
-                          viewCount={item.viewCount}
-                          wishCount={item.wishCount}
-                          wishStatus={item.wishStatus}
-                          chatCount={item.chatCount}
-                          route={`/home/${item.itemId}`}
-                        />
+              : itemList.map((item, idx) => {
+                  const card = (
+                    <ItemCard
+                      itemId={item.itemId}
+                      nickname={item.nickname}
+                      title={item.title}
+                      description={item.description}
+                      category={item.category}
+                      image={item.image}
+                      createdTime={getCurrentTime(item.createdTime)}
+                      viewCount={item.viewCount}
+                      wishCount={item.wishCount}
+                      isWished={item.isWished}
+                      wishStatus={item.wishStatus}
+                      chatCount={item.chatCount}
+                      route={`/home/${item.itemId}`}
+                    />
+                  );
+
+                  let wrappedCard = card;
+
+                  if (item.shareStatus === "COMPLETED") {
+                    wrappedCard = (
+                      <Badge.Ribbon text="나눔 완료" color="#4a4a4a">
+                        {card}
                       </Badge.Ribbon>
-                    ) : (
-                      <ItemCard
-                        itemId={item.itemId}
-                        nickname={item.nickname}
-                        title={item.title}
-                        description={item.description}
-                        category={item.category}
-                        image={item.image}
-                        createdTime={getCurrentTime(item.createdTime)}
-                        viewCount={item.viewCount}
-                        wishCount={item.wishCount}
-                        isWished={item.isWished}
-                        wishStatus={item.wishStatus}
-                        chatCount={item.chatCount}
-                        route={`/home/${item.itemId}`}
-                      />
-                    )}
-                  </Grid>
-                ))}
+                    );
+                  } else if (isNew(item.createdTime)) {
+                    wrappedCard = (
+                      <Badge.Ribbon text="New" color="red">
+                        {card}
+                      </Badge.Ribbon>
+                    );
+                  }
+
+                  return (
+                    <Grid item xs={6} sm={4} md={4} lg={4} xl={3} key={item.itemId}>
+                      {wrappedCard}
+                    </Grid>
+                  );
+                })}
           </Grid>
         </MDBox>
       </Grid>
