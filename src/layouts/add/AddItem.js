@@ -19,10 +19,10 @@ function AddItem() {
     title: "",
     category: "",
     place: "",
-    deadline: "",
     description: "",
+    deadlineOffsetType: "TOMORROW",
   });
-  const { title, place, deadline, category, description } = inputs;
+  const { title, place, category, description, deadlineOffsetType } = inputs;
 
   const [fileList, setFileList] = useState([]);
 
@@ -184,16 +184,23 @@ function AddItem() {
                       <MDTypography variant="h6" fontWeight="bold" color="info">
                         나눔 마감 기한을 선택해주세요
                       </MDTypography>
-                      <TextField
-                        id="deadline"
-                        name="deadline"
-                        type="datetime-local"
+                      <Select
+                        id="deadlineOffsetType"
+                        name="deadlineOffsetType"
+                        value={deadlineOffsetType}
+                        onChange={onInputChange}
+                        variant="outlined"
+                        displayEmpty
+                        sx={{ height: "45px" }}
                         fullWidth
                         required
-                        value={deadline}
-                        onChange={onInputChange}
-                        inputProps={{ min: new Date().toISOString().slice(0, 16) }}
-                      />
+                      >
+                        <MenuItem value="TOMORROW">1일</MenuItem>
+                        <MenuItem value="2DAYS">2일</MenuItem>
+                        <MenuItem value="3DAYS">3일</MenuItem>
+                        <MenuItem value="7DAYS">1주일</MenuItem>
+                        <MenuItem value="1MONTH">한 달</MenuItem>
+                      </Select>
                     </MDBox>
 
                     <MDBox m={3}>
