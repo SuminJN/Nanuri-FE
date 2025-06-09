@@ -9,10 +9,13 @@ import axiosInstance from "../../../apis/axios";
 import Grid from "@mui/material/Grid";
 import ItemCard from "../../../components/ItemCard";
 import { getMyItemList } from "../../../apis/itemApi";
+import { useRecoilState } from "recoil";
+import { HistoryTabValue } from "../../../recoil/HistoryTapValue";
 
 function ShareCardList() {
   const navigate = useNavigate();
   const [itemList, setItemList] = useState(null);
+  const [tabValue, setTabValue] = useRecoilState(HistoryTabValue);
 
   useEffect(() => {
     getMyItemList().then((response) => {
@@ -37,7 +40,10 @@ function ShareCardList() {
           variant="outlined"
           color="info"
           size="small"
-          onClick={() => navigate("/my-share")}
+          onClick={() => {
+            setTabValue(0);
+            navigate("/my-share");
+          }}
         >
           전체보기
         </MDButton>
