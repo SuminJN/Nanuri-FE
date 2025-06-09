@@ -12,9 +12,11 @@ import Footer from "../../examples/Footer";
 import ShareDoneInformation from "./component/ShareDoneInformation";
 import ReceivingInformation from "./component/ReceivingInformation";
 import ReceiveDoneInformation from "./component/ReceiveDoneInformation";
+import { useRecoilState } from "recoil";
+import { HistoryTabValue } from "../../recoil/HistoryTapValue";
 
 function ShareHistory() {
-  const [tabValue, setTabValue] = useState(0);
+  const [tabValue, setTabValue] = useRecoilState(HistoryTabValue);
 
   const handleSetTabValue = (event, newValue) => setTabValue(newValue);
 
