@@ -13,6 +13,7 @@ import OtherUserShareCardList from "./OtherUserShareCardList";
 import IconButton from "@mui/material/IconButton";
 import { navbarIconButton } from "../../examples/Navbars/DashboardNavbar/styles";
 import Icon from "@mui/material/Icon";
+import OtherUserShareDoneCardList from "./OtherUserShareDoneCardList";
 
 function User() {
   const navigate = useNavigate();
@@ -60,63 +61,68 @@ function User() {
   return (
     <DashboardLayout>
       <DashboardNavbar />
-      <Grid container justifyContent="center">
-        <Grid item xs={12} md={10} lg={8}>
-          <MDBox mb={2}>
-            <IconButton
-              size="small"
-              disableRipple
-              sx={navbarIconButton}
-              variant="contained"
-              onClick={() => {
-                navigate(-1);
-              }}
-            >
-              <Icon>arrow_back_ios_icon</Icon>
-            </IconButton>
-          </MDBox>
-          <Header nickname={user.nickname} />
-          <MDBox mt={2} mb={3}>
-            <Grid container spacing={1} justifyContent="center">
-              <Grid item xs={12} md={6}>
-                <MDBox
-                  borderRadius="lg"
-                  sx={{ borderColor: "grey.300", height: "100%" }}
-                  border={2}
-                  shadow="md"
-                >
+      <MDBox p={3}>
+        <Grid container justifyContent="center">
+          <Grid item xs={12}>
+            <MDBox mb={2}>
+              <IconButton
+                size="small"
+                disableRipple
+                sx={navbarIconButton}
+                variant="contained"
+                onClick={() => {
+                  navigate(-1);
+                }}
+              >
+                <Icon>arrow_back_ios_icon</Icon>
+              </IconButton>
+            </MDBox>
+            <Header nickname={user.nickname} />
+            <MDBox mt={2} mb={3}>
+              <Grid container spacing={1} justifyContent="center">
+                <Grid item xs={12} md={4}>
                   <MDBox
-                    display="flex"
-                    justifyContent="space-between"
-                    alignItems="center"
-                    pt={2}
-                    px={2}
+                    borderRadius="lg"
+                    sx={{ borderColor: "grey.300", height: "100%" }}
+                    border={2}
+                    shadow="md"
                   >
-                    <MDTypography variant="h6" fontWeight="medium" textTransform="capitalize">
-                      프로필 정보
-                    </MDTypography>
-                  </MDBox>
-
-                  <MDBox p={2}>
-                    <MDBox mb={2} lineHeight={1}>
-                      <MDTypography variant="button" color="text" fontWeight="bold">
-                        {user.introduction}
+                    <MDBox
+                      display="flex"
+                      justifyContent="space-between"
+                      alignItems="center"
+                      pt={2}
+                      px={2}
+                    >
+                      <MDTypography variant="h6" fontWeight="medium" textTransform="capitalize">
+                        프로필 정보
                       </MDTypography>
                     </MDBox>
-                    <MDBox opacity={0.3}>
-                      <Divider />
+
+                    <MDBox p={2}>
+                      <MDBox mb={2} lineHeight={1}>
+                        <MDTypography variant="button" color="text" fontWeight="bold">
+                          {user.introduction}
+                        </MDTypography>
+                      </MDBox>
+                      <MDBox opacity={0.3}>
+                        <Divider />
+                      </MDBox>
+                      {userInfo}
                     </MDBox>
-                    {userInfo}
                   </MDBox>
-                </MDBox>
+                </Grid>
+                <Grid item xs={12} md={4}>
+                  <OtherUserShareCardList itemList={user.sharingItemList} />
+                </Grid>
+                <Grid item xs={12} md={4}>
+                  <OtherUserShareDoneCardList itemList={user.completedItemList} />
+                </Grid>
               </Grid>
-              <Grid item xs={12} md={6}>
-                <OtherUserShareCardList itemList={user.sharingItemList} />
-              </Grid>
-            </Grid>
-          </MDBox>
+            </MDBox>
+          </Grid>
         </Grid>
-      </Grid>
+      </MDBox>
     </DashboardLayout>
   );
 }
