@@ -7,7 +7,7 @@ import Grid from "@mui/material/Grid";
 import MDTypography from "../../components/MDTypography";
 import TextField from "@mui/material/TextField";
 import MDButton from "../../components/MDButton";
-import { Select, MenuItem } from "@mui/material";
+import { Select, MenuItem, Chip } from "@mui/material";
 import { Upload } from "antd";
 import ImgCrop from "antd-img-crop";
 import { addItem, uploadImages } from "../../apis/itemApi";
@@ -20,9 +20,10 @@ function AddItem() {
     category: "",
     place: "",
     description: "",
+    deadline: "",
     deadlineOffsetType: "TOMORROW",
   });
-  const { title, place, category, description, deadlineOffsetType } = inputs;
+  const { title, place, deadline, category, description, deadlineOffsetType } = inputs;
 
   const [fileList, setFileList] = useState([]);
 
@@ -90,6 +91,45 @@ function AddItem() {
       alert("등록 오류가 발생했습니다. 다시 시도해주세요.");
       window.location.reload();
     }
+  };
+
+  const handleDeadlineOffsetType = (type) => {
+    setInputs((prev) => ({ ...prev, deadlineOffsetType: type }));
+
+    const now = new Date();
+    let newDeadline;
+
+    switch (type) {
+      case "TOMORROW":
+        newDeadline = new Date(now.setDate(now.getDate() + 1));
+        break;
+      case "2DAYS":
+        newDeadline = new Date(now.setDate(now.getDate() + 2));
+        break;
+      case "3DAYS":
+        newDeadline = new Date(now.setDate(now.getDate() + 3));
+        break;
+      case "7DAYS":
+        newDeadline = new Date(now.setDate(now.getDate() + 7));
+        break;
+      case "1MONTH":
+        newDeadline = new Date(now.setMonth(now.getMonth() + 1));
+        break;
+      default:
+        newDeadline = now;
+    }
+
+    const TIME_ZONE = 3240 * 10000;
+    const date = new Date(newDeadline);
+    const formDate = new Date(+date + TIME_ZONE)
+      .toISOString()
+      .replace("T", " ")
+      .replace(/\..*/, "");
+
+    setInputs((prev) => ({
+      ...prev,
+      deadline: formDate.substring(0, 10) + "T" + formDate.substring(11, 16), // YYYY-MM-DD HH:mm 형식으로 설정
+    }));
   };
 
   return (
@@ -184,23 +224,44 @@ function AddItem() {
                       <MDTypography variant="h6" fontWeight="bold" color="info">
                         나눔 마감 기한을 선택해주세요
                       </MDTypography>
-                      <Select
-                        id="deadlineOffsetType"
-                        name="deadlineOffsetType"
-                        value={deadlineOffsetType}
-                        onChange={onInputChange}
-                        variant="outlined"
-                        displayEmpty
-                        sx={{ height: "45px" }}
+                      <TextField
+                        id="deadline"
+                        name="deadline"
+                        type="datetime-local"
                         fullWidth
                         required
-                      >
-                        <MenuItem value="TOMORROW">1일</MenuItem>
-                        <MenuItem value="2DAYS">2일</MenuItem>
-                        <MenuItem value="3DAYS">3일</MenuItem>
-                        <MenuItem value="7DAYS">1주일</MenuItem>
-                        <MenuItem value="1MONTH">한 달</MenuItem>
-                      </Select>
+                        value={deadline}
+                        onChange={onInputChange}
+                        inputProps={{ min: new Date().toISOString().slice(0, 16) }}
+                      />
+
+                      <MDBox my={1} display="flex" gap={1}>
+                        <Chip
+                          label="1일 뒤"
+                          variant="outlined"
+                          onClick={() => handleDeadlineOffsetType("TOMORROW")}
+                        />
+                        <Chip
+                          label="2일 뒤"
+                          variant="outlined"
+                          onClick={() => handleDeadlineOffsetType("2DAYS")}
+                        />
+                        <Chip
+                          label="3일 뒤"
+                          variant="outlined"
+                          onClick={() => handleDeadlineOffsetType("3DAYS")}
+                        />
+                        <Chip
+                          label="일주일 뒤"
+                          variant="outlined"
+                          onClick={() => handleDeadlineOffsetType("7DAYS")}
+                        />
+                        <Chip
+                          label="한달 뒤"
+                          variant="outlined"
+                          onClick={() => handleDeadlineOffsetType("1MONTH")}
+                        />
+                      </MDBox>
                     </MDBox>
 
                     <MDBox m={3}>

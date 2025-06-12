@@ -26,21 +26,62 @@ import MDTypography from "components/MDTypography";
 
 // Material Dashboard 2 React base styles
 import typography from "assets/theme/base/typography";
+import { useNavigate } from "react-router-dom";
 
 function Footer({ company, links }) {
   const { href, name } = company;
   const { size } = typography;
+  const navigate = useNavigate();
 
-  const renderLinks = () =>
-    links.map((link) => (
-      <MDBox key={link.name} component="li" px={2} lineHeight={1}>
-        <Link href={link.href} target="_blank">
-          <MDTypography variant="button" fontWeight="regular" color="text">
-            {link.name}
-          </MDTypography>
-        </Link>
-      </MDBox>
-    ));
+  // const renderLinks = () =>
+  //   links.map((link) => (
+  //     <MDBox key={link.name} component="li" px={2} lineHeight={1}>
+  //       <Link
+  //         href="#"
+  //         onClick={(e) => {
+  //           e.preventDefault();
+  //           navigate(link.href);
+  //         }}
+  //       >
+  //         <MDTypography variant="button" fontWeight="regular" color="text">
+  //           {link.name}
+  //         </MDTypography>
+  //       </Link>
+  //     </MDBox>
+  //   ));
+
+  const renderLinks = () => {
+    return (
+      <>
+        <MDBox component="li" px={2} lineHeight={1}>
+          <Link
+            href="#"
+            onClick={(e) => {
+              e.preventDefault();
+              navigate("/policy/service");
+            }}
+          >
+            <MDTypography variant="button" fontWeight="regular" color="text">
+              이용약관
+            </MDTypography>
+          </Link>
+        </MDBox>
+        <MDBox component="li" px={2} lineHeight={1}>
+          <Link
+            href="#"
+            onClick={(e) => {
+              e.preventDefault();
+              navigate("/policy/privacy");
+            }}
+          >
+            <MDTypography variant="button" fontWeight="regular" color="text">
+              개인정보처리방침
+            </MDTypography>
+          </Link>
+        </MDBox>
+      </>
+    );
+  };
 
   return (
     <MDBox
@@ -92,8 +133,8 @@ Footer.defaultProps = {
   company: { href: "https://github.com/HGU-WALAB", name: "한줌" },
   links: [
     { href: "https://github.com/HGU-WALAB", name: "팀소개" },
-    { href: "https://github.com/HGU-WALAB", name: "이용약관" },
-    { href: "https://github.com/HGU-WALAB", name: "개인정보처리방침" },
+    { href: "/policy/service", name: "이용약관" },
+    { href: "/policy/privacy", name: "개인정보처리방침" },
   ],
 };
 
