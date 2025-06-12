@@ -33,6 +33,8 @@ import { ToastContainer } from "react-toastify";
 import PrivateRoutes from "./components/privateRoutes";
 import Dashboard from "./layouts/dashboard";
 import Profile from "./layouts/profile";
+import TermsOfService from "./layouts/policy/TermsOfService";
+import PrivacyPolicy from "./layouts/policy/PrivacyPolicy";
 
 export default function App() {
   const [controller, dispatch] = useMaterialUIController();
@@ -197,6 +199,8 @@ export default function App() {
               <Route path="/chat" element={<Chat />} />
               <Route path="/chat/:roomId" element={<ChatRoom />} />
               <Route path="/notifications" element={<Notifications />} />
+              <Route path="/policy/service" element={<TermsOfService />} />
+              <Route path="/policy/privacy" element={<PrivacyPolicy />} />
             </>
           ) : (
             <>
@@ -208,6 +212,8 @@ export default function App() {
               <Route path="/login" element={<SignIn />} />
               <Route path="/handful/callback" element={<LoginIng />} />
               <Route path="/signup" element={<SignUp />} />
+              <Route path="/policy/service" element={<TermsOfService />} />
+              <Route path="/policy/privacy" element={<PrivacyPolicy />} />
 
               <Route element={<PrivateRoutes />}>
                 <Route path="/home/post/:postId" element={<DetailPost />} />
