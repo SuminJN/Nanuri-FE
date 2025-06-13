@@ -19,6 +19,7 @@ import { useNavigate } from "react-router-dom";
 import ProfileChatRoomList from "./ProfileChatRoomList";
 import { categoryList } from "../../assets/category/categoryList";
 import { MBTIList } from "../../assets/mbti/mbtiList";
+import ShareDoneCardList from "./components/ShareDoneCardList";
 
 const initialUserInfo = {
   uniqueId: "",
@@ -82,7 +83,7 @@ function Overview() {
         <Header nickname={user.nickname} />
         <MDBox mt={2} mb={3}>
           <Grid container spacing={1} justifyContent="center">
-            <Grid item xs={12} md={6}>
+            <Grid item xs={12} lg={4}>
               {isEditing ? (
                 <MDBox borderRadius="lg" sx={{ borderColor: "grey.300" }} border={2} shadow="md">
                   <MDBox
@@ -182,12 +183,12 @@ function Overview() {
                 />
               )}
             </Grid>
-            <Grid item xs={12} md={6}>
+            <Grid item xs={12} md={6} lg={4}>
               <ShareCardList />
             </Grid>
-            {/*<Grid item xs={12} xl={4}>*/}
-            {/*  <ProfileChatRoomList />*/}
-            {/*</Grid>*/}
+            <Grid item xs={12} md={6} lg={4}>
+              <ShareDoneCardList />
+            </Grid>
           </Grid>
         </MDBox>
       </MDBox>

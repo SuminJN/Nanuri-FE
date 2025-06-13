@@ -327,7 +327,13 @@ function DetailItem() {
                           </Grid>
                           <Grid item xs={11}>
                             <MDBox>
-                              {new Date(item.deadline) > new Date() ? (
+                              {item.shareStatus === "COMPLETED" ? (
+                                <MDButton variant="gradient" color="dark" fullWidth disabled>
+                                  <MDTypography variant="h6" color="white">
+                                    나눔 완료
+                                  </MDTypography>
+                                </MDButton>
+                              ) : new Date(item.deadline) > new Date() ? (
                                 <MDButton
                                   variant="gradient"
                                   color="secondary"
