@@ -181,7 +181,10 @@ function DetailItem() {
               <Grid container spacing={5} sx={{ p: { xs: 2, sm: 3, md: 5 } }}>
                 <Grid item xs={12} sm={12} md={6}>
                   <MDBox>
-                    <MuiImageCarousel images={item.images} onImageClick={handleImageClick} />
+                    <MuiImageCarousel
+                      images={item.images.map((image) => image.fileUrl)}
+                      onImageClick={handleImageClick}
+                    />
 
                     <Modal
                       open={visible}

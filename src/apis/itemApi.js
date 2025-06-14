@@ -16,6 +16,11 @@ export const uploadImages = async (itemId, formData) => {
   });
 };
 
+// 사진 삭제
+export const deleteImage = async (itemId, imageIds) => {
+  return await axiosInstance.delete(`/api/image/${itemId}`, { data: imageIds });
+};
+
 // 아이템 목록 조회
 export const getItemList = async (category, search) => {
   return await axiosInstance.get("/api/items", {
