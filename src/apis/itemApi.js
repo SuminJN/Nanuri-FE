@@ -22,16 +22,19 @@ export const deleteImage = async (itemId, imageIds) => {
 };
 
 // 아이템 목록 조회
-export const getItemList = async (category, search) => {
+export const getItemList = async (category, search, sort) => {
+  console.log("getItemList", category, search, sort);
   return await axiosInstance.get("/api/items", {
     params: {
       category: category,
+      sort: sort,
     },
   });
 };
 
 // 아이템 목록 조회 + 검색
-export const getSearchItemList = async (category, search) => {
+export const getSearchItemList = async (category, search, sort) => {
+  console.log("getSearchItemList", category, search, sort);
   return await axiosInstance.get(`/api/items/search/${search}`, {
     params: {
       category: category,

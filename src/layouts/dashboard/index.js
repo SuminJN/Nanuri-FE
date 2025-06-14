@@ -35,6 +35,14 @@ import { TabValue } from "../../recoil/TabValueState";
 import { categoryList } from "../../assets/category/categoryList";
 import MDTypography from "../../components/MDTypography";
 
+const sortOptions = [
+  { label: "최신순", value: "latest" },
+  { label: "오래된순", value: "oldest" },
+  { label: "관심순", value: "wishCount" },
+  { label: "조회순", value: "viewCount" },
+  { label: "마감임박 순", value: "deadline" },
+];
+
 function Dashboard() {
   const [controller] = useMaterialUIController();
   const { miniSidenav } = controller;
@@ -63,6 +71,12 @@ function Dashboard() {
 
   const handleSubmitSearch = (event) => {
     event.preventDefault();
+    if (search.trim() !== "") {
+      setSelectedSortOrder("");
+      setSortOrder("");
+      setSelectedCategory("");
+      setCategory("");
+    }
     setRefresh(!refresh);
   };
 
@@ -127,7 +141,7 @@ function Dashboard() {
                   )}
                   {sortOrder && (
                     <Chip
-                      label={sortOrder}
+                      label={sortOptions.find((opt) => opt.value === sortOrder)?.label || sortOrder}
                       variant="outlined"
                       onDelete={() => handleChipDelete("sort")}
                     />
@@ -173,9 +187,13 @@ function Dashboard() {
                 value={selectedSortOrder}
                 onChange={(e) => setSelectedSortOrder(e.target.value)}
               >
-                <FormControlLabel value="" control={<Radio />} label="최신순" />
-                {["오래된순", "나눔완료", "관심순", "조회순"].map((label) => (
-                  <FormControlLabel key={label} value={label} control={<Radio />} label={label} />
+                {sortOptions.map((option) => (
+                  <FormControlLabel
+                    key={option.value}
+                    value={option.value}
+                    control={<Radio />}
+                    label={option.label}
+                  />
                 ))}
               </RadioGroup>
             </FormControl>

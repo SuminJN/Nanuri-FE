@@ -44,15 +44,22 @@ function DetailPost() {
 
   const handlePostApply = () => {
     if (!isLogin) return LoginToast();
-    applyWant(postId).then((response) => {
-      if (response.status === 200) {
-        alert("신청이 완료되었습니다.");
-        navigate("/chat");
-      } else {
-        alert("신청 오류가 발생했습니다. 다시 시도해주세요.");
-        window.location.reload();
-      }
-    });
+    applyWant(postId)
+      .then((response) => {
+        if (response.status === 200) {
+          alert("신청이 완료되었습니다.");
+          navigate("/chat");
+        } else {
+          alert("신청 오류가 발생했습니다. 다시 시도해주세요.");
+          window.location.reload();
+        }
+      })
+      .catch((error) => {
+        if (error.response?.status === 403) {
+          alert(error.response.data.errors[0]);
+          navigate("/chat");
+        }
+      });
   };
 
   const handleGoToUserInfo = () => {
