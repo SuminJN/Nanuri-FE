@@ -11,7 +11,7 @@ import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
 import Divider from "@mui/material/Divider";
 import { NicknameState } from "../../../recoil/NicknameState";
-import { getUserInfo } from "../../../apis/userApi";
+import { checkNickname, getUserInfo } from "../../../apis/userApi";
 import { register } from "../../../apis/authApi";
 import {
   FormControl,
@@ -25,6 +25,8 @@ import MenuItem from "@mui/material/MenuItem";
 import { categoryList } from "../../../assets/category/categoryList";
 import { MBTIList } from "../../../assets/mbti/mbtiList";
 import { useNavigate } from "react-router-dom";
+import Icon from "@mui/material/Icon";
+import Tooltip from "@mui/material/Tooltip";
 
 const initialUserInfo = {
   uniqueId: "",
@@ -47,22 +49,32 @@ function Cover() {
 
   const [additionalInfo, setAdditionalInfo] = useState(initialUserInfo);
 
+  const [nicknameCheckResult, setNicknameCheckResult] = useState(null);
+
   const handleChangeInfo = (e) => {
     const { name, value } = e.target;
     setAdditionalInfo((prev) => ({
       ...prev,
       [name]: name === "interestItemCategory" ? [...value] : value,
     }));
+
+    if (name === "nickname") {
+      setNicknameCheckResult(null); // 닉네임 바뀌면 체크 결과 초기화
+    }
   };
 
   // 폼 제출 함수
   const onSubmit = (event) => {
     event.preventDefault();
 
+    if (nicknameCheckResult !== "valid") {
+      alert("닉네임 중복 확인을 완료해주세요.");
+      return;
+    }
+
     register(additionalInfo).then((response) => {
       setIsLoggedIn(true);
       setNicknameState(additionalInfo.nickname);
-      // window.location.href = "/handful";
       navigate("/home", { replace: true });
     });
   };
@@ -129,7 +141,7 @@ function Cover() {
                     {userInfo.department}
                   </MDTypography>
                 </MDBox>
-                <MDBox mt={3}>
+                <MDBox display="flex" alignItems="center">
                   <TextField
                     id="nickname"
                     label="닉네임"
@@ -140,7 +152,48 @@ function Cover() {
                     autoFocus
                     value={additionalInfo.nickname}
                     onChange={handleChangeInfo}
+                    sx={{ flex: 1, marginRight: "8px" }}
                   />
+                  <Tooltip title="닉네임 중복 확인" placement="top">
+                    <Icon
+                      sx={{
+                        cursor: "pointer",
+                        color:
+                          nicknameCheckResult === "valid"
+                            ? "success.main"
+                            : nicknameCheckResult === "duplicate"
+                            ? "error.main"
+                            : "action.disabled",
+                      }}
+                      onClick={async () => {
+                        try {
+                          if (!additionalInfo.nickname.trim()) {
+                            alert("닉네임을 입력해주세요.");
+                            return;
+                          }
+
+                          const isDuplicate = await checkNickname(additionalInfo.nickname);
+
+                          if (isDuplicate.data) {
+                            setNicknameCheckResult("duplicate");
+                            alert("이미 사용 중인 닉네임입니다.");
+                          } else {
+                            setNicknameCheckResult("valid");
+                            alert("사용 가능한 닉네임입니다.");
+                          }
+                        } catch (error) {
+                          alert("닉네임 중복 확인 중 오류가 발생했습니다.");
+                          console.error(error);
+                        }
+                      }}
+                    >
+                      {nicknameCheckResult === "valid"
+                        ? "check_circle"
+                        : nicknameCheckResult === "duplicate"
+                        ? "cancel"
+                        : "check_circle_outline"}
+                    </Icon>
+                  </Tooltip>
                 </MDBox>
               </MDBox>
             </Grid>
