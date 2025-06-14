@@ -64,6 +64,11 @@ export const editItem = async (itemId, item) => {
   return await axiosInstance.patch(`${prefix}/${itemId}`, item);
 };
 
+// 아이템 거래 완료 클릭
+export const completeItem = async (itemId, item) => {
+  return await axiosInstance.patch(`${prefix}/complete/${itemId}`, item);
+};
+
 // 아이템 삭제
 export const deleteItem = async (itemId) => {
   return await axiosInstance.delete(`${prefix}/${itemId}`);

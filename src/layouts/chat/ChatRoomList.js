@@ -20,15 +20,29 @@ function ChatRoomList() {
 
   const [tabsOrientation, setTabsOrientation] = useState("horizontal");
   const [tabValue, setTabValue] = useRecoilState(ChatTabValue);
-  const handleSetTabValue = (event, newValue) => setTabValue(newValue);
+  const handleSetTabValue = async (event, newValue) => {
+    setTabValue(newValue);
 
-  const getChatRooms = async () => {
-    const response = await axiosInstance("/api/chat/rooms");
-    if (response.status === 200) {
-      console.log(response.data);
-      setChatRooms(response.data);
-    } else {
-      console.log("error");
+    if (newValue === 0) {
+      getChatRooms(); // 전체
+    } else if (newValue === 1) {
+      getChatRooms("ITEM"); // 나눠요
+    } else if (newValue === 2) {
+      getChatRooms("POST"); // 필요해요
+    }
+  };
+
+  const getChatRooms = async (roomType = null) => {
+    try {
+      const url = roomType ? `/api/chat/rooms/type?roomType=${roomType}` : `/api/chat/rooms`;
+      const response = await axiosInstance.get(url);
+      if (response.status === 200) {
+        setChatRooms(response.data);
+      } else {
+        console.error("채팅방 불러오기 실패");
+      }
+    } catch (err) {
+      console.error("에러:", err);
     }
   };
 
@@ -98,9 +112,13 @@ function ChatRoomList() {
       </MDBox>
       <MDBox p={2}>
         <MDBox component="ul" display="flex" flexDirection="column" p={0} m={0}>
-          {tabValue === 0 && renderProfiles}
-          {tabValue === 1 && renderProfiles}
-          {tabValue === 2 && null}
+          {chatRooms.length === 0 ? (
+            <MDTypography variant="caption" color="text">
+              해당 탭에 채팅방이 없습니다.
+            </MDTypography>
+          ) : (
+            renderProfiles
+          )}
         </MDBox>
       </MDBox>
     </MDBox>
