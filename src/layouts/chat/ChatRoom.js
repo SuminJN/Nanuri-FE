@@ -9,7 +9,6 @@ import SockJS from "sockjs-client";
 
 // Material UI
 import Grid from "@mui/material/Grid";
-import Card from "@mui/material/Card";
 import IconButton from "@mui/material/IconButton";
 import Icon from "@mui/material/Icon";
 import Menu from "@mui/material/Menu";
@@ -34,7 +33,6 @@ import MDTypography from "../../components/MDTypography";
 // Chat UI Kit
 import {
   ChatContainer,
-  ConversationHeader,
   MainContainer,
   Message,
   MessageInput,
@@ -43,8 +41,9 @@ import {
 import "@chatscope/chat-ui-kit-styles/dist/default/styles.min.css";
 
 // Assets & API
-import axiosInstance from "../../apis/axios";
-import image from "../../assets/images/team-2.jpg";
+import { fetchMessages, fetchRoomInfo, exitRoom } from "../../apis/chatApi";
+import { completeItem } from "../../apis/itemApi";
+import { completeWant } from "../../apis/wantApi";
 
 const initState = {
   itemId: "",
@@ -52,6 +51,7 @@ const initState = {
   title: "",
   itemImage: "",
   opponentNickname: "",
+  postType: "",
 };
 
 function ChatRoom() {
@@ -186,11 +186,7 @@ function ChatRoom() {
 
     setIsLoading(true);
     try {
-      const res = await axiosInstance.get(`/api/chat/room/${roomId}/messages`, {
-        params: {
-          cursor: cursor,
-        },
-      });
+      const res = await fetchMessages(roomId, cursor);
 
       const fetched = res.data;
       const newMessages = fetched.reverse();
@@ -217,13 +213,22 @@ function ChatRoom() {
     }
   };
 
+  const completeHandlers = {
+    ITEM: completeItem,
+    NEED: completeWant,
+    // 향후 다른 타입 추가 가능
+  };
+
   const getRoomInfo = async () => {
-    const response = await axiosInstance.get(`/api/chat/room/${roomId}`);
-    if (response.status === 200) {
-      console.log(response.data);
-      setRoomInfo(response.data);
-    } else {
-      console.log("error");
+    try {
+      const response = await fetchRoomInfo(roomId);
+      if (response.status === 200) {
+        setRoomInfo(response.data);
+      } else {
+        console.error("채팅방 정보 불러오기 실패");
+      }
+    } catch (err) {
+      console.error("에러 발생:", err);
     }
   };
 
@@ -263,12 +268,11 @@ function ChatRoom() {
 
   const handleConfirmExit = async () => {
     try {
-      await axiosInstance.delete(`/api/chat/room/${roomId}`);
+      await exitRoom(roomId);
       navigate("/chat");
-    } catch (error) {
-      console.error("채팅방 나가기 실패", error);
+    } catch (err) {
+      console.error("채팅방 나가기 실패", err);
     }
-    setOpenConfirm(false);
   };
 
   useEffect(() => {
@@ -331,8 +335,27 @@ function ChatRoom() {
                 </MDBox>
                 <MDBox>
                   <MDBox display="flex" alignItems="center">
-                    <MDButton variant="outlined" color="secondary" size="small">
-                      거래완료
+                    <MDButton
+                      variant="outlined"
+                      color="secondary"
+                      size="small"
+                      onClick={async () => {
+                        const { itemId, postType } = roomInfo;
+                        const handler = completeHandlers[postType];
+                        if (!handler) {
+                          alert("알 수 없는 게시글 타입입니다.");
+                          return;
+                        }
+                        try {
+                          await handler(itemId);
+                          alert("거래가 완료되었습니다.");
+                        } catch (err) {
+                          console.error("거래 완료 실패:", err);
+                          alert("오류가 발생했습니다.");
+                        }
+                      }}
+                    >
+                      {roomInfo.postType === "NEED" ? "요청 완료" : "거래 완료"}
                     </MDButton>
                     <IconButton onClick={(e) => setAnchorEl(e.currentTarget)}>
                       <MoreVertIcon />
