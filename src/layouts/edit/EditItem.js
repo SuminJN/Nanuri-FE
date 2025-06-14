@@ -13,7 +13,7 @@ import MDButton from "../../components/MDButton";
 import { Select, MenuItem, FormControl } from "@mui/material";
 import { Upload } from "antd";
 import ImgCrop from "antd-img-crop";
-import { editItem, getItem, deleteItem, uploadImages } from "../../apis/itemApi";
+import { editItem, getItem, deleteItem, uploadImages, deleteImage } from "../../apis/itemApi";
 import { categoryList } from "../../assets/category/categoryList";
 
 const initState = {
@@ -38,13 +38,16 @@ const EditItem = () => {
   const [item, setItem] = useState({ ...initState });
   const [fileList, setFileList] = useState([]);
 
+  // 삭제된 이미지 ID 목록
+  const [deletedImageIds, setDeletedImageIds] = useState([]);
+
   useEffect(() => {
     getItem(itemId).then((response) => {
-      const filesFromServer = response.data.images.map((url, idx) => ({
-        uid: `-${idx}`,
-        name: `image-${idx}`,
+      const filesFromServer = response.data.images.map((img, idx) => ({
+        uid: `-${img.imageId || idx}`,
+        name: `image-${img.imageId || idx}`,
         status: "done",
-        url,
+        url: img.fileUrl,
       }));
 
       setFileList(filesFromServer);
@@ -62,10 +65,22 @@ const EditItem = () => {
   };
 
   const handleImageChange = ({ fileList: newFileList }) => {
+    // 삭제된 파일 체크
+    const removedFiles = fileList.filter(
+      (file) => !newFileList.some((newFile) => newFile.uid === file.uid)
+    );
+
+    const removedImageIds = removedFiles
+      .filter((file) => file.uid.startsWith("-")) // 서버에서 온 이미지
+      .map((file) => parseInt(file.uid.slice(1), 10));
+
+    setDeletedImageIds((prev) => [...prev, ...removedImageIds]);
+
     if (newFileList.length === 0) {
       alert("이미지는 최소 한 장 이상 있어야 합니다.");
       return;
     }
+
     setFileList(newFileList);
   };
 
@@ -98,17 +113,23 @@ const EditItem = () => {
     }
 
     try {
-      const response = await editItem(itemId, item);
+      const response = await editItem(itemId, item); //{1}
       if (response.status === 200) {
+        if (deletedImageIds.length > 0) {
+          await deleteImage(itemId, deletedImageIds);
+        }
+
         if (formData.has("files")) {
           await uploadImages(itemId, formData);
         }
+
         alert("수정되었습니다.");
         navigate(-1, { replace: true });
       } else {
         throw new Error("수정 실패");
       }
     } catch (error) {
+      console.error("수정 오류:", error);
       alert("수정 오류가 발생했습니다. 다시 시도해주세요.");
       window.location.reload();
     }
