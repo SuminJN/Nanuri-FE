@@ -7,7 +7,7 @@ import useGetTime from "../../hooks/useGetTime";
 import { getItemList, getSearchItemList } from "../../apis/itemApi";
 import PropTypes from "prop-types";
 
-function SharingItems({ category, search, refresh }) {
+function SharingItems({ category, search, refresh, sortOrder }) {
   const [itemList, setItemList] = useState(null);
   const [loading, setLoading] = useState(true);
   const { getCurrentTime, isNew } = useGetTime();
@@ -16,7 +16,8 @@ function SharingItems({ category, search, refresh }) {
     setLoading(true);
     const fetchFunction = search ? getSearchItemList : getItemList;
     try {
-      const response = await fetchFunction(category, search);
+      const response = await fetchFunction(category, search, sortOrder);
+      console.log(category, search, sortOrder);
       if (response.status === 200) {
         setItemList(response.data);
       }
@@ -95,12 +96,14 @@ function SharingItems({ category, search, refresh }) {
 
 SharingItems.defaultProps = {
   category: "",
+  sortOrder: "",
 };
 
 SharingItems.propTypes = {
   category: PropTypes.string.isRequired,
   search: PropTypes.string,
   refresh: PropTypes.bool.isRequired,
+  sortOrder: PropTypes.string,
 };
 
 export default SharingItems;
