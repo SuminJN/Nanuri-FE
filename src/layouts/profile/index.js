@@ -14,7 +14,7 @@ import TextField from "@mui/material/TextField";
 import { FormControl, InputLabel, OutlinedInput, Select } from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
 import DashboardNavbar from "../../examples/Navbars/DashboardNavbar";
-import { getUserInfo, updateUser } from "../../apis/userApi";
+import { checkNickname, getUserInfo, updateUser } from "../../apis/userApi";
 import { useNavigate } from "react-router-dom";
 import ProfileChatRoomList from "./ProfileChatRoomList";
 import { categoryList } from "../../assets/category/categoryList";
@@ -35,6 +35,7 @@ function Overview() {
   const [isEditing, setIsEditing] = useState(false);
   const [user, setUser] = useState(initialUserInfo);
   const [userInterest, setUserInterest] = useState([]);
+  const [nicknameCheckResult, setNicknameCheckResult] = useState(null);
 
   const handleClickEdit = () => {
     setIsEditing(!isEditing);
@@ -55,9 +56,18 @@ function Overview() {
       ...prev,
       [name]: name === "interestItemCategory" ? [...value] : value,
     }));
+
+    if (name === "nickname") {
+      setNicknameCheckResult(null); // 닉네임 바뀌면 체크 결과 초기화
+    }
   };
 
   const handleSubmitEdit = () => {
+    if (nicknameCheckResult !== "valid") {
+      alert("닉네임 중복 확인을 완료해주세요.");
+      return;
+    }
+
     updateUser(user).then((response) => {
       if (response.status === 200) {
         alert("프로필 수정이 완료되었습니다.");
@@ -125,12 +135,56 @@ function Overview() {
                       <MDTypography variant="h6" fontWeight="bold" color="info">
                         닉네임
                       </MDTypography>
-                      <TextField
-                        name="nickname"
-                        value={user.nickname}
-                        onChange={handleChangeInfo}
-                        fullWidth
-                      />
+                      <MDBox display="flex" alignItems="center">
+                        <TextField
+                          name="nickname"
+                          value={user.nickname}
+                          onChange={handleChangeInfo}
+                          fullWidth
+                          sx={{ flex: 1, marginRight: "8px" }}
+                        />
+                        <Tooltip title="닉네임 중복 확인" placement="top">
+                          <Icon
+                            sx={{
+                              cursor: "pointer",
+                              color:
+                                nicknameCheckResult === "valid"
+                                  ? "success.main"
+                                  : nicknameCheckResult === "duplicate"
+                                  ? "error.main"
+                                  : "action.disabled",
+                            }}
+                            onClick={async () => {
+                              try {
+                                if (!user.nickname.trim()) {
+                                  alert("닉네임을 입력해주세요.");
+                                  return;
+                                }
+
+                                const isDuplicate = await checkNickname(user.nickname);
+                                console.log("isDuplicate", isDuplicate);
+
+                                if (isDuplicate.data) {
+                                  setNicknameCheckResult("duplicate");
+                                  alert("이미 사용 중인 닉네임입니다.");
+                                } else {
+                                  setNicknameCheckResult("valid");
+                                  alert("사용 가능한 닉네임입니다.");
+                                }
+                              } catch (error) {
+                                alert("닉네임 중복 확인 중 오류가 발생했습니다.");
+                                console.error(error);
+                              }
+                            }}
+                          >
+                            {nicknameCheckResult === "valid"
+                              ? "check_circle"
+                              : nicknameCheckResult === "duplicate"
+                              ? "cancel"
+                              : "check_circle_outline"}
+                          </Icon>
+                        </Tooltip>
+                      </MDBox>
                     </MDBox>
                     <MDBox mb={2}>
                       <FormControl fullWidth variant="outlined">
