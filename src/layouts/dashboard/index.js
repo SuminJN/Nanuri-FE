@@ -71,12 +71,6 @@ function Dashboard() {
 
   const handleSubmitSearch = (event) => {
     event.preventDefault();
-    if (search.trim() !== "") {
-      setSelectedSortOrder("");
-      setSortOrder("");
-      setSelectedCategory("");
-      setCategory("");
-    }
     setRefresh(!refresh);
   };
 

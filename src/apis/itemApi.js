@@ -26,6 +26,7 @@ export const getItemList = async (category, search, sort) => {
   console.log("getItemList", category, search, sort);
   return await axiosInstance.get("/api/items", {
     params: {
+      keyword: search,
       category: category,
       sort: sort,
     },
