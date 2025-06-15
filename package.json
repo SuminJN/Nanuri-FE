@@ -20,6 +20,7 @@
     "chroma-js": "2.4.2",
     "date-fns": "^4.1.0",
     "dotenv": "^16.4.7",
+    "env-cmd": "^10.1.0",
     "firebase": "^11.6.0",
     "http-proxy-middleware": "^3.0.5",
     "prop-types": "15.8.1",
@@ -40,8 +41,8 @@
     "yup": "1.1.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "env-cmd -f .env.development react-scripts start",
+    "build": "env-cmd -f .env.production react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && npm install && npm start"
