@@ -20,6 +20,8 @@ import ProfileChatRoomList from "./ProfileChatRoomList";
 import { categoryList } from "../../assets/category/categoryList";
 import { MBTIList } from "../../assets/mbti/mbtiList";
 import ShareDoneCardList from "./components/ShareDoneCardList";
+import { NicknameState } from "../../recoil/NicknameState";
+import { useRecoilState } from "recoil";
 
 const initialUserInfo = {
   uniqueId: "",
@@ -38,6 +40,7 @@ function Overview() {
   const [nicknameCheckResult, setNicknameCheckResult] = useState(null);
   const [originalNickname, setOriginalNickname] = useState("");
   const nicknameChanged = user.nickname !== originalNickname;
+  const [nicknameRecoil, setNicknameRecoil] = useRecoilState(NicknameState);
 
   const handleClickEdit = () => {
     setIsEditing(!isEditing);
@@ -60,7 +63,7 @@ function Overview() {
     }));
 
     if (name === "nickname") {
-      setNicknameCheckResult(null); // 닉네임 바뀌면 체크 결과 초기화
+      setNicknameCheckResult(null);
     }
   };
 
@@ -75,6 +78,9 @@ function Overview() {
     updateUser(user).then((response) => {
       if (response.status === 200) {
         alert("프로필 수정이 완료되었습니다.");
+
+        setNicknameRecoil(user.nickname);
+
         window.location.reload();
       } else {
         alert("프로필 수정에 실패했습니다.");
