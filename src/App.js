@@ -11,7 +11,7 @@ import createCache from "@emotion/cache";
 import routes from "routes";
 import { useMaterialUIController, setMiniSidenav, setOpenConfigurator } from "context";
 import logo from "assets/logo.png";
-import { useRecoilValue } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import { LoginState } from "./recoil/LoginState";
 import SignIn from "./layouts/authentication/sign-in";
 import LoginIng from "./util/LoginIng";
@@ -35,6 +35,14 @@ import Dashboard from "./layouts/dashboard";
 import Profile from "./layouts/profile";
 import TermsOfService from "./layouts/policy/TermsOfService";
 import PrivacyPolicy from "./layouts/policy/PrivacyPolicy";
+import { setNavigate } from "./util/navigationService";
+import { setLoginStateSetter } from "./util/authService";
+
+if (process.env.NODE_ENV === "production") {
+  ["log", "warn", "error"].forEach((method) => {
+    console[method] = () => {};
+  });
+}
 
 export default function App() {
   const [controller, dispatch] = useMaterialUIController();
@@ -53,6 +61,7 @@ export default function App() {
   const { pathname } = useLocation();
   const loginState = useRecoilValue(LoginState);
   const navigate = useNavigate();
+  const setLoginState = useSetRecoilState(LoginState);
 
   // Cache for the rtl
   useMemo(() => {
@@ -86,7 +95,9 @@ export default function App() {
   // Setting the dir attribute for the body element
   useEffect(() => {
     document.body.setAttribute("dir", direction);
-  }, [direction]);
+    setNavigate(navigate);
+    setLoginStateSetter(setLoginState);
+  }, [direction, navigate, setLoginState]);
 
   // Setting page scroll to 0 when changing the route
   useEffect(() => {
