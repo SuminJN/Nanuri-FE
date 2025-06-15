@@ -9,7 +9,7 @@ const container = document.getElementById("app");
 const root = createRoot(container);
 
 root.render(
-  <BrowserRouter>
+  <BrowserRouter basename={`${process.env.REACT_APP_PUBLIC_URL}`}>
     <MaterialUIControllerProvider>
       <RecoilRoot>
         <App />
