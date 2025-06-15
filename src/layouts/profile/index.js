@@ -36,6 +36,8 @@ function Overview() {
   const [user, setUser] = useState(initialUserInfo);
   const [userInterest, setUserInterest] = useState([]);
   const [nicknameCheckResult, setNicknameCheckResult] = useState(null);
+  const [originalNickname, setOriginalNickname] = useState("");
+  const nicknameChanged = user.nickname !== originalNickname;
 
   const handleClickEdit = () => {
     setIsEditing(!isEditing);
@@ -63,7 +65,9 @@ function Overview() {
   };
 
   const handleSubmitEdit = () => {
-    if (nicknameCheckResult !== "valid") {
+    const nicknameChanged = user.nickname !== originalNickname;
+
+    if (nicknameChanged && nicknameCheckResult !== "valid") {
       alert("닉네임 중복 확인을 완료해주세요.");
       return;
     }
@@ -79,10 +83,12 @@ function Overview() {
     });
   };
 
+  // 유저 정보 불러올 때 같이 저장
   useEffect(() => {
     getUserInfo().then((response) => {
       setUser(response.data);
       setUserInterest(response.data.interestItemCategory);
+      setOriginalNickname(response.data.nickname); // <-- 추가
     });
   }, []);
 
@@ -143,46 +149,59 @@ function Overview() {
                           fullWidth
                           sx={{ flex: 1, marginRight: "8px" }}
                         />
-                        <Tooltip title="닉네임 중복 확인" placement="top">
-                          <Icon
-                            sx={{
-                              cursor: "pointer",
-                              color:
-                                nicknameCheckResult === "valid"
-                                  ? "success.main"
-                                  : nicknameCheckResult === "duplicate"
-                                  ? "error.main"
-                                  : "action.disabled",
-                            }}
-                            onClick={async () => {
-                              try {
+                        <Tooltip
+                          title={
+                            nicknameChanged
+                              ? "닉네임 중복 확인"
+                              : "닉네임을 변경해야 확인할 수 있습니다."
+                          }
+                          placement="top"
+                        >
+                          <span>
+                            {" "}
+                            {/* span으로 감싸야 Tooltip + disabled 처리 가능 */}
+                            <Icon
+                              sx={{
+                                cursor: nicknameChanged ? "pointer" : "not-allowed",
+                                color:
+                                  nicknameCheckResult === "valid"
+                                    ? "success.main"
+                                    : nicknameCheckResult === "duplicate"
+                                    ? "error.main"
+                                    : "action.disabled",
+                                pointerEvents: nicknameChanged ? "auto" : "none", // 클릭 막기
+                              }}
+                              onClick={async () => {
+                                if (!nicknameChanged) return;
+
                                 if (!user.nickname.trim()) {
                                   alert("닉네임을 입력해주세요.");
                                   return;
                                 }
 
-                                const isDuplicate = await checkNickname(user.nickname);
-                                console.log("isDuplicate", isDuplicate);
+                                try {
+                                  const isDuplicate = await checkNickname(user.nickname);
 
-                                if (isDuplicate.data) {
-                                  setNicknameCheckResult("duplicate");
-                                  alert("이미 사용 중인 닉네임입니다.");
-                                } else {
-                                  setNicknameCheckResult("valid");
-                                  alert("사용 가능한 닉네임입니다.");
+                                  if (isDuplicate.data) {
+                                    setNicknameCheckResult("duplicate");
+                                    alert("이미 사용 중인 닉네임입니다.");
+                                  } else {
+                                    setNicknameCheckResult("valid");
+                                    alert("사용 가능한 닉네임입니다.");
+                                  }
+                                } catch (error) {
+                                  alert("닉네임 중복 확인 중 오류가 발생했습니다.");
+                                  console.error(error);
                                 }
-                              } catch (error) {
-                                alert("닉네임 중복 확인 중 오류가 발생했습니다.");
-                                console.error(error);
-                              }
-                            }}
-                          >
-                            {nicknameCheckResult === "valid"
-                              ? "check_circle"
-                              : nicknameCheckResult === "duplicate"
-                              ? "cancel"
-                              : "check_circle_outline"}
-                          </Icon>
+                              }}
+                            >
+                              {nicknameCheckResult === "valid"
+                                ? "check_circle"
+                                : nicknameCheckResult === "duplicate"
+                                ? "cancel"
+                                : "check_circle_outline"}
+                            </Icon>
+                          </span>
                         </Tooltip>
                       </MDBox>
                     </MDBox>
