@@ -99,7 +99,7 @@ function DetailItem() {
       })
       .catch((error) => {
         if (error.response?.status === 409) {
-          alert(error.response.data.errors[0]);
+          alert("이미 신청한 게시물입니다.");
           navigate("/chat");
         }
       });
