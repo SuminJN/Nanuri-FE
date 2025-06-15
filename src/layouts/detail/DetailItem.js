@@ -133,7 +133,11 @@ function DetailItem() {
         if (response.status === 200) {
           setItem(response.data);
           setIsWish(response.data.wishStatus);
-          if (response.data.isOwner && new Date(response.data.deadline) < new Date()) {
+          if (
+            response.data.isOwner &&
+            response.data.deadline &&
+            new Date(response.data.deadline) < new Date()
+          ) {
             setDeadlineAlert(true);
           }
         }
@@ -336,7 +340,7 @@ function DetailItem() {
                                     나눔 완료
                                   </MDTypography>
                                 </MDButton>
-                              ) : new Date(item.deadline) > new Date() ? (
+                              ) : new Date(item.deadline) > new Date() || !item.deadline ? (
                                 <MDButton
                                   variant="gradient"
                                   color="secondary"
