@@ -8,15 +8,15 @@ import { getItemList, getSearchItemList } from "../../apis/itemApi";
 import PropTypes from "prop-types";
 
 function SharingItems({ category, search, refresh, sortOrder }) {
-  const [itemList, setItemList] = useState(null);
+  const [itemList, setItemList] = useState([]);
   const [loading, setLoading] = useState(true);
   const { getCurrentTime, isNew } = useGetTime();
 
   const fetchItemList = async () => {
     setLoading(true);
-    const fetchFunction = search ? getSearchItemList : getItemList;
+    // const fetchFunction = search ? getSearchItemList : getItemList;
     try {
-      const response = await fetchFunction(category, search, sortOrder);
+      const response = await getItemList(category, search, sortOrder);
       console.log(category, search, sortOrder);
       if (response.status === 200) {
         setItemList(response.data);

@@ -221,7 +221,7 @@ export default function App() {
               <Route path="/home/:itemId" element={<DetailItem />} />
               <Route path="/home/post/:postId" element={<DetailPost />} />
               <Route path="/login" element={<SignIn />} />
-              <Route path="/handful/callback" element={<LoginIng />} />
+              <Route path={`${process.env.REACT_APP_CALLBACK_URL}`} element={<LoginIng />} />
               <Route path="/signup" element={<SignUp />} />
               <Route path="/policy/service" element={<TermsOfService />} />
               <Route path="/policy/privacy" element={<PrivacyPolicy />} />
