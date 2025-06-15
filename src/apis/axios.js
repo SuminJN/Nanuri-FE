@@ -28,7 +28,15 @@ axiosInstance.interceptors.response.use(
     if (error.response.status === 401) {
       window.alert("인증이 필요합니다. 다시 로그인 해주세요.");
       updateLoginState(false);
-      navigateTo("/");
+      return;
+    } else if (error.response.status === 404) {
+      window.alert("요청한 리소스를 찾을 수 없습니다.");
+      return;
+    } else if (error.response.status === 409) {
+      window.alert("이미 존재하는 데이터입니다. 다른 값을 입력해주세요.");
+      return;
+    } else if (error.response.status === 500) {
+      window.alert("서버 오류가 발생했습니다. 잠시 후 다시 시도해주세요.");
       return;
     }
 
