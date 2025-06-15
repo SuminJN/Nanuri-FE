@@ -8,7 +8,7 @@ import { getItemList, getSearchItemList } from "../../apis/itemApi";
 import PropTypes from "prop-types";
 
 function SharingItems({ category, search, refresh, sortOrder }) {
-  const [itemList, setItemList] = useState(null);
+  const [itemList, setItemList] = useState([]);
   const [loading, setLoading] = useState(true);
   const { getCurrentTime, isNew } = useGetTime();
 
