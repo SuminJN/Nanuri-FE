@@ -166,28 +166,30 @@ export default function App() {
               onMouseLeave={handleOnMouseLeave}
             />
 
-            <FloatButton.Group
-              shape="square"
-              trigger="hover"
-              type="primary"
-              style={{ insetInlineEnd: 24 }}
-              icon={<Icon sx={{ fontWeight: "bold" }}>add</Icon>}
-            >
-              <FloatButton
+            {!pathname.startsWith("/chat") && (
+              <FloatButton.Group
                 shape="square"
-                description={<strong>나눔 하기</strong>}
-                onClick={() => {
-                  navigate("/home/addItem");
-                }}
-              />
-              <FloatButton
-                shape="square"
-                description={<strong>나눔 받기</strong>}
-                onClick={() => {
-                  navigate("/home/addPost");
-                }}
-              />
-            </FloatButton.Group>
+                trigger="hover"
+                type="primary"
+                style={{ insetInlineEnd: 24 }}
+                icon={<Icon sx={{ fontWeight: "bold" }}>add</Icon>}
+              >
+                <FloatButton
+                  shape="square"
+                  description={<strong>나눔 하기</strong>}
+                  onClick={() => {
+                    navigate("/home/addItem");
+                  }}
+                />
+                <FloatButton
+                  shape="square"
+                  description={<strong>나눔 받기</strong>}
+                  onClick={() => {
+                    navigate("/home/addPost");
+                  }}
+                />
+              </FloatButton.Group>
+            )}
           </>
         )}
         <Routes>
