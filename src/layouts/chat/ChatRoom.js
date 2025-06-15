@@ -113,6 +113,7 @@ function ChatRoom() {
                   senderNickname: receiveData.senderNickname,
                   roomId: receiveData.roomId,
                   receiverNickname: receiveData.receiverNickname,
+                  type: receiveData.type || "TALK",
                   createdAt: receiveData.createdAt,
                 },
               ]);
@@ -388,10 +389,7 @@ function ChatRoom() {
                           const isMine = m.senderNickname === nickname;
 
                           return (
-                            <div
-                              key={index}
-                              ref={index === 0 ? topRef : null} // ✅ 이제 observer가 감지할 수 있어짐
-                            >
+                            <div key={index} ref={index === 0 ? topRef : null}>
                               {showDateHeader && (
                                 <div style={{ textAlign: "center", margin: "12px 0" }}>
                                   <span
@@ -407,40 +405,56 @@ function ChatRoom() {
                                   </span>
                                 </div>
                               )}
-                              <div
-                                style={{
-                                  display: "flex",
-                                  justifyContent: isMine ? "flex-end" : "flex-start",
-                                }}
-                              >
+                              {m.type === "ENTER" || m.type === "LEAVE" ? (
+                                <div style={{ textAlign: "center", margin: "12px 0" }}>
+                                  <span
+                                    style={{
+                                      backgroundColor: "#eee",
+                                      color: "#666",
+                                      padding: "6px 14px",
+                                      borderRadius: "20px",
+                                      fontSize: "13px",
+                                    }}
+                                  >
+                                    {m.message}
+                                  </span>
+                                </div>
+                              ) : (
                                 <div
                                   style={{
                                     display: "flex",
-                                    flexDirection: isMine ? "row-reverse" : "row",
-                                    alignItems: "flex-end",
+                                    justifyContent: isMine ? "flex-end" : "flex-start",
                                   }}
                                 >
-                                  <Message
-                                    model={{
-                                      message: m.message,
-                                      direction: isMine ? "outgoing" : "incoming",
-                                      position: "single",
-                                    }}
-                                  />
                                   <div
                                     style={{
-                                      fontSize: "12px",
-                                      color: "#999",
-                                      marginLeft: isMine ? "0px" : "6px",
-                                      marginRight: isMine ? "6px" : "0px",
-                                      alignSelf: "flex-end",
-                                      whiteSpace: "nowrap",
+                                      display: "flex",
+                                      flexDirection: isMine ? "row-reverse" : "row",
+                                      alignItems: "flex-end",
                                     }}
                                   >
-                                    {formatTime(m.createdAt)}
+                                    <Message
+                                      model={{
+                                        message: m.message,
+                                        direction: isMine ? "outgoing" : "incoming",
+                                        position: "single",
+                                      }}
+                                    />
+                                    <div
+                                      style={{
+                                        fontSize: "12px",
+                                        color: "#999",
+                                        marginLeft: isMine ? "0px" : "6px",
+                                        marginRight: isMine ? "6px" : "0px",
+                                        alignSelf: "flex-end",
+                                        whiteSpace: "nowrap",
+                                      }}
+                                    >
+                                      {formatTime(m.createdAt)}
+                                    </div>
                                   </div>
                                 </div>
-                              </div>
+                              )}
                             </div>
                           );
                         });
