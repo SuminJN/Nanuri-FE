@@ -3,24 +3,16 @@ import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
 import MDButton from "components/MDButton";
 import CoverLayout from "layouts/authentication/components/CoverLayout";
-import bgImage from "assets/images/bg-sign-up-cover.jpeg";
-import React, { useEffect, useRef, useState } from "react";
+import bgImage from "assets/images/hgu.png";
+import React, { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { LoginState } from "../../../recoil/LoginState";
 import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
-import Divider from "@mui/material/Divider";
 import { NicknameState } from "../../../recoil/NicknameState";
 import { checkNickname, getUserInfo } from "../../../apis/userApi";
 import { register } from "../../../apis/authApi";
-import {
-  FormControl,
-  FormLabel,
-  InputLabel,
-  OutlinedInput,
-  RadioGroup,
-  Select,
-} from "@mui/material";
+import { FormControl, InputLabel, OutlinedInput, Select } from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
 import { categoryList } from "../../../assets/category/categoryList";
 import { MBTIList } from "../../../assets/mbti/mbtiList";
