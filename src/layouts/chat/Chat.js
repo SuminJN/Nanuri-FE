@@ -2,9 +2,7 @@ import DashboardNavbar from "../../examples/Navbars/DashboardNavbar";
 import MDBox from "../../components/MDBox";
 import DashboardLayout from "../../examples/LayoutContainers/DashboardLayout";
 import Grid from "@mui/material/Grid";
-import profilesListData from "../profile/data/profilesListData";
 import ChatRoomList from "./ChatRoomList";
-import Footer from "../../examples/Footer";
 
 function Chat() {
   return (

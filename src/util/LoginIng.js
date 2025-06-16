@@ -4,50 +4,70 @@ import { LoginState } from "../recoil/LoginState";
 import { useNavigate } from "react-router-dom";
 import { login } from "../apis/authApi";
 import { NicknameState } from "../recoil/NicknameState";
-import { handleAllowNotification } from "./notification";
+
+// import { handleAllowNotification } from "./notification";
 
 function LoginIng() {
   const [isLoggedIn, setIsLoggedIn] = useRecoilState(LoginState);
   const [nickname, setNickname] = useRecoilState(NicknameState);
   const navigate = useNavigate();
 
+  const isKakaoInApp = /KAKAOTALK/i.test(navigator.userAgent);
+
   const fetchData = async () => {
     try {
       const urlParams = new URLSearchParams(window.location.search);
       const credential = urlParams.get("token");
-      console.log(credential);
+      console.log("받은 token:", credential);
 
       if (credential) {
-        const nickname = await login(credential);
-        setNickname(nickname);
+        const userNickname = await login(credential);
+        console.log("받은 nickname:", userNickname);
 
-        // FCM 알림 권한 요청
-        await handleAllowNotification();
+        setNickname(userNickname);
 
-        // 닉네임이 없다면 신규 유저
-        if (!nickname) {
-          // window.location.href = "/handful/signup";
-          navigate("/signup", { replace: true });
-        }
-        // 닉네임이 있다면 기존 유저
-        else {
-          // 로그인 성공 시 상태 업데이트
+        // FCM 알림 권한 요청 (옵션)
+        // await handleAllowNotification();
+
+        if (!userNickname) {
+          // 신규 유저
+          if (isKakaoInApp) {
+            setTimeout(() => {
+              window.location.href = "/handful/signup";
+            }, 100);
+          } else {
+            navigate("/signup", { replace: true });
+          }
+        } else {
+          // 기존 유저
           setIsLoggedIn(true);
-          navigate("/", { replace: true });
+          if (isKakaoInApp) {
+            setTimeout(() => {
+              window.location.href = "/handful/";
+            }, 100);
+          } else {
+            navigate("/", { replace: true });
+          }
         }
       } else {
         throw new Error("히즈넷 토큰이 존재하지 않습니다.");
       }
     } catch (error) {
-      alert("로그인 실패!");
-      navigate("/home");
-      console.log("Login API 오류:", error);
+      alert(error.stack);
+      console.error("Login API 오류:", error);
+      if (isKakaoInApp) {
+        setTimeout(() => {
+          window.location.href = "/handful/home";
+        }, 100);
+      } else {
+        navigate("/home");
+      }
     }
   };
 
   useEffect(() => {
     fetchData();
-  }, []); // 빈 배열을 전달하여 페이지가 로드될 때 한 번만 실행되도록 함
+  }, []);
 
   return null; // 이 컴포넌트는 아무것도 렌더링하지 않음
 }
