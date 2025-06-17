@@ -227,7 +227,13 @@ function AddItem() {
                         fullWidth
                         required
                         placeholder="예) 전공책 나눔하고 싶습니다."
+                        inputProps={{ maxLength: 30 }}
                       />
+                      <MDBox justifyContent="flex-end" display="flex" mt={1}>
+                        <MDTypography variant="caption" color="text">
+                          {title.length} / 30자
+                        </MDTypography>
+                      </MDBox>
                     </MDBox>
 
                     <MDBox m={3}>

@@ -91,7 +91,13 @@ function AddPost() {
                         fullWidth
                         required
                         placeholder="예) 남는 연필 있으신 분 있나요?"
+                        inputProps={{ maxLength: 30 }}
                       />
+                      <MDBox justifyContent="flex-end" display="flex" mt={1}>
+                        <MDTypography variant="caption" color="text">
+                          {title.length} / 30자
+                        </MDTypography>
+                      </MDBox>
                     </MDBox>
                     <MDBox m={3}>
                       <MDTypography variant="h6" fontWeight="bold" color="info">
