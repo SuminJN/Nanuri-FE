@@ -26,6 +26,16 @@ function AddPost() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (!title.trim()) {
+      alert("제목을 입력해주세요.");
+      return;
+    }
+
+    if (!description.trim()) {
+      alert("설명을 입력해주세요.");
+      return;
+    }
+
     addWant(inputs).then((response) => {
       if (response.status === 200) {
         alert("글이 등록되었습니다.");
@@ -80,6 +90,7 @@ function AddPost() {
                         variant="outlined"
                         fullWidth
                         required
+                        placeholder="예) 남는 연필 있으신 분 있나요?"
                       />
                     </MDBox>
                     <MDBox m={3}>
@@ -96,7 +107,14 @@ function AddPost() {
                         required
                         multiline
                         rows={8}
+                        inputProps={{ maxLength: 500 }}
+                        placeholder="예) 연필이 필요한데, 혹시 남는 연필 있으신 분 계신가요? 제가 직접 가지러 갈게요!"
                       />
+                      <MDBox justifyContent="flex-end" display="flex" mt={1}>
+                        <MDTypography variant="caption" color="text">
+                          {description.length} / 500자
+                        </MDTypography>
+                      </MDBox>
                     </MDBox>
                     <MDBox display="flex" justifyContent="center" mb={3}>
                       <MDButton

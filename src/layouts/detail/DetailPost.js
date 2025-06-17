@@ -142,7 +142,7 @@ function DetailPost() {
                           {post.receiverNickName}
                         </MDTypography>
                       </MDBox>
-                      <MDBox mb={2} height="200px">
+                      <MDBox mb={2}>
                         <MDTypography variant="h6">
                           <Linkify options={options}>{post.description}</Linkify>
                         </MDTypography>
