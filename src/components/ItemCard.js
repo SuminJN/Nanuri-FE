@@ -72,7 +72,7 @@ function ItemCard({
                 {category} · {createdTime}
               </MDTypography>
             </MDBox>
-            <MDBox display="flex" justifyContent="center" mb={1}>
+            <MDBox display="flex" justifyContent="center">
               <MDTypography
                 variant="caption"
                 fontWeight="medium"
