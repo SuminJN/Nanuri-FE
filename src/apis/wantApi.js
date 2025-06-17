@@ -29,7 +29,7 @@ export const editWant = async (postId, post) => {
 
 // 원트 완료 상태 수정
 export const completeWant = async (postId) => {
-  return await axiosInstance.patch(`${prefix}/${postId}/done`, { params: { isFinished: true } });
+  return await axiosInstance.patch(`${prefix}/complete/${postId}`);
 };
 
 // 원트 글 삭제

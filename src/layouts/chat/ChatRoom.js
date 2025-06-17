@@ -216,7 +216,7 @@ function ChatRoom() {
 
   const completeHandlers = {
     ITEM: completeItem,
-    NEED: completeWant,
+    POST: completeWant,
     // 향후 다른 타입 추가 가능
   };
 
@@ -341,18 +341,19 @@ function ChatRoom() {
                       color="secondary"
                       size="small"
                       onClick={async () => {
-                        const { itemId, postType } = roomInfo;
+                        const { postId, itemId, postType } = roomInfo;
                         const handler = completeHandlers[postType];
                         if (!handler) {
                           alert("알 수 없는 게시글 타입입니다.");
                           return;
                         }
                         try {
-                          await handler(itemId);
+                          const id = postType === "ITEM" ? itemId : postId;
+                          await handler(id);
                           alert("거래가 완료되었습니다.");
                         } catch (err) {
                           console.error("거래 완료 실패:", err);
-                          alert("오류가 발생했습니다.");
+                          alert("게시물 작성자만 할 수 있습니다.");
                         }
                       }}
                     >
