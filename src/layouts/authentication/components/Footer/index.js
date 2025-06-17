@@ -1,17 +1,17 @@
 /**
-=========================================================
-* Material Dashboard 2 React - v2.2.0
-=========================================================
+ =========================================================
+ * Material Dashboard 2 React - v2.2.0
+ =========================================================
 
-* Product Page: https://www.creative-tim.com/product/material-dashboard-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
+ * Product Page: https://www.creative-tim.com/product/material-dashboard-react
+ * Copyright 2023 Creative Tim (https://www.creative-tim.com)
 
-Coded by www.creative-tim.com
+ Coded by www.creative-tim.com
 
  =========================================================
 
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ */
 
 // prop-types is a library for typechecking of props
 import PropTypes from "prop-types";
@@ -81,7 +81,13 @@ function Footer({ light }) {
               </Link>
             </MDBox>
             <MDBox component="li" px={2} lineHeight={1}>
-              <Link href="https://github.com/HGU-WALAB" target="_blank">
+              <Link
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault();
+                  navigate("/policy/service");
+                }}
+              >
                 <MDTypography
                   variant="button"
                   fontWeight="regular"
@@ -92,7 +98,13 @@ function Footer({ light }) {
               </Link>
             </MDBox>
             <MDBox component="li" px={2} lineHeight={1}>
-              <Link href="https://github.com/HGU-WALAB" target="_blank">
+              <Link
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault();
+                  navigate("/policy/privacy");
+                }}
+              >
                 <MDTypography
                   variant="button"
                   fontWeight="regular"
