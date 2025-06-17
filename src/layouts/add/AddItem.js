@@ -65,8 +65,26 @@ function AddItem() {
       return;
     }
 
+    if (!title.trim()) {
+      alert("제목을 입력해주세요.");
+      return;
+    }
+
     if (!category) {
       alert("카테고리를 선택해주세요.");
+      return;
+    }
+
+    const selectedDeadline = new Date(deadline);
+
+    const now = new Date();
+    if (selectedDeadline < now) {
+      alert("마감 기한은 현재 시간 이후로 설정해야 합니다.");
+      return;
+    }
+
+    if (!description.trim()) {
+      alert("설명을 입력해주세요.");
       return;
     }
 
@@ -139,7 +157,13 @@ function AddItem() {
       <MDBox my={3}>
         <Grid container spacing={3} justifyContent="center">
           <Grid item xs={12} sm={10} md={10} lg={6}>
-            <MDBox sx={{ borderColor: "grey.300" }} borderRadius="lg" border={2} shadow="md">
+            <MDBox
+              bgColor="white"
+              sx={{ borderColor: "grey.300" }}
+              borderRadius="lg"
+              border={2}
+              shadow="md"
+            >
               <MDBox
                 mx={2}
                 mb={3}
@@ -174,7 +198,14 @@ function AddItem() {
                             alert("JPG, JPEG, PNG 형식의 이미지 파일만 업로드할 수 있습니다.");
                             return Upload.LIST_IGNORE;
                           }
-                          return Promise.resolve(file); // 크롭 처리된 이미지 반영
+
+                          const isLt5M = file.size / 1024 / 1024 < 5;
+                          if (!isLt5M) {
+                            alert("이미지 용량은 5MB 이하만 업로드할 수 있습니다.");
+                            return Upload.LIST_IGNORE;
+                          }
+
+                          return Promise.resolve(file);
                         }}
                       >
                         {fileList.length < 5 && "+ Upload"}
@@ -195,7 +226,14 @@ function AddItem() {
                         variant="outlined"
                         fullWidth
                         required
+                        placeholder="예) 전공책 나눔하고 싶습니다."
+                        inputProps={{ maxLength: 30 }}
                       />
+                      <MDBox justifyContent="flex-end" display="flex" mt={1}>
+                        <MDTypography variant="caption" color="text">
+                          {title.length} / 30자
+                        </MDTypography>
+                      </MDBox>
                     </MDBox>
 
                     <MDBox m={3}>
@@ -279,7 +317,14 @@ function AddItem() {
                         required
                         multiline
                         rows={8}
+                        inputProps={{ maxLength: 500 }}
+                        placeholder="예) 상태 좋은 전공책입니다. 직접 가지러 오실 분 구합니다."
                       />
+                      <MDBox justifyContent="flex-end" display="flex" mt={1}>
+                        <MDTypography variant="caption" color="text">
+                          {description.length} / 500자
+                        </MDTypography>
+                      </MDBox>
                     </MDBox>
 
                     <MDBox display="flex" justifyContent="center" mb={3}>

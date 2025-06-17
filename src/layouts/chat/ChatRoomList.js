@@ -61,7 +61,18 @@ function ChatRoomList() {
         <MDAvatar src={itemImage} alt="something here" variant="rounded" shadow="md" size="xl" />
       </MDBox>
       <MDBox display="flex" flexDirection="column" alignItems="flex-start" justifyContent="center">
-        <MDTypography variant="button" fontWeight="medium">
+        <MDTypography
+          variant="button"
+          fontWeight="medium"
+          sx={{
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+            display: "-webkit-box",
+            WebkitLineClamp: 1, // 원하는 줄 수로 변경
+            WebkitBoxOrient: "vertical",
+            minHeight: "1em", // 3줄의 높이를 고정
+          }}
+        >
           {title}
         </MDTypography>
         <MDTypography variant="caption" color="text">

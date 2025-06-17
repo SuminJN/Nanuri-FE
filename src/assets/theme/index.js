@@ -54,7 +54,7 @@ export default createTheme({
     MuiCssBaseline: {
       styleOverrides: {
         body: {
-          backgroundColor: "#ffffff", // 원하는 배경색으로 변경
+          backgroundColor: "#f7f8f3", // 원하는 배경색으로 변경
         },
         ...globals,
         ...container,

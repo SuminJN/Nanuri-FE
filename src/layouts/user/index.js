@@ -80,8 +80,9 @@ function User() {
             <Header nickname={user.nickname} />
             <MDBox mt={2} mb={3}>
               <Grid container spacing={1} justifyContent="center">
-                <Grid item xs={12} lg={4}>
+                <Grid item xs={12}>
                   <MDBox
+                    bgColor="white"
                     borderRadius="lg"
                     sx={{ borderColor: "grey.300", height: "100%" }}
                     border={2}
@@ -112,10 +113,10 @@ function User() {
                     </MDBox>
                   </MDBox>
                 </Grid>
-                <Grid item xs={12} md={6} lg={4}>
+                <Grid item xs={12} md={6}>
                   <OtherUserShareCardList itemList={user.sharingItemList} />
                 </Grid>
-                <Grid item xs={12} md={6} lg={4}>
+                <Grid item xs={12} md={6}>
                   <OtherUserShareDoneCardList itemList={user.completedItemList} />
                 </Grid>
               </Grid>

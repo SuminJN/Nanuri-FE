@@ -9,6 +9,7 @@ function OtherUserShareCardList({ itemList }) {
 
   return (
     <MDBox
+      bgColor="white"
       borderRadius="lg"
       sx={{ borderColor: "grey.300", height: "100%" }}
       border={2}

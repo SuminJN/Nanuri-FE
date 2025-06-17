@@ -26,6 +26,16 @@ function AddPost() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (!title.trim()) {
+      alert("제목을 입력해주세요.");
+      return;
+    }
+
+    if (!description.trim()) {
+      alert("설명을 입력해주세요.");
+      return;
+    }
+
     addWant(inputs).then((response) => {
       if (response.status === 200) {
         alert("글이 등록되었습니다.");
@@ -43,7 +53,13 @@ function AddPost() {
       <MDBox my={3}>
         <Grid container spacing={3} justifyContent="center">
           <Grid item xs={12} sm={10} md={8} lg={6}>
-            <MDBox sx={{ borderColor: "grey.300" }} borderRadius="lg" border={2} shadow="md">
+            <MDBox
+              bgColor="white"
+              sx={{ borderColor: "grey.300" }}
+              borderRadius="lg"
+              border={2}
+              shadow="md"
+            >
               <MDBox
                 mx={2}
                 mb={3}
@@ -74,7 +90,14 @@ function AddPost() {
                         variant="outlined"
                         fullWidth
                         required
+                        placeholder="예) 남는 연필 있으신 분 있나요?"
+                        inputProps={{ maxLength: 30 }}
                       />
+                      <MDBox justifyContent="flex-end" display="flex" mt={1}>
+                        <MDTypography variant="caption" color="text">
+                          {title.length} / 30자
+                        </MDTypography>
+                      </MDBox>
                     </MDBox>
                     <MDBox m={3}>
                       <MDTypography variant="h6" fontWeight="bold" color="info">
@@ -90,7 +113,14 @@ function AddPost() {
                         required
                         multiline
                         rows={8}
+                        inputProps={{ maxLength: 500 }}
+                        placeholder="예) 연필이 필요한데, 혹시 남는 연필 있으신 분 계신가요? 제가 직접 가지러 갈게요!"
                       />
+                      <MDBox justifyContent="flex-end" display="flex" mt={1}>
+                        <MDTypography variant="caption" color="text">
+                          {description.length} / 500자
+                        </MDTypography>
+                      </MDBox>
                     </MDBox>
                     <MDBox display="flex" justifyContent="center" mb={3}>
                       <MDButton

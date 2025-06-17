@@ -158,6 +158,7 @@ function DetailItem() {
         <Grid item xs={12} sm={10} md={10}>
           <MDBox
             mb={3}
+            bgColor="white"
             borderRadius="lg"
             sx={{ borderColor: "grey.300", height: "100%" }}
             border={2}
