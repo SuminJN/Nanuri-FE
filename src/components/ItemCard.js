@@ -58,7 +58,20 @@ function ItemCard({
         <Grid item xs={12} style={{ cursor: "pointer" }} onClick={() => navigate(route)}>
           <MDBox width="100%" display="flex" flexDirection="column">
             <MDBox mt={1} mb={0.5} lineHeight={0} display="flex" justifyContent="center">
-              <MDTypography variant="h5" fontWeight="bold" textTransform="capitalize" color="info">
+              <MDTypography
+                variant="h5"
+                fontWeight="bold"
+                textTransform="capitalize"
+                color="info"
+                sx={{
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                  display: "-webkit-box",
+                  WebkitLineClamp: 1, // 원하는 줄 수로 변경
+                  WebkitBoxOrient: "vertical",
+                  minHeight: "1em", // 3줄의 높이를 고정
+                }}
+              >
                 {title}
               </MDTypography>
             </MDBox>
