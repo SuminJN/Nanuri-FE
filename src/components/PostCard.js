@@ -21,7 +21,7 @@ function PostCard({ itemId, title, createdTime, description, viewCount, route })
       display="flex"
       justifyContent="space-between"
       alignItems="flex-start"
-      bgColor={darkMode ? "transparent" : "grey-100"}
+      bgColor="white"
       borderRadius="lg"
       sx={{ borderColor: "grey.300" }}
       border={2}
