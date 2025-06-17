@@ -8,7 +8,7 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { LoginState } from "../../recoil/LoginState";
 import { LoginToast } from "../../components/LoginToast";
 import { TabValue } from "../../recoil/TabValueState";
-import { Spin } from "antd";
+import { Badge, Spin } from "antd";
 
 function WishItems() {
   const [itemList, setItemList] = useState([]);
@@ -47,8 +47,8 @@ function WishItems() {
             </MDBox>
           ) : (
             <Grid container spacing={2}>
-              {itemList.map((item, idx) => (
-                <Grid item xs={6} sm={4} md={4} lg={4} xl={3} key={idx}>
+              {itemList.map((item, idx) => {
+                const card = (
                   <ItemCard
                     itemId={item.itemId}
                     nickname={item.nickname}
@@ -63,8 +63,30 @@ function WishItems() {
                     chatCount={item.chatCount}
                     route={`/wish/${item.itemId}`}
                   />
-                </Grid>
-              ))}
+                );
+
+                let wrappedCard = card;
+
+                if (item.shareStatus === "COMPLETED") {
+                  wrappedCard = (
+                    <Badge.Ribbon text="거래 완료" color="#4a4a4a">
+                      {card}
+                    </Badge.Ribbon>
+                  );
+                } else if (isNew(item.createdTime)) {
+                  wrappedCard = (
+                    <Badge.Ribbon text="New" color="red">
+                      {card}
+                    </Badge.Ribbon>
+                  );
+                }
+
+                return (
+                  <Grid item xs={6} sm={4} md={4} lg={4} xl={3} key={idx}>
+                    {wrappedCard}
+                  </Grid>
+                );
+              })}
             </Grid>
           )}
         </MDBox>
