@@ -54,6 +54,13 @@ function Footer({ company, links }) {
     return (
       <>
         <MDBox component="li" px={2} lineHeight={1}>
+          <Link href="https://forms.gle/84vLNevuVx3Ry4eKA" target="_blank">
+            <MDTypography variant="button" fontWeight="regular" color="text">
+              건의사항
+            </MDTypography>
+          </Link>
+        </MDBox>
+        <MDBox component="li" px={2} lineHeight={1}>
           <Link
             href="#"
             onClick={(e) => {
