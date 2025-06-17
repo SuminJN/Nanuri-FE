@@ -10,8 +10,8 @@ import IconButton from "@mui/material/IconButton";
 import TextField from "@mui/material/TextField";
 import MDTypography from "../../components/MDTypography";
 import MDButton from "../../components/MDButton";
-import { Select, MenuItem, FormControl } from "@mui/material";
-import { Upload } from "antd";
+import { Select, MenuItem, FormControl, Chip } from "@mui/material";
+import { Modal, Upload } from "antd";
 import ImgCrop from "antd-img-crop";
 import { editItem, getItem, deleteItem, uploadImages, deleteImage } from "../../apis/itemApi";
 import { categoryList } from "../../assets/category/categoryList";
@@ -84,6 +84,8 @@ const EditItem = () => {
     setFileList(newFileList);
   };
 
+  const [previewOpen, setPreviewOpen] = useState(false);
+  const [previewImage, setPreviewImage] = useState("");
   const onPreview = async (file) => {
     let src = file.url;
     if (!src && file.originFileObj) {
@@ -93,11 +95,10 @@ const EditItem = () => {
         reader.onload = () => resolve(reader.result);
       });
     }
-    const image = new Image();
-    image.src = src;
-    const imgWindow = window.open(src);
-    imgWindow?.document.write(image.outerHTML);
+    setPreviewImage(src);
+    setPreviewOpen(true);
   };
+  const handleCancel = () => setPreviewOpen(false);
 
   const handleClickEdit = async () => {
     if (fileList.length === 0) {
@@ -143,6 +144,43 @@ const EditItem = () => {
         navigate("/home", { replace: true });
       }
     }
+  };
+
+  const handleDeadlineOffsetType = (type) => {
+    const now = new Date();
+    let newDeadline;
+
+    switch (type) {
+      case "TOMORROW":
+        newDeadline = new Date(now.setDate(now.getDate() + 1));
+        break;
+      case "2DAYS":
+        newDeadline = new Date(now.setDate(now.getDate() + 2));
+        break;
+      case "3DAYS":
+        newDeadline = new Date(now.setDate(now.getDate() + 3));
+        break;
+      case "7DAYS":
+        newDeadline = new Date(now.setDate(now.getDate() + 7));
+        break;
+      case "1MONTH":
+        newDeadline = new Date(now.setMonth(now.getMonth() + 1));
+        break;
+      default:
+        newDeadline = now;
+    }
+
+    const TIME_ZONE = 3240 * 10000;
+    const date = new Date(newDeadline);
+    const formDate = new Date(+date + TIME_ZONE)
+      .toISOString()
+      .replace("T", " ")
+      .replace(/\..*/, "");
+
+    setItem((prev) => ({
+      ...prev,
+      deadline: formDate.substring(0, 10) + "T" + formDate.substring(11, 16), // "YYYY-MM-DDTHH:mm"
+    }));
   };
 
   return (
@@ -233,6 +271,33 @@ const EditItem = () => {
                       onChange={handleChangeItem}
                       inputProps={{ min: new Date().toISOString().slice(0, 16) }}
                     />
+                    <MDBox my={1} display="flex" gap={1}>
+                      <Chip
+                        label="1일 뒤"
+                        variant="outlined"
+                        onClick={() => handleDeadlineOffsetType("TOMORROW")}
+                      />
+                      <Chip
+                        label="2일 뒤"
+                        variant="outlined"
+                        onClick={() => handleDeadlineOffsetType("2DAYS")}
+                      />
+                      <Chip
+                        label="3일 뒤"
+                        variant="outlined"
+                        onClick={() => handleDeadlineOffsetType("3DAYS")}
+                      />
+                      <Chip
+                        label="일주일 뒤"
+                        variant="outlined"
+                        onClick={() => handleDeadlineOffsetType("7DAYS")}
+                      />
+                      <Chip
+                        label="한달 뒤"
+                        variant="outlined"
+                        onClick={() => handleDeadlineOffsetType("1MONTH")}
+                      />
+                    </MDBox>
                   </MDBox>
 
                   <MDBox mb={2}>
@@ -296,6 +361,9 @@ const EditItem = () => {
           </MDBox>
         </Grid>
       </Grid>
+      <Modal open={previewOpen} footer={null} onCancel={handleCancel}>
+        <img alt="preview" style={{ width: "100%" }} src={previewImage} />
+      </Modal>
     </DashboardLayout>
   );
 };

@@ -8,7 +8,7 @@ import MDTypography from "../../components/MDTypography";
 import TextField from "@mui/material/TextField";
 import MDButton from "../../components/MDButton";
 import { Select, MenuItem, Chip } from "@mui/material";
-import { Upload } from "antd";
+import { Modal, Upload } from "antd";
 import ImgCrop from "antd-img-crop";
 import { addItem, uploadImages } from "../../apis/itemApi";
 import { categoryList } from "../../assets/category/categoryList";
@@ -31,6 +31,8 @@ function AddItem() {
     setFileList(newFileList);
   };
 
+  const [previewOpen, setPreviewOpen] = useState(false);
+  const [previewImage, setPreviewImage] = useState("");
   const onPreview = async (file) => {
     let src = file.url;
     if (!src && file.originFileObj) {
@@ -40,11 +42,10 @@ function AddItem() {
         reader.onload = () => resolve(reader.result);
       });
     }
-    const image = new Image();
-    image.src = src;
-    const imgWindow = window.open(src);
-    imgWindow?.document.write(image.outerHTML);
+    setPreviewImage(src);
+    setPreviewOpen(true);
   };
+  const handleCancel = () => setPreviewOpen(false);
 
   const onInputChange = (e) => {
     const { name, value } = e.target;
@@ -298,6 +299,9 @@ function AddItem() {
             </MDBox>
           </Grid>
         </Grid>
+        <Modal open={previewOpen} footer={null} onCancel={handleCancel}>
+          <img alt="preview" style={{ width: "100%" }} src={previewImage} />
+        </Modal>
       </MDBox>
     </DashboardLayout>
   );
