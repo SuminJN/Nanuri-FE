@@ -357,7 +357,7 @@ function ChatRoom() {
                         }
                       }}
                     >
-                      {roomInfo.postType === "NEED" ? "요청 완료" : "거래 완료"}
+                      {roomInfo.postType === "ITEM" ? "거래 완료" : "요청 완료"}
                     </MDButton>
                     <IconButton onClick={(e) => setAnchorEl(e.currentTarget)}>
                       <MoreVertIcon />
