@@ -36,7 +36,7 @@
 ### 5. 알림 시스템
 - Firebase Cloud Messaging (FCM) 기반
 - 실시간 알림 수신
-
+ 
 ## 기술 스택
 
 ### Frontend
